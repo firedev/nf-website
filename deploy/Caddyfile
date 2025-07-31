@@ -1,0 +1,15 @@
+{
+	auto_https off
+	servers {
+		trusted_proxies static 0.0.0.0/0
+		client_ip_headers CF-Connecting-IP
+	}
+}
+
+:5000 {
+	root * /usr/share/caddy
+	file_server
+	try_files {path} {path}.html {path}/index.html
+	try_files {path}/ {path}.html {path}/index.html
+	log stdout
+}

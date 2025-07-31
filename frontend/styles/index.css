@@ -1,0 +1,217 @@
+/* Import the base Shoelace stylesheet: */
+/*@import "@shoelace-style/shoelace/dist/themes/light.css";*/
+
+/* If you need to add @import statements, do so up here */
+/*@import "../fonts/dm/dm.css";*/
+/*@import "../fonts/redhat/redhat.css";*/
+
+@import "shoelaced.css";
+@import "theme-dark.css";
+
+@import "jit-refresh.css"; /* triggers frontend rebuilds */
+
+/* Set up Tailwind imports */
+@tailwind base;
+
+@layer base {
+  h1, .h1 {
+    @apply text-4xl font-bold mb-4 mt-8;
+
+  }
+  h2, .h2 {
+    @apply text-3xl font-bold mb-3 mt-6;
+  }
+  h3, .h3 {
+    @apply text-2xl font-bold mb-2 mt-4;
+  }
+
+  code {
+    @apply px-4 py-2 bg-sky-100 rounded font-bold;
+  }
+
+  p {
+    @apply mb-4;
+  }
+
+  ul, ol {
+    @apply mb-4;
+  }
+
+  /* Theme content visibility */
+  .light-content {
+    display: block;
+  }
+  
+  .dark-content {
+    display: none;
+  }
+
+  /* Dark theme styles */
+  :root.theme-dark .light-content {
+    display: none;
+  }
+  
+  :root.theme-dark .dark-content {
+    display: block;
+  }
+
+  .break-words { word-break: break-word }
+  .colorful {
+    @apply text-sky-900;
+  }
+
+  [aria-current="page"] {
+    @apply decoration-4 decoration-sky-200 underline font-bold;
+  }
+  .prose a:visited { @apply text-slate-500}
+
+  .prose a {
+    @apply decoration-8 decoration-sky-200 underline font-medium;
+  }
+
+  ul.prose,
+  .prose ul {
+    @apply list-disc list-inside mb-4;
+  }
+  .prose ol {
+    @apply list-decimal list-inside mb-4;
+  }
+  .prose blockquote {
+    @apply pl-8 border-l-2 border-l-slate-300;
+  }
+
+  blockquote.bubble {
+    @apply border-0 font-medium tracking-tighter bg-white shadow-xl tracking-tight py-9 px-12 relative lg:ml-9 lg:float-right lg:w-4/12 mt-8 lg:mt-0 mb-16 clear-both rounded-xl;
+  }
+    .prose blockquote, .prose>p {
+        @apply my-8;
+    }
+
+  blockquote:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 2rem;
+    border: 0.75em solid white;
+    border-color: white transparent transparent white;
+  }
+  blockquote > p:last-child { margin-bottom: 0; }
+  u {
+    @apply  decoration-sky-400 decoration-8;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --body-background: rgb(255 251 235); /* bg-amber-50 */
+  --body-color: rgb(69 26 3); /* bg-amber-950 */
+  --heading-color: black;
+  --action-color: #d64045;
+}
+
+body {
+  @apply text-slate-950 text-xl/8 bg-slate-50;
+}
+
+.bg-logo {
+  background-image: url("../../src/images/zen-circle-grunge-brush-stroke-2.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+sl-icon {
+  width: 1.5em; height: 1.5em;
+  @apply block;
+}
+
+.homepage .homepage-no-shadow { box-shadow: none }
+
+#markdown-toc { margin-bottom: 2rem; }
+.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; }
+.embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+prose img { width: 100%; height: auto; @apply rounded-xl; }
+
+.gif-from-jpeg {
+  @apply relative;
+  aspect-ratio: 16/9;
+  width: 100%;
+
+}
+.gif-from-jpeg img {
+  @apply absolute top-0 opacity-0 w-full;
+}
+
+.gif-from-jpeg::before {
+  content: "Hover or tap here";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 1;
+  @apply bg-white rounded-xl p-4 font-bold shadow-2xl;
+}
+
+.gif-from-jpeg:hover img {
+  animation: fadeIn 1s forwards;
+}
+
+.gif-from-jpeg img:nth-child(1) {
+  opacity: 1;
+  animation: none;
+}
+.gif-from-jpeg:hover:before {
+  content: '';
+  display: none;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 100%;
+  }
+  20% {
+    opacity: 100%;
+  }
+  40% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+.gif-from-jpeg img:nth-child(1) {
+  animation-delay: 0.5s;
+}
+
+.gif-from-jpeg img:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.gif-from-jpeg img:nth-child(3) {
+  animation-delay: 1.5s;
+}
+
+.gif-from-jpeg img:nth-child(4) {
+  animation-delay: 2s;
+}
+
+.gif-from-jpeg img:nth-child(5) {
+  animation-delay: 2.5s;
+}
+
+.gif-from-jpeg img:nth-child(6) {
+  animation-delay: 3s;
+}
+
+.gif-from-jpeg img:nth-child(7) {
+  animation-delay: 3.5s;
+}

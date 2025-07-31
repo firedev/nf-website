@@ -1,0 +1,26 @@
+{% for quote in @view_context.collections.quotes.resources %}
+{% if quote.data.slug == @slug %}
+
+{% quote_author = quote.data.author %}
+{% author = @view_context.site.data.authors[quote.data.author] %}
+{% author_link = author&.link %}
+
+<blockquote class="bubble">
+<!--{% if author&.image %}-->
+<!--<div class="h-40 bg-top bg-contain bg-no-repeat" style="background-image: url({{ author.image  }})"></div>-->
+<!--{% end %}-->
+  <strong class="font-medium">{{ quote.content | markdownify }}</strong>
+  <div class="text-right opacity-50">
+        {% if author_link %}
+        <a href="{{ author_link }}">
+          {% end %}
+          {{ author&.name || quote_author }}
+      {% if author_link %}
+      </a>
+      {% end %}
+
+  </div>
+</blockquote>
+
+{% end %}
+{% end %}

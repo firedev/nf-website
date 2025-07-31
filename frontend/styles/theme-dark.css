@@ -1,0 +1,428 @@
+/* ===================================================================
+   MODERN DARK THEME - 2024 Best Practices
+   ================================================================= */
+
+:root.theme-dark {
+  /* Modern Dark Theme Color System */
+  --dark-surface-0: #0f0f0f;        /* Deepest - main background */
+  --dark-surface-1: #00001a80;        /* Cards, elevated elements */
+  --dark-surface-2: #252525;        /* Modals, overlays */
+  --dark-surface-3: #2f2f2f;        /* Interactive hover states */
+  --dark-surface-4: #3a3a3a;        /* Active states */
+  
+  /* Blue to Black Gradient Background */
+  --dark-gradient-bg: linear-gradient(to bottom, #0099FF, #00083A, #00000a);
+  --dark-gradient-bg-light: linear-gradient(to bottom, rgba(0, 153, 255, 0.1), rgba(0, 8, 58, 0.02), rgba(0, 0, 10, 0.01));
+  
+  /* Text Colors - Properly contrasted */
+  --dark-text-primary: #f5f5f5;     /* Main text - 96% white */
+  --dark-text-secondary: #b3b3b3;   /* Secondary text */
+  --dark-text-muted: #8a8a8a;       /* Muted text */
+  --dark-text-disabled: #666666;    /* Disabled text */
+  
+  /* Accent Colors - Adjusted for dark backgrounds */
+  --dark-accent-primary: #4299e1;   /* Navy blue - matches button theme */
+  --dark-accent-primary-hover: #3182ce;
+  --dark-accent-secondary: #f97316; /* Orange - warmer tone */
+  --dark-accent-danger: #ef4444;    /* Red - softer than light theme */
+  --dark-accent-warning: #f59e0b;   /* Amber */
+  --dark-accent-info: #3b82f6;      /* Blue */
+  --dark-accent-success: #10b981;   /* Emerald */
+  
+  /* Borders and Dividers */
+  --dark-border-primary: #404040;   /* Main borders */
+  --dark-border-secondary: #2a2a2a; /* Subtle dividers */
+  --dark-border-focus: #60a5fa;     /* Focus rings */
+  
+  /* Shadows for depth */
+  --dark-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --dark-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --dark-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  
+  /* Apply the dark theme with gradient */
+  --body-background: var(--dark-gradient-bg);
+  --body-color: var(--dark-text-primary);
+  
+  /* Update existing variables for consistency */
+  --color-code-background: var(--dark-surface-2);
+  
+  /* Shoelace dark theme integration */
+  --sl-color-primary-700: var(--dark-accent-primary);
+  --sl-color-primary-600: var(--dark-accent-primary-hover);
+  --sl-color-primary-500: var(--dark-accent-primary);
+  --sl-color-neutral-50: var(--dark-surface-1);
+  --sl-color-neutral-100: var(--dark-surface-2);
+  --sl-color-neutral-200: var(--dark-surface-3);
+  --sl-color-neutral-300: var(--dark-border-primary);
+  --sl-color-neutral-400: var(--dark-text-muted);
+  --sl-color-neutral-500: var(--dark-text-secondary);
+  --sl-color-neutral-600: var(--dark-text-primary);
+  --sl-color-neutral-700: var(--dark-text-primary);
+  --sl-color-neutral-800: var(--dark-text-primary);
+  --sl-color-neutral-900: var(--dark-text-primary);
+}
+
+/* ===================================================================
+   LAYOUT & STRUCTURAL ELEMENTS
+   ================================================================= */
+
+:root.theme-dark {
+  /* Body gradient background */
+  & body {
+    background: var(--body-background);
+    background-attachment: scroll;
+    min-height: 100vh;
+  }
+  
+  & .main-wave {
+    background: transparent;
+    border-top: 1px solid var(--dark-border-secondary);
+  }
+  
+  & main {
+    background: transparent;
+    color: var(--dark-text-primary);
+  }
+  
+  & footer {
+    background: transparent;
+    border-top: 1px solid var(--dark-border-secondary);
+    color: var(--dark-text-secondary);
+  }
+}
+
+/* ===================================================================
+   TYPOGRAPHY
+   ================================================================= */
+
+:root.theme-dark {
+  & h1, & h2, & h3, & h4, & h5, & h6 {
+    color: var(--dark-text-primary);
+    
+    &.colorful {
+      color: var(--dark-accent-primary);
+    }
+  }
+  
+  & p, & li, & span {
+    color: var(--dark-text-primary);
+  }
+  
+  & .text-secondary {
+    color: var(--dark-text-secondary);
+  }
+  
+  & .text-muted {
+    color: var(--dark-text-muted);
+  }
+}
+
+/* ===================================================================
+   LINKS & INTERACTIVE ELEMENTS
+   ================================================================= */
+
+:root.theme-dark {
+  & a {
+    color: #4299e1 !important;
+    text-decoration-color: #4299e1 !important;
+    
+    &:hover {
+      color: #60a5fa !important;
+      text-decoration-color: #60a5fa !important;
+    }
+    
+    &:focus {
+      outline: 2px solid var(--dark-border-focus);
+      outline-offset: 2px;
+    }
+  }
+}
+
+/* ===================================================================
+   CARDS & ELEVATED SURFACES
+   ================================================================= */
+
+:root.theme-dark {
+  & .grid div {
+    background-color: var(--dark-surface-1) !important;
+    color: var(--dark-text-primary);
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  & .grid div h3 {
+    color: var(--dark-accent-primary);
+  }
+
+  & .grid div a {
+    color: #4299e1;
+  }
+  
+  /* Card improvements */
+  & sl-card {
+    --sl-panel-background-color: var(--dark-surface-1);
+    --sl-panel-border-color: var(--dark-border-secondary);
+    box-shadow: var(--dark-shadow-md);
+  }
+  
+  & sl-card [slot="header"] h3 {
+    color: var(--dark-accent-secondary);
+    text-decoration-color: var(--dark-accent-danger);
+  }
+}
+
+/* ===================================================================
+   BUTTON THEMING
+   ================================================================= */
+
+:root.theme-dark {
+  /* Button component styling */
+  & .group.inline-flex {
+    background: rgba(15, 15, 15, 0.8) !important;
+    color: var(--dark-text-primary) !important;
+    box-shadow: var(--dark-shadow-lg);
+    backdrop-filter: blur(10px);
+    
+    &:hover {
+      background: rgba(26, 26, 26, 0.9) !important;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      border-color: #4299e1;
+    }
+    
+    /* Icon styling */
+    & sl-icon {
+      color: #4299e1;
+    }
+    
+    /* Text styling */
+    & span {
+      color: var(--dark-text-primary);
+    }
+  }
+}
+
+/* ===================================================================
+   CODE & SYNTAX HIGHLIGHTING
+   ================================================================= */
+
+:root.theme-dark {
+  & code, & pre {
+    background-color: var(--dark-surface-2);
+    color: var(--dark-text-primary);
+    border: 1px solid var(--dark-border-secondary);
+    border-radius: 6px;
+  }
+  
+  & p code, & li code, & blockquote code {
+    background-color: var(--dark-surface-2);
+    color: var(--dark-accent-secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  
+  /* Syntax highlighting - Modern color scheme */
+  & .highlight {
+    background-color: var(--dark-surface-2);
+    border: 1px solid var(--dark-border-secondary);
+    border-radius: 8px;
+    
+    & .w { color: var(--dark-text-primary); }          /* Whitespace */
+    & .cp, & .p { color: #f8fafc; }                    /* Punctuation */
+    & .s1, & .s2, & .s { color: #a7f3d0; }            /* Strings */
+    & .na { color: #fbbf24; }                          /* Attributes */
+    & .kc, & .k { color: #a78bfa; }                    /* Keywords */
+    & .kn { color: #60a5fa; }                          /* Keyword namespace */
+    & .sh { color: #34d399; }                          /* Shell */
+    & .vi, & .si { color: #fbbf24; }                   /* Variables */
+    & .ss { color: #f472b6; }                          /* Symbols */
+    & .c, & .c1 { color: var(--dark-text-muted); }    /* Comments */
+    & .kp { color: #a78bfa; }                          /* Keyword pseudo */
+    & .n { color: var(--dark-text-primary); }         /* Names */
+    & .nb { color: #60a5fa; }                          /* Built-ins */
+    & .nc { color: #fbbf24; }                          /* Classes */
+    & .nf { color: #a7f3d0; }                          /* Functions */
+    & .nn { color: #f472b6; }                          /* Namespaces */
+    & .no { color: #ef4444; }                          /* Constants */
+    & .nt { color: #a78bfa; }                          /* Tags */
+    & .nv { color: #fbbf24; }                          /* Variables */
+    & .o { color: #f8fafc; }                           /* Operators */
+    & .gs { color: #60a5fa; font-weight: bold; }      /* Generic strong */
+  }
+}
+
+/* ===================================================================
+   NAVIGATION & UI COMPONENTS
+   ================================================================= */
+
+:root.theme-dark {
+  & nav {
+    background-color: var(--dark-surface-0);
+    border-bottom: 1px solid var(--dark-border-secondary);
+  }
+  
+  & #mobile-menu sl-button::part(base) {
+    color: var(--dark-text-primary);
+    background-color: var(--dark-surface-1);
+    border: 1px solid var(--dark-border-primary);
+  }
+
+  & sl-breadcrumb-item::part(label) {
+    color: var(--dark-text-secondary);
+  }
+
+  & sl-alert {
+    --sl-panel-background-color: var(--dark-surface-1);
+    --sl-panel-border-color: var(--dark-border-primary);
+  }
+  
+  & .info-grid q {
+    color: var(--dark-accent-secondary);
+    border-left: 3px solid var(--dark-accent-primary);
+    background-color: var(--dark-surface-1);
+    padding: 1rem;
+    border-radius: 6px;
+  }
+
+  & div.highlight {
+    border-color: var(--dark-border-primary);
+  }
+}
+
+/* ===================================================================
+   SEARCH & FORMS
+   ================================================================= */
+
+:root.theme-dark {
+  & bridgetown-search-form input {
+    background-color: var(--dark-surface-1);
+    color: var(--dark-text-primary);
+    border: 1px solid var(--dark-border-primary);
+    
+    &:focus {
+      border-color: var(--dark-border-focus);
+      box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+    }
+    
+    &::placeholder {
+      color: var(--dark-text-muted);
+    }
+  }
+  
+  & body > nav kbd {
+    background-color: var(--dark-surface-2);
+    color: var(--dark-text-secondary);
+    border: 1px solid var(--dark-border-primary);
+    box-shadow: var(--dark-shadow-sm);
+  }
+}
+
+/* ===================================================================
+   BUTTONS & INTERACTIVE STATES
+   ================================================================= */
+
+:root.theme-dark {
+  & sl-button[variant="primary"]::part(base) {
+    background-color: var(--dark-accent-primary);
+    border-color: var(--dark-accent-primary);
+    color: var(--dark-surface-0);
+    
+    &:hover {
+      background-color: var(--dark-accent-primary-hover);
+      border-color: var(--dark-accent-primary-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--dark-shadow-md);
+    }
+  }
+  
+  & sl-button[variant="default"]::part(base) {
+    background-color: var(--dark-surface-1);
+    border-color: var(--dark-border-primary);
+    color: var(--dark-text-primary);
+    
+    &:hover {
+      background-color: var(--dark-surface-2);
+      border-color: var(--dark-border-primary);
+    }
+  }
+}
+
+/* ===================================================================
+   THEME CONTENT SWITCHING
+   ================================================================= */
+
+:root.theme-dark {
+  & .light-content {
+    display: none;
+  }
+  
+  & .dark-content {
+    display: block;
+  }
+}
+
+:root:not(.theme-dark) {
+  & .light-content {
+    display: block;
+  }
+  
+  & .dark-content {
+    display: none;
+  }
+}
+
+/* ===================================================================
+   ICONS & GRAPHICS
+   ================================================================= */
+
+:root.theme-dark {
+  & svg.logo .letter {
+    fill: var(--dark-text-primary);
+  }
+  
+  & .version-text {
+    color: var(--dark-text-muted);
+  }
+}
+
+/* ===================================================================
+   ACCESSIBILITY & FOCUS STATES
+   ================================================================= */
+
+:root.theme-dark {
+  & *:focus {
+    outline: 2px solid var(--dark-border-focus);
+    outline-offset: 2px;
+  }
+  
+  & *:focus:not(:focus-visible) {
+    outline: none;
+  }
+  
+  & *:focus-visible {
+    outline: 2px solid var(--dark-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+/* ===================================================================
+   RESPONSIVE & EDGE CASES
+   ================================================================= */
+
+@media (max-width: 768px) {
+  :root.theme-dark {
+    & .grid div {
+      border-width: 1px;
+      box-shadow: var(--dark-shadow-sm);
+    }
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  :root.theme-dark {
+    & * {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+}

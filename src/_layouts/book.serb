@@ -1,0 +1,54 @@
+---
+layout: default
+---
+
+<div class="flex gap-4 justify-center">
+  <aside class="hidden md:block min-w-screen-md flex-shrink-0 w-60">
+    {%@ Documentation::Sidebar docs: collections.book.resources, resource: resource %}
+  </aside>
+  <div class="max-w-screen-xl mx-auto px-10 xl:px-16 py-10 w-full">
+    {% url_sections = resource.relative_url.split "/" %}
+    <main-content>
+      <div class="flex gap-2 items-center font-bold">
+        <a href="/book">The Book</a>
+        <sl-icon library="remixicon" name="arrows/arrow-right" slot="separator" style=""></sl-icon>
+        <a href="#sidebar-{{ resource.data.top_section | slugify }}">{{ resource.data.top_section }}</a>
+        {% if url_sections.size > 3 %}
+          {% crumb_label = resource.data.category.gsub("-", " ").titleize %}
+          {% crumb_url = "/docs/#{resource.data.back_to || resource.data.category}" %}
+          <sl-icon library="remixicon" name="arrows/arrow-right" slot="separator" style=""></sl-icon>
+          <a href="{{ crumb_url }}">{{ crumb_label }}</a>
+        {% end %}
+      </div>
+
+      <h1 class="serif">{{ resource.data.title }}</h1>
+
+      <div class="prose">
+      {%= yield %}
+      </div>
+
+      {% if url_sections.size > 3 %}
+        <p style="text-align:center; margin-top:4rem">
+          <a href="/docs/{{ resource.data.back_to || resource.data.category }}"><sl-button variant="primary" size="small" outline>
+            Back to {{ resource.data.category | titleize }}
+            <sl-icon slot="prefix" library="remixicon" name="arrows/arrow-up-s-fill"></sl-icon>
+          </sl-button></a>
+        </p>
+      {% else %}
+        {% next_order = resource.data.next_page_order %}
+        {% unless next_order %}
+          {% next_order = page.data.order.to_i + 10 %}
+        {% end %}
+        {% alldocs = collections.book.resources %}
+        {% next_page = collections.book.resources.find { _1.data.order == next_order } %}
+        {% if next_page %}
+          <p style="text-align:right; margin-top:4rem">
+              {%@ Button href: next_page.relative_url do %}
+                {{ next_page.data.title }}
+              {% end %}
+          </p>
+        {% end %}
+      {% end %}
+    </main-content>
+  </div>
+</div>

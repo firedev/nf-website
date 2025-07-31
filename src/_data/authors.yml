@@ -1,0 +1,23 @@
+nick:
+  name: Nikolay
+  #  avatar: /images/avatars/nick.jpg
+  twitter: firedev
+  website: https://firedev.com
+tesla:
+  name: Nikola Tesla
+  image: /images/people/tesla.jpeg
+  link: https://en.wikipedia.org/wiki/Nikola_Tesla
+peterson:
+  name: Jordan Peterson
+  image: /images/people/peterson.jpeg
+  link: https://en.wikipedia.org/wiki/Jordan_Peterson
+morpheus:
+  name: Morpheus
+  image: /images/people/morpheus.jpeg
+  link: https://en.wikipedia.org/wiki/Morpheus_(The_Matrix)
+alan-watts:
+  name: Alan Watts
+  link: https://en.wikipedia.org/wiki/Alan_Watts
+bjork:
+  name: Björk
+  link: https://en.wikipedia.org/wiki/Bj%C3%B6rk

@@ -1,0 +1,48 @@
+url: "https://nofins.com"
+permalink: simple
+timezone: America/Los_Angeles
+template_engine: serbea
+
+available_locales: [en, ru]
+default_locale: en
+prefix_default_locale: false
+
+collections:
+  instructors:
+    output: true
+    sort_by: order
+    name: Instructors
+  book:
+    output: true
+#    permalink: "/:collection/:path/"
+    sort_by: order
+    name: Book
+  posts:
+    output: true
+#    permalink: "/:locale/:collection/:path/"
+    sort_by: order
+    name: Posts
+  quotes:
+    output: false
+#    permalink: "/:collection/:path/"
+    sort_by: order
+    name: Quotes
+  music:
+    output: true
+#    permalink: "/:collection/:path/"
+    sort_by: order
+    name: Music
+  books:
+    output: true
+#    permalink: "/:collection/:path/"
+    sort_by: order
+    name: Books
+
+pagination:
+  enabled: true
+
+html_inspector_parser: nokolexbor
+
+# Environment-specific settings
+development:
+  unpublished: true

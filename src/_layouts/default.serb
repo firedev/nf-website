@@ -1,0 +1,16 @@
+<!doctype html>
+<html loaded lang="en">
+<head>
+  {%@ "head" %}
+</head>
+<body class="{{ data.layout }} {{ data.page_class }} xdark:bg-slate-950 xdark:text-white-500">
+
+{%@ Shared::Navbar metadata: site.metadata, resource: resource %}
+
+<main id="main" class="min-h-screen max-w-screen-2xl mx-auto px-2 lg:px-8">
+  {%= yield %}
+</main>
+
+{%@ "footer", metadata: site.metadata %}
+</body>
+</html>

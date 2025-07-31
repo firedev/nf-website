@@ -1,0 +1,18 @@
+<footer class="overflow-hidden">
+  <div class="group flex flex-col items-center justify-center">
+    <h3 class="text-xl font-bold  xxdark:text-orange-50 xxdark:text-opacity-50"> Support the
+      adventure</h3>
+    <a href="bitcoin:{{site.metadata.bitcoin}}">
+      <code class="break-words text-orange-600 min-w-1 bold flex gap-2 items-center font-bold break-words overflow-hidden">
+        <sl-icon library="remixicon" class="text-2xl" name="finance/bit-coin"></sl-icon>
+        {{site.metadata.bitcoin}}
+      </code>
+    </a>
+    <div class="my-8">
+      <a href="https://firedev.com" target="_blank" class="inline-flex">
+        <sl-icon library="remixicon" name="weather/fire-fill" class="text-red-700"></sl-icon>
+        <b class="font-extrabold">fire</b>dev
+      </a>
+    </div>
+  </div>
+</footer>

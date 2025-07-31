@@ -1,0 +1,5 @@
+<div class="mt-8 mb-16 text-center text-2xl">
+{%@ Button href:"https://thinkforward.academy/book", icon: "document/file-text-fill" do %}
+  The Book
+{% end %}
+</div>

@@ -1,0 +1,50 @@
+blink {
+    animation: blink-animation 1s steps(5, start) infinite;
+    -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+
+@-webkit-keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+
+
+#testimonials {
+    position: relative;
+}
+
+.testimonial-box {
+    line-height: 1;
+    width: 300px;
+    background-color: #f0f0f0;
+    padding: 1rem;
+    opacity: 0;
+    border-radius: 1rem;
+    position: absolute;
+    animation: fade-in-out 6s ease-in-out forwards;
+    z-index: 1;
+    text-align: left;
+    font-size: 16px;
+}
+
+@keyframes fade-in-out {
+    0% {
+        opacity: 0; bottom: 0;
+    }
+    10% {
+        opacity: 1; bottom: 30px;
+    }
+    90% {
+        opacity: 1; bottom: 300px;
+    }
+    100% {
+        opacity: 0; bottom: 315px;
+    }
+}

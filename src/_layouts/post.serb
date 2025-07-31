@@ -1,0 +1,76 @@
+---
+layout: default
+---
+
+<div class="flex gap-4 justify-center">
+  <aside class="hidden md:block min-w-screen-md flex-shrink-0 w-60">
+    <h3>Posts</h3>
+    {%@ Documentation::Sidebar docs: collections.posts.resources, resource: resource %}
+  </aside>
+  <div class="max-w-screen-xl mx-auto px-10 xl:px-16 py-10 w-full">
+    <div class="flex gap-4  items-center">
+      {% for local_resource in resource.all_locales.sort %}
+        {% if local_resource.data.locale == resource.data.locale %}
+          <div class="bg-white text-slate-500 p-4 rounded-xl">
+            {{ local_resource.data.locale | t }}
+          </div>
+        {% else %}
+          {%@ Button href: local_resource.relative_url do %}
+            {{ local_resource.data.locale | t }}
+          {% end %}
+        {% end %}
+      {% end %}
+    </div>
+    <main-content>
+      <section-wrapper>
+        <section>
+
+          <!--  <sl-breadcrumb style="display:block; margin-bottom:2.1em">-->
+          <!--    <sl-icon library="remixicon" name="arrows/arrow-right-s-fill" slot="separator" style="font-size:1.2em; margin-top:0.1em"></sl-icon>-->
+
+          <!--    <sl-breadcrumb-item href="/blog">Blog</sl-breadcrumb-item>-->
+          <!--    <sl-breadcrumb-item href="/blog/{{ data.category }}">Category: {{ data.category | titleize }}</sl-breadcrumb-item>-->
+          <!--    <sl-breadcrumb-item></sl-breadcrumb-item>-->
+          <!--  </sl-breadcrumb>-->
+
+          <article class="prose">
+            <h1 class="serif">{{ data.title }}</h1>
+
+            <!--    <article-author class="mb-10 author has-text-centered p-author">-->
+            <!--      {% author = site.data.authors[data.author] %}-->
+            <!--      <img src="{{ author.avatar }}" alt="{{ author.name }}" class="avatar u-photo" />-->
+            <!--      <a href="/authors/{{ data.author }}/" class="has-text-weight-bold u-url p-name">{{ author.name }}</a>-->
+            <!--      on <no-br style="white-space:nowrap">{{ resource.date | strftime: "%B %-d, %Y" }}</no-br>-->
+            <!--    </article-author>-->
+
+            {%= yield %}
+
+            <!--    <p style="margin-top:2.5em; text-align:center">-->
+            <!--      <sl-button variant="primary" size="small" pill outline onclick='-->
+            <!--        navigator.share({url: location.href})-->
+            <!--      '>-->
+            <!--        <sl-icon slot="suffix" library="remixicon" name="system/share-box"></sl-icon>-->
+            <!--        Share This Article-->
+            <!--      </sl-button>-->
+            <!--    </p>-->
+          </article>
+
+          <!--  <br/><br/>-->
+
+          <!--  <p class="heading-icon">-->
+          <!--    <sl-icon library="remixicon" name="document/article-fill"></sl-icon>-->
+          <!--  </p>-->
+
+          <!--  <h2 style="margin-top:0">Latest on the Blog</h2>-->
+
+          <!--  <ul class="info-grid highlighted-cards">-->
+          <!--    {% collections.posts.resources.reject { _1.data.exclude_from_pagination }[0...6].each do |post| %}-->
+          <!--      <li>{%@ PostCard post: post %}</li>-->
+          <!--    {% end %}-->
+          <!--  </ul>-->
+
+        </section>
+      </section-wrapper>
+    </main-content>
+  </div>
+</div>
