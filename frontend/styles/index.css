@@ -10,8 +10,10 @@
 
 @import "jit-refresh.css"; /* triggers frontend rebuilds */
 
-/* Set up Tailwind imports */
-@tailwind base;
+/* Tailwind v4: single import; scan templates for class names */
+@import "tailwindcss";
+@source "../../src/**/*.{html,md,liquid,erb,serb,rb}";
+@source "../javascript/**/*.js";
 
 @layer base {
   h1, .h1 {
@@ -100,9 +102,6 @@
     @apply  decoration-sky-400 decoration-8;
   }
 }
-
-@tailwind components;
-@tailwind utilities;
 
 :root {
   --body-background: rgb(255 251 235); /* bg-amber-50 */

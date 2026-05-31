@@ -1,13 +1,10 @@
 import "$styles/index.css"
-import "$styles/syntax-highlighting.css"
 
 // Example Shoelace components. Mix 'n' match however you like!
 import "@shoelace-style/shoelace/dist/components/button/button.js"
 import "@shoelace-style/shoelace/dist/components/icon/icon.js"
 import "@shoelace-style/shoelace/dist/components/spinner/spinner.js"
 
-import  "./testimonials.js"
-import  "./lifeline.js"
 import  "./theme-switcher.js"
 
 // Use the public icons folder:

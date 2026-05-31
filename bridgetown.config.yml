@@ -12,34 +12,6 @@ collections:
     output: true
     sort_by: order
     name: Instructors
-  book:
-    output: true
-#    permalink: "/:collection/:path/"
-    sort_by: order
-    name: Book
-  posts:
-    output: true
-#    permalink: "/:locale/:collection/:path/"
-    sort_by: order
-    name: Posts
-  quotes:
-    output: false
-#    permalink: "/:collection/:path/"
-    sort_by: order
-    name: Quotes
-  music:
-    output: true
-#    permalink: "/:collection/:path/"
-    sort_by: order
-    name: Music
-  books:
-    output: true
-#    permalink: "/:collection/:path/"
-    sort_by: order
-    name: Books
-
-pagination:
-  enabled: true
 
 html_inspector_parser: nokolexbor
 

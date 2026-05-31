@@ -3,43 +3,6 @@ layout: default
 ---
 <main-content>
   <section-wrapper><section>
-    {% if page.data.video %}
-      <div class="bg-center hero3 flex place-content-center min-h-[10em]" id="testimonials">
-        <div class="flex flex-col gap-4 md:flex-row justify-center items-center w-full text-4xl">
-<!--          <div class="hidden sm:block w-full text-left md:text-right px-4">-->
-<!--            <div>-->
-<!--              <div>-->
-<!--                GET YOUR-->
-<!--              </div>-->
-<!--              <div class="md:block">-->
-<!--                &nbsp;-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-          <div class="bg-logo black bg-darken-4 pt-20 pb-12 pl-14 pr-6 inline-block mx-8 fade-in text-6xl leading-[90%]">
-            <div>
-              <div class="font-bold" style="letter-spacing: -3.5px">
-                think
-              </div>
-              <div  style="letter-spacing: -3.5px">
-                forward
-              </div>
-            </div>
-          </div>
-<!--          <div class="hidden sm:block px-4 w-full text-right md:text-left">-->
-<!--            <div>-->
-<!--              <div class="md:block">-->
-<!--                &nbsp;-->
-<!--              </div>-->
-<!--              <div>-->
-<!--                <span id="lifeline">IN <blink>▐</blink></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-        </div>
-      </div>
-    {% end %}
-
     <div class="prose max-w-screen-xl mx-auto px-2 xl:px-36 py-10">
     {%= yield %}
     </div>
