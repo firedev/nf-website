@@ -135,6 +135,119 @@ Crafted for those ready to awaken and grow.
   </div>
 </div>
 
+<hr class="block my-16">
+
+{:.light-content .text-4xl .sm:text-5xl .font-black .text-center .mt-20 .mb-12}
+# Why freediving?
+
+{:.dark-content .text-4xl .sm:text-5xl .font-black .text-center .mt-20 .mb-12}
+# Why freediving?
+
+<div class="grid grid-cols-1 gap-6 text-center mb-6 max-w-3xl mx-auto">
+  <div class="p-8 sm:p-12 bg-white rounded-lg shadow-md">
+    <h3 class="text-3xl sm:text-4xl font-black mb-6">The art of staying calm</h3>
+    <div class="light-content">
+      <p class="text-xl sm:text-2xl">It isn't about swimming — it's mental discipline. The more relaxed you are, the longer and easier the water holds you. The urge to breathe isn't a lack of oxygen; it's just a reflex, a signal. The calmest go deepest. So does the calmest life.</p>
+    </div>
+    <div class="dark-content">
+      <p class="text-xl sm:text-2xl">A breath-hold is active meditation — a mental sport that lets you slip out from under the mind's control. By following the breath, you settle consciousness, and the mind becomes still water. Hold longer — learn more.</p>
+    </div>
+  </div>
+</div>
+
+<div class="grid md:grid-cols-2 gap-6 text-center mb-6">
+  <div class="p-7 bg-white rounded-lg shadow-sm">
+    <h3 class="text-2xl sm:text-3xl font-black mb-3">The wall is you</h3>
+    <div class="light-content">
+      <p class="text-lg">Every extra meter touches what you believed was your limit. Don't fight, don't speed up — keep the same pace. You see it was never a physical limit. Only a limit of perception you took for real.</p>
+    </div>
+    <div class="dark-content">
+      <p class="text-lg">You pass through the wall, and it disappears. The body isn't convinced by arguments — it needs the lived moment: <em>I met this, and it was easy.</em> Same in life. You calmly walk toward what you thought was impossible.</p>
+    </div>
+  </div>
+  <div class="p-7 bg-white rounded-lg shadow-sm">
+    <h3 class="text-2xl sm:text-3xl font-black mb-3">Leave the character above</h3>
+    <div class="light-content">
+      <p class="text-lg">You dive, and you leave the character on the surface. The masks fall away, and what remains is what was always there. The best dive is when you aren't thinking anything at all.</p>
+    </div>
+    <div class="dark-content">
+      <p class="text-lg">Under water, on a breath-hold, you feel a living movement toward your true self. You stop being the character and become yourself — nothing else exists.</p>
+    </div>
+  </div>
+</div>
+
+<div class="grid md:grid-cols-3 gap-6 text-center mb-16">
+  <div class="p-6 bg-white rounded-lg shadow-sm">
+    <h3 class="text-xl font-black mb-3">Active meditation</h3>
+    <div class="light-content">
+      <p>Slow breaths, relaxed movement, silence. You glide into calm and the noise drops away — a gym for the mind.</p>
+    </div>
+    <div class="dark-content">
+      <p>The breath-hold teaches the mind to be clean and calm like still water, opening the path to inner silence and clarity.</p>
+    </div>
+  </div>
+  <div class="p-6 bg-white rounded-lg shadow-sm">
+    <h3 class="text-xl font-black mb-3">It reformats you</h3>
+    <div class="light-content">
+      <p>Freediving washes out everything unnecessary. Many things simply stop mattering. You become calmer — in the water and out of it.</p>
+    </div>
+    <div class="dark-content">
+      <p>It cleans the junk from your head, recalibrates the compass, reformats the brain. You can't dive angry, irritated, or hurt.</p>
+    </div>
+  </div>
+  <div class="p-6 bg-white rounded-lg shadow-sm">
+    <h3 class="text-xl font-black mb-3">Free as in freedom</h3>
+    <div class="light-content">
+      <p>No fins, minimal gear, maximum relaxation. One person on a buoy, your own inner space, nothing to distract you.</p>
+    </div>
+    <div class="dark-content">
+      <p>Under water — reunion with space, with the primordial. Long breath-holds open a psychedelic state without any substance. Free as in freedom.</p>
+    </div>
+  </div>
+</div>
+
+{:.light-content .text-2xl .sm:text-3xl .font-black .text-center .mt-16 .mb-3}
+## Fear dissolves
+
+{:.dark-content .text-2xl .sm:text-3xl .font-black .text-center .mt-16 .mb-3}
+## Fear dissolves
+
+{:.light-content .max-w-2xl .mx-auto .text-center .text-lg .mb-10}
+You don't fight it. You relax — and the water dissolves it for you. The most beautiful thing is watching people who were wary of water bloom.
+
+{:.dark-content .max-w-2xl .mx-auto .text-center .text-lg .mb-10}
+Fear is a wall. You pass through it once, and it's simply gone. The same wall, again and again, in the water and in life.
+
+<div class="grid md:grid-cols-3 gap-6 text-center mb-16">
+  <div class="p-6 bg-white rounded-lg shadow-sm">
+    <h3 class="text-xl font-black mb-3">Come as you are</h3>
+    <div class="light-content">
+      <p>Wary of water? Good. That's where it starts. Begin with breathwork on the surface, relax into the water, and feel safe within. No experience needed.</p>
+    </div>
+    <div class="dark-content">
+      <p>Spiritual freediving is underwater meditation — learning to feel the soul, to stop fearing depth, and to relax under water. Step by step.</p>
+    </div>
+  </div>
+  <div class="p-6 bg-white rounded-lg shadow-sm">
+    <h3 class="text-xl font-black mb-3">The wall dissolves</h3>
+    <div class="light-content">
+      <p>Don't push, don't speed up — keep the same pace. The body isn't convinced by arguments; it needs the lived moment: I met this, and it was easy.</p>
+    </div>
+    <div class="dark-content">
+      <p>You pass through the wall, and it disappears. All you have to do is calm the one inside you. It was never a physical limit — only a limit of perception.</p>
+    </div>
+  </div>
+  <div class="p-6 bg-white rounded-lg shadow-sm">
+    <h3 class="text-xl font-black mb-3">It carries over</h3>
+    <div class="light-content">
+      <p>The calm you find under water comes up with you. You walk toward what you thought was impossible — gently, without forcing.</p>
+    </div>
+    <div class="dark-content">
+      <p>We live in a maze of invisible walls. They vanish the moment you walk through them. The only way: stop believing in them.</p>
+    </div>
+  </div>
+</div>
+
 {:.light-content}
 # The experience
 
