@@ -55,20 +55,15 @@ rake frontend:build           # Build frontend assets for production
 - `plugins/` - Custom Bridgetown plugins
 
 ### Content Collections
-The site uses Bridgetown collections for organizing content:
-- `instructors` - Instructor profiles
-- `book` - Book chapters
-- `posts` - Blog posts
-- `quotes` - Quote collection
-- `music` - Music collection
-- `books` - Book recommendations
+The site uses a single Bridgetown collection:
+- `instructors` - Instructor profiles (currently one: nick-plekhanov)
 
 ### Theme System
 The site implements a unique dual-content theme system:
 - Light theme ("Spiritual Pool") - Beginner-friendly messaging
 - Dark theme ("Psychedelic Wave") - Advanced/psychedelic messaging
-- Theme switcher in `frontend/javascript/theme_switcher.js`
-- Different content blocks shown based on `data-theme` attributes
+- Theme switcher in `frontend/javascript/theme-switcher.js` (toggles `theme-dark` class on `:root`, persists in localStorage)
+- Different content blocks shown via `.light-content` / `.dark-content` classes (`{:.light-content}` markers in `index.md`)
 
 ### Deployment
 - Deploys to GitHub Pages at nofins.com
@@ -92,9 +87,9 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 - Components can accept props and render dynamic content
 
 ### Adding Content
-- Blog posts: Add Markdown files to `src/_posts/`
 - Instructors: Add to `src/_instructors/` collection
 - Static pages: Add Markdown or HTML files to `src/`
+- Homepage copy lives in `src/index.md` — every block exists twice (`{:.light-content}` + `{:.dark-content}`)
 
 ### Frontend Development
 - JavaScript modules go in `frontend/javascript/`
