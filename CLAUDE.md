@@ -1,12 +1,10 @@
-# CLAUDE.md
+# Sites/nofins — nofins.com
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## Project Overview
-
-This is a Bridgetown-based static website for Psychedelic Freediving, a business offering spiritual and psychedelic freediving experiences in Phuket, Thailand. The site features a unique dual-theme system where light and dark modes display different content and messaging.
+Bridgetown static site for Psychedelic Freediving (Phuket, Thailand) — read this before any work in this folder. The site features a unique dual-theme system where light and dark modes display different content and messaging. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/CLAUDE.md`.
 
 ## Development Commands
+
+All commands run from `/Users/nick/obsidian/obsidian-life/Sites/nofins/`. Ruby — через mise, системный ruby 2.6 Bridgetown не потянет.
 
 ### Initial Setup
 ```bash
@@ -22,7 +20,13 @@ yarn start     # Build frontend and start development server
 ### Build & Deploy
 ```bash
 yarn deploy    # Build production site and deploy to GitHub Pages
-rake deploy    # Alternative build command
+rake deploy    # Alternative: build only, no push
+```
+
+`yarn deploy` requires `output/` to be an initialized git repo (`ls output/.git`). If `.git` is missing, restore it by cloning the live repo first (do NOT force-push):
+
+```bash
+rm -rf output && git clone git@github.com:firedev/nf-website.git output && yarn deploy
 ```
 
 ### Other Useful Commands
@@ -51,7 +55,7 @@ rake frontend:build           # Build frontend assets for production
 - `frontend/` - Frontend assets
   - `javascript/` - JS modules (theme switcher, testimonials, etc.)
   - `styles/` - CSS files including Tailwind and theme styles
-- `output/` - Built static site (git-ignored, deployment target)
+- `output/` - Built static site (git-ignored in this repo; itself a separate git checkout of `firedev/nf-website` branch `master` — the deployment target)
 - `plugins/` - Custom Bridgetown plugins
 
 ### Content Collections
@@ -66,15 +70,15 @@ The site implements a unique dual-content theme system:
 - Different content blocks shown via `.light-content` / `.dark-content` classes (`{:.light-content}` markers in `index.md`)
 
 ### Deployment
-- Deploys to GitHub Pages at nofins.com
-- Uses custom deployment script that:
-  1. Builds production assets
-  2. Copies output to git repository
-  3. Adds CNAME and .nojekyll files
-  4. Commits and pushes to deployment branch
+- Deploys to legacy GitHub Pages at nofins.com: repo `firedev/nf-website`, Pages serves branch `master` path `/`. Source code lives on branch `source` of the same repo
+- **Repo must stay public** — a private repo on the free plan silently stops building Pages while serving the stale site (`Sites/CLAUDE.md` § Деплой — грабли GitHub Pages)
+- `yarn deploy` (the `deploy` script in `package.json`):
+  1. Builds production assets into `output/`
+  2. Adds CNAME and .nojekyll files
+  3. Commits and pushes `output/` to `master` of `firedev/nf-website`
 
 ### Internationalization
-- Supports English and Russian locales
+- English and Russian locales declared in `bridgetown.config.yml` (`available_locales`); ru content does not exist yet — the site is en-only in practice
 - Configured in `bridgetown.config.yml`
 - Prefix URLs disabled for cleaner paths
 
@@ -95,7 +99,7 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 - JavaScript modules go in `frontend/javascript/`
 - Styles use Tailwind utilities in `frontend/styles/`
 - Shoelace components are available globally after build
-- Use `data-theme="light"` or `data-theme="dark"` to show/hide content based on theme
+- To show/hide content based on theme use `.light-content` / `.dark-content` classes; dark styles hang off `:root.theme-dark` (there is no `data-theme` attribute in this codebase)
 
 ### Building and Testing Changes
 1. Run `yarn start` for development server
