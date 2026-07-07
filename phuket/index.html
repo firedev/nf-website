@@ -8,14 +8,18 @@
   html,body{margin:0;height:100%;overflow:hidden;background:#9adcf0;font-family:Georgia,serif}
   canvas{display:block}
   #ui{position:fixed;inset:0;pointer-events:none;color:#fff}
-  #list{position:absolute;top:280px;right:14px;background:rgba(20,40,60,.55);padding:8px 12px;border-radius:10px;font-size:12px;line-height:1.55;text-align:right}
-  #list b{font-size:15px;color:#ffe27a}
+  #list{position:absolute;top:14px;right:14px;background:rgba(20,40,60,.6);padding:12px 16px;border-radius:10px;font-size:16px;line-height:1.6;text-align:right}
+  #list b{font-size:20px;color:#ffe27a}
   #list .done{color:#ffe27a}
   #list .todo{color:#bcd8e8}
-  #minimap{position:absolute;top:14px;right:14px;background:rgba(20,40,60,.55);border-radius:10px}
-  #toast{position:absolute;bottom:90px;width:100%;text-align:center;font-size:26px;text-shadow:0 2px 6px rgba(0,0,0,.5);letter-spacing:1px}
-  #hint{position:absolute;bottom:18px;width:100%;text-align:center;font-size:14px;color:#eaf6ff;text-shadow:0 1px 4px rgba(0,0,0,.6);transition:opacity 2s}
-  #banner{position:absolute;top:38%;width:100%;text-align:center;font-size:44px;color:#ffe27a;text-shadow:0 3px 10px rgba(0,0,0,.6);display:none}
+  #minimap{position:absolute;bottom:14px;right:14px;background:rgba(20,40,60,.55);border-radius:10px;pointer-events:auto;cursor:pointer}
+  #flash{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,225,120,.95),rgba(255,190,60,0) 70%);opacity:0;pointer-events:none;transition:opacity .4s}
+  #toast{position:absolute;bottom:90px;width:100%;text-align:center;font-size:34px;text-shadow:0 2px 6px rgba(0,0,0,.5);letter-spacing:1px}
+  #hint{position:absolute;bottom:18px;width:100%;text-align:center;font-size:17px;color:#eaf6ff;text-shadow:0 1px 4px rgba(0,0,0,.6);transition:opacity 2s}
+  #banner{position:absolute;top:38%;width:100%;text-align:center;font-size:56px;color:#ffe27a;text-shadow:0 3px 10px rgba(0,0,0,.6);display:none}
+  .quest{display:inline-block;color:#7fd4f2;font-style:italic}
+  .pop{animation:qpop .7s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes qpop{0%{transform:scale(.2);opacity:0}60%{transform:scale(1.18)}100%{transform:scale(1);opacity:1}}
 </style>
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
@@ -24,10 +28,11 @@
 <body>
 <div id="ui">
   <div id="list"></div>
-  <canvas id="minimap" width="120" height="250"></canvas>
+  <canvas id="minimap" width="160" height="330"></canvas>
   <div id="toast"></div>
-  <div id="hint">WASD move &nbsp;·&nbsp; Space jump &nbsp;·&nbsp; drag mouse to look &nbsp;·&nbsp; scroll to zoom &nbsp;·&nbsp; E board/leave boat &nbsp;·&nbsp; discover all landmarks</div>
+  <div id="hint">WASD move &nbsp;·&nbsp; Shift run &nbsp;·&nbsp; Space jump &nbsp;·&nbsp; drag mouse to look &nbsp;·&nbsp; scroll to zoom &nbsp;·&nbsp; E board/leave boat &nbsp;·&nbsp; discover all landmarks</div>
   <div id="banner">⟡ All of Phuket Discovered! ⟡</div>
+  <div id="flash"></div>
 </div>
 <script type="module">
 import * as THREE from 'three';
@@ -121,7 +126,7 @@ function rawHeight(x,z){
 
 
 // flat pads so landmark structures sit on level ground
-const FLATS=[[3,134],[-36.6,143.7],[-12.9,127.6],[-37.5,207.0],[-49.8,76.3],[33.9,89.6],[-42.5,183.4],[-53.1,-11.2],[22.4,81.8]];
+const FLATS=[[-16,187],[-36.6,143.7],[-12.9,127.6],[-37.5,207.0],[-49.8,76.3],[33.9,89.6],[-42.5,183.4],[-53.1,-11.2],[22.4,81.8]];
 const padH=FLATS.map(f=>rawHeight(f[0],f[1]));
 function terrainHeight(x,z){
   let h=rawHeight(x,z);
@@ -399,6 +404,19 @@ function buildDiveIsland(){
   g.add(buoy,pole,flag);
   return g;
 }
+function buildReefBuoy(){
+  const g=new THREE.Group();
+  for(const [dx,dz,r] of [[0,0,1.6],[2.2,1.4,1.1],[-1.8,-1.2,1.3]]){
+    const rock=new THREE.Mesh(new THREE.CylinderGeometry(r*0.7,r,2.2,7),toon(0x8d927e));
+    rock.position.set(dx,0,dz); g.add(rock);
+  }
+  const buoy=new THREE.Mesh(new THREE.SphereGeometry(0.6,8,8),toon(0xdd2233)); buoy.position.set(4,0.5,2);
+  const pole=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,1.6,4),toon(0xeeeeee)); pole.position.set(4,1.4,2);
+  const flag=new THREE.Mesh(new THREE.PlaneGeometry(1,0.7),new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}));
+  flag.position.set(4.5,1.9,2);
+  g.add(buoy,pole,flag);
+  return g;
+}
 function buildWreck(){
   const g=new THREE.Group();
   const hull=addOutline(new THREE.Mesh(new THREE.BoxGeometry(3,2.6,10),toon(0x5a4a3a)),1.04);
@@ -422,9 +440,13 @@ const LANDMARKS=[
   {name:'Sarasin Bridge', x:-50.6, z:-207.0, r:18, build:buildBridge},
   {name:'Bang Tao Lagoon', x:-53.1, z:-11.2, r:15, build:buildLagoon},
   {name:'Khao Rang Hill', x:22.4, z:81.8, r:12, build:buildFlagHill},
-  {name:'NAMA Freediving', x:3, z:134, r:10, build:buildNama},
-  {name:'Ko Maiton', x:100, z:140, r:14, build:buildDiveIsland, hidden:true},
-  {name:'Ko Racha', x:-15, z:252, r:14, build:buildDiveIsland, hidden:true},
+  {name:'NAMA Freediving', x:-16, z:187, r:10, build:buildNama},
+  {name:'Ko Maiton', x:100, z:140, r:14, build:buildDiveIsland, hidden:true, dive:true},
+  {name:'Ko Racha', x:-15, z:252, r:14, build:buildDiveIsland, hidden:true, dive:true},
+  {name:'Ko Doc Mai', x:68, z:158, r:12, build:buildReefBuoy, hidden:true, dive:true},
+  {name:'Anemone Reef', x:78, z:170, r:12, build:buildReefBuoy, hidden:true, dive:true},
+  {name:'Shark Point', x:85, z:180, r:12, build:buildReefBuoy, hidden:true, dive:true},
+  {name:'Racha Noi', x:-20, z:268, r:14, build:buildDiveIsland, hidden:true, dive:true},
   {name:'King Cruiser Wreck', x:62, z:228, r:14, build:buildWreck, hidden:true},
 ];
 function makeLabel(text){
@@ -493,8 +515,12 @@ function gullFlock(cx,cz,n){
   }
 }
 // Chalong pier (long jetty into Chalong Bay) + Rawai pier
-buildPier(9,139.5,0.6,0.8,26);  gullFlock(9+0.6*20,139.5+0.8*20,5);
-buildPier(-12.8,190.5,0.25,0.97,18); gullFlock(-12.8+0.25*14,190.5+0.97*14,4);
+const PIERS=[{x:9,z:139.5,dx:0.6,dz:0.8,len:26},{x:-12.8,z:190.5,dx:0.25,dz:0.97,len:18},{x:33.5,z:158,dx:-0.95,dz:0.31,len:14}];
+for(const p of PIERS) buildPier(p.x,p.z,p.dx,p.dz,p.len);
+gullFlock(9+0.6*20,139.5+0.8*20,5);
+gullFlock(-12.8+0.25*14,190.5+0.97*14,4);
+gullFlock(24,161,4);
+function pierY(x,z){for(const p of PIERS){const rx=x-p.x,rz=z-p.z,t=rx*p.dx+rz*p.dz,perp=Math.abs(rx*p.dz-rz*p.dx);if(t>=-1&&t<=p.len&&perp<1.3)return 1.35;}return null;}
 
 // ============================= PLAYER ==============================
 const player=new THREE.Group();
@@ -538,19 +564,51 @@ function makeBoat(hullCol,sailCol){
   sail.position.set(0,3.5,-0.35);
   b.add(hull,prow,mast,sail); return b;
 }
-const boat=makeBoat(0xb03a2e,0xfff6e0);
+function makeSpeedboat(){
+  const b=new THREE.Group();
+  const hull=addOutline(new THREE.Mesh(new THREE.BoxGeometry(2,0.8,4.5),toon(0xf5f8fa)),1.04);
+  hull.position.y=0.45;
+  const bow=new THREE.Mesh(new THREE.ConeGeometry(0.95,1.6,4),toon(0xf5f8fa));
+  bow.rotation.set(-Math.PI/2+0.12,0,Math.PI/4); bow.position.set(0,0.42,3);
+  const cabin=new THREE.Mesh(new THREE.BoxGeometry(1.4,0.9,1.4),toon(0x2b6fb0));
+  cabin.position.set(0,1.15,-1.1);
+  const motor=new THREE.Mesh(new THREE.BoxGeometry(0.3,0.7,0.25),toon(0x14181c));
+  motor.position.set(0,0.7,-2.35);
+  b.add(hull,bow,cabin,motor); b.userData={max:26,acc:22}; return b;
+}
+function makeLongtail(){
+  const b=new THREE.Group();
+  const hull=addOutline(new THREE.Mesh(new THREE.BoxGeometry(1.3,0.7,6.5),toon(0x9a6b3f)),1.04);
+  hull.position.y=0.4;
+  const bow=new THREE.Mesh(new THREE.ConeGeometry(0.55,1.4,4),toon(0x9a6b3f));
+  bow.rotation.set(-Math.PI/2+0.5,0,Math.PI/4); bow.position.set(0,0.75,3.4);
+  const tail=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06,3,6),toon(0x3a3a3a));
+  tail.rotation.x=Math.PI/2-0.52; tail.position.set(0,1,-4.3);
+  const prop=new THREE.Mesh(new THREE.BoxGeometry(0.4,0.08,0.12),toon(0x14181c));
+  prop.position.set(0,0.25,-5.55);
+  const flag=new THREE.Mesh(new THREE.PlaneGeometry(0.5,0.35),new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}));
+  flag.position.set(0,1.6,3.9);
+  b.add(hull,bow,tail,prop,flag); b.userData={max:13,acc:10}; return b;
+}
+const boat=makeBoat(0xb03a2e,0xfff6e0); boat.userData={max:16,acc:14};
 // spawn in water east of Old Town
-let bx=60,bz=91.5; while(heightAt(bx,bz)>-0.9&&bx<110)bx+=1;
+let bx=60,bz=91.5; while(heightAt(bx,bz)>-1.8&&bx<110)bx+=1;
 boat.position.set(bx,0.3,bz);
 scene.add(boat);
-// Namo — the NAMA dive boat by the Chalong pier, white with a red diver flag
-const namo=makeBoat(0xf5f8fa,0x9fd7e8);
+// Namo — the NAMA dive boat off the Cape Panwa pier, white with a red diver flag
+const namo=makeBoat(0xf5f8fa,0x9fd7e8); namo.userData={max:18,acc:14};
 const dflag=new THREE.Mesh(new THREE.PlaneGeometry(1.2,0.8),new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}));
 dflag.position.set(0.6,5.6,-0.35); namo.add(dflag);
-let nx=27,nz=164; while(heightAt(nx,nz)>-0.9&&nz<200){nz+=1;nx+=0.3;}
-namo.position.set(nx,0.3,nz);
+namo.position.set(18,0.3,163);
 scene.add(namo);
-let activeBoat=boat, spotsUnlocked=false, w1cert=false, wetsuitTried=false;
+// speedboats in Chalong bay, longtails off Rawai
+const speed1=makeSpeedboat(); speed1.position.set(18,0.3,153); scene.add(speed1);
+const speed2=makeSpeedboat(); speed2.position.set(27,0.3,158); scene.add(speed2);
+const long1=makeLongtail(); long1.position.set(-14,0.3,204); scene.add(long1);
+const long2=makeLongtail(); long2.position.set(-3,0.3,207); scene.add(long2);
+const ALL_BOATS=[boat,namo,speed1,speed2,long1,long2];
+ALL_BOATS.forEach(b=>b.userData.home=b.position.clone());
+let activeBoat=boat, w1cert=false, wetsuitTried=false;
 
 // boat wake sprites
 const wakeTexC=document.createElement('canvas'); wakeTexC.width=wakeTexC.height=64;
@@ -589,38 +647,66 @@ function questLine(){
   const by=n=>LANDMARKS.find(l=>l.name===n);
   if(!by('NAMA Freediving').discovered) return null;
   if(!wetsuitTried) return 'Try on a wetsuit at NAMA (E)';
-  if(!spotsUnlocked) return 'Board Namo at the Chalong pier';
-  if(!(by('Ko Maiton').discovered&&by('Ko Racha').discovered)) return 'Dive Ko Maiton & Ko Racha';
-  if(!w1cert) return 'Return to NAMA — W1 certification';
+  if(!w1cert) return 'Take the W1 course aboard Namo (Cape Panwa)';
+  const dives=LANDMARKS.filter(l=>l.dive), k=dives.filter(l=>l.discovered).length;
+  if(k<dives.length) return `Freedive at all dive spots · ${k}/${dives.length}`;
   if(!by('King Cruiser Wreck').discovered) return 'Find the King Cruiser Wreck';
-  return 'Freediving quest complete ✦';
+  return null;
 }
+let shownQuests=new Set();
 function renderList(){
   const vis=LANDMARKS.filter(l=>!l.hidden), n=vis.filter(l=>l.discovered).length;
-  const q=questLine();
-  listEl.innerHTML=`<b>Phuket · ${n}/${vis.length} discovered</b><br>`+
-    vis.map(l=>`<span class="${l.discovered?'done':'todo'}">${l.discovered?'✦':'·'} ${l.name}</span>`).join('<br>')+
-    (q?`<br><span style="color:#7fd4f2;font-style:italic">➤ ${q}</span>`:'');
+  const done=n===vis.length;
+  const lines=vis.filter(l=>!l.discovered).map(l=>'· '+l.name);
+  const q=questLine(); if(q)lines.push('➤ '+q);
+  if(typeof halo!=='undefined'&&!halo)lines.push('✧ A secret hides where serenity sits');
+  if(done)lines.unshift('All secrets found ✦');
+  listEl.innerHTML=`<b>Phuket · ${n}/${vis.length}</b><br>`+lines.map(s=>{
+    const fresh=!shownQuests.has(s);
+    return `<span class="quest${fresh?' pop':''}"${fresh||s.startsWith('All')?' style="color:#ffe27a"':''}>${s}</span>`;
+  }).join('<br>');
+  shownQuests=new Set(lines);
 }
 renderList();
 setTimeout(()=>hintEl.style.opacity=0,12000);
 
 const mm=document.getElementById('minimap').getContext('2d');
 function drawMinimap(){
-  mm.clearRect(0,0,120,250);
-  const X=x=>60+x*0.52, Z=z=>118+z*0.48;
+  mm.clearRect(0,0,160,330);
+  const X=x=>80+x*0.68, Z=z=>158+z*0.62;
   mm.beginPath();
   OUTLINE.forEach(([x,z],i)=>i?mm.lineTo(X(x),Z(z)):mm.moveTo(X(x),Z(z)));
   mm.closePath(); mm.fillStyle='#4a9e52'; mm.fill();
   mm.strokeStyle='#efe0ae'; mm.lineWidth=2; mm.stroke();
   for(const L of LANDMARKS){
+    if(L.dive){mm.fillStyle='#d8c58c';mm.beginPath();mm.arc(X(L.x),Z(L.z),3,0,7);mm.fill();}
     if(L.hidden)continue;
     mm.fillStyle=L.discovered?'#ffe27a':'#dfeef5';
-    mm.beginPath(); mm.arc(X(L.x),Z(L.z),2.6,0,7); mm.fill();
+    mm.beginPath(); mm.arc(X(L.x),Z(L.z),3.5,0,7); mm.fill();
   }
   const p=sailing?activeBoat.position:player.position;
-  mm.fillStyle='#ff5a5a'; mm.beginPath(); mm.arc(X(p.x),Z(p.z),3.4,0,7); mm.fill();
+  mm.fillStyle='#ff5a5a'; mm.beginPath(); mm.arc(X(p.x),Z(p.z),4.5,0,7); mm.fill();
 }
+// click the minimap to teleport
+document.getElementById('minimap').addEventListener('click',e=>{
+  const wx=(e.offsetX-80)/0.68, wz=(e.offsetY-158)/0.62;
+  if(introT<INTRO_LEN)introT=INTRO_LEN;
+  if(sailing){
+    activeBoat.position.copy(activeBoat.userData.home);
+    sailing=false; boatSpeed=0; player.visible=true;
+  }
+  let lx=null,lz=null;
+  if(heightAt(wx,wz)>0.4||pierY(wx,wz)!==null){lx=wx;lz=wz;}
+  else outer:for(let r=2;r<=50;r+=2)for(let a=0;a<12;a++){
+    const x=wx+Math.cos(a/12*Math.PI*2)*r, z=wz+Math.sin(a/12*Math.PI*2)*r;
+    if(heightAt(x,z)>0.4){lx=x;lz=z;break outer;}
+  }
+  if(lx===null)return; // clicked open ocean, nothing near
+  const py=pierY(lx,lz);
+  player.position.set(lx,py!==null?py:heightAt(lx,lz),lz);
+  toastEl.textContent='✈ Warped';
+  setTimeout(()=>{if(toastEl.textContent==='✈ Warped')toastEl.textContent='';},2000);
+});
 
 // ============================== AUDIO ==============================
 let actx=null;
@@ -638,52 +724,59 @@ function chime(notes,step=0.13){
 }
 
 // =========================== BOAT / MODES ==========================
+const flashEl=document.getElementById('flash');
+let halo=null;
+function enlighten(){
+  flashEl.style.opacity=1;
+  setTimeout(()=>flashEl.style.opacity=0,600);
+  chime([523,659,784,1047,1319,1568],0.12);
+  toastEl.textContent='☀ Enlightenment attained';
+  setTimeout(()=>{if(toastEl.textContent.includes('Enlightenment'))toastEl.textContent='';},3000);
+  if(!halo){
+    halo=new THREE.Mesh(new THREE.TorusGeometry(0.45,0.06,8,24),new THREE.MeshBasicMaterial({color:0xffd75e}));
+    halo.rotation.x=Math.PI/2; halo.position.y=3.05; player.add(halo);
+  }
+}
 let sailing=false, boatSpeed=0, vy=0, airborne=false;
+function boardBoat(b,silent){
+  if(b===namo&&!wetsuit){
+    if(!silent){toastEl.textContent='Wetsuit required — visit NAMA Freediving';setTimeout(()=>{toastEl.textContent='';},3000);}
+    return false;
+  }
+  activeBoat=b; sailing=true; player.visible=false;
+  if(b===namo&&!w1cert){
+    w1cert=true;
+    for(const L of LANDMARKS) if(L.dive)L.hidden=false;
+    renderList(); chime([659,784,988,1319]);
+    toastEl.textContent='⟡ W1 certified! Dive spots are on the map — take any boat and freedive there';
+    setTimeout(()=>{toastEl.textContent='';},4000);
+  }
+  return true;
+}
 function toggleBoat(){
   if(sailing){ // find land to disembark
     for(let d=3;d<=18;d+=2)for(let a=0;a<8;a++){
       const x=activeBoat.position.x+Math.cos(a/8*Math.PI*2)*d, z=activeBoat.position.z+Math.sin(a/8*Math.PI*2)*d;
-      if(heightAt(x,z)>0.4){
-        player.position.set(x,heightAt(x,z),z); player.visible=true; sailing=false; boatSpeed=0; return;
+      const py=pierY(x,z);
+      if(heightAt(x,z)>0.4||py!==null){
+        player.position.set(x,py!==null?py:heightAt(x,z),z); player.visible=true; sailing=false; boatSpeed=0; return;
       }
     }
     toastEl.textContent='No land nearby to disembark';
     return;
   }
+  const bud=LANDMARKS.find(l=>l.name==='Big Buddha');
+  if(Math.hypot(player.position.x-bud.x,player.position.z-bud.z)<12){enlighten();return;}
   const nama=LANDMARKS.find(l=>l.name==='NAMA Freediving');
   if(Math.hypot(player.position.x-nama.x,player.position.z-nama.z)<9){
-    const spotsDone=LANDMARKS.filter(l=>l.name.startsWith('Ko ')).every(l=>l.discovered);
-    if(wetsuit&&spotsDone&&!w1cert){
-      w1cert=true;
-      const wreck=LANDMARKS.find(l=>l.name==='King Cruiser Wreck'); wreck.hidden=false;
-      renderList(); chime([523,659,784,1047,1319],0.15);
-      toastEl.textContent='⟡ W1 certification earned! A shipwreck is rumored to the southeast…';
-      setTimeout(()=>{toastEl.textContent='';},4500);
-    } else {
-      toggleWetsuit();
-      toastEl.textContent=wetsuit?'Wetsuit on — Namo awaits at the pier':'Wetsuit off';
-      setTimeout(()=>{toastEl.textContent='';},2500);
-      renderList();
-    }
+    toggleWetsuit();
+    toastEl.textContent=wetsuit?'Wetsuit on — Namo awaits at Cape Panwa':'Wetsuit off';
+    setTimeout(()=>{toastEl.textContent='';},2500);
+    renderList();
     return;
   }
-  for(const b of [boat,namo]){
-    if(player.position.distanceTo(b.position)<9){
-      if(b===namo&&!wetsuit){
-        toastEl.textContent='Wetsuit required — visit NAMA Freediving';
-        setTimeout(()=>{toastEl.textContent='';},3000);
-        return;
-      }
-      activeBoat=b; sailing=true; player.visible=false;
-      if(b===namo&&!spotsUnlocked){
-        spotsUnlocked=true;
-        for(const L of LANDMARKS) if(L.name.startsWith('Ko '))L.hidden=false;
-        renderList(); chime([659,784,988,1319]);
-        toastEl.textContent='⟡ Dive spots unlocked: Ko Maiton & Ko Racha!';
-        setTimeout(()=>{toastEl.textContent='';},4000);
-      }
-      return;
-    }
+for(const b of ALL_BOATS){
+    if(player.position.distanceTo(b.position)<9){ boardBoat(b,false); return; }
   }
 }
 
@@ -699,23 +792,32 @@ function checkDiscoveries(){
     if(d<L.r+12) near=L;
     if(!L.discovered&&d<L.r){
       L.discovered=true; renderList(); chime([523,659,784,1047]);
-      toastEl.textContent=`✦ ${L.name} discovered!`;
+      toastEl.textContent=L.dive?`✦ Freedived at ${L.name}!`:`✦ ${L.name} discovered!`;
       setTimeout(()=>{if(toastEl.textContent.includes(L.name))toastEl.textContent='';},3000);
+      if(L.dive&&LANDMARKS.filter(l=>l.dive).every(l=>l.discovered)){
+        const wreck=LANDMARKS.find(l=>l.name==='King Cruiser Wreck');
+        if(wreck.hidden){
+          wreck.hidden=false; renderList(); chime([523,659,784,1047]);
+          toastEl.textContent='⟡ Rumors of a shipwreck to the southeast…';
+          setTimeout(()=>{if(toastEl.textContent.includes('Rumors'))toastEl.textContent='';},4500);
+        }
+      }
       if(LANDMARKS.every(l=>l.hidden||l.discovered)){
         bannerEl.style.display='block';
         chime([523,659,784,1047,784,1047,1319],0.18);
       }
     }
   }
-  if(near&&!toastEl.textContent.includes('discovered')&&!toastEl.textContent.includes('No land'))
-    toastEl.textContent=near.discovered?'':near.name;
-  else if(!near&&!toastEl.textContent.includes('discovered')&&!toastEl.textContent.includes('No land'))
+  const busyToast=toastEl.textContent.includes('✦')||toastEl.textContent.includes('⟡')||toastEl.textContent.includes('No land')||toastEl.textContent.includes('☀')||toastEl.textContent.includes('✈');
+  if(near&&!busyToast)
+    toastEl.textContent=near.discovered?(near.name==='Big Buddha'&&Math.hypot(p.x-near.x,p.z-near.z)<12?'Press E — meditate':''):near.name;
+  else if(!near&&!busyToast)
     toastEl.textContent = (!sailing&&(player.position.distanceTo(boat.position)<9||player.position.distanceTo(namo.position)<9))?'Press E to sail':'';
 }
 
 // =============================== LOOP ==============================
 const clock=new THREE.Clock();
-let t=0, mmTimer=0;
+let t=0, mmTimer=0, runT=0;
 // intro fly-in
 const INTRO_LEN=6, AERIAL=new THREE.Vector3(45,480,180), ISLAND_CENTER=new THREE.Vector3(0,0,0);
 let introT=0;
@@ -731,34 +833,42 @@ function animate(){
 
   if(!sailing){
     const moving=mx||mz;
+    const shift=keys.ShiftLeft||keys.ShiftRight;
+    if(moving&&shift)runT+=dt; else runT=Math.max(0,runT-dt*2);
+    const speed=10*(shift&&moving?(runT<4?1.8:1.35):1); // sprint, tires into half-run after 4s
     if(moving){
       const ang=Math.atan2(mx,mz)+camYaw; // W = away from camera
-      const nx=player.position.x+Math.sin(ang)*10*dt, nz=player.position.z+Math.cos(ang)*10*dt;
-      if(heightAt(nx,nz)>-0.6){ player.position.x=nx; player.position.z=nz; } // can wade in shallows
+      const nx=player.position.x+Math.sin(ang)*speed*dt, nz=player.position.z+Math.cos(ang)*speed*dt;
+      if(heightAt(nx,nz)>-0.6||pierY(nx,nz)!==null){ player.position.x=nx; player.position.z=nz; } // can wade in shallows or walk piers
       player.rotation.y=ang;
     }
-    const ground=Math.max(heightAt(player.position.x,player.position.z),-0.45);
+    const pier=pierY(player.position.x,player.position.z);
+    const ground=Math.max(heightAt(player.position.x,player.position.z),pier!==null?pier:-0.45,-0.45);
     if(keys.Space&&!airborne){vy=9;airborne=true;}
     if(airborne){
       player.position.y+=vy*dt; vy-=26*dt;
       if(player.position.y<=ground){player.position.y=ground;airborne=false;vy=0;}
     } else player.position.y=ground;
+    // stepping or landing onto a boat boards it automatically
+    if(!airborne)for(const b of ALL_BOATS){
+      if(player.position.distanceTo(b.position)<3.2&&boardBoat(b,true))break;
+    }
     // blob shadow stays on the ground, shrinks with jump height
     const jumpH=player.position.y-ground;
     blob.position.y=ground-player.position.y+0.06;
     blob.scale.setScalar(Math.max(0.55,1-jumpH*0.1));
-    const sw=moving?Math.sin(t*11):0;
+    const sw=moving?Math.sin(t*(shift?(runT<4?16:13):11)):0;
     armL.rotation.x=sw*0.8; armR.rotation.x=-sw*0.8;
     legL.rotation.x=-sw*0.8; legR.rotation.x=sw*0.8;
     body.position.y=1.15+(moving?Math.abs(Math.sin(t*11))*0.08:Math.sin(t*2)*0.03);
   } else {
-    if(keys.KeyW)boatSpeed=Math.min(boatSpeed+14*dt,16);
+    if(keys.KeyW)boatSpeed=Math.min(boatSpeed+activeBoat.userData.acc*dt,activeBoat.userData.max);
     else if(keys.KeyS)boatSpeed=Math.max(boatSpeed-16*dt,-4);
     else boatSpeed*=(1-1.2*dt);
     if(mx)activeBoat.rotation.y-=mx*1.4*dt*(boatSpeed>=0?1:-1);
     const nx=activeBoat.position.x+Math.sin(activeBoat.rotation.y)*boatSpeed*dt,
           nz=activeBoat.position.z+Math.cos(activeBoat.rotation.y)*boatSpeed*dt;
-    if(heightAt(nx,nz)<-0.8){ activeBoat.position.x=nx; activeBoat.position.z=nz; } else boatSpeed*=0.4;
+    if(heightAt(nx,nz)<-0.5){ activeBoat.position.x=nx; activeBoat.position.z=nz; } else boatSpeed*=0.4;
     activeBoat.position.y=0.3+waveY(activeBoat.position.x,activeBoat.position.z,t);
     activeBoat.rotation.z=Math.sin(t*1.7)*0.04+(mx?-mx*0.08:0);
     activeBoat.rotation.x=Math.sin(t*1.3)*0.03-boatSpeed*0.004;
@@ -766,7 +876,7 @@ function animate(){
       spawnWake(activeBoat.position.x-Math.sin(activeBoat.rotation.y)*2.5,activeBoat.position.z-Math.cos(activeBoat.rotation.y)*2.5);
   }
   // idle boats bob on the waves
-  for(const b of [boat,namo]) if(!(sailing&&b===activeBoat)) b.position.y=0.3+waveY(b.position.x,b.position.z,t)*0.6;
+  for(const b of ALL_BOATS) if(!(sailing&&b===activeBoat)) b.position.y=0.3+waveY(b.position.x,b.position.z,t)*0.6;
   // wake update
   for(let i=wakes.length-1;i>=0;i--){
     const w=wakes[i]; w.userData.age+=dt;
