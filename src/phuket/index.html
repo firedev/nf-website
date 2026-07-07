@@ -10,7 +10,7 @@
   #ui{position:fixed;inset:0;pointer-events:none;color:#fff}
   #list{position:absolute;top:14px;right:14px;background:rgba(20,40,60,.6);padding:12px 16px;border-radius:10px;font-size:16px;line-height:1.6;text-align:right}
   #list b{font-size:20px;color:#ffe27a}
-  #list .done{color:#ffe27a}
+  #list .done{color:#c9b96a;text-decoration:line-through;opacity:.8}
   #list .todo{color:#bcd8e8}
   #minimap{position:absolute;bottom:14px;right:14px;background:rgba(20,40,60,.55);border-radius:10px;pointer-events:auto;cursor:pointer}
   #flash{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,225,120,.95),rgba(255,190,60,0) 70%);opacity:0;pointer-events:none;transition:opacity .4s}
@@ -20,6 +20,8 @@
   .quest{display:inline-block;color:#7fd4f2;font-style:italic}
   .pop{animation:qpop .7s cubic-bezier(.34,1.56,.64,1)}
   @keyframes qpop{0%{transform:scale(.2);opacity:0}60%{transform:scale(1.18)}100%{transform:scale(1);opacity:1}}
+  #list .done,#list .todo,#list .quest{display:inline-block}
+  #list .lvl1{padding-right:16px;font-size:14px}
 </style>
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
@@ -621,10 +623,10 @@ head.position.y=2.05; head.scale.set(1,0.95,0.95);
 const eyeGeo=new THREE.SphereGeometry(0.075,6,6), eyeMat=new THREE.MeshBasicMaterial({color:0x22301f});
 for(const s of [-1,1]){const e=new THREE.Mesh(eyeGeo,eyeMat);e.position.set(s*0.22,0.05,0.56);head.add(e);}
 // pointy hat with brim roll and bobble
-const hat=new THREE.Mesh(new THREE.ConeGeometry(0.52,1.05,9),toon(0x1f7a43));
-hat.position.y=2.85; hat.rotation.x=0.3;
-const brim=new THREE.Mesh(new THREE.TorusGeometry(0.44,0.1,6,12).rotateX(Math.PI/2),hat.material);
-brim.position.y=-0.42; hat.add(brim);
+const hat=new THREE.Mesh(new THREE.ConeGeometry(0.62,1.0,9),toon(0x1f7a43));
+hat.position.y=2.82; hat.rotation.x=0.12; // sits on the crown, not through it
+const brim=new THREE.Mesh(new THREE.TorusGeometry(0.52,0.1,6,12).rotateX(Math.PI/2),hat.material);
+brim.position.y=-0.45; hat.add(brim);
 const bobble=new THREE.Mesh(new THREE.SphereGeometry(0.12,8,6),toon(0xffe27a));
 bobble.position.y=0.6; hat.add(bobble);
 // rounded limbs, pivot at top (translated geometry)
@@ -758,7 +760,7 @@ const long1=makeLongtail(); long1.position.set(-14,0.3,204); scene.add(long1);
 const long2=makeLongtail(); long2.position.set(-3,0.3,207); scene.add(long2);
 const ALL_BOATS=[boat,namo,speed1,speed2,long1,long2];
 ALL_BOATS.forEach(b=>b.userData.home=b.position.clone());
-let activeBoat=boat, w1cert=false, wetsuitTried=false;
+let activeBoat=boat, namoTried=false, w1cert=false, wetsuitTried=false;
 
 // boat wake sprites
 const wakeTexC=document.createElement('canvas'); wakeTexC.width=wakeTexC.height=64;
@@ -797,25 +799,43 @@ function questLine(){
   const by=n=>LANDMARKS.find(l=>l.name===n);
   if(!by('NAMA Freediving').discovered) return null;
   if(!wetsuitTried) return 'Try on a wetsuit at NAMA (E)';
-  if(!w1cert) return 'Take the W1 course aboard Namo (Cape Panwa)';
+  if(!namoTried) return 'Try depth training aboard Namo (Cape Panwa)';
+  if(!w1cert) return 'Return to NAMA to complete your W1 (E)';
   const dives=LANDMARKS.filter(l=>l.dive), k=dives.filter(l=>l.discovered).length;
   if(k<dives.length) return `Freedive at all dive spots · ${k}/${dives.length}`;
   if(!by('King Cruiser Wreck').discovered) return 'Find the King Cruiser Wreck';
   return null;
 }
-let shownQuests=new Set(), halo=null; // halo declared before first renderList() call (TDZ)
+let shownQuests=new Set(), halo=null;
 function renderList(){
   const vis=LANDMARKS.filter(l=>!l.hidden), n=vis.filter(l=>l.discovered).length;
-  const done=n===vis.length;
-  const lines=vis.filter(l=>!l.discovered).map(l=>'· '+l.name);
-  const q=questLine(); if(q)lines.push('➤ '+q);
-  if(typeof halo!=='undefined'&&!halo)lines.push('✧ A secret hides where serenity sits');
-  if(done)lines.unshift('All secrets found ✦');
-  listEl.innerHTML=`<b>Phuket · ${n}/${vis.length}</b><br>`+lines.map(s=>{
-    const fresh=!shownQuests.has(s);
-    return `<span class="quest${fresh?' pop':''}"${fresh||s.startsWith('All')?' style="color:#ffe27a"':''}>${s}</span>`;
+  const wreck=LANDMARKS.find(l=>l.name==='King Cruiser Wreck');
+  const places=vis.filter(l=>!l.dive&&l!==wreck), dives=vis.filter(l=>l.dive);
+  const pd=places.filter(l=>l.discovered).length, dd=dives.filter(l=>l.discovered).length;
+  const rows=[];
+  const row=(txt,cls,lvl)=>rows.push({txt,cls,lvl});
+  const mark=l=>(l.discovered?'✦ ':'· ')+l.name;
+  // tree: root quests with indented sub-items, roots always expanded
+  row(`▾ Visit all places · ${pd}/${places.length}`, pd===places.length?'done':'quest',0);
+  for(const l of places) row(mark(l), l.discovered?'done':'todo',1);
+  const nama=LANDMARKS.find(l=>l.name==='NAMA Freediving');
+  if(nama.discovered&&!w1cert){
+    row('▾ NAMA Freediving W1','quest',0);
+    row('➤ '+(!wetsuitTried?'Try on a wetsuit at NAMA (E)':!namoTried?'Try depth training aboard Namo (Cape Panwa)':'Return to NAMA to complete your W1 (E)'),'quest',1);
+  }
+  if(w1cert){
+    const allDives=dd===dives.length;
+    row(`▾ Freedive at all dive spots · ${dd}/${dives.length}`, allDives?'done':'quest',0);
+    for(const l of dives) row(mark(l), l.discovered?'done':'todo',1);
+    if(!wreck.hidden) row(mark(wreck), wreck.discovered?'done':'todo',1);
+  }
+  if(!halo) row('✧ A secret hides where serenity sits','quest',0);
+  if(n===vis.length&&(wreck.hidden||wreck.discovered)) rows.unshift({txt:'All secrets found ✦',cls:'done',lvl:0});
+  listEl.innerHTML=`<b>Phuket · ${n}/${vis.length}</b><br>`+rows.map(r=>{
+    const fresh=!shownQuests.has(r.txt);
+    return `<span class="${r.cls}${r.lvl?' lvl1':''}${fresh?' pop':''}"${fresh?' style="color:#ffe27a"':''}>${r.txt}</span>`;
   }).join('<br>');
-  shownQuests=new Set(lines);
+  shownQuests=new Set(rows.map(r=>r.txt));
 }
 renderList();
 setTimeout(()=>hintEl.style.opacity=0,12000);
@@ -823,7 +843,7 @@ setTimeout(()=>hintEl.style.opacity=0,12000);
 const mm=document.getElementById('minimap').getContext('2d');
 function drawMinimap(){
   mm.clearRect(0,0,160,330);
-  const X=x=>80+x*0.68, Z=z=>158+z*0.62;
+  const X=x=>62+x*0.6, Z=z=>150+z*0.6; // fits dive spots: x -88..150, z -210..268
   mm.beginPath();
   OUTLINE.forEach(([x,z],i)=>i?mm.lineTo(X(x),Z(z)):mm.moveTo(X(x),Z(z)));
   mm.closePath(); mm.fillStyle='#4a9e52'; mm.fill();
@@ -839,7 +859,7 @@ function drawMinimap(){
 }
 // click the minimap to teleport
 document.getElementById('minimap').addEventListener('click',e=>{
-  const wx=(e.offsetX-80)/0.68, wz=(e.offsetY-158)/0.62;
+  const wx=(e.offsetX-62)/0.6, wz=(e.offsetY-150)/0.6;
   if(introT<INTRO_LEN)introT=INTRO_LEN;
   if(sailing){
     activeBoat.position.copy(activeBoat.userData.home);
@@ -893,11 +913,9 @@ function boardBoat(b,silent){
     return false;
   }
   activeBoat=b; sailing=true; player.visible=false;
-  if(b===namo&&!w1cert){
-    w1cert=true;
-    for(const L of LANDMARKS) if(L.dive)L.hidden=false;
-    renderList(); chime([659,784,988,1319]);
-    toastEl.textContent='⟡ W1 certified! Dive spots are on the map — take any boat and freedive there';
+  if(b===namo&&!namoTried){
+    namoTried=true; renderList(); chime([659,784,988]);
+    toastEl.textContent='⟡ Great dive! Return to NAMA to complete your W1';
     setTimeout(()=>{toastEl.textContent='';},4000);
   }
   return true;
@@ -911,13 +929,26 @@ function toggleBoat(){
         player.position.set(x,py!==null?py:heightAt(x,z),z); player.visible=true; sailing=false; boatSpeed=0; return;
       }
     }
-    toastEl.textContent='No land nearby to disembark';
+    // no land around — dive in and swim
+    const ang=activeBoat.rotation.y+Math.PI/2;
+    player.position.set(activeBoat.position.x+Math.sin(ang)*4,0,activeBoat.position.z+Math.cos(ang)*4);
+    player.visible=true; sailing=false; boatSpeed=0;
+    toastEl.textContent='Swimming — reach shore or climb aboard';
+    setTimeout(()=>{toastEl.textContent='';},2500);
     return;
   }
   const bud=LANDMARKS.find(l=>l.name==='Big Buddha');
   if(Math.hypot(player.position.x-bud.x,player.position.z-bud.z)<12){enlighten();return;}
   const nama=LANDMARKS.find(l=>l.name==='NAMA Freediving');
   if(Math.hypot(player.position.x-nama.x,player.position.z-nama.z)<9){
+    if(namoTried&&!w1cert){
+      w1cert=true;
+      for(const L of LANDMARKS) if(L.dive)L.hidden=false;
+      renderList(); chime([523,659,784,1047,1319],0.15);
+      toastEl.textContent='⟡ W1 certified! Dive spots are on your map — take any boat and freedive there';
+      setTimeout(()=>{toastEl.textContent='';},4500);
+      return;
+    }
     toggleWetsuit();
     toastEl.textContent=wetsuit?'Wetsuit on — Namo awaits at Cape Panwa':'Wetsuit off';
     setTimeout(()=>{toastEl.textContent='';},2500);
@@ -984,16 +1015,19 @@ function animate(){
     const moving=mx||mz;
     const shift=keys.ShiftLeft||keys.ShiftRight;
     if(moving&&shift)runT+=dt; else runT=Math.max(0,runT-dt*2);
-    const speed=10*(shift&&moving?(runT<4?1.8:1.35):1); // sprint, tires into half-run after 4s
+    const swimming=heightAt(player.position.x,player.position.z)<-0.6&&pierY(player.position.x,player.position.z)===null;
+    const speed=(swimming?4.5:10)*(shift&&moving?(runT<4?1.8:1.35):1); // sprint, tires into half-run after 4s
     if(moving){
       const ang=Math.atan2(mx,mz)+camYaw; // W = away from camera
       const nx=player.position.x+Math.sin(ang)*speed*dt, nz=player.position.z+Math.cos(ang)*speed*dt;
-      if(heightAt(nx,nz)>-0.6||pierY(nx,nz)!==null){ player.position.x=nx; player.position.z=nz; } // can wade in shallows or walk piers
+      player.position.x=nx; player.position.z=nz; // walk, wade or swim anywhere
       player.rotation.y=ang;
     }
     const pier=pierY(player.position.x,player.position.z);
-    const ground=Math.max(heightAt(player.position.x,player.position.z),pier!==null?pier:-0.45,-0.45);
-    if(keys.Space&&!airborne){vy=9;airborne=true;}
+    const ground=swimming
+      ? waveY(player.position.x,player.position.z,t)-0.95
+      : Math.max(heightAt(player.position.x,player.position.z),pier!==null?pier:-0.45,-0.45);
+    if(keys.Space&&!airborne&&!swimming){vy=9;airborne=true;}
     if(airborne){
       player.position.y+=vy*dt; vy-=26*dt;
       if(player.position.y<=ground){player.position.y=ground;airborne=false;vy=0;}
@@ -1006,6 +1040,7 @@ function animate(){
     const jumpH=player.position.y-ground;
     blob.position.y=ground-player.position.y+0.06;
     blob.scale.setScalar(Math.max(0.55,1-jumpH*0.1));
+    blob.visible=!swimming;
     const sw=moving?Math.sin(t*(shift?(runT<4?16:13):11)):0;
     armL.rotation.x=sw*0.8; armR.rotation.x=-sw*0.8;
     legL.rotation.x=-sw*0.8; legR.rotation.x=sw*0.8;
