@@ -178,15 +178,11 @@
 :root.theme-dark {
   /* Button component styling */
   & .group.inline-flex {
-    background: rgba(15, 15, 15, 0.8) !important;
+    background: transparent !important;
     color: var(--dark-text-primary) !important;
-    box-shadow: var(--dark-shadow-lg);
-    backdrop-filter: blur(10px);
-    
+
     &:hover {
-      background: rgba(26, 26, 26, 0.9) !important;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-      border-color: #4299e1;
+      background: rgba(255, 255, 255, 0.5) !important;
     }
     
     /* Icon styling */
@@ -430,4 +426,25 @@
 /* Zen-circle logo: black brush stroke inverts to white in dark theme */
 :root.theme-dark img.zen-circle {
   filter: invert(1);
+}
+
+/* Header wordmark follows theme text color */
+:root.theme-dark .logo-text {
+  color: var(--dark-text-primary);
+}
+
+/* Next dive card: dark surface instead of white, outline buttons */
+:root.theme-dark .next-dive {
+  background-color: var(--dark-surface-1);
+  color: var(--dark-text-primary);
+}
+
+:root.theme-dark .next-dive a {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--dark-text-primary) !important;
+}
+
+:root.theme-dark .next-dive a:hover {
+  background-color: rgba(255, 255, 255, 0.5);
 }

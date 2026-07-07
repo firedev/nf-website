@@ -5,10 +5,10 @@
       <div class="flex flex-shrink-0 items-center delay-75 w-[3em] h-[3em] absolute left-[1rem]">
         <img src="/images/zen-circle-grunge-brush-stroke-2.png" class="zen-circle flex-shrink-0 w-[3em] h-[3em]"/>
       </div>
-      <div class="flex text-4xl tracking-tighter">
-        <span  style="color: #000" class="font-bold">n         fins</span>
-        <span  style="color: #000" class="">.</span>
-        <span  style="color: #000" class="">com</span>
+      <div class="logo-text flex text-4xl tracking-tighter text-slate-950">
+        <span  class="font-bold">n         fins</span>
+        <span  class="">.</span>
+        <span  class="">com</span>
       </div>
     </a>
 

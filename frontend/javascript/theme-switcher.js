@@ -182,8 +182,13 @@ class ThemeSwitcher {
       
       /* Dark theme styles */
       :root.theme-dark .theme-toggle-btn {
-        background: var(--dark-surface-1);
+        background: transparent;
         color: #f5f5f5;
+        box-shadow: none;
+      }
+
+      :root.theme-dark .theme-toggle-btn:hover {
+        background: rgba(255, 255, 255, 0.5);
       }
       
       :root.theme-dark .theme-icon-sun {
