@@ -133,7 +133,7 @@ function rawHeight(x,z){
 
 
 // flat pads so landmark structures sit on level ground
-const FLATS=[[-16,187],[-36.6,143.7],[-12.9,127.6],[-37.5,207.0],[-49.8,76.3],[33.9,89.6],[-42.5,183.4],[-53.1,-11.2],[22.4,81.8],[-42,-183]];
+const FLATS=[[-39,-140],[-39,-160],[-16,187],[-36.6,143.7],[-12.9,127.6],[-37.5,207.0],[-49.8,76.3],[33.9,89.6],[-42.5,183.4],[-53.1,-11.2],[22.4,81.8],[-18,-175]];
 const padH=FLATS.map(f=>rawHeight(f[0],f[1]));
 function terrainHeight(x,z){
   let h=rawHeight(x,z);
@@ -584,12 +584,12 @@ function buildCrab(){
     return arm;
   }
   const clawL=buildClaw(-1);
-  clawL.position.set(-0.66,0.62,0.5);
-  clawL.rotation.y=0.35;
+  clawL.position.set(-0.8,0.5,0.85);
+  clawL.rotation.set(-0.5,0.5,0);
   g.add(clawL);
   const clawR=buildClaw(1);
-  clawR.position.set(0.66,0.62,0.5);
-  clawR.rotation.y=-0.35;
+  clawR.position.set(0.8,0.5,0.85);
+  clawR.rotation.set(-0.5,-0.5,0);
   g.add(clawR);
 
   // small side legs: 3 pairs of thin tapered capsules, bent at an angle
@@ -1028,6 +1028,45 @@ function buildMonkey(){
 
   return g;
 }
+function buildAirport(){
+  const g=new THREE.Group();
+  const runway=new THREE.Mesh(new THREE.BoxGeometry(6,0.25,40),toon(0x5c6066)); runway.position.set(-3,0.15,0); g.add(runway);
+  for(let i=0;i<7;i++){const s=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.28,2.4),toon(0xf2f2f2)); s.position.set(-3,0.18,i*5.5-16.5); g.add(s);}
+  const term=addOutline(new THREE.Mesh(new THREE.BoxGeometry(7,3,5),toon(0xf4f1e8)),1.04); term.position.set(4,1.5,2); g.add(term);
+  const glass=new THREE.Mesh(new THREE.BoxGeometry(7.1,1.1,5.1),new THREE.MeshBasicMaterial({color:0x9fd7e8})); glass.position.set(4,1.7,2); g.add(glass);
+  const roof=new THREE.Mesh(new THREE.BoxGeometry(7.8,0.35,5.8),toon(0xd94f3d)); roof.position.set(4,3.1,2); g.add(roof);
+  const tower=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.8,6,8),toon(0xe8e4d8)); tower.position.set(6.5,3,-3); g.add(tower);
+  const cab=new THREE.Mesh(new THREE.CylinderGeometry(1.4,1.4,1.2,8),toon(0x2e6f8e)); cab.position.set(6.5,6.4,-3); addOutline(cab,1.06); g.add(cab);
+  const cone=new THREE.Mesh(new THREE.ConeGeometry(0.35,1,6),toon(0xf2842a)); cone.rotation.z=Math.PI/2; cone.position.set(0.5,1.4,-17); g.add(cone);
+  return g;
+}
+function wheel(r,w){return new THREE.Mesh(new THREE.CylinderGeometry(r,r,w,10).rotateZ(Math.PI/2),toon(0x22262b));}
+function buildScooter(){
+  const v=new THREE.Group();
+  const board=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.15,1.7),toon(0x3fa7d6)); board.position.y=0.45; v.add(board);
+  const seat=new THREE.Mesh(new THREE.BoxGeometry(0.45,0.25,0.8),toon(0x22262b)); seat.position.set(0,0.75,-0.4); v.add(seat);
+  const col=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06,0.9,6),toon(0x3fa7d6)); col.rotation.x=0.4; col.position.set(0,0.9,0.62); v.add(col);
+  const bar=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,0.7,6).rotateZ(Math.PI/2),toon(0x22262b)); bar.position.set(0,1.32,0.45); v.add(bar);
+  const w1=wheel(0.28,0.16); w1.position.set(0,0.28,0.8); const w2=wheel(0.28,0.16); w2.position.set(0,0.28,-0.8);
+  v.add(w1,w2); return v;
+}
+function buildTuktuk(){
+  const v=new THREE.Group();
+  const cab=addOutline(new THREE.Mesh(new THREE.BoxGeometry(1.5,1.1,2.4),toon(0xd94f3d)),1.05); cab.position.y=0.95; v.add(cab);
+  const roof=new THREE.Mesh(new THREE.BoxGeometry(1.7,0.15,2.7),toon(0xf2c14e)); roof.position.y=1.65; v.add(roof);
+  const shield=new THREE.Mesh(new THREE.PlaneGeometry(1.2,0.7),new THREE.MeshBasicMaterial({color:0x9fd7e8,side:THREE.DoubleSide})); shield.position.set(0,1.2,1.21); v.add(shield);
+  const wf=wheel(0.3,0.2); wf.position.set(0,0.3,1.15);
+  const wl=wheel(0.3,0.2); wl.position.set(-0.7,0.3,-0.8);
+  const wr=wheel(0.3,0.2); wr.position.set(0.7,0.3,-0.8);
+  v.add(wf,wl,wr); return v;
+}
+function buildCar(){
+  const v=new THREE.Group();
+  const body=addOutline(new THREE.Mesh(new THREE.BoxGeometry(1.9,0.8,3.6),toon(0x2e6f8e)),1.04); body.position.y=0.75; v.add(body);
+  const cabin=new THREE.Mesh(new THREE.BoxGeometry(1.6,0.7,1.8),toon(0x9fd7e8)); cabin.position.set(0,1.45,-0.2); v.add(cabin);
+  for(const [x,z] of [[-0.85,1.2],[0.85,1.2],[-0.85,-1.2],[0.85,-1.2]]){const w=wheel(0.35,0.25); w.position.set(x,0.35,z); v.add(w);}
+  return v;
+}
 const LANDMARKS=[
   {name:'Big Buddha', x:-36.6, z:143.7, r:16, build:buildBigBuddha},
   {name:'Wat Chalong', x:-12.9, z:127.6, r:14, build:buildWat},
@@ -1038,6 +1077,7 @@ const LANDMARKS=[
   {name:'Sarasin Bridge', x:-50.6, z:-207.0, r:18, build:buildBridge},
   {name:'Bang Tao Lagoon', x:-53.1, z:-11.2, r:15, build:buildLagoon},
   {name:'Khao Rang Hill', x:22.4, z:81.8, r:12, build:buildFlagHill},
+  {name:'Phuket Airport', x:-36, z:-150, r:16, build:buildAirport},
   {name:'NAMA Freediving', x:-16, z:187, r:10, build:buildNama},
   {name:'Ko Maiton', x:100, z:140, r:14, build:buildDiveIsland, hidden:true, dive:true},
   {name:'Ko Racha', x:-15, z:252, r:14, build:buildDiveIsland, hidden:true, dive:true},
@@ -1189,7 +1229,7 @@ const blob=new THREE.Mesh(new THREE.CircleGeometry(0.7,16).rotateX(-Math.PI/2),
   new THREE.MeshBasicMaterial({color:0x11331e,transparent:true,opacity:0.3}));
 blob.position.y=0.06;
 player.add(body,head,hat,armL,armR,legL,legR,blob);
-player.position.set(25.5,heightAt(25.5,91.5),91.5); // spawn at Old Phuket Town
+player.position.set(-18,heightAt(-18,-175),-175); // spawn at the northern airport
 scene.add(player);
 
 // wetsuit (NAMA Freediving)
@@ -1288,8 +1328,8 @@ function makeLongtail(){
   b.add(hull,gun,bow,tail,prop,flag); b.userData={max:13,acc:10}; return b;
 }
 const boat=makeBoat(0xb03a2e,0xfff6e0); boat.userData={max:16,acc:14};
-// spawn in water east of Old Town
-let bx=60,bz=91.5; while(heightAt(bx,bz)>-1.8&&bx<110)bx+=1;
+// spawn in water just east of the airport (test walks east to board)
+let bx=-8,bz=-175; while(heightAt(bx,bz)>-1.8&&bx<40)bx+=1;
 boat.position.set(bx,0.3,bz);
 scene.add(boat);
 // Namo — the NAMA dive boat off the Cape Panwa pier, white with a red diver flag
@@ -1297,6 +1337,8 @@ const namo=makeBoat(0xf5f8fa,0x9fd7e8); namo.userData={max:18,acc:14};
 const dflag=new THREE.Mesh(new THREE.PlaneGeometry(1.2,0.8),new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}));
 dflag.position.set(0.6,5.6,-0.35); namo.add(dflag);
 namo.position.set(18,0.3,163);
+const namoTag=makeLabel('Namo'); namoTag.scale.set(9,1.7,1); namoTag.visible=true;
+namoTag.position.set(0,7,0); namo.add(namoTag); // name tag above the dive boat
 scene.add(namo);
 // speedboats in Chalong bay, longtails off Rawai
 const speed1=makeSpeedboat(); speed1.position.set(18,0.3,153); scene.add(speed1);
@@ -1304,7 +1346,12 @@ const speed2=makeSpeedboat(); speed2.position.set(27,0.3,158); scene.add(speed2)
 const long1=makeLongtail(); long1.position.set(-14,0.3,204); scene.add(long1);
 const long2=makeLongtail(); long2.position.set(-3,0.3,207); scene.add(long2);
 const ALL_BOATS=[boat,namo,speed1,speed2,long1,long2];
-ALL_BOATS.forEach(b=>b.userData.home=b.position.clone());
+const scooter=buildScooter(); scooter.userData={max:20,acc:18,land:true}; scooter.position.set(-31,0,-144); scene.add(scooter);
+const tuktuk=buildTuktuk(); tuktuk.userData={max:16,acc:14,land:true}; tuktuk.position.set(-31,0,-149); scene.add(tuktuk);
+const car=buildCar(); car.userData={max:26,acc:16,land:true}; car.position.set(-31,0,-154); scene.add(car);
+for(const v of [scooter,tuktuk,car]) v.position.y=heightAt(v.position.x,v.position.z)+0.1;
+const ALL_RIDES=[...ALL_BOATS,scooter,tuktuk,car];
+ALL_RIDES.forEach(b=>b.userData.home=b.position.clone());
 let activeBoat=boat, namoTried=false, w1cert=false, wetsuitTried=false;
 
 // boat wake sprites
@@ -1482,7 +1529,7 @@ function toggleBoat(){
     renderList();
     return;
   }
-for(const b of ALL_BOATS){
+for(const b of ALL_RIDES){
     if(player.position.distanceTo(b.position)<9){ boardBoat(b,false); return; }
   }
 }
@@ -1560,7 +1607,7 @@ function animate(){
       if(player.position.y<=ground){player.position.y=ground;airborne=false;vy=0;}
     } else player.position.y=ground;
     // stepping or landing onto a boat boards it automatically
-    if(!airborne)for(const b of ALL_BOATS){
+    if(!airborne)for(const b of ALL_RIDES){
       if(player.position.distanceTo(b.position)<3.2&&boardBoat(b,true))break;
     }
     // blob shadow stays on the ground, shrinks with jump height
@@ -1579,11 +1626,17 @@ function animate(){
     if(mx)activeBoat.rotation.y-=mx*1.4*dt*(boatSpeed>=0?1:-1);
     const nx=activeBoat.position.x+Math.sin(activeBoat.rotation.y)*boatSpeed*dt,
           nz=activeBoat.position.z+Math.cos(activeBoat.rotation.y)*boatSpeed*dt;
-    if(heightAt(nx,nz)<-0.5){ activeBoat.position.x=nx; activeBoat.position.z=nz; } else boatSpeed*=0.4;
-    activeBoat.position.y=0.3+waveY(activeBoat.position.x,activeBoat.position.z,t);
-    activeBoat.rotation.z=Math.sin(t*1.7)*0.04+(mx?-mx*0.08:0);
-    activeBoat.rotation.x=Math.sin(t*1.3)*0.03-boatSpeed*0.004;
-    if(Math.abs(boatSpeed)>4&&Math.random()<dt*14)
+    const land=activeBoat.userData.land;
+    if(land ? heightAt(nx,nz)>0.3 : heightAt(nx,nz)<-0.5){ activeBoat.position.x=nx; activeBoat.position.z=nz; } else boatSpeed*=0.4;
+    if(land){
+      activeBoat.position.y=heightAt(activeBoat.position.x,activeBoat.position.z)+0.1;
+      activeBoat.rotation.z=0; activeBoat.rotation.x=0;
+    } else {
+      activeBoat.position.y=0.3+waveY(activeBoat.position.x,activeBoat.position.z,t);
+      activeBoat.rotation.z=Math.sin(t*1.7)*0.04+(mx?-mx*0.08:0);
+      activeBoat.rotation.x=Math.sin(t*1.3)*0.03-boatSpeed*0.004;
+    }
+    if(!activeBoat.userData.land&&Math.abs(boatSpeed)>4&&Math.random()<dt*14)
       spawnWake(activeBoat.position.x-Math.sin(activeBoat.rotation.y)*2.5,activeBoat.position.z-Math.cos(activeBoat.rotation.y)*2.5);
   }
   // idle boats bob on the waves
