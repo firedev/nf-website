@@ -25,6 +25,8 @@
   .q.done{color:#7e97a8}
   .q.done i{background:#ffd75e;border-color:#ffd75e}
   .q.quest{color:#ffe27a;font-style:italic}
+  .q.secret{color:#63798a;font-style:italic}
+  .q.secret i{border-color:#63798a}
   .q.quest i{border-color:#ffe27a}
   .pop{animation:qpop .7s cubic-bezier(.34,1.56,.64,1)}
 </style>
@@ -1186,7 +1188,7 @@ function gullFlock(cx,cz,n){
   }
 }
 // Chalong pier (long jetty into Chalong Bay) + Rawai pier
-const PIERS=[{x:9,z:139.5,dx:0.6,dz:0.8,len:26},{x:-12.8,z:190.5,dx:0.25,dz:0.97,len:18},{x:33.5,z:158,dx:-0.95,dz:0.31,len:14}];
+const PIERS=[{x:9,z:139.5,dx:0.6,dz:0.8,len:26},{x:33.5,z:158,dx:-0.95,dz:0.31,len:14}];
 for(const p of PIERS) buildPier(p.x,p.z,p.dx,p.dz,p.len);
 gullFlock(9+0.6*20,139.5+0.8*20,5);
 gullFlock(-12.8+0.25*14,190.5+0.97*14,4);
@@ -1336,16 +1338,11 @@ scene.add(boat);
 const namo=makeBoat(0xf5f8fa,0x9fd7e8); namo.userData={max:18,acc:14};
 const dflag=new THREE.Mesh(new THREE.PlaneGeometry(1.2,0.8),new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}));
 dflag.position.set(0.6,5.6,-0.35); namo.add(dflag);
-namo.position.set(18,0.3,163);
+namo.position.set(2,0.3,187); namo.rotation.y=Math.PI/2; // in the water east of NAMA Freediving, facing open sea
 const namoTag=makeLabel('Namo'); namoTag.scale.set(9,1.7,1); namoTag.visible=true;
 namoTag.position.set(0,7,0); namo.add(namoTag); // name tag above the dive boat
 scene.add(namo);
-// speedboats in Chalong bay, longtails off Rawai
-const speed1=makeSpeedboat(); speed1.position.set(18,0.3,153); scene.add(speed1);
-const speed2=makeSpeedboat(); speed2.position.set(27,0.3,158); scene.add(speed2);
-const long1=makeLongtail(); long1.position.set(-14,0.3,204); scene.add(long1);
-const long2=makeLongtail(); long2.position.set(-3,0.3,207); scene.add(long2);
-const ALL_BOATS=[boat,namo,speed1,speed2,long1,long2];
+const ALL_BOATS=[boat,namo];
 const scooter=buildScooter(); scooter.userData={max:20,acc:18,land:true}; scooter.position.set(-31,0,-144); scene.add(scooter);
 const tuktuk=buildTuktuk(); tuktuk.userData={max:16,acc:14,land:true}; tuktuk.position.set(-31,0,-149); scene.add(tuktuk);
 const car=buildCar(); car.userData={max:26,acc:16,land:true}; car.position.set(-31,0,-154); scene.add(car);
@@ -1404,11 +1401,10 @@ function renderList(){
   const rows=[];
   const q=questLine(); if(q)rows.push({txt:q,cls:'quest'});
   for(const l of vis) if(!l.discovered) rows.push({txt:l.name,cls:'todo'});
-  if(!halo)rows.push({txt:'A secret hides where serenity sits',cls:'quest'});
   for(const l of vis) if(l.discovered) rows.push({txt:l.name,cls:'done'}); // completed sink to the bottom
   if(n===vis.length)rows.unshift({txt:'All secrets found',cls:'quest'});
   listEl.innerHTML=`<b>Phuket</b><div id="bar"><i style="width:${Math.round(n/vis.length*100)}%"></i></div>`+
-    rows.map(r=>`<div class="q ${r.cls}${shownQuests.has(r.txt)?'':' pop'}"><i></i><span>${r.txt}</span></div>`).join('');
+    rows.map(r=>`<div class="q ${r.cls}${!shownQuests.has(r.txt)&&r.cls!=='secret'?' pop':''}"><i></i><span>${r.txt}</span></div>`).join('');
   shownQuests=new Set(rows.map(r=>r.txt));
 }
 renderList();
