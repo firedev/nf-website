@@ -59,6 +59,9 @@ class ThemeSwitcher {
   }
 
   createToggleButton() {
+    const mount = document.getElementById('theme-switcher');
+    if (!mount) return;
+
     // Create modern toggle button
     const button = document.createElement('button');
     button.id = 'wha';
@@ -102,7 +105,7 @@ class ThemeSwitcher {
     });
     
     // Add to page
-    document.getElementById('theme-switcher').appendChild(button);
+    mount.appendChild(button);
     this.toggleButton = button;
     
     // Update initial state

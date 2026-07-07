@@ -12,6 +12,7 @@
       </div>
     </a>
 
+    <div class="flex items-center gap-4">
     <a class="group inline-flex space-x-2 items-center rounded-2xl py-4 px-2 font-bold outline-none
     transition duration-300
     shadow-xl shadow-sky-950/10
@@ -26,6 +27,8 @@
   </span>
     </a>
 
+    <div id="theme-switcher" class="flex items-center"></div>
+    </div>
 
   </div>
 </header>
