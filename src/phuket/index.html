@@ -8,9 +8,16 @@
   html,body{margin:0;height:100%;overflow:hidden;background:#9adcf0;font-family:Georgia,serif}
   canvas{display:block}
   #ui{position:fixed;inset:0;pointer-events:none;color:#fff}
-  #list{position:absolute;top:14px;right:14px;min-width:250px;background:linear-gradient(160deg,rgba(22,42,62,.88),rgba(10,24,38,.88));border:2px solid rgba(255,215,110,.5);border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.35);padding:12px 16px;font-size:16px}
+  #list{position:absolute;top:14px;right:14px;min-width:250px;background:linear-gradient(160deg,rgba(22,42,62,.88),rgba(10,24,38,.88));border:2px solid rgba(255,215,110,.5);border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.35);padding:12px 16px;font-size:16px;opacity:0;transition:opacity .8s}
   #list b{display:block;text-align:center;font-size:20px;color:#ffe27a;letter-spacing:1px}
-  #minimap{position:absolute;bottom:14px;right:14px;background:rgba(20,40,60,.55);border-radius:10px;pointer-events:auto;cursor:pointer}
+  #minimap{position:absolute;bottom:14px;right:14px;background:rgba(20,40,60,.55);border-radius:10px;pointer-events:auto;cursor:pointer;opacity:0;transition:opacity .8s}
+  #ui.ready #list,#ui.ready #minimap{opacity:1}
+  #start{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 38%,#bfeaf7,#7cc4e0 70%,#4a97bd);color:#fff;text-align:center;transition:opacity .7s;cursor:pointer}
+  #start.hide{opacity:0;pointer-events:none}
+  #start h1{margin:0;font-size:clamp(48px,9vw,120px);color:#fff;text-shadow:0 4px 0 #1a5f86,0 8px 22px rgba(0,0,0,.35);letter-spacing:2px}
+  #start .sub{margin-top:6px;font-size:clamp(16px,2.4vw,26px);color:#eafaff;text-shadow:0 2px 6px rgba(0,0,0,.4);font-style:italic}
+  #start .go{margin-top:38px;font-size:clamp(18px,2.6vw,28px);color:#0d3b56;background:#ffe27a;border:3px solid #fff;border-radius:40px;padding:12px 40px;box-shadow:0 6px 18px rgba(0,0,0,.3);animation:gopulse 1.6s ease-in-out infinite}
+  @keyframes gopulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
   #flash{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,225,120,.95),rgba(255,190,60,0) 70%);opacity:0;pointer-events:none;transition:opacity .4s}
   #toast{position:absolute;bottom:90px;width:100%;text-align:center;font-size:34px;text-shadow:0 2px 6px rgba(0,0,0,.5);letter-spacing:1px}
   #hint{position:absolute;bottom:18px;width:100%;text-align:center;font-size:17px;color:#eaf6ff;text-shadow:0 1px 4px rgba(0,0,0,.6);transition:opacity 2s}
@@ -35,6 +42,11 @@
 </script>
 </head>
 <body>
+<div id="start">
+  <h1>Finding Nama</h1>
+  <div class="sub">A Wind Waker voyage around Phuket</div>
+  <div class="go">Press any key to begin</div>
+</div>
 <div id="ui">
   <div id="list"></div>
   <canvas id="minimap" width="160" height="330"></canvas>
@@ -1925,8 +1937,17 @@ function spawnWake(x,z){
 }
 
 // ============================== INPUT ==============================
+// start screen: dismiss on first key/click, then reveal HUD after the fly-in
+const startEl=document.getElementById('start'), uiEl=document.getElementById('ui');
+let started=false;
+function startGame(){ if(started)return; started=true; startEl.classList.add('hide'); initAudio(); }
+addEventListener('pointerdown',startGame);
+
 const keys={};
-addEventListener('keydown',e=>{keys[e.code]=true; initAudio(); if(e.code==='KeyE')toggleBoat(); if(e.code==='Space')e.preventDefault();});
+addEventListener('keydown',e=>{
+  if(!started){startGame();return;} // first key just starts the game
+  keys[e.code]=true; initAudio(); if(e.code==='KeyE')toggleBoat(); if(e.code==='Space')e.preventDefault();
+});
 addEventListener('keyup',e=>keys[e.code]=false);
 addEventListener('blur',()=>{for(const k in keys)keys[k]=false; dragging=false;}); // stuck-key guard on tab/window switch
 document.addEventListener('visibilitychange',()=>{if(document.hidden)for(const k in keys)keys[k]=false;});
@@ -2242,7 +2263,7 @@ function animate(){
     cy=Math.max(cy,heightAt(focus.x+(cx-focus.x)*s,focus.z+(cz-focus.z)*s)+2);
   cy=Math.max(cy,1.2);
   if(introT<INTRO_LEN){ // aerial fly-in: whole Phuket, then descend to the player
-    introT+=dt;
+    if(started)introT+=dt; // hold on the aerial view behind the title until the player begins
     const k=Math.min(introT/INTRO_LEN,1), e=k*k*(3-2*k);
     scene.fog.far=650+(1-e)*600; // don't fog out the island during the aerial view
     camera.position.lerpVectors(AERIAL,new THREE.Vector3(cx,cy,cz),e);
@@ -2250,6 +2271,7 @@ function animate(){
     const look=new THREE.Vector3().lerpVectors(ISLAND_CENTER,new THREE.Vector3(focus.x,focus.y+2.5,focus.z),e);
     camera.lookAt(look);
   } else {
+    if(!uiEl.classList.contains('ready'))uiEl.classList.add('ready'); // reveal HUD once the fly-in lands
     camera.position.lerp(new THREE.Vector3(cx,cy,cz),Math.min(1,dt*6));
     camera.lookAt(focus.x,focus.y+2.5,focus.z);
   }
@@ -2260,7 +2282,8 @@ function animate(){
 }
 animate();
 // ponytail: debug handle for automated smoke test
-window.__dbg={player,boat,get sailing(){return sailing},LANDMARKS,renderer,scene,camera,THREE};
+window.__dbg={player,boat,get sailing(){return sailing},LANDMARKS,renderer,scene,camera,THREE,
+  skipIntro(){startGame();introT=INTRO_LEN;}}; // test hook: dismiss title + fast-forward fly-in
 </script>
 </body>
 </html>
