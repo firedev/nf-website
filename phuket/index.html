@@ -1963,6 +1963,8 @@ addEventListener('wheel',e=>{camDist=Math.max(6,Math.min(45,camDist+e.deltaY*0.0
 addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
 
 // =============================== UI ================================
+let toastUntil=0; // timed toasts hold until game-time t passes this; ambient text yields to them
+function toast(msg,dur=3){toastEl.textContent=msg;toastUntil=t+dur;}
 const listEl=document.getElementById('list'),toastEl=document.getElementById('toast'),
       hintEl=document.getElementById('hint'),bannerEl=document.getElementById('banner');
 function questLine(){
@@ -2025,8 +2027,7 @@ document.getElementById('minimap').addEventListener('click',e=>{
   if(lx===null)return; // clicked open ocean, nothing near
   const py=pierY(lx,lz);
   player.position.set(lx,py!==null?py:heightAt(lx,lz),lz);
-  toastEl.textContent='✈ Warped';
-  setTimeout(()=>{if(toastEl.textContent==='✈ Warped')toastEl.textContent='';},2000);
+  toast('✈ Warped',2);
 });
 
 // ============================== AUDIO ==============================
@@ -2050,8 +2051,7 @@ function enlighten(){
   flashEl.style.opacity=1;
   setTimeout(()=>flashEl.style.opacity=0,600);
   chime([523,659,784,1047,1319,1568],0.12);
-  toastEl.textContent='☀ Enlightenment attained';
-  setTimeout(()=>{if(toastEl.textContent.includes('Enlightenment'))toastEl.textContent='';},3000);
+  toast('☀ Enlightenment attained');
   if(!halo){
     halo=new THREE.Mesh(new THREE.TorusGeometry(0.45,0.06,8,24),new THREE.MeshBasicMaterial({color:0xffd75e}));
     halo.rotation.x=Math.PI/2; halo.position.y=3.05; player.add(halo);
@@ -2060,14 +2060,13 @@ function enlighten(){
 let sailing=false, boatSpeed=0, vy=0, airborne=false;
 function boardBoat(b,silent){
   if(b===namo&&!wetsuit){
-    if(!silent){toastEl.textContent='Wetsuit required — visit NAMA Freediving';setTimeout(()=>{toastEl.textContent='';},3000);}
+    if(!silent)toast('Wetsuit required — visit NAMA Freediving');
     return false;
   }
   activeBoat=b; sailing=true; player.visible=false;
   if(b===namo&&!namoTried){
     namoTried=true; renderList(); chime([659,784,988]);
-    toastEl.textContent='⟡ Great dive! Return to NAMA to complete your W1';
-    setTimeout(()=>{toastEl.textContent='';},4000);
+    toast('⟡ Great dive! Return to NAMA to complete your W1',4);
   }
   return true;
 }
@@ -2084,8 +2083,7 @@ function toggleBoat(){
     const ang=activeBoat.rotation.y+Math.PI/2;
     player.position.set(activeBoat.position.x+Math.sin(ang)*4,0,activeBoat.position.z+Math.cos(ang)*4);
     player.visible=true; sailing=false; boatSpeed=0;
-    toastEl.textContent='Swimming — reach shore or climb aboard';
-    setTimeout(()=>{toastEl.textContent='';},2500);
+    toast('Swimming — reach shore or climb aboard',2.5);
     return;
   }
   const bud=LANDMARKS.find(l=>l.name==='Big Buddha');
@@ -2096,13 +2094,11 @@ function toggleBoat(){
       w1cert=true;
       for(const L of LANDMARKS) if(L.dive)L.hidden=false;
       renderList(); chime([523,659,784,1047,1319],0.15);
-      toastEl.textContent='⟡ W1 certified! Dive spots are on your map — take any boat and freedive there';
-      setTimeout(()=>{toastEl.textContent='';},4500);
+      toast('⟡ W1 certified! Dive spots are on your map — take any boat and freedive there',4.5);
       return;
     }
     toggleWetsuit();
-    toastEl.textContent=wetsuit?'Wetsuit on — Namo awaits at NAMA Freediving':'Wetsuit off';
-    setTimeout(()=>{toastEl.textContent='';},2500);
+    toast(wetsuit?'Wetsuit on — Namo awaits at NAMA Freediving':'Wetsuit off',2.5);
     renderList();
     return;
   }
@@ -2126,14 +2122,12 @@ function checkDiscoveries(){
     if(d<L.r+12) near=L;
     if(!L.discovered&&d<L.r){
       L.discovered=true; renderList(); chime([523,659,784,1047]);
-      toastEl.textContent=L.dive?`✦ Freedived at ${L.name}!`:`✦ ${L.name} discovered!`;
-      setTimeout(()=>{if(toastEl.textContent.includes(L.name))toastEl.textContent='';},3000);
+      toast(L.dive?`✦ Freedived at ${L.name}!`:`✦ ${L.name} discovered!`);
       if(L.dive&&LANDMARKS.filter(l=>l.dive).every(l=>l.discovered)){
         const wreck=LANDMARKS.find(l=>l.name==='King Cruiser Wreck');
         if(wreck.hidden){
           wreck.hidden=false; renderList(); chime([523,659,784,1047]);
-          toastEl.textContent='⟡ Rumors of a shipwreck to the southeast…';
-          setTimeout(()=>{if(toastEl.textContent.includes('Rumors'))toastEl.textContent='';},4500);
+          toast('⟡ Rumors of a shipwreck to the southeast…',4.5);
         }
       }
       if(LANDMARKS.every(l=>l.hidden||l.discovered)){
@@ -2142,14 +2136,14 @@ function checkDiscoveries(){
       }
     }
   }
-  const busyToast=toastEl.textContent.includes('✦')||toastEl.textContent.includes('⟡')||toastEl.textContent.includes('No land')||toastEl.textContent.includes('☀')||toastEl.textContent.includes('✈');
-  if(near&&!busyToast)
+  if(t<toastUntil)return; // a timed toast() holds the line; ambient text below
+  if(near)
     toastEl.textContent=near.discovered?(near.name==='Big Buddha'&&Math.hypot(p.x-near.x,p.z-near.z)<12?'Press E — meditate':''):near.name;
-  else if(!near&&!busyToast&&!sailing){
+  else if(!sailing){
     let ride=null,rd=9;
     for(const b of ALL_RIDES){const d=player.position.distanceTo(b.position);if(d<rd){rd=d;ride=b;}}
     toastEl.textContent = ride?(ride.userData.land?'Press E to drive':'Press E to sail'):'';
-  }
+  } else toastEl.textContent='';
 }
 
 // =============================== LOOP ==============================
@@ -2255,7 +2249,7 @@ function animate(){
   for(const c of clouds){ c.position.x+=dt*2; if(c.position.x>500)c.position.x=-500; }
 
   // camera follow
-  const focus=sailing?boat.position:player.position;
+  const focus=sailing?activeBoat.position:player.position;
   const cx=focus.x+Math.sin(camYaw)*Math.cos(camPitch)*camDist,
         cz=focus.z+Math.cos(camYaw)*Math.cos(camPitch)*camDist;
   let cy=focus.y+Math.sin(camPitch)*camDist+2;
