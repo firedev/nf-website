@@ -1069,6 +1069,545 @@ function buildCar(){
   for(const [x,z] of [[-0.85,1.2],[0.85,1.2],[-0.85,-1.2],[0.85,-1.2]]){const w=wheel(0.35,0.25); w.position.set(x,0.35,z); v.add(w);}
   return v;
 }
+// ---- round 2 wildlife ----
+function buildDolphin(){
+  const g=new THREE.Group();
+  const top=0x5b86b5, belly=0xdfeaf2;
+
+  // sleek body: chain of tapered capsules, nose forward along +x
+  // segments {x, r, len, sy(vertical squash)}
+  const segs=[
+    {x: 1.05, r:0.18, len:0.35, sy:0.85}, // beak base
+    {x: 0.72, r:0.34, len:0.55, sy:0.92},
+    {x: 0.30, r:0.52, len:0.75, sy:1.00}, // fat middle
+    {x:-0.20, r:0.50, len:0.75, sy:1.00},
+    {x:-0.68, r:0.34, len:0.60, sy:0.95},
+    {x:-1.05, r:0.16, len:0.40, sy:0.80}  // tail stalk
+  ];
+  for(const s of segs){
+    const c=new THREE.Mesh(new THREE.CapsuleGeometry(s.r,s.len,8,16),toon(top));
+    c.rotation.z=Math.PI/2;
+    c.position.set(s.x,0,0);
+    c.scale.set(1,s.sy,1);
+    g.add(addOutline(c));
+  }
+
+  // rounded head cap
+  const head=new THREE.Mesh(new THREE.SphereGeometry(0.55,16,14),toon(top));
+  head.position.set(0.52,0.02,0);
+  head.scale.set(1.05,0.98,1);
+  g.add(addOutline(head));
+
+  // pointy upturned beak tip
+  const beak=new THREE.Mesh(new THREE.CapsuleGeometry(0.13,0.4,6,12),toon(top));
+  beak.rotation.z=Math.PI/2;
+  beak.position.set(1.28,0.06,0);
+  beak.scale.set(1,0.82,0.82);
+  g.add(addOutline(beak));
+
+  // pale belly: flattened tapered shape underneath
+  for(const s of segs.slice(1,5)){
+    const b=new THREE.Mesh(new THREE.CapsuleGeometry(s.r*0.82,s.len,6,14),toon(belly));
+    b.rotation.z=Math.PI/2;
+    b.position.set(s.x,-s.r*0.42,0);
+    b.scale.set(1,0.5,0.92);
+    g.add(b);
+  }
+
+  // happy smile: torus arc under the beak
+  const mouth=new THREE.Mesh(new THREE.TorusGeometry(0.18,0.035,8,16,Math.PI),new THREE.MeshBasicMaterial({color:0x243244}));
+  mouth.position.set(0.98,-0.06,0.30);
+  mouth.rotation.set(Math.PI/2,0,Math.PI);
+  g.add(mouth);
+  const mouth2=mouth.clone();mouth2.position.z=-0.30;g.add(mouth2);
+
+  // eyes: white sphere + dark pupil, both sides
+  for(const sz of[1,-1]){
+    const w=new THREE.Mesh(new THREE.SphereGeometry(0.15,12,12),new THREE.MeshBasicMaterial({color:0xffffff}));
+    w.position.set(0.72,0.18,0.34*sz);
+    g.add(w);
+    const p=new THREE.Mesh(new THREE.SphereGeometry(0.085,10,10),new THREE.MeshBasicMaterial({color:0x141414}));
+    p.position.set(0.80,0.20,0.40*sz);
+    g.add(p);
+    const sh=new THREE.Mesh(new THREE.SphereGeometry(0.03,6,6),new THREE.MeshBasicMaterial({color:0xffffff}));
+    sh.position.set(0.85,0.24,0.42*sz);
+    g.add(sh);
+  }
+
+  // curved dorsal fin: flattened scaled cone, swept back
+  const dorsal=new THREE.Mesh(new THREE.ConeGeometry(0.28,0.7,14),toon(top));
+  dorsal.position.set(-0.05,0.5,0);
+  dorsal.rotation.z=-0.5;
+  dorsal.scale.set(1,1,0.28);
+  g.add(addOutline(dorsal));
+
+  // side flippers: flattened cones angled down
+  for(const sz of[1,-1]){
+    const f=new THREE.Mesh(new THREE.ConeGeometry(0.2,0.6,12),toon(top));
+    f.position.set(0.28,-0.32,0.34*sz);
+    f.rotation.set(sz*0.7,0,Math.PI*0.62);
+    f.scale.set(1,1,0.3);
+    g.add(addOutline(f));
+  }
+
+  // tail flukes: two horizontal lobes from flattened cones
+  const tail=new THREE.Group();
+  tail.position.set(-1.2,0,0);
+  for(const sz of[1,-1]){
+    const fl=new THREE.Mesh(new THREE.ConeGeometry(0.24,0.7,12),toon(top));
+    fl.position.set(-0.18,0,0.28*sz);
+    fl.rotation.set(0,0,Math.PI*0.5+sz*0.15);
+    fl.scale.set(1,1,0.26);
+    tail.add(addOutline(fl));
+  }
+  g.add(tail);
+
+  g.userData={tail,dorsal};
+  return g;
+}
+function buildShark(){
+  const g=new THREE.Group();
+  const STEEL=0x5c7a8a, STEEL_DK=0x466070, CREAM=0xf3e9c9, PINK=0xe89aa0, WHITE=0xffffff, DARK=0x1c1c22;
+
+  // TORSO: lathe profile along local +z (nose forward), fat mid-front tapering to thin tail base
+  const prof=[
+    new THREE.Vector2(0.02,-1.30),
+    new THREE.Vector2(0.28,-1.18),
+    new THREE.Vector2(0.50,-0.95),
+    new THREE.Vector2(0.60,-0.60),
+    new THREE.Vector2(0.63,-0.15),
+    new THREE.Vector2(0.61, 0.25),
+    new THREE.Vector2(0.52, 0.60),
+    new THREE.Vector2(0.38, 0.90),
+    new THREE.Vector2(0.22, 1.10),
+    new THREE.Vector2(0.09, 1.24),
+    new THREE.Vector2(0.03, 1.30),
+  ];
+  const bodyGeo=new THREE.LatheGeometry(prof,20);
+  bodyGeo.rotateX(Math.PI/2); // lathe axis (was local Y) -> local Z, nose at +z
+  const body=new THREE.Mesh(bodyGeo,toon(STEEL));
+  body.scale.set(1,0.88,1);
+  g.add(addOutline(body));
+
+  // PALE BELLY: flattened scaled duplicate, shifted down, clipped visually by being thin & under
+  const bellyGeo=bodyGeo.clone();
+  const belly=new THREE.Mesh(bellyGeo,toon(CREAM));
+  belly.scale.set(0.86,0.42,0.97);
+  belly.position.y=-0.28;
+  g.add(belly);
+
+  // HEAD BUMP: chunky rounded snout cap, slightly flattened, in front of lathe nose
+  const snout=new THREE.Mesh(new THREE.SphereGeometry(0.44,16,12),toon(STEEL));
+  snout.scale.set(1,0.82,0.7);
+  snout.position.set(0,0.05,1.18);
+  g.add(addOutline(snout));
+
+  // EYES: big round white + dark pupil, sit on upper sides of head
+  [-1,1].forEach(s=>{
+    const eyeW=new THREE.Mesh(new THREE.SphereGeometry(0.19,12,10),new THREE.MeshBasicMaterial({color:WHITE}));
+    eyeW.position.set(s*0.38,0.28,1.18);
+    g.add(eyeW);
+    const pupil=new THREE.Mesh(new THREE.SphereGeometry(0.10,10,8),new THREE.MeshBasicMaterial({color:DARK}));
+    pupil.position.set(s*0.38,0.28,1.30);
+    g.add(pupil);
+  });
+
+  // GRIN: torus arc smile under the snout, opening downward-forward
+  const smileGeo=new THREE.TorusGeometry(0.36,0.05,8,16,Math.PI*0.85);
+  const smile=new THREE.Mesh(smileGeo,new THREE.MeshBasicMaterial({color:DARK}));
+  smile.position.set(0,-0.14,1.31);
+  smile.rotation.set(Math.PI*0.06,0,Math.PI*1.075);
+  g.add(smile);
+
+  // TEETH: tiny white triangle cones along the smile arc
+  const teethCount=6;
+  for(let i=0;i<teethCount;i++){
+    const t=i/(teethCount-1);
+    const ang=Math.PI*(0.08+0.84*t);
+    const tx=Math.cos(ang)*0.36, ty=-Math.sin(ang)*0.36;
+    const tooth=new THREE.Mesh(new THREE.ConeGeometry(0.035,0.09,6),new THREE.MeshBasicMaterial({color:WHITE}));
+    tooth.position.set(tx,-0.14+ty*0.55-0.03,1.33);
+    tooth.rotation.x=Math.PI;
+    g.add(tooth);
+  }
+
+  // DORSAL FIN: tall flattened scaled cone, curved back via slight rotation
+  const dorsal=new THREE.Mesh(new THREE.ConeGeometry(0.42,0.95,4),toon(STEEL_DK));
+  dorsal.scale.set(0.42,1,1);
+  dorsal.position.set(0,0.78,0.05);
+  dorsal.rotation.z=Math.PI;
+  dorsal.rotation.y=Math.PI/4;
+  dorsal.rotation.x=-0.28;
+  g.add(addOutline(dorsal,1.08));
+
+  // PECTORAL FINS: flattened scaled cones, angled out+down from mid-body
+  [-1,1].forEach(s=>{
+    const pec=new THREE.Mesh(new THREE.ConeGeometry(0.24,0.72,4),toon(STEEL_DK));
+    pec.scale.set(0.5,1,1);
+    pec.position.set(s*0.55,-0.15,0.35);
+    pec.rotation.z=s*1.05;
+    pec.rotation.x=0.35;
+    pec.rotation.y=s*0.2;
+    g.add(addOutline(pec,1.08));
+  });
+
+  // TAIL: group so it can swish; tapered capsule stub + two-lobe vertical fin (two cones base-to-base)
+  const tail=new THREE.Group();
+  tail.position.set(0,0,-1.22);
+
+  const tailStub=new THREE.Mesh(new THREE.CapsuleGeometry(0.14,0.4,4,10),toon(STEEL));
+  tailStub.rotation.x=Math.PI/2;
+  tailStub.position.set(0,0,-0.2);
+  tailStub.scale.set(1,0.8,1);
+  tail.add(addOutline(tailStub));
+
+  const lobeTop=new THREE.Mesh(new THREE.ConeGeometry(0.3,0.75,4),toon(STEEL_DK));
+  lobeTop.scale.set(0.35,1,1);
+  lobeTop.position.set(0,0.32,-0.42);
+  lobeTop.rotation.z=Math.PI;
+  lobeTop.rotation.y=Math.PI/4;
+  lobeTop.rotation.x=0.55;
+  tail.add(addOutline(lobeTop,1.08));
+
+  const lobeBot=new THREE.Mesh(new THREE.ConeGeometry(0.2,0.45,4),toon(STEEL_DK));
+  lobeBot.scale.set(0.35,1,1);
+  lobeBot.position.set(0,-0.2,-0.35);
+  lobeBot.rotation.y=Math.PI/4;
+  lobeBot.rotation.x=-0.75;
+  tail.add(addOutline(lobeBot,1.08));
+
+  g.add(tail);
+  g.userData={tail};
+
+  return g;
+}
+function buildManta(){
+  const g=new THREE.Group();
+  const topC=0x1c2b57, bellyC=0xf2f6ff, hornC=0x24356b;
+
+  // central body: flat wide squashed sphere -> diamond core
+  const body=new THREE.Mesh(new THREE.SphereGeometry(0.95,20,14),toon(topC));
+  body.scale.set(1.15,0.32,1.35);
+  addOutline(body);
+  g.add(body);
+
+  // belly plate (pale) tucked just under the body
+  const belly=new THREE.Mesh(new THREE.SphereGeometry(0.9,18,12),toon(bellyC));
+  belly.scale.set(1.05,0.22,1.2);
+  belly.position.y=-0.14;
+  g.add(belly);
+
+  // pale belly patches
+  const patchGeo=new THREE.SphereGeometry(0.22,12,10);
+  [[-0.42,-0.17,0.15],[0.42,-0.17,0.15]].forEach(p=>{
+    const m=new THREE.Mesh(patchGeo,toon(bellyC));
+    m.scale.set(1,0.28,1.2);
+    m.position.set(p[0],p[1],p[2]);
+    g.add(m);
+  });
+
+  // wing builder: flattened tapered cone, tip raised, swept back
+  const makeWing=side=>{
+    const w=new THREE.Group();
+    const wing=new THREE.Mesh(new THREE.ConeGeometry(0.7,1.7,16,1),toon(topC));
+    wing.geometry.translate(0,-0.85,0);   // pivot at wing root
+    wing.rotation.z=Math.PI/2*side;        // point outward
+    wing.rotation.y=side*0.35;             // sweep back
+    wing.scale.set(1,1,0.28);              // flatten thin vertically
+    addOutline(wing);
+    w.add(wing);
+    // pale trailing edge accent under wingtip
+    const acc=new THREE.Mesh(new THREE.ConeGeometry(0.4,1.2,14,1),toon(bellyC));
+    acc.geometry.translate(0,-0.85,0);
+    acc.rotation.z=Math.PI/2*side;
+    acc.rotation.y=side*0.35;
+    acc.scale.set(1,1,0.2);
+    acc.position.y=-0.08;
+    w.add(acc);
+    w.position.set(side*0.7,0.04,0);
+    w.rotation.z=side*0.16;                 // raise tips a touch
+    return w;
+  };
+  const wingL=makeWing(1), wingR=makeWing(-1);
+  g.add(wingL); g.add(wingR);
+
+  // cephalic horns: two small tapered cones poking forward
+  const hornGeo=new THREE.ConeGeometry(0.12,0.55,12,1);
+  [[-0.3,0.02,-1.0],[0.3,0.02,-1.0]].forEach(p=>{
+    const h=new THREE.Mesh(hornGeo,toon(hornC));
+    const hh=new THREE.Group();
+    h.rotation.x=-Math.PI/2*0.72;          // tilt forward-down
+    h.position.set(0,0,-0.27);
+    hh.add(h);
+    hh.position.set(p[0],p[1],p[2]);
+    hh.rotation.y=-p[0]*0.5;                // splay outward
+    addOutline(h);
+    g.add(hh);
+  });
+
+  // head bump front-center
+  const head=new THREE.Mesh(new THREE.SphereGeometry(0.5,16,12),toon(topC));
+  head.scale.set(1,0.5,0.8);
+  head.position.set(0,0.06,-0.7);
+  addOutline(head);
+  g.add(head);
+
+  // big friendly eyes on the sides of the head
+  const eyeW=new THREE.SphereGeometry(0.17,14,12);
+  const pupG=new THREE.SphereGeometry(0.09,12,10);
+  [-1,1].forEach(s=>{
+    const e=new THREE.Mesh(eyeW,new THREE.MeshBasicMaterial({color:0xffffff}));
+    e.position.set(s*0.42,0.14,-0.72);
+    g.add(e);
+    const p=new THREE.Mesh(pupG,new THREE.MeshBasicMaterial({color:0x11131f}));
+    p.position.set(s*0.47,0.15,-0.83);
+    g.add(p);
+    const sp=new THREE.Mesh(new THREE.SphereGeometry(0.03,8,6),new THREE.MeshBasicMaterial({color:0xffffff}));
+    sp.position.set(s*0.5,0.19,-0.89);
+    g.add(sp);
+  });
+
+  // slender whip tail: long thin tapered cone swept back+up
+  const tail=new THREE.Mesh(new THREE.ConeGeometry(0.14,2.0,12,1),toon(topC));
+  tail.geometry.translate(0,1.0,0);        // base at origin, points +y
+  tail.rotation.x=Math.PI/2*0.86;          // lay back over the tail
+  tail.position.set(0,0.06,1.1);
+  addOutline(tail);
+  g.add(tail);
+
+  g.userData={wingL,wingR};
+  return g;
+}
+function buildBuffalo(){
+  const g=new THREE.Group();
+  const HIDE=0x6b7480, MUZZLE=0x3a3f47, HORN=0xe8dcc0, DARK=0x232528;
+  // body: chunky tapered capsule barrel, slightly tilted, head-low posture
+  const body=new THREE.Mesh(new THREE.CapsuleGeometry(0.62,1.35,6,10),toon(HIDE));
+  body.rotation.z=Math.PI/2;
+  body.scale.set(1,1,1.12);
+  body.position.set(0,1.05,0.05);
+  g.add(addOutline(body));
+  // chest/belly puff for chunkiness
+  const belly=new THREE.Mesh(new THREE.SphereGeometry(0.68,12,10),toon(HIDE));
+  belly.scale.set(1.05,0.9,1.1);
+  belly.position.set(0,0.78,0.15);
+  g.add(addOutline(belly));
+  // neck: tapered capsule connecting body to lowered head
+  const neck=new THREE.Mesh(new THREE.CapsuleGeometry(0.34,0.5,6,8),toon(HIDE));
+  neck.position.set(0,0.82,0.95);
+  neck.rotation.x=1.05;
+  g.add(addOutline(neck));
+  // head group, lowered
+  const head=new THREE.Group();
+  head.position.set(0,0.62,1.35);
+  head.rotation.x=0.45;
+  g.add(head);
+  const skull=new THREE.Mesh(new THREE.SphereGeometry(0.5,14,12),toon(HIDE));
+  skull.scale.set(1,0.92,1.02);
+  head.add(addOutline(skull));
+  // muzzle: rounded scaled sphere, darker
+  const muzzle=new THREE.Mesh(new THREE.SphereGeometry(0.33,12,10),toon(MUZZLE));
+  muzzle.scale.set(1,0.72,0.85);
+  muzzle.position.set(0,-0.18,0.42);
+  head.add(addOutline(muzzle));
+  // nostrils
+  const nostrilGeo=new THREE.SphereGeometry(0.035,6,6);
+  const nMat=new THREE.MeshBasicMaterial({color:DARK});
+  const nL=new THREE.Mesh(nostrilGeo,nMat); nL.position.set(-0.09,-0.16,0.68);
+  const nR=new THREE.Mesh(nostrilGeo,nMat); nR.position.set(0.09,-0.16,0.68);
+  head.add(nL,nR);
+  // sleepy half-closed eyes: dark ovals
+  const eyeGeo=new THREE.SphereGeometry(0.07,8,6);
+  const eyeMat=new THREE.MeshBasicMaterial({color:DARK});
+  const eyeL=new THREE.Mesh(eyeGeo,eyeMat); eyeL.scale.set(1,0.45,0.6); eyeL.position.set(-0.28,0.08,0.38);
+  const eyeR=new THREE.Mesh(eyeGeo,eyeMat); eyeR.scale.set(1,0.45,0.6); eyeR.position.set(0.28,0.08,0.38);
+  head.add(eyeL,eyeR);
+  // content smile: small torus arc
+  const smile=new THREE.Mesh(new THREE.TorusGeometry(0.1,0.018,6,10,Math.PI*0.9),toon(DARK));
+  smile.position.set(0,-0.3,0.62);
+  smile.rotation.set(Math.PI/2,0,Math.PI*0.55);
+  head.add(smile);
+  // ears: small flattened spheres sticking sideways
+  const earGeo=new THREE.SphereGeometry(0.14,8,8);
+  const earL=new THREE.Mesh(earGeo,toon(HIDE)); earL.scale.set(1.4,0.5,0.9); earL.position.set(-0.46,0.1,0.05); earL.rotation.z=0.3;
+  const earR=new THREE.Mesh(earGeo,toon(HIDE)); earR.scale.set(1.4,0.5,0.9); earR.position.set(0.46,0.1,0.05); earR.rotation.z=-0.3;
+  head.add(addOutline(earL),addOutline(earR));
+  // horns: big sweeping crescents — chain of tapered capsules along a wide
+  // arc that goes out sideways from the head then curves up to a point.
+  function horn(sign){
+    const hg=new THREE.Group();
+    hg.position.set(sign*0.34,0.24,0);
+    // path points: local X out to the side, Y rising near the tip
+    const pts=[
+      {x:0.0, y:0.0,  z:-0.02, r:0.13},
+      {x:0.55,y:0.02, z:-0.05, r:0.115},
+      {x:1.0, y:0.14, z:-0.08, r:0.1},
+      {x:1.3, y:0.42, z:-0.12, r:0.08},
+      {x:1.4, y:0.78, z:-0.16, r:0.055},
+      {x:1.36,y:1.06, z:-0.2,  r:0.03}
+    ];
+    for(let i=0;i<pts.length-1;i++){
+      const a=pts[i],b=pts[i+1];
+      const dx=(b.x-a.x)*sign, dy=b.y-a.y, dz=b.z-a.z;
+      const len=Math.hypot(dx,dy,dz);
+      const seg=new THREE.Mesh(new THREE.CapsuleGeometry((a.r+b.r)/2,len,6,8),toon(HORN));
+      seg.position.set((a.x+b.x)/2*sign,(a.y+b.y)/2,(a.z+b.z)/2);
+      // capsule default axis is +Y; aim it along the segment direction
+      const from=new THREE.Vector3(0,1,0);
+      const to=new THREE.Vector3(dx,dy,dz).normalize();
+      seg.quaternion.setFromUnitVectors(from,to);
+      hg.add(addOutline(seg,1.06));
+    }
+    // rounded cream tip cap
+    const tip=new THREE.Mesh(new THREE.SphereGeometry(0.045,8,6),toon(HORN));
+    const t=pts[pts.length-1];
+    tip.position.set(t.x*sign,t.y+0.02,t.z);
+    hg.add(addOutline(tip,1.06));
+    return hg;
+  }
+  head.add(horn(1),horn(-1));
+  // legs: stubby capsules, feet at y=0
+  function leg(x,z){
+    const l=new THREE.Mesh(new THREE.CapsuleGeometry(0.19,0.42,6,8),toon(HIDE));
+    l.position.set(x,0.42,z);
+    return addOutline(l);
+  }
+  g.add(leg(-0.4,-0.55),leg(0.4,-0.55),leg(-0.42,0.55),leg(0.42,0.55));
+  // tiny hooves
+  function hoof(x,z){
+    const h=new THREE.Mesh(new THREE.SphereGeometry(0.13,8,6),toon(DARK));
+    h.scale.set(1,0.6,1);
+    h.position.set(x,0.1,z);
+    return h;
+  }
+  g.add(hoof(-0.4,-0.55),hoof(0.4,-0.55),hoof(-0.42,0.55),hoof(0.42,0.55));
+  // tail: thin tapered capsule with tuft
+  const tail=new THREE.Group();
+  tail.position.set(0,1.1,-0.85);
+  tail.rotation.x=0.5;
+  const tailBone=new THREE.Mesh(new THREE.CapsuleGeometry(0.045,0.55,4,6),toon(HIDE));
+  tailBone.position.set(0,-0.28,0);
+  tail.add(addOutline(tailBone));
+  const tuft=new THREE.Mesh(new THREE.SphereGeometry(0.09,8,6),toon(DARK));
+  tuft.position.set(0,-0.6,0);
+  tail.add(addOutline(tuft));
+  g.add(tail);
+  g.userData={head,tail};
+  return g;
+}
+function buildHornbill(){
+  const g=new THREE.Group();
+
+  // BODY: fat rounded egg, HORIZONTAL, leaning forward (longer than tall)
+  const body=new THREE.Mesh(new THREE.SphereGeometry(0.6, 16, 16), toon(0x0a0a0a));
+  body.position.set(0, 0.75, -0.1);
+  body.scale.set(0.95, 0.85, 1.35);   // long along z (front-back), plump
+  body.rotation.x=-0.25;              // tilt = perched forward lean
+  g.add(addOutline(body, 1.05));
+
+  // CHEST: cream front puff, the leaning breast
+  const chest=new THREE.Mesh(new THREE.SphereGeometry(0.45, 14, 14), toon(0xf5deb3));
+  chest.position.set(0, 0.7, 0.55);
+  chest.scale.set(0.85, 0.8, 0.6);
+  g.add(addOutline(chest, 1.04));
+
+  // NECK: short cream taper up to the head at the FRONT
+  const neck=new THREE.Mesh(new THREE.ConeGeometry(0.34, 0.5, 12), toon(0xf5deb3));
+  neck.position.set(0, 1.15, 0.55);
+  neck.rotation.x=0.4;
+  g.add(addOutline(neck, 1.04));
+
+  // HEAD: big round ball up FRONT (not stacked on top)
+  const head=new THREE.Mesh(new THREE.SphereGeometry(0.52, 16, 16), toon(0x0a0a0a));
+  head.position.set(0, 1.5, 0.7);
+  head.scale.set(1.0, 1.0, 0.95);
+  g.add(addOutline(head, 1.05));
+  g.userData.head=head;
+
+  // BEAK: BIG cheerful forward hook, two tapered cones pointing +z
+  // Upper mandible — long, points forward, dips down at tip
+  const upperBeak=new THREE.Mesh(new THREE.ConeGeometry(0.26, 1.15, 10), toon(0xffa500));
+  upperBeak.position.set(0, 1.42, 1.35);
+  upperBeak.rotation.x=Math.PI/2 + 0.28;  // point forward, hook down
+  upperBeak.scale.set(1.05, 1.0, 0.9);
+  g.add(addOutline(upperBeak, 1.05));
+
+  // Lower mandible — shorter, meets upper at the tip
+  const lowerBeak=new THREE.Mesh(new THREE.ConeGeometry(0.19, 0.9, 10), toon(0xf5a300));
+  lowerBeak.position.set(0, 1.3, 1.25);
+  lowerBeak.rotation.x=Math.PI/2 + 0.42;
+  lowerBeak.scale.set(0.95, 0.9, 0.9);
+  g.add(addOutline(lowerBeak, 1.04));
+
+  // CASQUE: bright bulbous horn riding on TOP of the upper mandible base
+  const casque=new THREE.Mesh(new THREE.SphereGeometry(0.28, 12, 12), toon(0xffc000));
+  casque.position.set(0, 1.72, 0.95);
+  casque.scale.set(0.75, 0.9, 1.5);   // ridge running forward along the bill
+  casque.rotation.x=0.3;
+  g.add(addOutline(casque, 1.05));
+
+  // EYES: big round eyes, white + pupil + colorful ring, on sides of head
+  function makeEye(sx){
+    const e=new THREE.Group();
+    const w=new THREE.Mesh(new THREE.SphereGeometry(0.2, 10, 10),
+      new THREE.MeshBasicMaterial({color:0xffffff}));
+    w.position.set(0.3*sx, 1.6, 0.9); e.add(w);
+    const p=new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8),
+      new THREE.MeshBasicMaterial({color:0x1a1a1a}));
+    p.position.set(0.36*sx, 1.6, 1.0); e.add(p);
+    const r=new THREE.Mesh(new THREE.TorusGeometry(0.25, 0.07, 6, 12), toon(0xff3366));
+    r.position.set(0.3*sx, 1.6, 0.9); r.rotation.y=Math.PI/2; e.add(r);
+    return e;
+  }
+  g.add(makeEye(-1));
+  g.add(makeEye(1));
+
+  // WINGS: little folded wings on the flanks, black glossy
+  const wingL=new THREE.Mesh(new THREE.SphereGeometry(0.4, 10, 10), toon(0x0a0a0a));
+  wingL.position.set(-0.55, 0.75, -0.15);
+  wingL.scale.set(0.35, 0.7, 1.15);
+  wingL.rotation.x=-0.2;
+  g.add(addOutline(wingL, 1.04));
+  g.userData.wingL=wingL;
+
+  const wingR=new THREE.Mesh(new THREE.SphereGeometry(0.4, 10, 10), toon(0x0a0a0a));
+  wingR.position.set(0.55, 0.75, -0.15);
+  wingR.scale.set(0.35, 0.7, 1.15);
+  wingR.rotation.x=-0.2;
+  g.add(addOutline(wingR, 1.04));
+  g.userData.wingR=wingR;
+
+  // TAIL: long tapered tail trailing back and slightly up
+  const tail=new THREE.Mesh(new THREE.ConeGeometry(0.26, 1.35, 10), toon(0x0a0a0a));
+  tail.position.set(0, 0.85, -1.0);
+  tail.rotation.x=-(Math.PI/2 + 0.35);   // point back, tip up
+  tail.scale.set(1.2, 1.0, 0.9);
+  g.add(addOutline(tail, 1.04));
+
+  // LEGS: tiny stick legs tucked under, perched
+  const legL=new THREE.Mesh(new THREE.CapsuleGeometry(0.08, 0.4, 4, 8), toon(0x3d3d3d));
+  legL.position.set(-0.2, 0.25, 0.1);
+  legL.rotation.z=0.25;
+  g.add(addOutline(legL, 1.03));
+
+  const legR=new THREE.Mesh(new THREE.CapsuleGeometry(0.08, 0.4, 4, 8), toon(0x3d3d3d));
+  legR.position.set(0.2, 0.25, 0.1);
+  legR.rotation.z=-0.25;
+  g.add(addOutline(legR, 1.03));
+
+  // FEET: tiny black talons at ground
+  const footL=new THREE.Mesh(new THREE.SphereGeometry(0.11, 6, 6), toon(0x1a1a1a));
+  footL.position.set(-0.25, 0.05, 0.2);
+  footL.scale.set(0.9, 0.55, 1.2);
+  g.add(footL);
+
+  const footR=new THREE.Mesh(new THREE.SphereGeometry(0.11, 6, 6), toon(0x1a1a1a));
+  footR.position.set(0.25, 0.05, 0.2);
+  footR.scale.set(0.9, 0.55, 1.2);
+  g.add(footR);
+
+  return g;
+}
 const LANDMARKS=[
   {name:'Big Buddha', x:-36.6, z:143.7, r:16, build:buildBigBuddha},
   {name:'Wat Chalong', x:-12.9, z:127.6, r:14, build:buildWat},
@@ -1077,7 +1616,7 @@ const LANDMARKS=[
   {name:'Old Phuket Town', x:33.9, z:89.6, r:14, build:buildOldTown},
   {name:'Karon Viewpoint', x:-42.5, z:183.4, r:14, build:()=>buildPavilion(1.2)},
   {name:'Sarasin Bridge', x:-50.6, z:-207.0, r:18, build:buildBridge},
-  {name:'Bang Tao Lagoon', x:-53.1, z:-11.2, r:15, build:buildLagoon},
+  {name:'Bang Tao', x:-53.1, z:-11.2, r:15, build:buildLagoon},
   {name:'Khao Rang Hill', x:22.4, z:81.8, r:12, build:buildFlagHill},
   {name:'Phuket Airport', x:-36, z:-150, r:16, build:buildAirport},
   {name:'NAMA Freediving', x:-16, z:187, r:10, build:buildNama},
@@ -1147,6 +1686,26 @@ placeAnimal(buildTurtle,72,150,{sea:true,rot:2.6});
   placeAnimal(buildClownfish,x+3,z-2,{sea:true,rot:i});
   placeAnimal(buildClownfish,x-2,z+3,{sea:true,rot:i+2,scale:0.8});
 });
+// round 2 wildlife
+// dolphins leaping in open sea near the airport & east coast
+placeAnimal(buildDolphin,15,-170,{sea:true,rot:2.4});
+placeAnimal(buildDolphin,24,-168,{sea:true,rot:2.0,scale:0.9});
+placeAnimal(buildDolphin,10,180,{sea:true,rot:-1.0});
+placeAnimal(buildDolphin,30,175,{sea:true,rot:-0.6,scale:0.9});
+// shark patrols Shark Point
+placeAnimal(buildShark,85,180,{sea:true,rot:1.2});
+// manta rays gliding over dive spots
+placeAnimal(buildManta,100,140,{sea:true,rot:0.4});
+placeAnimal(buildManta,-15,252,{sea:true,rot:2.2,scale:0.9});
+placeAnimal(buildManta,68,158,{sea:true,rot:-0.8});
+// water buffalo grazing the Talang/Chalong plains
+placeAnimal(buildBuffalo,10,40,{rot:0.8});
+placeAnimal(buildBuffalo,20,50,{rot:2.3,scale:0.9});
+placeAnimal(buildBuffalo,15,110,{rot:-1.1});
+placeAnimal(buildBuffalo,25,100,{rot:1.6,scale:0.95});
+// hornbills perched on the hills
+placeAnimal(buildHornbill,26,90,{rot:-0.5});
+placeAnimal(buildHornbill,28,86,{rot:1.2,scale:0.9});
 
 // ====================== PIERS & SEAGULLS ==========================
 function buildPier(x,z,dx,dz,len){
@@ -1334,12 +1893,13 @@ const boat=makeBoat(0xb03a2e,0xfff6e0); boat.userData={max:16,acc:14};
 let bx=-8,bz=-175; while(heightAt(bx,bz)>-1.8&&bx<40)bx+=1;
 boat.position.set(bx,0.3,bz);
 scene.add(boat);
-// Namo — the NAMA dive boat off the Cape Panwa pier, white with a red diver flag
-const namo=makeBoat(0xf5f8fa,0x9fd7e8); namo.userData={max:18,acc:14};
+// Namo — the NAMA dive boat in the water by NAMA Freediving, white with a red diver flag
+const namo=makeBoat(0xffffff,0xeaf6fb); namo.userData={max:18,acc:14}; // white NAMA dive boat
 const dflag=new THREE.Mesh(new THREE.PlaneGeometry(1.2,0.8),new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}));
 dflag.position.set(0.6,5.6,-0.35); namo.add(dflag);
-namo.position.set(2,0.3,187); namo.rotation.y=Math.PI/2; // in the water east of NAMA Freediving, facing open sea
+namo.position.set(-6,0.3,180); namo.rotation.y=Math.PI/2; // in the water right by NAMA Freediving, facing open sea
 const namoTag=makeLabel('Namo'); namoTag.scale.set(9,1.7,1); namoTag.visible=true;
+namoTag.material.depthTest=true; // occlude behind terrain (don't show through mountains)
 namoTag.position.set(0,7,0); namo.add(namoTag); // name tag above the dive boat
 scene.add(namo);
 const ALL_BOATS=[boat,namo];
@@ -1388,7 +1948,7 @@ function questLine(){
   const by=n=>LANDMARKS.find(l=>l.name===n);
   if(!by('NAMA Freediving').discovered) return null;
   if(!wetsuitTried) return 'Try on a wetsuit at NAMA (E)';
-  if(!namoTried) return 'Try depth training aboard Namo (Cape Panwa)';
+  if(!namoTried) return 'Try depth training aboard Namo (at NAMA Freediving)';
   if(!w1cert) return 'Return to NAMA to complete your W1 (E)';
   const dives=LANDMARKS.filter(l=>l.dive), k=dives.filter(l=>l.discovered).length;
   if(k<dives.length) return `Freedive at all dive spots · ${k}/${dives.length}`;
@@ -1520,14 +2080,17 @@ function toggleBoat(){
       return;
     }
     toggleWetsuit();
-    toastEl.textContent=wetsuit?'Wetsuit on — Namo awaits at Cape Panwa':'Wetsuit off';
+    toastEl.textContent=wetsuit?'Wetsuit on — Namo awaits at NAMA Freediving':'Wetsuit off';
     setTimeout(()=>{toastEl.textContent='';},2500);
     renderList();
     return;
   }
-for(const b of ALL_RIDES){
-    if(player.position.distanceTo(b.position)<9){ boardBoat(b,false); return; }
+  let nearest=null,nd=9;
+  for(const b of ALL_RIDES){
+    const d=player.position.distanceTo(b.position);
+    if(d<nd){ nd=d; nearest=b; }
   }
+  if(nearest){ boardBoat(nearest,false); return; }
 }
 
 // ============================ DISCOVERY ============================
@@ -1561,8 +2124,11 @@ function checkDiscoveries(){
   const busyToast=toastEl.textContent.includes('✦')||toastEl.textContent.includes('⟡')||toastEl.textContent.includes('No land')||toastEl.textContent.includes('☀')||toastEl.textContent.includes('✈');
   if(near&&!busyToast)
     toastEl.textContent=near.discovered?(near.name==='Big Buddha'&&Math.hypot(p.x-near.x,p.z-near.z)<12?'Press E — meditate':''):near.name;
-  else if(!near&&!busyToast)
-    toastEl.textContent = (!sailing&&(player.position.distanceTo(boat.position)<9||player.position.distanceTo(namo.position)<9))?'Press E to sail':'';
+  else if(!near&&!busyToast&&!sailing){
+    let ride=null,rd=9;
+    for(const b of ALL_RIDES){const d=player.position.distanceTo(b.position);if(d<rd){rd=d;ride=b;}}
+    toastEl.textContent = ride?(ride.userData.land?'Press E to drive':'Press E to sail'):'';
+  }
 }
 
 // =============================== LOOP ==============================
@@ -1602,10 +2168,7 @@ function animate(){
       player.position.y+=vy*dt; vy-=26*dt;
       if(player.position.y<=ground){player.position.y=ground;airborne=false;vy=0;}
     } else player.position.y=ground;
-    // stepping or landing onto a boat boards it automatically
-    if(!airborne)for(const b of ALL_RIDES){
-      if(player.position.distanceTo(b.position)<3.2&&boardBoat(b,true))break;
-    }
+    // vehicles are entered only with E (see toggleBoat) — no auto-board
     // blob shadow stays on the ground, shrinks with jump height
     const jumpH=player.position.y-ground;
     blob.position.y=ground-player.position.y+0.06;
@@ -1657,12 +2220,14 @@ function animate(){
     if(a.sea){ // bob on the waves + gentle drift heading
       m.position.y=waveY(a.x,a.z,t)*0.6-0.1+Math.sin(t*1.4+ph)*0.05;
       m.rotation.z=Math.sin(t*1.1+ph)*0.12;
-      if(ud.tail)ud.tail.rotation.y=Math.sin(t*6+ph)*0.5; // fish wiggle
-      if(ud.flippers)ud.flippers.forEach((f,i)=>f.rotation.z+=0); // turtles just bob
+      if(ud.tail)ud.tail.rotation.y=Math.sin(t*6+ph)*0.5; // fish/dolphin/shark tail
+      if(ud.dorsal)m.position.y+=Math.sin(t*3+ph)*0.04; // dolphins ride a little livelier
+      if(ud.wingL&&ud.wingR){const f=Math.sin(t*2+ph)*0.35; ud.wingL.rotation.z=f; ud.wingR.rotation.z=-f;} // manta flap
     }else{ // land critters: subtle breathing bob
       m.position.y=a.baseY??(a.baseY=m.position.y); m.position.y=a.baseY+Math.sin(t*2+ph)*0.06;
       if(ud.trunk)ud.trunk.rotation.z=Math.sin(t*1.3+ph)*0.08; // elephant trunk sway
-      if(ud.tail&&ud.head)ud.tail.rotation.z=Math.sin(t*2.5+ph)*0.15; // monkey tail flick
+      if(ud.tail&&ud.head)ud.tail.rotation.z=Math.sin(t*2.5+ph)*0.15; // monkey/buffalo tail flick
+      if(ud.wingL&&ud.wingR&&ud.head)ud.head.rotation.y=Math.sin(t*1.2+ph)*0.2; // hornbill head bob
     }
   }
   // clouds drift
