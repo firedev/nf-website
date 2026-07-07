@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//nofins//Freediving//EN
+BEGIN:VEVENT
+UID:20260712-dive@nofins.com
+DTSTAMP:20260707T000000Z
+DTSTART;VALUE=DATE:20260712
+DTEND;VALUE=DATE:20260713
+SUMMARY:Freediving with nofins — Phuket
+LOCATION:Phuket, Thailand
+DESCRIPTION:Freediving session with nofins. Reserve a spot: nick@firedev.com or Instagram @nofins
+END:VEVENT
+END:VCALENDAR
