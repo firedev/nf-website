@@ -653,7 +653,7 @@ function questLine(){
   if(!by('King Cruiser Wreck').discovered) return 'Find the King Cruiser Wreck';
   return null;
 }
-let shownQuests=new Set();
+let shownQuests=new Set(), halo=null;
 function renderList(){
   const vis=LANDMARKS.filter(l=>!l.hidden), n=vis.filter(l=>l.discovered).length;
   const done=n===vis.length;
@@ -725,7 +725,6 @@ function chime(notes,step=0.13){
 
 // =========================== BOAT / MODES ==========================
 const flashEl=document.getElementById('flash');
-let halo=null;
 function enlighten(){
   flashEl.style.opacity=1;
   setTimeout(()=>flashEl.style.opacity=0,600);
