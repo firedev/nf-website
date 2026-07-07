@@ -8,20 +8,25 @@
   html,body{margin:0;height:100%;overflow:hidden;background:#9adcf0;font-family:Georgia,serif}
   canvas{display:block}
   #ui{position:fixed;inset:0;pointer-events:none;color:#fff}
-  #list{position:absolute;top:14px;right:14px;background:rgba(20,40,60,.6);padding:12px 16px;border-radius:10px;font-size:16px;line-height:1.6;text-align:right}
-  #list b{font-size:20px;color:#ffe27a}
-  #list .done{color:#c9b96a;text-decoration:line-through;opacity:.8}
-  #list .todo{color:#bcd8e8}
+  #list{position:absolute;top:14px;right:14px;min-width:250px;background:linear-gradient(160deg,rgba(22,42,62,.88),rgba(10,24,38,.88));border:2px solid rgba(255,215,110,.5);border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.35);padding:12px 16px;font-size:16px}
+  #list b{display:block;text-align:center;font-size:20px;color:#ffe27a;letter-spacing:1px}
   #minimap{position:absolute;bottom:14px;right:14px;background:rgba(20,40,60,.55);border-radius:10px;pointer-events:auto;cursor:pointer}
   #flash{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,225,120,.95),rgba(255,190,60,0) 70%);opacity:0;pointer-events:none;transition:opacity .4s}
   #toast{position:absolute;bottom:90px;width:100%;text-align:center;font-size:34px;text-shadow:0 2px 6px rgba(0,0,0,.5);letter-spacing:1px}
   #hint{position:absolute;bottom:18px;width:100%;text-align:center;font-size:17px;color:#eaf6ff;text-shadow:0 1px 4px rgba(0,0,0,.6);transition:opacity 2s}
   #banner{position:absolute;top:38%;width:100%;text-align:center;font-size:56px;color:#ffe27a;text-shadow:0 3px 10px rgba(0,0,0,.6);display:none}
-  .quest{display:inline-block;color:#7fd4f2;font-style:italic}
   .pop{animation:qpop .7s cubic-bezier(.34,1.56,.64,1)}
   @keyframes qpop{0%{transform:scale(.2);opacity:0}60%{transform:scale(1.18)}100%{transform:scale(1);opacity:1}}
-  #list .done,#list .todo,#list .quest{display:inline-block}
-  #list .lvl1{padding-right:16px;font-size:14px}
+  #bar{height:6px;border-radius:3px;background:rgba(255,255,255,.15);margin:6px 0 9px;overflow:hidden}
+  #bar i{display:block;height:100%;background:linear-gradient(90deg,#ffd75e,#ffb42e)}
+  .q{display:flex;align-items:center;gap:9px;line-height:1.75}
+  .q i{width:11px;height:11px;transform:rotate(45deg);border:2px solid #8fb8d0;flex:0 0 auto}
+  .q.todo{color:#eaf6ff}
+  .q.done{color:#7e97a8}
+  .q.done i{background:#ffd75e;border-color:#ffd75e}
+  .q.quest{color:#ffe27a;font-style:italic}
+  .q.quest i{border-color:#ffe27a}
+  .pop{animation:qpop .7s cubic-bezier(.34,1.56,.64,1)}
 </style>
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
@@ -128,7 +133,7 @@ function rawHeight(x,z){
 
 
 // flat pads so landmark structures sit on level ground
-const FLATS=[[-16,187],[-36.6,143.7],[-12.9,127.6],[-37.5,207.0],[-49.8,76.3],[33.9,89.6],[-42.5,183.4],[-53.1,-11.2],[22.4,81.8]];
+const FLATS=[[-16,187],[-36.6,143.7],[-12.9,127.6],[-37.5,207.0],[-49.8,76.3],[33.9,89.6],[-42.5,183.4],[-53.1,-11.2],[22.4,81.8],[-42,-183]];
 const padH=FLATS.map(f=>rawHeight(f[0],f[1]));
 function terrainHeight(x,z){
   let h=rawHeight(x,z);
@@ -512,6 +517,517 @@ function buildWreck(){
   g.add(buoy,pole,flag);
   return g;
 }
+// ---- cute critters (scattered wildlife) ----
+function buildCrab(){
+  const g=new THREE.Group();
+  const shellCol=0xe8562f, bellyCol=0xffb27a, clawCol=0xff7a3c, legCol=0xd8451f, darkCol=0xb8360f;
+
+  // shell: domed, wider than tall, tapered toward the back
+  const shell=new THREE.Mesh(new THREE.SphereGeometry(0.62,20,16),toon(shellCol));
+  shell.scale.set(1.55,0.78,1.25);
+  shell.position.y=0.5;
+  addOutline(shell);
+  g.add(shell);
+
+  // belly rim: flatter squashed sphere peeking under the front of the shell
+  const belly=new THREE.Mesh(new THREE.SphereGeometry(0.5,16,12),toon(bellyCol));
+  belly.scale.set(1.3,0.4,1.0);
+  belly.position.set(0,0.28,0.12);
+  g.add(belly);
+
+  // eye stalks: tapered capsules poking up-forward, capped with white+pupil
+  const stalkGeo=new THREE.CapsuleGeometry(0.05,0.22,4,8);
+  [-0.22,0.22].forEach(sx=>{
+    const stalk=new THREE.Mesh(stalkGeo,toon(shellCol));
+    stalk.position.set(sx,0.98,0.42);
+    stalk.rotation.x=-0.5;
+    addOutline(stalk,1.08);
+    g.add(stalk);
+    const eyeWhite=new THREE.Mesh(new THREE.SphereGeometry(0.11,12,10),new THREE.MeshBasicMaterial({color:0xffffff}));
+    eyeWhite.position.set(sx,1.14,0.55);
+    g.add(eyeWhite);
+    const pupil=new THREE.Mesh(new THREE.SphereGeometry(0.06,10,8),new THREE.MeshBasicMaterial({color:0x1a1a1a}));
+    pupil.position.set(sx,1.15,0.62);
+    g.add(pupil);
+  });
+
+  // smile: thin torus arc under the eyes
+  const smile=new THREE.Mesh(new THREE.TorusGeometry(0.16,0.025,8,16,Math.PI*0.9),new THREE.MeshBasicMaterial({color:darkCol}));
+  smile.position.set(0,0.62,0.68);
+  smile.rotation.set(Math.PI*0.05,0,Math.PI*1.07);
+  g.add(smile);
+
+  // claws: upper arm (tapered capsule) + pincer (squashed torus-like sphere pair)
+  function buildClaw(side){
+    const arm=new THREE.Group();
+    const upper=new THREE.Mesh(new THREE.CapsuleGeometry(0.11,0.28,4,8),toon(clawCol));
+    upper.rotation.z=side*0.9;
+    upper.position.set(side*0.16,0,0);
+    addOutline(upper,1.08);
+    arm.add(upper);
+
+    const pincerBase=new THREE.Mesh(new THREE.SphereGeometry(0.22,14,12),toon(clawCol));
+    pincerBase.scale.set(1.3,0.85,0.95);
+    pincerBase.position.set(side*0.42,-0.02,0);
+    addOutline(pincerBase,1.08);
+    arm.add(pincerBase);
+
+    const pincerTop=new THREE.Mesh(new THREE.TorusGeometry(0.1,0.045,8,10,Math.PI*0.85),toon(darkCol));
+    pincerTop.position.set(side*0.5,0.06,0.03);
+    pincerTop.rotation.set(Math.PI/2,side*0.3,0);
+    arm.add(pincerTop);
+
+    const pincerBottom=pincerTop.clone();
+    pincerBottom.position.y=-0.06;
+    pincerBottom.rotation.z=-pincerTop.rotation.z;
+    arm.add(pincerBottom);
+    return arm;
+  }
+  const clawL=buildClaw(-1);
+  clawL.position.set(-0.66,0.62,0.5);
+  clawL.rotation.y=0.35;
+  g.add(clawL);
+  const clawR=buildClaw(1);
+  clawR.position.set(0.66,0.62,0.5);
+  clawR.rotation.y=-0.35;
+  g.add(clawR);
+
+  // small side legs: 3 pairs of thin tapered capsules, bent at an angle
+  const legGeo=new THREE.CapsuleGeometry(0.045,0.36,4,6);
+  const legPositions=[-0.15,0,0.18];
+  legPositions.forEach((lz,i)=>{
+    [-1,1].forEach(side=>{
+      const leg=new THREE.Mesh(legGeo,toon(legCol));
+      leg.position.set(side*0.62,0.3-i*0.02,lz);
+      leg.rotation.z=side*1.05;
+      leg.rotation.x=0.25*(i-1);
+      addOutline(leg,1.1);
+      g.add(leg);
+    });
+  });
+
+  g.userData={clawL,clawR};
+  return g;
+}
+function buildTurtle(){
+  const g=new THREE.Group();
+  const shellC=0x2e9e57, shellD=0x1f7a44, skin=0xc7d94a, belly=0xf2e6b6;
+
+  // domed shell — top hemisphere of a squashed sphere
+  const shell=addOutline(new THREE.Mesh(
+    new THREE.SphereGeometry(1,20,14,0,Math.PI*2,0,Math.PI*0.5),toon(shellC)),1.04);
+  shell.scale.set(1.1,0.62,1.5); shell.position.y=0.5; g.add(shell);
+
+  // raised scutes — a few slightly-raised patches for a hexagon feel
+  const scuteGeo=new THREE.SphereGeometry(0.26,10,8,0,Math.PI*2,0,Math.PI*0.5);
+  const scute=(x,z,s)=>{
+    const m=new THREE.Mesh(scuteGeo,toon(shellD));
+    m.scale.set(s,0.5,s); m.position.set(x,0,z);
+    const yy=Math.sqrt(Math.max(0,1-(x/1.1)**2-(z/1.5)**2))*0.62+0.5;
+    m.position.y=yy-0.06; g.add(m);
+  };
+  scute(0,0,1); scute(0,-0.62,0.82); scute(0,0.62,0.82);
+  scute(-0.5,0,0.7); scute(0.5,0,0.7);
+  scute(-0.42,0.6,0.55); scute(0.42,0.6,0.55);
+  scute(-0.42,-0.6,0.55); scute(0.42,-0.6,0.55);
+
+  // belly plate — flattened disc under the shell
+  const bel=new THREE.Mesh(new THREE.SphereGeometry(1,16,10),toon(belly));
+  bel.scale.set(1.02,0.16,1.42); bel.position.y=0.24; g.add(bel);
+
+  // head+neck — capsule poking forward, big round head
+  const neck=addOutline(new THREE.Mesh(new THREE.CapsuleGeometry(0.24,0.36,6,12),toon(skin)),1.06);
+  neck.rotation.x=Math.PI*0.5; neck.position.set(0,0.42,1.35); g.add(neck);
+  const head=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.42,16,14),toon(skin)),1.05);
+  head.scale.set(1,0.95,1.05); head.position.set(0,0.5,1.72); g.add(head);
+
+  // eyes — white sphere + dark pupil
+  const eyeW=new THREE.MeshBasicMaterial({color:0xffffff});
+  const pupW=new THREE.MeshBasicMaterial({color:0x1a1a22});
+  const eye=(sx)=>{
+    const w=new THREE.Mesh(new THREE.SphereGeometry(0.13,10,10),eyeW);
+    w.position.set(sx*0.2,0.6,2.02); g.add(w);
+    const p=new THREE.Mesh(new THREE.SphereGeometry(0.075,8,8),pupW);
+    p.position.set(sx*0.22,0.6,2.11); g.add(p);
+  };
+  eye(-1); eye(1);
+
+  // tiny smile — torus arc curving down
+  const smile=new THREE.Mesh(
+    new THREE.TorusGeometry(0.14,0.032,8,14,Math.PI),new THREE.MeshBasicMaterial({color:0x5a3a2a}));
+  smile.rotation.x=Math.PI; smile.rotation.z=Math.PI; smile.position.set(0,0.4,2.06); g.add(smile);
+
+  // 4 stubby flippers — tapered capsules, splayed
+  const flippers=[];
+  const flip=(x,z,rot)=>{
+    const m=addOutline(new THREE.Mesh(new THREE.CapsuleGeometry(0.18,0.42,6,10),toon(skin)),1.06);
+    m.scale.set(1,1,0.6); m.position.set(x,0.28,z);
+    m.rotation.z=rot; m.rotation.y=(x<0?1:-1)*0.5;
+    g.add(m); flippers.push(m); return m;
+  };
+  flip(-0.95,0.7,0.9); flip(0.95,0.7,-0.9);
+  flip(-0.85,-0.75,0.7); flip(0.85,-0.75,-0.7);
+
+  // little pointy tail
+  const tail=new THREE.Mesh(new THREE.ConeGeometry(0.14,0.4,8),toon(skin));
+  tail.rotation.x=-Math.PI*0.5; tail.position.set(0,0.34,-1.55); g.add(tail);
+
+  g.userData={flippers};
+  return g;
+}
+function buildElephant(){
+  const g=new THREE.Group();
+  const BODY=0x8a9bb0, EAR=0x7d8ea6, TUSK=0xfdf6e3, GOLD=0xe0a53a, RED=0xb43a3a;
+
+  // body — fat tapered capsule, lying horizontal
+  const body=addOutline(new THREE.Mesh(new THREE.CapsuleGeometry(1.05,0.9,8,16),toon(BODY)));
+  body.rotation.z=Math.PI/2; body.scale.set(1,1,0.92); body.position.set(0,1.55,0);
+  g.add(body);
+
+  // rump — rounded back end
+  const rump=addOutline(new THREE.Mesh(new THREE.SphereGeometry(1.02,16,14),toon(BODY)));
+  rump.position.set(-1.0,1.55,0); rump.scale.set(0.95,1,0.9);
+  g.add(rump);
+
+  // head — big round ball up front
+  const head=addOutline(new THREE.Mesh(new THREE.SphereGeometry(1.1,18,16),toon(BODY)));
+  head.position.set(1.15,1.75,0); head.scale.set(0.95,1,0.95);
+  g.add(head);
+
+  // forehead bump
+  const brow=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.55,14,12),toon(BODY)));
+  brow.position.set(1.35,2.35,0); brow.scale.set(1,0.8,1.1);
+  g.add(brow);
+
+  // ears — big flattened floppy discs
+  const ears=[];
+  for(const s of [-1,1]){
+    const ear=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.8,14,12),toon(EAR)));
+    ear.scale.set(0.35,1.0,0.9);
+    ear.position.set(0.95,1.85,s*1.05);
+    ear.rotation.x=s*0.25; ear.rotation.z=-0.2;
+    g.add(ear); ears.push(ear);
+  }
+
+  // trunk — chain of tapered capsules curling down and in
+  const trunk=new THREE.Group();
+  const segs=[
+    {r:0.42,l:0.55,x:1.95,y:1.55,z:0,rz:-0.6},
+    {r:0.36,l:0.5, x:2.25,y:1.05,z:0,rz:-0.2},
+    {r:0.30,l:0.45,x:2.35,y:0.58,z:0,rz:0.35},
+    {r:0.25,l:0.4, x:2.18,y:0.28,z:0,rz:1.0},
+    {r:0.2, l:0.32,x:1.85,y:0.22,z:0,rz:1.7}
+  ];
+  for(const s of segs){
+    const seg=addOutline(new THREE.Mesh(new THREE.CapsuleGeometry(s.r,s.l,6,12),toon(BODY)));
+    seg.position.set(s.x,s.y,s.z); seg.rotation.z=s.rz;
+    trunk.add(seg);
+  }
+  g.add(trunk);
+
+  // tusks — small white tapered cones
+  for(const s of [-1,1]){
+    const tusk=addOutline(new THREE.Mesh(new THREE.ConeGeometry(0.16,0.7,10),toon(TUSK)));
+    tusk.position.set(1.95,1.2,s*0.45);
+    tusk.rotation.z=0.9; tusk.rotation.x=s*0.15;
+    g.add(tusk);
+  }
+
+  // eyes — white sphere + dark pupil
+  for(const s of [-1,1]){
+    const w=new THREE.Mesh(new THREE.SphereGeometry(0.22,12,10),new THREE.MeshBasicMaterial({color:0xffffff}));
+    w.position.set(1.9,1.95,s*0.5); g.add(w);
+    const p=new THREE.Mesh(new THREE.SphereGeometry(0.11,10,8),new THREE.MeshBasicMaterial({color:0x24160f}));
+    p.position.set(2.05,1.95,s*0.52); g.add(p);
+  }
+
+  // legs — 4 stubby tapered capsules
+  const legPos=[[-0.75,0.6],[-0.75,-0.6],[0.55,0.6],[0.55,-0.6]];
+  for(const [x,z] of legPos){
+    const leg=addOutline(new THREE.Mesh(new THREE.CapsuleGeometry(0.4,0.6,6,12),toon(BODY)));
+    leg.position.set(x,0.5,z); leg.scale.set(1,1,1);
+    g.add(leg);
+    const foot=addOutline(new THREE.Mesh(new THREE.CylinderGeometry(0.42,0.46,0.22,12),toon(EAR)));
+    foot.position.set(x,0.12,z); g.add(foot);
+  }
+
+  // saddle blanket — gold with red trim, draped over back
+  const blanket=addOutline(new THREE.Mesh(new THREE.CylinderGeometry(1.12,1.12,1.3,16,1,true,-0.2,Math.PI+0.4),toon(GOLD)));
+  blanket.rotation.z=Math.PI/2; blanket.position.set(-0.25,1.55,0); blanket.scale.set(1,1,0.95);
+  g.add(blanket);
+  const trim=addOutline(new THREE.Mesh(new THREE.TorusGeometry(1.13,0.09,8,20,Math.PI+0.4),toon(RED)));
+  trim.rotation.y=Math.PI/2; trim.position.set(0.35,1.55,0); trim.rotation.z=-0.2;
+  g.add(trim);
+  // little gold dome on top of saddle
+  const knob=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.28,12,10),toon(RED)));
+  knob.position.set(-0.25,2.7,0); knob.scale.set(1,0.7,1);
+  g.add(knob);
+
+  // tail — thin capsule with tuft
+  const tail=addOutline(new THREE.Mesh(new THREE.CapsuleGeometry(0.12,0.7,6,10),toon(BODY)));
+  tail.position.set(-1.85,1.25,0); tail.rotation.z=-0.5; g.add(tail);
+  const tuft=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.2,10,8),toon(0x3a2c22)));
+  tuft.position.set(-2.15,0.85,0); g.add(tuft);
+
+  g.userData={trunk,ears};
+  return g;
+}
+function buildClownfish(){
+  const g=new THREE.Group();
+  const orange=toon(0xff7a1a), white=0xffffff, dark=0x2a1508;
+  // plump teardrop body via lathe: fat front, tapering tail
+  const pts=[];
+  pts.push(new THREE.Vector2(0.0,-0.42));
+  pts.push(new THREE.Vector2(0.30,-0.30));
+  pts.push(new THREE.Vector2(0.42,-0.05));
+  pts.push(new THREE.Vector2(0.40,0.18));
+  pts.push(new THREE.Vector2(0.24,0.34));
+  pts.push(new THREE.Vector2(0.08,0.40));
+  pts.push(new THREE.Vector2(0.0,0.41));
+  const bodyGeo=new THREE.LatheGeometry(pts,20);
+  const body=new THREE.Mesh(bodyGeo,orange);
+  body.rotation.z=Math.PI/2;
+  body.scale.set(1.55,1,1);
+  body.position.set(0.05,0,0);
+  addOutline(body);
+  g.add(body);
+
+  // white stripes: thin curved bands wrapping body (scaled torus)
+  const stripeMat=toon(white);
+  const stripeGeom=new THREE.TorusGeometry(0.34,0.055,8,16);
+  const stripeXs=[0.42,0.0,-0.42];
+  const stripeSc=[0.86,1.0,0.62];
+  stripeXs.forEach((x,i)=>{
+    const s=new THREE.Mesh(stripeGeom,stripeMat);
+    s.rotation.y=Math.PI/2;
+    s.scale.set(1,stripeSc[i],stripeSc[i]);
+    s.position.set(x,0,0);
+    addOutline(s,1.04);
+    g.add(s);
+  });
+
+  // head cap stripe near eyes (small white band)
+  const capGeo=new THREE.TorusGeometry(0.24,0.05,8,14);
+  const cap=new THREE.Mesh(capGeo,stripeMat);
+  cap.rotation.y=Math.PI/2;
+  cap.scale.set(1,0.9,0.9);
+  cap.position.set(0.62,0.02,0);
+  addOutline(cap,1.04);
+  g.add(cap);
+
+  // big round eyes
+  const eyeWhiteGeo=new THREE.SphereGeometry(0.13,12,10);
+  const eyeWhiteMat=new THREE.MeshBasicMaterial({color:white});
+  const pupilGeo=new THREE.SphereGeometry(0.07,10,8);
+  const pupilMat=new THREE.MeshBasicMaterial({color:dark});
+  [1,-1].forEach(s=>{
+    const ew=new THREE.Mesh(eyeWhiteGeo,eyeWhiteMat);
+    ew.position.set(0.68,0.08,0.28*s);
+    g.add(ew);
+    const pu=new THREE.Mesh(pupilGeo,pupilMat);
+    pu.position.set(0.74,0.08,0.32*s);
+    g.add(pu);
+  });
+
+  // happy mouth: small torus arc
+  const mouthGeo=new THREE.TorusGeometry(0.07,0.018,6,10,Math.PI);
+  const mouthMat=toon(dark);
+  const mouth=new THREE.Mesh(mouthGeo,mouthMat);
+  mouth.rotation.set(0,0,Math.PI);
+  mouth.position.set(0.80,-0.06,0);
+  g.add(mouth);
+
+  // dorsal fin: tapered flattened cone, dark-edged orange
+  const dorsalGeo=new THREE.ConeGeometry(0.22,0.34,4,1,true);
+  const dorsal=new THREE.Mesh(dorsalGeo,orange);
+  dorsal.scale.set(1,1,0.18);
+  dorsal.position.set(-0.02,0.44,0);
+  dorsal.rotation.z=0.15;
+  addOutline(dorsal,1.08);
+  g.add(dorsal);
+
+  // side pectoral fins
+  const pecGeo=new THREE.ConeGeometry(0.16,0.26,4,1,true);
+  [1,-1].forEach(s=>{
+    const p=new THREE.Mesh(pecGeo,orange);
+    p.scale.set(1,1,0.15);
+    p.rotation.z=Math.PI/2+0.5*s;
+    p.rotation.x=0.3*s;
+    p.position.set(0.18,-0.16,0.34*s);
+    addOutline(p,1.08);
+    g.add(p);
+  });
+
+  // triangular happy tail fin (group for wiggle animation)
+  const tail=new THREE.Group();
+  const tailGeo=new THREE.ConeGeometry(0.34,0.5,3,1,true);
+  const tailMesh=new THREE.Mesh(tailGeo,orange);
+  tailMesh.scale.set(1,1,0.14);
+  tailMesh.rotation.z=Math.PI/2;
+  tailMesh.rotation.y=Math.PI/2;
+  tailMesh.position.set(-0.28,0,0);
+  addOutline(tailMesh,1.08);
+  tail.add(tailMesh);
+  tail.position.set(-0.55,0,0);
+  g.add(tail);
+
+  // center whole fish around origin (body spans x≈[-0.85,0.85] incl tail/head)
+  g.position.x-=0.05;
+  g.scale.setScalar(1.3);
+  g.userData={tail};
+  return g;
+}
+function buildMonkey(){
+  const g=new THREE.Group();
+
+  // Body: capsule-shaped, warm brown
+  const body=new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.35, 1.2, 8, 16),
+    toon(0x8B4513)
+  );
+  body.position.y=0.4;
+  g.add(addOutline(body, 1.05));
+
+  // Head: big round sphere, same brown
+  const head=new THREE.Mesh(
+    new THREE.SphereGeometry(0.55, 16, 16),
+    toon(0x8B4513)
+  );
+  head.position.y=1.4;
+  g.add(addOutline(head, 1.05));
+  g.userData.head=head;
+
+  // Left ear: scaled sphere, attached to head
+  const earL=new THREE.Mesh(
+    new THREE.SphereGeometry(0.35, 12, 12),
+    toon(0x8B4513)
+  );
+  earL.position.set(-0.55, 1.85, 0);
+  earL.scale.y=1.4;
+  g.add(addOutline(earL, 1.05));
+
+  // Right ear: scaled sphere
+  const earR=new THREE.Mesh(
+    new THREE.SphereGeometry(0.35, 12, 12),
+    toon(0x8B4513)
+  );
+  earR.position.set(0.55, 1.85, 0);
+  earR.scale.y=1.4;
+  g.add(addOutline(earR, 1.05));
+
+  // Face patch: lighter peachy circle on front, flattened sphere
+  const facePatch=new THREE.Mesh(
+    new THREE.SphereGeometry(0.4, 16, 16),
+    toon(0xD4A574)
+  );
+  facePatch.position.set(0, 1.4, 0.48);
+  facePatch.scale.set(1, 1, 0.4);
+  g.add(addOutline(facePatch, 1.03));
+
+  // Belly: warm peachy patch on body
+  const belly=new THREE.Mesh(
+    new THREE.SphereGeometry(0.3, 12, 12),
+    toon(0xDEB887)
+  );
+  belly.position.set(0, 0.3, 0.3);
+  belly.scale.set(0.8, 1, 0.5);
+  g.add(belly);
+
+  // Left eye white: small sphere
+  const eyeWL=new THREE.Mesh(
+    new THREE.SphereGeometry(0.18, 10, 10),
+    new THREE.MeshBasicMaterial({color: 0xFFFFFF})
+  );
+  eyeWL.position.set(-0.22, 1.65, 0.52);
+  g.add(eyeWL);
+
+  // Left pupil: small dark sphere
+  const pupilL=new THREE.Mesh(
+    new THREE.SphereGeometry(0.08, 8, 8),
+    new THREE.MeshBasicMaterial({color: 0x222222})
+  );
+  pupilL.position.set(-0.22, 1.62, 0.58);
+  g.add(pupilL);
+
+  // Right eye white: small sphere
+  const eyeWR=new THREE.Mesh(
+    new THREE.SphereGeometry(0.18, 10, 10),
+    new THREE.MeshBasicMaterial({color: 0xFFFFFF})
+  );
+  eyeWR.position.set(0.22, 1.65, 0.52);
+  g.add(eyeWR);
+
+  // Right pupil: small dark sphere
+  const pupilR=new THREE.Mesh(
+    new THREE.SphereGeometry(0.08, 8, 8),
+    new THREE.MeshBasicMaterial({color: 0x222222})
+  );
+  pupilR.position.set(0.22, 1.62, 0.58);
+  g.add(pupilR);
+
+  // Smile: torusGeometry curved mouth
+  const smile=new THREE.Mesh(
+    new THREE.TorusGeometry(0.15, 0.05, 8, 20, Math.PI),
+    toon(0x704214)
+  );
+  smile.position.set(0, 1.25, 0.52);
+  smile.rotation.x=-Math.PI/6;
+  g.add(smile);
+
+  // Left arm: capsule, hanging down
+  const armL=new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.18, 0.75, 6, 12),
+    toon(0x8B4513)
+  );
+  armL.position.set(-0.5, 0.8, 0);
+  armL.rotation.z=0.3;
+  g.add(addOutline(armL, 1.04));
+
+  // Right arm: capsule, hanging down
+  const armR=new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.18, 0.75, 6, 12),
+    toon(0x8B4513)
+  );
+  armR.position.set(0.5, 0.8, 0);
+  armR.rotation.z=-0.3;
+  g.add(addOutline(armR, 1.04));
+
+  // Left leg: capsule, sitting pose
+  const legL=new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.2, 0.6, 6, 12),
+    toon(0x8B4513)
+  );
+  legL.position.set(-0.35, -0.05, 0.2);
+  legL.rotation.z=0.4;
+  g.add(addOutline(legL, 1.04));
+
+  // Right leg: capsule, sitting pose
+  const legR=new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.2, 0.6, 6, 12),
+    toon(0x8B4513)
+  );
+  legR.position.set(0.35, -0.05, 0.2);
+  legR.rotation.z=-0.4;
+  g.add(addOutline(legR, 1.04));
+
+  // Curly tail: chained capsules in a spiral/curl
+  const tail=new THREE.Group();
+  for(let i=0; i<4; i++){
+    const seg=new THREE.Mesh(
+      new THREE.CapsuleGeometry(0.12, 0.4, 5, 10),
+      toon(0x8B4513)
+    );
+    const angle=i*(Math.PI/3);
+    seg.position.set(0.3*Math.cos(angle), -0.5+i*0.15, -0.2-i*0.15);
+    seg.rotation.z=angle+0.8;
+    tail.add(addOutline(seg, 1.04));
+  }
+  tail.position.set(0, 0.6, -0.3);
+  g.add(tail);
+  g.userData.tail=tail;
+
+  return g;
+}
 const LANDMARKS=[
   {name:'Big Buddha', x:-36.6, z:143.7, r:16, build:buildBigBuddha},
   {name:'Wat Chalong', x:-12.9, z:127.6, r:14, build:buildWat},
@@ -560,6 +1076,35 @@ while(placed<45&&tries++<4000){
   const x=Math.random()*180-90, z=Math.random()*440-220, h=heightAt(x,z);
   if(h>0.6&&h<2.2){palm(x,z);placed++;}
 }
+
+// cute wildlife — land critters grounded, sea critters bob at surface
+const ANIMALS=[]; // {mesh, sea, phase} for animation
+function placeAnimal(build,x,z,{sea=false,rot=0,scale=1}={}){
+  const m=build();
+  const y=sea? -0.15 : Math.max(heightAt(x,z),0.05);
+  m.position.set(x,y,z); m.rotation.y=rot; m.scale.multiplyScalar(scale);
+  scene.add(m); ANIMALS.push({mesh:m,sea,phase:Math.random()*6.28,x,z}); return m;
+}
+// elephants near temples (Big Buddha / Wat Chalong)
+placeAnimal(buildElephant,-30,148,{rot:-0.6});
+placeAnimal(buildElephant,-6,124,{rot:2.1,scale:0.9});
+// monkeys on the hills (Khao Rang, Karon viewpoint)
+placeAnimal(buildMonkey,25,84,{rot:2.4});
+placeAnimal(buildMonkey,-39,180,{rot:-1.2});
+placeAnimal(buildMonkey,-34,205,{rot:0.5,scale:0.9});
+// crabs on beaches (Patong, spawn beach north)
+placeAnimal(buildCrab,-52,73,{rot:0.9});
+placeAnimal(buildCrab,-46,79,{rot:-0.4,scale:0.8});
+placeAnimal(buildCrab,-38,-180,{rot:1.7});
+// turtles paddling in shallows near shore
+placeAnimal(buildTurtle,-58,68,{sea:true,rot:1.2});
+placeAnimal(buildTurtle,-20,258,{sea:true,rot:-0.5});
+placeAnimal(buildTurtle,72,150,{sea:true,rot:2.6});
+// clownfish schooling over dive spots
+[[100,140],[68,158],[78,170],[85,180],[-15,252]].forEach(([x,z],i)=>{
+  placeAnimal(buildClownfish,x+3,z-2,{sea:true,rot:i});
+  placeAnimal(buildClownfish,x-2,z+3,{sea:true,rot:i+2,scale:0.8});
+});
 
 // ====================== PIERS & SEAGULLS ==========================
 function buildPier(x,z,dx,dz,len){
@@ -644,7 +1189,7 @@ const blob=new THREE.Mesh(new THREE.CircleGeometry(0.7,16).rotateX(-Math.PI/2),
   new THREE.MeshBasicMaterial({color:0x11331e,transparent:true,opacity:0.3}));
 blob.position.y=0.06;
 player.add(body,head,hat,armL,armR,legL,legR,blob);
-player.position.set(25.5,heightAt(25.5,91.5),91.5);
+player.position.set(25.5,heightAt(25.5,91.5),91.5); // spawn at Old Phuket Town
 scene.add(player);
 
 // wetsuit (NAMA Freediving)
@@ -809,32 +1354,14 @@ function questLine(){
 let shownQuests=new Set(), halo=null;
 function renderList(){
   const vis=LANDMARKS.filter(l=>!l.hidden), n=vis.filter(l=>l.discovered).length;
-  const wreck=LANDMARKS.find(l=>l.name==='King Cruiser Wreck');
-  const places=vis.filter(l=>!l.dive&&l!==wreck), dives=vis.filter(l=>l.dive);
-  const pd=places.filter(l=>l.discovered).length, dd=dives.filter(l=>l.discovered).length;
   const rows=[];
-  const row=(txt,cls,lvl)=>rows.push({txt,cls,lvl});
-  const mark=l=>(l.discovered?'✦ ':'· ')+l.name;
-  // tree: root quests with indented sub-items, roots always expanded
-  row(`▾ Visit all places · ${pd}/${places.length}`, pd===places.length?'done':'quest',0);
-  for(const l of places) row(mark(l), l.discovered?'done':'todo',1);
-  const nama=LANDMARKS.find(l=>l.name==='NAMA Freediving');
-  if(nama.discovered&&!w1cert){
-    row('▾ NAMA Freediving W1','quest',0);
-    row('➤ '+(!wetsuitTried?'Try on a wetsuit at NAMA (E)':!namoTried?'Try depth training aboard Namo (Cape Panwa)':'Return to NAMA to complete your W1 (E)'),'quest',1);
-  }
-  if(w1cert){
-    const allDives=dd===dives.length;
-    row(`▾ Freedive at all dive spots · ${dd}/${dives.length}`, allDives?'done':'quest',0);
-    for(const l of dives) row(mark(l), l.discovered?'done':'todo',1);
-    if(!wreck.hidden) row(mark(wreck), wreck.discovered?'done':'todo',1);
-  }
-  if(!halo) row('✧ A secret hides where serenity sits','quest',0);
-  if(n===vis.length&&(wreck.hidden||wreck.discovered)) rows.unshift({txt:'All secrets found ✦',cls:'done',lvl:0});
-  listEl.innerHTML=`<b>Phuket · ${n}/${vis.length}</b><br>`+rows.map(r=>{
-    const fresh=!shownQuests.has(r.txt);
-    return `<span class="${r.cls}${r.lvl?' lvl1':''}${fresh?' pop':''}"${fresh?' style="color:#ffe27a"':''}>${r.txt}</span>`;
-  }).join('<br>');
+  const q=questLine(); if(q)rows.push({txt:q,cls:'quest'});
+  for(const l of vis) if(!l.discovered) rows.push({txt:l.name,cls:'todo'});
+  if(!halo)rows.push({txt:'A secret hides where serenity sits',cls:'quest'});
+  for(const l of vis) if(l.discovered) rows.push({txt:l.name,cls:'done'}); // completed sink to the bottom
+  if(n===vis.length)rows.unshift({txt:'All secrets found',cls:'quest'});
+  listEl.innerHTML=`<b>Phuket</b><div id="bar"><i style="width:${Math.round(n/vis.length*100)}%"></i></div>`+
+    rows.map(r=>`<div class="q ${r.cls}${shownQuests.has(r.txt)?'':' pop'}"><i></i><span>${r.txt}</span></div>`).join('');
   shownQuests=new Set(rows.map(r=>r.txt));
 }
 renderList();
@@ -1074,6 +1601,20 @@ function animate(){
     s.gl.rotation.y=-a+(s.sp>0?0:Math.PI);
     const flap=Math.sin(t*9+s.ph)*0.55;
     s.gl.userData.wL.rotation.z=flap; s.gl.userData.wR.rotation.z=Math.PI-flap;
+  }
+  // cute wildlife idle
+  for(const a of ANIMALS){
+    const m=a.mesh, ph=a.phase, ud=m.userData;
+    if(a.sea){ // bob on the waves + gentle drift heading
+      m.position.y=waveY(a.x,a.z,t)*0.6-0.1+Math.sin(t*1.4+ph)*0.05;
+      m.rotation.z=Math.sin(t*1.1+ph)*0.12;
+      if(ud.tail)ud.tail.rotation.y=Math.sin(t*6+ph)*0.5; // fish wiggle
+      if(ud.flippers)ud.flippers.forEach((f,i)=>f.rotation.z+=0); // turtles just bob
+    }else{ // land critters: subtle breathing bob
+      m.position.y=a.baseY??(a.baseY=m.position.y); m.position.y=a.baseY+Math.sin(t*2+ph)*0.06;
+      if(ud.trunk)ud.trunk.rotation.z=Math.sin(t*1.3+ph)*0.08; // elephant trunk sway
+      if(ud.tail&&ud.head)ud.tail.rotation.z=Math.sin(t*2.5+ph)*0.15; // monkey tail flick
+    }
   }
   // clouds drift
   for(const c of clouds){ c.position.x+=dt*2; if(c.position.x>500)c.position.x=-500; }
