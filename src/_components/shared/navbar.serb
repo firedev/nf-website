@@ -3,7 +3,7 @@
 
     <a href="/" class="relative flex items-center gap-4 mx-3 mb-2 {{ @resource.data.homepage && 'hidden lg:flex' }}">
       <div class="flex flex-shrink-0 items-center delay-75 w-[3em] h-[3em] absolute left-[1rem]">
-        <img src="/images/zen-circle-grunge-brush-stroke-2.png" class="flex-shrink-0 w-[3em] h-[3em]"/>
+        <img src="/images/zen-circle-grunge-brush-stroke-2.png" class="zen-circle flex-shrink-0 w-[3em] h-[3em]"/>
       </div>
       <div class="flex text-4xl tracking-tighter">
         <span  style="color: #000" class="font-bold">n         fins</span>

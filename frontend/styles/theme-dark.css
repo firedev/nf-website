@@ -426,3 +426,8 @@
     }
   }
 }
+
+/* Zen-circle logo: black brush stroke inverts to white in dark theme */
+:root.theme-dark img.zen-circle {
+  filter: invert(1);
+}
