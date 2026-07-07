@@ -4,7 +4,7 @@ title: Psychedelic Freediving to open up the soul
 ---
 
 {:.text-6xl .font-bold .tracking-tight .animate .ease .fadeIn .delay-500 .flex .text-center .justify-center .sm:text-8xl .mb-16 .z-1 .relative .inline-block .w-full .line-height[2em] .font-light .flex .flex-col .items-center}
-<span class="font-black inline-flex items-center tracking-tighter">n<img src="/images/zen-circle-grunge-brush-stroke-2.png" alt="o" class="zen-circle" style="width:1.15em;height:1.15em;margin:0 -0.08em">fins</span><span class="font-light" style="display:block">Freediving</span>
+<span class="font-black inline-flex items-center tracking-tighter">n<img src="/images/zen-circle-grunge-brush-stroke-2.png" alt="o" class="zen-circle" style="width:1.15em;height:1.15em;margin:0 -0.08em">fins</span><span class="font-light" style="display:block;font-size:5rem">freediving</span>
 
 {:.light-content .text-3xl .sm:text-4xl .max-w-2xl .mx-auto .font-bold .text-center .my-10}
 Underwater calm to open your soul
