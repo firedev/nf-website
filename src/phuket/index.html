@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Wind Waker of Phuket</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#9adcf0;font-family:Georgia,serif}
+  canvas{display:block}
+  #ui{position:fixed;inset:0;pointer-events:none;color:#fff}
+  #list{position:absolute;top:280px;right:14px;background:rgba(20,40,60,.55);padding:8px 12px;border-radius:10px;font-size:12px;line-height:1.55;text-align:right}
+  #list b{font-size:15px;color:#ffe27a}
+  #list .done{color:#ffe27a}
+  #list .todo{color:#bcd8e8}
+  #minimap{position:absolute;top:14px;right:14px;background:rgba(20,40,60,.55);border-radius:10px}
+  #toast{position:absolute;bottom:90px;width:100%;text-align:center;font-size:26px;text-shadow:0 2px 6px rgba(0,0,0,.5);letter-spacing:1px}
+  #hint{position:absolute;bottom:18px;width:100%;text-align:center;font-size:14px;color:#eaf6ff;text-shadow:0 1px 4px rgba(0,0,0,.6);transition:opacity 2s}
+  #banner{position:absolute;top:38%;width:100%;text-align:center;font-size:44px;color:#ffe27a;text-shadow:0 3px 10px rgba(0,0,0,.6);display:none}
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
+</script>
+</head>
+<body>
+<div id="ui">
+  <div id="list"></div>
+  <canvas id="minimap" width="120" height="250"></canvas>
+  <div id="toast"></div>
+  <div id="hint">WASD move &nbsp;·&nbsp; Space jump &nbsp;·&nbsp; drag mouse to look &nbsp;·&nbsp; scroll to zoom &nbsp;·&nbsp; E board/leave boat &nbsp;·&nbsp; discover all landmarks</div>
+  <div id="banner">⟡ All of Phuket Discovered! ⟡</div>
+</div>
+<script type="module">
+import * as THREE from 'three';
+
+// ============================== WORLD ==============================
+// Phuket outline from OSM coastline (relation 1162697), 257 pts, world units (x east, z south)
+const OUTLINE=[[-50.6,-210.0],[-52.8,-208.5],[-61.1,-209.4],[-63.6,-206.4],[-59.8,-198.5],[-51.8,-163.5],[-46.8,-132.8],[-47.1,-120.1],
+  [-51.2,-114.1],[-49.8,-108.4],[-51.9,-103.1],[-57.2,-98.7],[-61.1,-100.6],[-73.5,-94.3],[-76.2,-87.4],[-74.8,-82.9],
+  [-70.3,-79.2],[-69.4,-73.3],[-70.2,-60.2],[-74.6,-57.8],[-74.6,-55.8],[-70.9,-51.6],[-61.5,-52.8],[-63.2,-49.7],
+  [-59.1,-47.1],[-57.0,-39.6],[-55.8,-18.8],[-58.2,-10.1],[-62.6,-5.4],[-75.0,-9.6],[-76.3,-8.4],[-74.6,-4.5],
+  [-70.3,-3.2],[-68.6,6.3],[-70.5,8.6],[-67.8,9.9],[-67.7,14.5],[-64.1,15.8],[-64.7,23.1],[-69.6,28.7],
+  [-72.9,27.5],[-78.9,30.8],[-83.7,29.1],[-83.7,33.3],[-87.9,41.2],[-84.6,42.5],[-84.0,52.8],[-80.2,50.7],
+  [-77.6,53.6],[-75.2,50.8],[-72.4,51.4],[-65.8,58.3],[-56.4,59.8],[-51.4,66.3],[-52.2,76.8],[-58.1,87.9],
+  [-60.8,88.8],[-60.9,87.2],[-66.4,85.9],[-74.2,88.1],[-75.6,84.3],[-81.3,83.4],[-82.1,81.6],[-85.1,88.7],
+  [-80.8,94.1],[-74.6,92.1],[-73.9,96.0],[-71.1,97.8],[-74.4,103.5],[-73.3,105.6],[-70.2,108.9],[-65.6,107.9],
+  [-64.7,113.4],[-57.4,116.1],[-53.4,138.3],[-53.7,141.8],[-57.9,146.6],[-57.3,148.2],[-54.3,147.0],[-50.2,151.4],
+  [-49.3,156.0],[-52.3,157.9],[-49.3,166.2],[-54.0,175.4],[-62.6,177.6],[-62.6,181.5],[-56.7,182.4],[-60.6,188.9],
+  [-59.2,193.0],[-51.8,190.8],[-43.8,191.4],[-42.3,200.1],[-45.6,209.2],[-41.7,207.3],[-38.1,210.0],[-30.6,206.5],
+  [-29.7,202.8],[-31.8,200.7],[-29.4,197.7],[-12.8,191.2],[-11.9,187.1],[-16.8,180.3],[-5.2,147.8],[1.0,141.1],
+  [9.0,138.9],[14.5,132.8],[22.8,132.8],[23.7,129.9],[32.7,155.2],[33.0,161.6],[36.2,164.9],[36.9,159.1],
+  [41.7,156.3],[47.2,163.1],[52.8,165.6],[54.3,170.7],[58.2,168.9],[56.4,162.1],[53.8,160.1],[51.4,161.9],
+  [48.4,158.6],[48.4,155.6],[52.3,152.1],[49.8,147.3],[47.2,147.0],[51.8,141.8],[48.6,141.3],[49.1,136.6],
+  [53.8,136.6],[56.2,134.4],[53.6,132.8],[44.0,133.6],[41.4,123.1],[38.5,120.6],[42.2,113.1],[48.6,110.4],
+  [45.8,106.9],[46.2,102.1],[55.9,95.8],[59.6,97.5],[60.0,102.4],[61.5,93.4],[59.2,87.9],[64.8,87.3],
+  [63.6,79.9],[70.9,78.2],[67.8,78.0],[66.4,74.7],[65.8,77.2],[63.2,77.6],[67.5,71.4],[61.8,66.9],
+  [60.4,62.8],[57.4,62.4],[59.6,61.2],[56.4,58.2],[59.8,55.5],[58.9,49.7],[54.2,41.0],[51.9,41.5],
+  [46.7,36.0],[42.8,27.5],[44.1,23.1],[41.1,20.5],[40.8,16.8],[44.2,10.6],[41.2,8.4],[42.2,3.9],
+  [39.9,0.4],[45.9,-4.9],[43.8,-7.6],[45.8,-9.0],[44.2,-7.4],[46.0,-6.6],[50.2,-9.0],[48.8,-11.2],
+  [51.0,-9.6],[53.6,-11.6],[59.6,-10.9],[63.8,-9.3],[66.6,-4.7],[70.9,-7.8],[66.4,-9.3],[56.6,-21.8],
+  [57.4,-28.0],[54.6,-28.7],[56.8,-29.4],[57.4,-32.7],[56.1,-32.5],[55.7,-37.2],[56.8,-44.7],[60.2,-53.6],
+  [63.0,-54.9],[60.4,-58.9],[66.3,-58.5],[63.0,-66.0],[74.8,-57.6],[77.2,-57.9],[75.2,-59.7],[76.3,-63.4],
+  [74.6,-72.3],[78.9,-81.4],[82.2,-83.2],[84.0,-81.3],[87.3,-82.2],[87.9,-86.7],[86.2,-88.5],[80.2,-87.4],
+  [79.2,-101.6],[83.6,-103.2],[84.3,-107.7],[78.9,-109.1],[78.3,-112.9],[72.9,-111.9],[70.2,-115.4],[69.9,-110.1],
+  [63.2,-100.9],[57.8,-100.5],[52.2,-94.7],[47.7,-98.4],[43.2,-95.1],[42.0,-97.4],[33.3,-100.6],[23.9,-114.1],
+  [21.3,-125.2],[23.2,-129.6],[21.0,-132.4],[15.5,-133.9],[8.9,-127.2],[5.6,-127.2],[4.1,-124.5],[2.1,-126.6],
+  [1.0,-124.6],[-0.4,-128.4],[3.0,-131.9],[1.5,-133.4],[3.2,-137.4],[0.0,-138.9],[-3.4,-135.6],[-4.9,-129.4],
+  [-5.4,-148.4],[-2.7,-149.1],[-3.2,-155.9],[-8.2,-157.5],[-11.7,-181.2],[-13.5,-183.8],[-17.5,-183.4],[-26.5,-188.7],
+  [-33.2,-196.0],[-35.8,-197.1],[-39.6,-194.9],[-39.0,-197.2],[-43.8,-202.6],[-50.8,-198.9],[-44.8,-203.2],[-48.6,-201.5],
+  [-46.2,-206.9]];
+
+function insidePoly(x,z){
+  let inside=false;
+  for(let i=0,j=OUTLINE.length-1;i<OUTLINE.length;j=i++){
+    const [xi,zi]=OUTLINE[i],[xj,zj]=OUTLINE[j];
+    if(((zi>z)!==(zj>z)) && (x < (xj-xi)*(z-zi)/(zj-zi)+xi)) inside=!inside;
+  }
+  return inside;
+}
+function distToPoly(x,z){
+  let d=Infinity;
+  for(let i=0,j=OUTLINE.length-1;i<OUTLINE.length;j=i++){
+    const [x1,z1]=OUTLINE[j],[x2,z2]=OUTLINE[i];
+    const dx=x2-x1,dz=z2-z1,L2=dx*dx+dz*dz;
+    let t=((x-x1)*dx+(z-z1)*dz)/L2; t=Math.max(0,Math.min(1,t));
+    const px=x1+t*dx-x, pz=z1+t*dz-z;
+    d=Math.min(d,px*px+pz*pz);
+  }
+  return Math.sqrt(d);
+}
+// value-noise fbm
+function hash(ix,iz){let n=ix*374761393+iz*668265263;n=(n^(n>>13))*1274126177;return((n^(n>>16))>>>0)/4294967295;}
+function vnoise(x,z){
+  const ix=Math.floor(x),iz=Math.floor(z),fx=x-ix,fz=z-iz;
+  const sx=fx*fx*(3-2*fx),sz=fz*fz*(3-2*fz);
+  const a=hash(ix,iz),b=hash(ix+1,iz),c=hash(ix,iz+1),d=hash(ix+1,iz+1);
+  return a+(b-a)*sx+(c-a)*sz+(a-b-c+d)*sx*sz;
+}
+function fbm(x,z){let v=0,a=0.5,f=1;for(let o=0;o<4;o++){v+=a*vnoise(x*f,z*f);a*=0.5;f*=2;}return v;}
+function gauss(x,z,cx,cz,amp,sig){const dx=x-cx,dz=z-cz;return amp*Math.exp(-(dx*dx+dz*dz)/(2*sig*sig));}
+
+// hill bumps: [x, z, amplitude, sigma] — Big Buddha, Karon viewpoint, Khao Rang, Promthep cliff, central spine helpers
+const HILLS=[[-36.6,143.7,13,15.0],[-42.5,183.4,10,12.0],[22.4,81.8,6,9.0],[-37.5,207.0,7,13.5]];
+// west mountain range (Mai Thao Sip Song) as line segments [x1,z1,x2,z2,amp,sigma];
+// gap at z=38..60 is the real Patong pass; Thalang and Chalong plains stay low
+const RIDGES=[[-39.0,-78.0,-33.0,-7.5,15,13.5],[-30.0,-7.5,-31.5,57.0,17,13.5],[-37.5,90.0,-39.0,138.0,17,13.5],[-39.0,138.0,-36.0,180.0,14,12.0]];
+function segDist(x,z,x1,z1,x2,z2){
+  const dx=x2-x1,dz=z2-z1,t=Math.max(0,Math.min(1,((x-x1)*dx+(z-z1)*dz)/(dx*dx+dz*dz)));
+  return Math.hypot(x1+t*dx-x,z1+t*dz-z);
+}
+
+function rawHeight(x,z){
+  const d = distToPoly(x,z) * (insidePoly(x,z)?1:-1);
+  if(d<=0) return Math.max(-5, d*0.35);
+  let h = Math.min(d,8)/8*2.5;                       // beach rise
+  const mask = Math.min(Math.max((d-3)/22,0),1);
+  h += fbm(x*0.03+7,z*0.03+3) * mask * 3;            // gentle lowland undulation
+  for(const [x1,z1,x2,z2,a,s] of RIDGES){const dd=segDist(x,z,x1,z1,x2,z2); h += a*Math.exp(-dd*dd/(2*s*s))*mask;}
+  for(const [cx,cz,a,s] of HILLS) h += gauss(x,z,cx,cz,a,s)*Math.min(Math.max(d/6,0),1);
+  return h;
+}
+
+
+// flat pads so landmark structures sit on level ground
+const FLATS=[[3,134],[-36.6,143.7],[-12.9,127.6],[-37.5,207.0],[-49.8,76.3],[33.9,89.6],[-42.5,183.4],[-53.1,-11.2],[22.4,81.8]];
+const padH=FLATS.map(f=>rawHeight(f[0],f[1]));
+function terrainHeight(x,z){
+  let h=rawHeight(x,z);
+  for(let i=0;i<FLATS.length;i++){
+    const d=Math.hypot(x-FLATS[i][0],z-FLATS[i][1]);
+    if(d<14){const t=d<8?1:1-(d-8)/6; h=h*(1-t)+padH[i]*t;}
+  }
+  return h;
+}
+
+// heightmap grid (also fed to the ocean shader for shore foam)
+const HM_W=256, HM_H=256, HM_X0=-120, HM_Z0=-262, HM_SX=240, HM_SZ=525;
+const heightData = new Float32Array(HM_W*HM_H);
+for(let j=0;j<HM_H;j++)for(let i=0;i<HM_W;i++){
+  heightData[j*HM_W+i]=terrainHeight(HM_X0+i/(HM_W-1)*HM_SX, HM_Z0+j/(HM_H-1)*HM_SZ);
+}
+function heightAt(x,z){ // bilinear sample — used instead of raycasts
+  const u=(x-HM_X0)/HM_SX*(HM_W-1), v=(z-HM_Z0)/HM_SZ*(HM_H-1);
+  const i=Math.max(0,Math.min(HM_W-2,Math.floor(u))), j=Math.max(0,Math.min(HM_H-2,Math.floor(v)));
+  const fu=u-i, fv=v-j, g=(a,b)=>heightData[b*HM_W+a];
+  return g(i,j)*(1-fu)*(1-fv)+g(i+1,j)*fu*(1-fv)+g(i,j+1)*(1-fu)*fv+g(i+1,j+1)*fu*fv;
+}
+
+// ============================ RENDERER =============================
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth,innerHeight);
+document.body.appendChild(renderer.domElement);
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x8fd6f2);
+scene.fog=new THREE.Fog(0xbfe6f5,220,650);
+const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,1500);
+
+scene.add(new THREE.HemisphereLight(0xcfeaff,0x6a9c58,0.9));
+const sun=new THREE.DirectionalLight(0xfff3d6,1.6); sun.position.set(80,140,-60); scene.add(sun);
+
+// ========================= TOON MATERIALS ==========================
+const grad=new THREE.DataTexture(new Uint8Array([90,170,255]),3,1,THREE.RedFormat);
+grad.minFilter=grad.magFilter=THREE.NearestFilter; grad.needsUpdate=true;
+const toon=c=>new THREE.MeshToonMaterial({color:c,gradientMap:grad});
+function addOutline(mesh,scale=1.05){
+  const o=new THREE.Mesh(mesh.geometry,new THREE.MeshBasicMaterial({color:0x1a2530,side:THREE.BackSide}));
+  o.scale.setScalar(scale); mesh.add(o); return mesh;
+}
+
+// ========================= TERRAIN MESH ============================
+{
+  const geo=new THREE.PlaneGeometry(HM_SX,HM_SZ,200,300);
+  geo.rotateX(-Math.PI/2);
+  geo.translate(0,0,HM_Z0+HM_SZ/2); // align plane with heightmap bounds
+  const pos=geo.attributes.position, colors=[];
+  const sand=new THREE.Color(0xeeddaa), grass=new THREE.Color(0x5cb551),
+        dark=new THREE.Color(0x3f9346), sea=new THREE.Color(0xc9c09b);
+  for(let i=0;i<pos.count;i++){
+    const x=pos.getX(i), z=pos.getZ(i);
+    const h=terrainHeight(x,z);
+    pos.setY(i,h);
+    let c = h<1.4?sand : h<7?grass : h<15?dark : new THREE.Color(0x6f7f5e);
+    if(h<0.1)c=sea;
+    const shade=0.9+fbm(x*0.15,z*0.15)*0.2;
+    colors.push(c.r*shade,c.g*shade,c.b*shade);
+  }
+  geo.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+  geo.computeVertexNormals();
+  const mat=new THREE.MeshToonMaterial({vertexColors:true,gradientMap:grad});
+  scene.add(new THREE.Mesh(geo,mat));
+}
+
+// ========================== OCEAN SHADER ===========================
+const heightTex=new THREE.DataTexture(heightData,HM_W,HM_H,THREE.RedFormat,THREE.FloatType);
+heightTex.minFilter=heightTex.magFilter=THREE.LinearFilter; heightTex.needsUpdate=true;
+const oceanUniforms={
+  uTime:{value:0}, uHeight:{value:heightTex},
+  uHm:{value:new THREE.Vector4(HM_X0,HM_Z0,HM_SX,HM_SZ)},
+  ...THREE.UniformsLib.fog
+};
+const ocean=new THREE.Mesh(
+  new THREE.PlaneGeometry(2000,2000,140,140).rotateX(-Math.PI/2),
+  new THREE.ShaderMaterial({
+    uniforms:oceanUniforms, fog:true, transparent:false,
+    vertexShader:`
+      uniform float uTime; varying vec3 vW;
+      #include <fog_pars_vertex>
+      void main(){
+        vec3 p=position;
+        p.y += sin(p.x*0.08+uTime)*0.25 + sin(p.z*0.06+uTime*1.3)*0.25;
+        vec4 mvPosition = modelViewMatrix*vec4(p,1.0);
+        vW=(modelMatrix*vec4(p,1.0)).xyz;
+        gl_Position = projectionMatrix*mvPosition;
+        #include <fog_vertex>
+      }`,
+    fragmentShader:`
+      uniform float uTime; uniform sampler2D uHeight; uniform vec4 uHm;
+      varying vec3 vW;
+      #include <fog_pars_fragment>
+      float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+      float noise(vec2 p){
+        vec2 i=floor(p),f=fract(p); f=f*f*(3.-2.*f);
+        return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);
+      }
+      void main(){
+        vec2 uv=(vW.xz-uHm.xy)/uHm.zw;
+        float h = (uv.x>0.0&&uv.x<1.0&&uv.y>0.0&&uv.y<1.0) ? texture2D(uHeight,uv).r : -6.0;
+        // deep vs shallow — Wind Waker light blue
+        vec3 deep=vec3(0.16,0.47,0.72), shallow=vec3(0.35,0.75,0.80);
+        vec3 col=mix(deep,shallow,smoothstep(-6.0,-0.5,h));
+        // drifting contour swirls
+        float n=noise(vW.xz*0.045+vec2(uTime*0.04,uTime*0.025))
+               +0.5*noise(vW.xz*0.11-vec2(uTime*0.03,0.0));
+        float band=smoothstep(0.86,0.90,n)-smoothstep(0.96,1.0,n);
+        col=mix(col,vec3(0.92,0.98,1.0),band*0.9);
+        // animated shoreline foam
+        float shore=smoothstep(-2.2,-0.1,h)*(1.0-smoothstep(0.0,0.4,h));
+        float pulse=0.5+0.5*sin(uTime*1.8 - h*4.0 + noise(vW.xz*0.3)*3.0);
+        col=mix(col,vec3(1.0),clamp(shore*(0.45+0.55*pulse),0.0,1.0));
+        gl_FragColor=vec4(col,1.0);
+        #include <fog_fragment>
+      }`
+  })
+);
+scene.add(ocean);
+const waveY=(x,z,t)=>Math.sin(x*0.08+t)*0.25+Math.sin(z*0.06+t*1.3)*0.25;
+
+// ============================= CLOUDS ==============================
+const clouds=[];
+for(let i=0;i<10;i++){
+  const g=new THREE.Group();
+  for(let k=0;k<3;k++){
+    const m=new THREE.Mesh(new THREE.IcosahedronGeometry(6+Math.random()*5,1),
+      new THREE.MeshToonMaterial({color:0xffffff,gradientMap:grad}));
+    m.position.set(k*7-7+Math.random()*3,Math.random()*2,Math.random()*4);
+    m.scale.y=0.45; g.add(m);
+  }
+  g.position.set(Math.random()*900-450,60+Math.random()*30,Math.random()*900-450);
+  clouds.push(g); scene.add(g);
+}
+
+// ============================ LANDMARKS ============================
+function palm(x,z){
+  const g=new THREE.Group();
+  const trunk=new THREE.Mesh(new THREE.CylinderGeometry(0.12,0.2,3,6),toon(0x9a6b3f));
+  trunk.position.y=1.5; trunk.rotation.z=(Math.random()-0.5)*0.25; g.add(trunk);
+  for(let i=0;i<5;i++){
+    const leaf=new THREE.Mesh(new THREE.ConeGeometry(0.35,2.4,4),toon(0x2f9e44));
+    const a=i/5*Math.PI*2;
+    leaf.position.set(Math.cos(a)*0.9,3,Math.sin(a)*0.9);
+    leaf.rotation.set(Math.sin(a)*1.2,0,-Math.cos(a)*1.2);
+    g.add(leaf);
+  }
+  g.position.set(x,heightAt(x,z),z); scene.add(g); return g;
+}
+function buildBigBuddha(){
+  const g=new THREE.Group(),W=toon(0xf5f5f0);
+  const base=new THREE.Mesh(new THREE.CylinderGeometry(4.5,5.5,1.6,10),W); base.position.y=0.8;
+  const lap=new THREE.Mesh(new THREE.SphereGeometry(3.4,12,10),W); lap.scale.set(1,0.55,0.8); lap.position.y=2.2;
+  const torso=new THREE.Mesh(new THREE.SphereGeometry(2.3,12,10),W); torso.scale.y=1.35; torso.position.y=4.6;
+  const head=new THREE.Mesh(new THREE.SphereGeometry(1.25,12,10),W); head.position.y=8.0;
+  const top=new THREE.Mesh(new THREE.ConeGeometry(0.5,1.1,8),toon(0xe8d9a0)); top.position.y=9.3;
+  addOutline(torso,1.06); addOutline(head,1.06);
+  g.add(base,lap,torso,head,top); return g;
+}
+function buildWat(){
+  const g=new THREE.Group();
+  const tier1=new THREE.Mesh(new THREE.BoxGeometry(7,2.6,7),toon(0xfaf3e0)); tier1.position.y=1.3; g.add(tier1);
+  const tier2=new THREE.Mesh(new THREE.BoxGeometry(4.6,2,4.6),toon(0xf3e6c4)); tier2.position.y=3.6; g.add(tier2);
+  const spire=new THREE.Mesh(new THREE.ConeGeometry(2,6.5,8),toon(0xe8b923)); spire.position.y=7.8; addOutline(spire,1.06);
+  g.add(spire);
+  for(const [dx,dz] of [[3,3],[-3,3],[3,-3],[-3,-3]]){
+    const c=new THREE.Mesh(new THREE.ConeGeometry(0.6,2.4,6),toon(0xe8b923)); c.position.set(dx,3.8,dz); g.add(c);
+  }
+  return g;
+}
+function buildLighthouse(){
+  const g=new THREE.Group();
+  const t=new THREE.Mesh(new THREE.CylinderGeometry(1.1,1.6,8,10),toon(0xffffff)); t.position.y=4; addOutline(t,1.06);
+  const cap=new THREE.Mesh(new THREE.ConeGeometry(1.5,1.6,10),toon(0xd94f3d)); cap.position.y=8.9;
+  const lamp=new THREE.Mesh(new THREE.SphereGeometry(0.6,8,8),new THREE.MeshBasicMaterial({color:0xfff2a8})); lamp.position.y=8.1;
+  g.add(t,cap,lamp); return g;
+}
+function buildPatong(){
+  const g=new THREE.Group();
+  const cols=[0xf25c5c,0xf2b705,0x2ea8c9,0xef6ea8];
+  for(let i=0;i<5;i++){
+    const u=new THREE.Group();
+    const pole=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06,2,5),toon(0xdddddd)); pole.position.y=1;
+    const top=new THREE.Mesh(new THREE.ConeGeometry(1.1,0.7,8),toon(cols[i%4])); top.position.y=2.1;
+    u.add(pole,top); u.position.set(i*2.4-5,0,(i%2)*2.2); g.add(u);
+  }
+  for(let i=0;i<3;i++){
+    const b=new THREE.Mesh(new THREE.BoxGeometry(3,3+i,2.4),toon([0xf6d8b8,0xcfe6f2,0xf2e6c9][i]));
+    b.position.set(i*3.6-3.6,(3+i)/2,-5); g.add(b);
+  }
+  return g;
+}
+function buildOldTown(){
+  const g=new THREE.Group();
+  const cols=[0xf2c14e,0xe87461,0x7fb7be,0xf4a1c4,0x9dd18c,0xf2e2ba,0xd9a5e0,0xf59e77,0x8fc8e8];
+  for(let i=0;i<9;i++){
+    const h=2.4+hash(i,7)*2;
+    const b=new THREE.Mesh(new THREE.BoxGeometry(2.6,h,2.6),toon(cols[i]));
+    b.position.set((i%3)*3.2-3.2,h/2,Math.floor(i/3)*3.2-3.2);
+    addOutline(b,1.04); g.add(b);
+  }
+  return g;
+}
+function buildPavilion(scale=1){
+  const g=new THREE.Group();
+  for(const [dx,dz] of [[1.6,1.6],[-1.6,1.6],[1.6,-1.6],[-1.6,-1.6]]){
+    const p=new THREE.Mesh(new THREE.CylinderGeometry(0.15,0.15,2.6,6),toon(0x8a5a33)); p.position.set(dx,1.3,dz); g.add(p);
+  }
+  const roof=new THREE.Mesh(new THREE.ConeGeometry(3.2,1.8,4),toon(0xb0452f)); roof.position.y=3.4; roof.rotation.y=Math.PI/4;
+  addOutline(roof,1.05); g.add(roof);
+  g.scale.setScalar(scale); return g;
+}
+function buildBridge(){
+  const g=new THREE.Group();
+  const deck=new THREE.Mesh(new THREE.BoxGeometry(3.4,0.7,26),toon(0xd8d8d8)); deck.position.y=2.6; addOutline(deck,1.03); g.add(deck);
+  for(let i=0;i<4;i++){
+    for(const s of [-1,1]){
+      const p=new THREE.Mesh(new THREE.CylinderGeometry(0.35,0.35,4,6),toon(0xb8b8b8));
+      p.position.set(s*1.2,0.6,i*7-10.5); g.add(p);
+    }
+  }
+  const arch=new THREE.Mesh(new THREE.TorusGeometry(4,0.3,6,16,Math.PI),toon(0xd94f3d));
+  arch.position.y=2.9; g.add(arch);
+  return g;
+}
+function buildLagoon(){
+  const g=new THREE.Group();
+  const pool=new THREE.Mesh(new THREE.CircleGeometry(5,20).rotateX(-Math.PI/2),new THREE.MeshBasicMaterial({color:0x54c8d8}));
+  pool.position.y=0.25; g.add(pool);
+  for(let i=0;i<3;i++){
+    const v=new THREE.Mesh(new THREE.BoxGeometry(2.2,1.8,2.2),toon(0xfdf6ec));
+    v.position.set(i*3-3,0.9,-6); g.add(v);
+    const r=new THREE.Mesh(new THREE.ConeGeometry(1.9,1.2,4),toon(0xc97b4a)); r.position.set(i*3-3,2.4,-6); r.rotation.y=Math.PI/4; g.add(r);
+  }
+  return g;
+}
+function buildFlagHill(){
+  const g=new THREE.Group();
+  const pole=new THREE.Mesh(new THREE.CylinderGeometry(0.08,0.08,5,5),toon(0xcccccc)); pole.position.y=2.5;
+  const flag=new THREE.Mesh(new THREE.PlaneGeometry(1.8,1.1),new THREE.MeshBasicMaterial({color:0xd94f3d,side:THREE.DoubleSide}));
+  flag.position.set(0.95,4.4,0); g.add(pole,flag);
+  g.add(buildPavilion(0.8));
+  return g;
+}
+function buildNama(){
+  const g=new THREE.Group();
+  const hut=addOutline(new THREE.Mesh(new THREE.BoxGeometry(6,2.8,4.4),toon(0xfafafa)),1.04); hut.position.y=1.4; g.add(hut);
+  const roof=new THREE.Mesh(new THREE.BoxGeometry(6.6,0.4,5),toon(0x14181c)); roof.position.y=3; g.add(roof);
+  const c=document.createElement('canvas'); c.width=256; c.height=96;
+  const x=c.getContext('2d');
+  x.fillStyle='#14181c'; x.fillRect(0,0,256,96);
+  x.fillStyle='#fff'; x.font='bold 42px Helvetica'; x.textAlign='center'; x.fillText('NAMA',128,42);
+  x.font='19px Helvetica'; x.fillText('f r e e d i v i n g',128,78);
+  x.strokeStyle='#4ac8e8'; x.lineWidth=3; x.beginPath();
+  x.moveTo(22,54); x.quadraticCurveTo(75,46,128,54); x.quadraticCurveTo(181,62,234,54); x.stroke();
+  const sign=new THREE.Mesh(new THREE.PlaneGeometry(4.6,1.7),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c)}));
+  sign.position.set(0,2.15,2.26); g.add(sign);
+  const suit=new THREE.Mesh(new THREE.BoxGeometry(0.5,1.1,0.25),toon(0x14181c)); suit.position.set(2.6,0.9,2.3); g.add(suit);
+  return g;
+}
+function buildDiveIsland(){
+  const g=new THREE.Group();
+  const base=new THREE.Mesh(new THREE.CylinderGeometry(7,10,4,10),toon(0xeeddaa)); base.position.y=0.6; g.add(base);
+  const top=new THREE.Mesh(new THREE.ConeGeometry(5.5,3.2,9),toon(0x4aa64f)); top.position.y=3.8; g.add(top);
+  for(const [dx,dz] of [[2,1],[-2.4,-1.2]]){
+    const tr=new THREE.Mesh(new THREE.CylinderGeometry(0.1,0.16,2.6,5),toon(0x9a6b3f)); tr.position.set(dx,5.6,dz); g.add(tr);
+    const lv=new THREE.Mesh(new THREE.ConeGeometry(1.1,1.2,6),toon(0x2f9e44)); lv.position.set(dx,7.1,dz); g.add(lv);
+  }
+  const buoy=new THREE.Mesh(new THREE.SphereGeometry(0.6,8,8),toon(0xdd2233)); buoy.position.set(11,0.5,3);
+  const pole=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,1.6,4),toon(0xeeeeee)); pole.position.set(11,1.4,3);
+  const flag=new THREE.Mesh(new THREE.PlaneGeometry(1,0.7),new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}));
+  flag.position.set(11.5,1.9,3);
+  g.add(buoy,pole,flag);
+  return g;
+}
+function buildWreck(){
+  const g=new THREE.Group();
+  const hull=addOutline(new THREE.Mesh(new THREE.BoxGeometry(3,2.6,10),toon(0x5a4a3a)),1.04);
+  hull.rotation.set(0.12,0.5,0.42); hull.position.y=0.2; g.add(hull);
+  const mast=new THREE.Mesh(new THREE.CylinderGeometry(0.12,0.12,7,6),toon(0x4a3a2c));
+  mast.rotation.z=0.9; mast.position.set(2.6,1.6,0); g.add(mast);
+  const buoy=new THREE.Mesh(new THREE.SphereGeometry(0.6,8,8),toon(0xdd2233)); buoy.position.set(7,0.5,4);
+  const pole=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,1.6,4),toon(0xeeeeee)); pole.position.set(7,1.4,4);
+  const flag=new THREE.Mesh(new THREE.PlaneGeometry(1,0.7),new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}));
+  flag.position.set(7.5,1.9,4);
+  g.add(buoy,pole,flag);
+  return g;
+}
+const LANDMARKS=[
+  {name:'Big Buddha', x:-36.6, z:143.7, r:16, build:buildBigBuddha},
+  {name:'Wat Chalong', x:-12.9, z:127.6, r:14, build:buildWat},
+  {name:'Promthep Cape', x:-37.5, z:207.0, r:14, build:buildLighthouse},
+  {name:'Patong Beach', x:-49.8, z:76.3, r:16, build:buildPatong},
+  {name:'Old Phuket Town', x:33.9, z:89.6, r:14, build:buildOldTown},
+  {name:'Karon Viewpoint', x:-42.5, z:183.4, r:14, build:()=>buildPavilion(1.2)},
+  {name:'Sarasin Bridge', x:-50.6, z:-207.0, r:18, build:buildBridge},
+  {name:'Bang Tao Lagoon', x:-53.1, z:-11.2, r:15, build:buildLagoon},
+  {name:'Khao Rang Hill', x:22.4, z:81.8, r:12, build:buildFlagHill},
+  {name:'NAMA Freediving', x:3, z:134, r:10, build:buildNama},
+  {name:'Ko Maiton', x:100, z:140, r:14, build:buildDiveIsland, hidden:true},
+  {name:'Ko Racha', x:-15, z:252, r:14, build:buildDiveIsland, hidden:true},
+  {name:'King Cruiser Wreck', x:62, z:228, r:14, build:buildWreck, hidden:true},
+];
+function makeLabel(text){
+  const c=document.createElement('canvas'); c.width=512; c.height=96;
+  const x=c.getContext('2d'); x.font='bold 52px Georgia'; x.textAlign='center'; x.textBaseline='middle';
+  x.lineWidth=10; x.strokeStyle='rgba(15,35,55,0.9)'; x.strokeText(text,256,48);
+  x.fillStyle='#fff'; x.fillText(text,256,48);
+  const s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthTest:false}));
+  s.scale.set(18,3.4,1); s.visible=false; return s;
+}
+for(const L of LANDMARKS){
+  const g=L.build();
+  const gy=Math.max(heightAt(L.x,L.z),0.3);
+  g.position.set(L.x,gy,L.z);
+  L.label=makeLabel(L.name);
+  L.label.position.set(L.x,gy+13,L.z);
+  scene.add(g,L.label); L.discovered=false;
+}
+// limestone karsts, NE waters
+for(const [x,z,r,h] of [[94,-36,3,10],[106,-72,3.5,12],[100,-12,3,9],[78,30,4,14],[90,68,4.5,15]]){
+  const k=new THREE.Mesh(new THREE.CylinderGeometry(r*0.55,r,h,8),toon(0x8d927e));
+  k.position.set(x,h/2-1.5,z); addOutline(k,1.04); scene.add(k);
+  const cap=new THREE.Mesh(new THREE.ConeGeometry(r*0.7,2.5,8),toon(0x3f9346));
+  cap.position.set(x,h-1.2,z); scene.add(cap);
+}
+// scattered beach palms
+let placed=0,tries=0;
+while(placed<45&&tries++<4000){
+  const x=Math.random()*180-90, z=Math.random()*440-220, h=heightAt(x,z);
+  if(h>0.6&&h<2.2){palm(x,z);placed++;}
+}
+
+// ====================== PIERS & SEAGULLS ==========================
+function buildPier(x,z,dx,dz,len){
+  const p=new THREE.Group(), ang=Math.atan2(dx,dz);
+  const deck=new THREE.Mesh(new THREE.BoxGeometry(2.2,0.3,len),toon(0xa07a4e));
+  deck.position.y=1.2; p.add(deck);
+  for(let i=0;i<len/4;i++)for(const s of [-1,1]){
+    const post=new THREE.Mesh(new THREE.CylinderGeometry(0.14,0.14,2.6,5),toon(0x7a5a36));
+    post.position.set(s*0.9,-0.1,i*4-len/2+2); p.add(post);
+  }
+  p.rotation.y=ang;
+  p.position.set(x+dx*len/2,0,z+dz*len/2);
+  scene.add(p); return p;
+}
+function makeGull(){
+  const gl=new THREE.Group();
+  const body=new THREE.Mesh(new THREE.SphereGeometry(0.28,8,6),toon(0xffffff));
+  body.scale.set(1,0.8,1.6); gl.add(body);
+  const head=new THREE.Mesh(new THREE.SphereGeometry(0.16,8,6),toon(0xffffff));
+  head.position.set(0,0.15,0.5); gl.add(head);
+  const beak=new THREE.Mesh(new THREE.ConeGeometry(0.06,0.25,4),toon(0xf2a03d));
+  beak.rotation.x=Math.PI/2; beak.position.set(0,0.13,0.72); gl.add(beak);
+  const wingGeo=new THREE.PlaneGeometry(1.5,0.5).translate(0.75,0,0);
+  const wL=new THREE.Mesh(wingGeo,new THREE.MeshToonMaterial({color:0xf4f4f4,gradientMap:grad,side:THREE.DoubleSide}));
+  wL.rotation.x=-Math.PI/2; const wR=wL.clone(); wR.rotation.z=Math.PI;
+  gl.add(wL,wR); gl.userData={wL,wR};
+  return gl;
+}
+const gulls=[];
+function gullFlock(cx,cz,n){
+  for(let i=0;i<n;i++){
+    const gl=makeGull(); scene.add(gl);
+    gulls.push({gl,cx,cz,R:5+Math.random()*7,h:6+Math.random()*5,
+      sp:(0.4+Math.random()*0.4)*(Math.random()<0.5?1:-1),ph:Math.random()*7});
+  }
+}
+// Chalong pier (long jetty into Chalong Bay) + Rawai pier
+buildPier(9,139.5,0.6,0.8,26);  gullFlock(9+0.6*20,139.5+0.8*20,5);
+buildPier(-12.8,190.5,0.25,0.97,18); gullFlock(-12.8+0.25*14,190.5+0.97*14,4);
+
+// ============================= PLAYER ==============================
+const player=new THREE.Group();
+const body=addOutline(new THREE.Mesh(new THREE.BoxGeometry(0.9,0.9,0.55),toon(0x2e9e57)));
+body.position.y=1.15;
+const head=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.58,12,10),toon(0xf5c89a)),1.07);
+head.position.y=2.05;
+const hat=new THREE.Mesh(new THREE.ConeGeometry(0.5,0.9,8),toon(0x1f7a43));
+hat.position.y=2.75; hat.rotation.x=0.25;
+const limbGeo=new THREE.BoxGeometry(0.24,0.7,0.24).translate(0,-0.35,0);
+const armL=new THREE.Mesh(limbGeo,toon(0x2e9e57)), armR=armL.clone();
+armL.position.set(0.6,1.55,0); armR.position.set(-0.6,1.55,0);
+const legL=new THREE.Mesh(limbGeo,toon(0x8a5a33)), legR=legL.clone();
+legL.position.set(0.24,0.7,0); legR.position.set(-0.24,0.7,0);
+const blob=new THREE.Mesh(new THREE.CircleGeometry(0.7,16).rotateX(-Math.PI/2),
+  new THREE.MeshBasicMaterial({color:0x11331e,transparent:true,opacity:0.3}));
+blob.position.y=0.06;
+player.add(body,head,hat,armL,armR,legL,legR,blob);
+player.position.set(25.5,heightAt(25.5,91.5),91.5);
+scene.add(player);
+
+// wetsuit (NAMA Freediving)
+let wetsuit=false;
+function toggleWetsuit(){
+  wetsuit=!wetsuit; wetsuitTried=true;
+  body.material.color.set(wetsuit?0x14181c:0x2e9e57);
+  armL.material.color.set(wetsuit?0x14181c:0x2e9e57);
+  legL.material.color.set(wetsuit?0x14181c:0x8a5a33);
+  hat.material.color.set(wetsuit?0x14181c:0x1f7a43);
+}
+
+// ============================== BOAT ===============================
+function makeBoat(hullCol,sailCol){
+  const b=new THREE.Group();
+  const hull=addOutline(new THREE.Mesh(new THREE.BoxGeometry(2.2,1,5.5),toon(hullCol)),1.04);
+  hull.position.y=0.5;
+  const prow=new THREE.Mesh(new THREE.ConeGeometry(1.05,2,4),toon(hullCol));
+  prow.rotation.set(-Math.PI/2,0,Math.PI/4); prow.position.set(0,0.55,3.6);
+  const mast=new THREE.Mesh(new THREE.CylinderGeometry(0.1,0.1,5.5,6),toon(0x7a4a28)); mast.position.y=3.2;
+  const sail=new THREE.Mesh(new THREE.PlaneGeometry(3.2,3.8),new THREE.MeshToonMaterial({color:sailCol,gradientMap:grad,side:THREE.DoubleSide}));
+  sail.position.set(0,3.5,-0.35);
+  b.add(hull,prow,mast,sail); return b;
+}
+const boat=makeBoat(0xb03a2e,0xfff6e0);
+// spawn in water east of Old Town
+let bx=60,bz=91.5; while(heightAt(bx,bz)>-0.9&&bx<110)bx+=1;
+boat.position.set(bx,0.3,bz);
+scene.add(boat);
+// Namo — the NAMA dive boat by the Chalong pier, white with a red diver flag
+const namo=makeBoat(0xf5f8fa,0x9fd7e8);
+const dflag=new THREE.Mesh(new THREE.PlaneGeometry(1.2,0.8),new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}));
+dflag.position.set(0.6,5.6,-0.35); namo.add(dflag);
+let nx=27,nz=164; while(heightAt(nx,nz)>-0.9&&nz<200){nz+=1;nx+=0.3;}
+namo.position.set(nx,0.3,nz);
+scene.add(namo);
+let activeBoat=boat, spotsUnlocked=false, w1cert=false, wetsuitTried=false;
+
+// boat wake sprites
+const wakeTexC=document.createElement('canvas'); wakeTexC.width=wakeTexC.height=64;
+{const c=wakeTexC.getContext('2d'),g2=c.createRadialGradient(32,32,4,32,32,30);
+ g2.addColorStop(0,'rgba(255,255,255,0.9)');g2.addColorStop(1,'rgba(255,255,255,0)');
+ c.fillStyle=g2;c.fillRect(0,0,64,64);}
+const wakeTex=new THREE.CanvasTexture(wakeTexC);
+const wakes=[];
+function spawnWake(x,z){
+  const s=new THREE.Sprite(new THREE.SpriteMaterial({map:wakeTex,transparent:true,opacity:0.8,depthWrite:false}));
+  s.position.set(x,0.4,z); s.scale.setScalar(1.5); s.userData.age=0;
+  wakes.push(s); scene.add(s);
+}
+
+// ============================== INPUT ==============================
+const keys={};
+addEventListener('keydown',e=>{keys[e.code]=true; initAudio(); if(e.code==='KeyE')toggleBoat(); if(e.code==='Space')e.preventDefault();});
+addEventListener('keyup',e=>keys[e.code]=false);
+addEventListener('blur',()=>{for(const k in keys)keys[k]=false; dragging=false;}); // stuck-key guard on tab/window switch
+document.addEventListener('visibilitychange',()=>{if(document.hidden)for(const k in keys)keys[k]=false;});
+let camYaw=Math.PI, camPitch=0.42, camDist=14, dragging=false, px=0,py=0;
+addEventListener('pointerdown',e=>{dragging=true;px=e.clientX;py=e.clientY;initAudio();});
+addEventListener('pointerup',()=>dragging=false);
+addEventListener('pointermove',e=>{
+  if(!dragging)return;
+  camYaw-=(e.clientX-px)*0.005; camPitch=Math.max(0.05,Math.min(1.2,camPitch+(e.clientY-py)*0.004));
+  px=e.clientX;py=e.clientY;
+});
+addEventListener('wheel',e=>{camDist=Math.max(6,Math.min(45,camDist+e.deltaY*0.02));});
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+
+// =============================== UI ================================
+const listEl=document.getElementById('list'),toastEl=document.getElementById('toast'),
+      hintEl=document.getElementById('hint'),bannerEl=document.getElementById('banner');
+function questLine(){
+  const by=n=>LANDMARKS.find(l=>l.name===n);
+  if(!by('NAMA Freediving').discovered) return null;
+  if(!wetsuitTried) return 'Try on a wetsuit at NAMA (E)';
+  if(!spotsUnlocked) return 'Board Namo at the Chalong pier';
+  if(!(by('Ko Maiton').discovered&&by('Ko Racha').discovered)) return 'Dive Ko Maiton & Ko Racha';
+  if(!w1cert) return 'Return to NAMA — W1 certification';
+  if(!by('King Cruiser Wreck').discovered) return 'Find the King Cruiser Wreck';
+  return 'Freediving quest complete ✦';
+}
+function renderList(){
+  const vis=LANDMARKS.filter(l=>!l.hidden), n=vis.filter(l=>l.discovered).length;
+  const q=questLine();
+  listEl.innerHTML=`<b>Phuket · ${n}/${vis.length} discovered</b><br>`+
+    vis.map(l=>`<span class="${l.discovered?'done':'todo'}">${l.discovered?'✦':'·'} ${l.name}</span>`).join('<br>')+
+    (q?`<br><span style="color:#7fd4f2;font-style:italic">➤ ${q}</span>`:'');
+}
+renderList();
+setTimeout(()=>hintEl.style.opacity=0,12000);
+
+const mm=document.getElementById('minimap').getContext('2d');
+function drawMinimap(){
+  mm.clearRect(0,0,120,250);
+  const X=x=>60+x*0.52, Z=z=>118+z*0.48;
+  mm.beginPath();
+  OUTLINE.forEach(([x,z],i)=>i?mm.lineTo(X(x),Z(z)):mm.moveTo(X(x),Z(z)));
+  mm.closePath(); mm.fillStyle='#4a9e52'; mm.fill();
+  mm.strokeStyle='#efe0ae'; mm.lineWidth=2; mm.stroke();
+  for(const L of LANDMARKS){
+    if(L.hidden)continue;
+    mm.fillStyle=L.discovered?'#ffe27a':'#dfeef5';
+    mm.beginPath(); mm.arc(X(L.x),Z(L.z),2.6,0,7); mm.fill();
+  }
+  const p=sailing?activeBoat.position:player.position;
+  mm.fillStyle='#ff5a5a'; mm.beginPath(); mm.arc(X(p.x),Z(p.z),3.4,0,7); mm.fill();
+}
+
+// ============================== AUDIO ==============================
+let actx=null;
+function initAudio(){ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)(); }
+function chime(notes,step=0.13){
+  if(!actx)return;
+  notes.forEach((f,i)=>{
+    const o=actx.createOscillator(),g=actx.createGain();
+    o.type='triangle'; o.frequency.value=f;
+    const t=actx.currentTime+i*step;
+    g.gain.setValueAtTime(0.0,t); g.gain.linearRampToValueAtTime(0.25,t+0.02);
+    g.gain.exponentialRampToValueAtTime(0.001,t+0.5);
+    o.connect(g).connect(actx.destination); o.start(t); o.stop(t+0.6);
+  });
+}
+
+// =========================== BOAT / MODES ==========================
+let sailing=false, boatSpeed=0, vy=0, airborne=false;
+function toggleBoat(){
+  if(sailing){ // find land to disembark
+    for(let d=3;d<=18;d+=2)for(let a=0;a<8;a++){
+      const x=activeBoat.position.x+Math.cos(a/8*Math.PI*2)*d, z=activeBoat.position.z+Math.sin(a/8*Math.PI*2)*d;
+      if(heightAt(x,z)>0.4){
+        player.position.set(x,heightAt(x,z),z); player.visible=true; sailing=false; boatSpeed=0; return;
+      }
+    }
+    toastEl.textContent='No land nearby to disembark';
+    return;
+  }
+  const nama=LANDMARKS.find(l=>l.name==='NAMA Freediving');
+  if(Math.hypot(player.position.x-nama.x,player.position.z-nama.z)<9){
+    const spotsDone=LANDMARKS.filter(l=>l.name.startsWith('Ko ')).every(l=>l.discovered);
+    if(wetsuit&&spotsDone&&!w1cert){
+      w1cert=true;
+      const wreck=LANDMARKS.find(l=>l.name==='King Cruiser Wreck'); wreck.hidden=false;
+      renderList(); chime([523,659,784,1047,1319],0.15);
+      toastEl.textContent='⟡ W1 certification earned! A shipwreck is rumored to the southeast…';
+      setTimeout(()=>{toastEl.textContent='';},4500);
+    } else {
+      toggleWetsuit();
+      toastEl.textContent=wetsuit?'Wetsuit on — Namo awaits at the pier':'Wetsuit off';
+      setTimeout(()=>{toastEl.textContent='';},2500);
+      renderList();
+    }
+    return;
+  }
+  for(const b of [boat,namo]){
+    if(player.position.distanceTo(b.position)<9){
+      if(b===namo&&!wetsuit){
+        toastEl.textContent='Wetsuit required — visit NAMA Freediving';
+        setTimeout(()=>{toastEl.textContent='';},3000);
+        return;
+      }
+      activeBoat=b; sailing=true; player.visible=false;
+      if(b===namo&&!spotsUnlocked){
+        spotsUnlocked=true;
+        for(const L of LANDMARKS) if(L.name.startsWith('Ko '))L.hidden=false;
+        renderList(); chime([659,784,988,1319]);
+        toastEl.textContent='⟡ Dive spots unlocked: Ko Maiton & Ko Racha!';
+        setTimeout(()=>{toastEl.textContent='';},4000);
+      }
+      return;
+    }
+  }
+}
+
+// ============================ DISCOVERY ============================
+function checkDiscoveries(){
+  const p=sailing?activeBoat.position:player.position;
+  let near=null;
+  for(const L of LANDMARKS){
+    if(L.hidden){L.label.visible=false;continue;}
+    const d=Math.hypot(p.x-L.x,p.z-L.z);
+    L.label.visible = d<L.r+22;
+    if(L.label.visible) L.label.position.y=Math.max(heightAt(L.x,L.z),0.3)+13+Math.sin(t*1.5)*0.4;
+    if(d<L.r+12) near=L;
+    if(!L.discovered&&d<L.r){
+      L.discovered=true; renderList(); chime([523,659,784,1047]);
+      toastEl.textContent=`✦ ${L.name} discovered!`;
+      setTimeout(()=>{if(toastEl.textContent.includes(L.name))toastEl.textContent='';},3000);
+      if(LANDMARKS.every(l=>l.hidden||l.discovered)){
+        bannerEl.style.display='block';
+        chime([523,659,784,1047,784,1047,1319],0.18);
+      }
+    }
+  }
+  if(near&&!toastEl.textContent.includes('discovered')&&!toastEl.textContent.includes('No land'))
+    toastEl.textContent=near.discovered?'':near.name;
+  else if(!near&&!toastEl.textContent.includes('discovered')&&!toastEl.textContent.includes('No land'))
+    toastEl.textContent = (!sailing&&(player.position.distanceTo(boat.position)<9||player.position.distanceTo(namo.position)<9))?'Press E to sail':'';
+}
+
+// =============================== LOOP ==============================
+const clock=new THREE.Clock();
+let t=0, mmTimer=0;
+// intro fly-in
+const INTRO_LEN=6, AERIAL=new THREE.Vector3(45,480,180), ISLAND_CENTER=new THREE.Vector3(0,0,0);
+let introT=0;
+camera.position.copy(AERIAL); camera.lookAt(ISLAND_CENTER);
+function animate(){
+  requestAnimationFrame(animate);
+  const dt=Math.min(clock.getDelta(),0.05); t+=dt;
+  oceanUniforms.uTime.value=t;
+
+  // movement input, camera-relative
+  let mx=0,mz=0;
+  if(keys.KeyW)mz-=1; if(keys.KeyS)mz+=1; if(keys.KeyA)mx-=1; if(keys.KeyD)mx+=1;
+
+  if(!sailing){
+    const moving=mx||mz;
+    if(moving){
+      const ang=Math.atan2(mx,mz)+camYaw; // W = away from camera
+      const nx=player.position.x+Math.sin(ang)*10*dt, nz=player.position.z+Math.cos(ang)*10*dt;
+      if(heightAt(nx,nz)>-0.6){ player.position.x=nx; player.position.z=nz; } // can wade in shallows
+      player.rotation.y=ang;
+    }
+    const ground=Math.max(heightAt(player.position.x,player.position.z),-0.45);
+    if(keys.Space&&!airborne){vy=9;airborne=true;}
+    if(airborne){
+      player.position.y+=vy*dt; vy-=26*dt;
+      if(player.position.y<=ground){player.position.y=ground;airborne=false;vy=0;}
+    } else player.position.y=ground;
+    // blob shadow stays on the ground, shrinks with jump height
+    const jumpH=player.position.y-ground;
+    blob.position.y=ground-player.position.y+0.06;
+    blob.scale.setScalar(Math.max(0.55,1-jumpH*0.1));
+    const sw=moving?Math.sin(t*11):0;
+    armL.rotation.x=sw*0.8; armR.rotation.x=-sw*0.8;
+    legL.rotation.x=-sw*0.8; legR.rotation.x=sw*0.8;
+    body.position.y=1.15+(moving?Math.abs(Math.sin(t*11))*0.08:Math.sin(t*2)*0.03);
+  } else {
+    if(keys.KeyW)boatSpeed=Math.min(boatSpeed+14*dt,16);
+    else if(keys.KeyS)boatSpeed=Math.max(boatSpeed-16*dt,-4);
+    else boatSpeed*=(1-1.2*dt);
+    if(mx)activeBoat.rotation.y-=mx*1.4*dt*(boatSpeed>=0?1:-1);
+    const nx=activeBoat.position.x+Math.sin(activeBoat.rotation.y)*boatSpeed*dt,
+          nz=activeBoat.position.z+Math.cos(activeBoat.rotation.y)*boatSpeed*dt;
+    if(heightAt(nx,nz)<-0.8){ activeBoat.position.x=nx; activeBoat.position.z=nz; } else boatSpeed*=0.4;
+    activeBoat.position.y=0.3+waveY(activeBoat.position.x,activeBoat.position.z,t);
+    activeBoat.rotation.z=Math.sin(t*1.7)*0.04+(mx?-mx*0.08:0);
+    activeBoat.rotation.x=Math.sin(t*1.3)*0.03-boatSpeed*0.004;
+    if(Math.abs(boatSpeed)>4&&Math.random()<dt*14)
+      spawnWake(activeBoat.position.x-Math.sin(activeBoat.rotation.y)*2.5,activeBoat.position.z-Math.cos(activeBoat.rotation.y)*2.5);
+  }
+  // idle boats bob on the waves
+  for(const b of [boat,namo]) if(!(sailing&&b===activeBoat)) b.position.y=0.3+waveY(b.position.x,b.position.z,t)*0.6;
+  // wake update
+  for(let i=wakes.length-1;i>=0;i--){
+    const w=wakes[i]; w.userData.age+=dt;
+    w.scale.setScalar(1.5+w.userData.age*3); w.material.opacity=0.8*(1-w.userData.age/1.4);
+    if(w.userData.age>1.4){scene.remove(w);w.material.dispose();wakes.splice(i,1);}
+  }
+  // seagulls circle their piers
+  for(const s of gulls){
+    const a=t*s.sp+s.ph;
+    s.gl.position.set(s.cx+Math.cos(a)*s.R, s.h+Math.sin(t*1.7+s.ph)*0.7, s.cz+Math.sin(a)*s.R);
+    s.gl.rotation.y=-a+(s.sp>0?0:Math.PI);
+    const flap=Math.sin(t*9+s.ph)*0.55;
+    s.gl.userData.wL.rotation.z=flap; s.gl.userData.wR.rotation.z=Math.PI-flap;
+  }
+  // clouds drift
+  for(const c of clouds){ c.position.x+=dt*2; if(c.position.x>500)c.position.x=-500; }
+
+  // camera follow
+  const focus=sailing?boat.position:player.position;
+  const cx=focus.x+Math.sin(camYaw)*Math.cos(camPitch)*camDist,
+        cz=focus.z+Math.cos(camYaw)*Math.cos(camPitch)*camDist;
+  let cy=focus.y+Math.sin(camPitch)*camDist+2;
+  for(let s=0.3;s<=1.001;s+=0.35) // keep the sight line above ridges
+    cy=Math.max(cy,heightAt(focus.x+(cx-focus.x)*s,focus.z+(cz-focus.z)*s)+2);
+  cy=Math.max(cy,1.2);
+  if(introT<INTRO_LEN){ // aerial fly-in: whole Phuket, then descend to the player
+    introT+=dt;
+    const k=Math.min(introT/INTRO_LEN,1), e=k*k*(3-2*k);
+    scene.fog.far=650+(1-e)*600; // don't fog out the island during the aerial view
+    camera.position.lerpVectors(AERIAL,new THREE.Vector3(cx,cy,cz),e);
+    camera.position.y=Math.max(camera.position.y,heightAt(camera.position.x,camera.position.z)+2);
+    const look=new THREE.Vector3().lerpVectors(ISLAND_CENTER,new THREE.Vector3(focus.x,focus.y+2.5,focus.z),e);
+    camera.lookAt(look);
+  } else {
+    camera.position.lerp(new THREE.Vector3(cx,cy,cz),Math.min(1,dt*6));
+    camera.lookAt(focus.x,focus.y+2.5,focus.z);
+  }
+
+  checkDiscoveries();
+  if((mmTimer+=dt)>0.2){drawMinimap();mmTimer=0;}
+  renderer.render(scene,camera);
+}
+animate();
+// ponytail: debug handle for automated smoke test
+window.__dbg={player,boat,get sailing(){return sailing},LANDMARKS};
+</script>
+</body>
+</html>
