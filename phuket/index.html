@@ -1768,36 +1768,46 @@ function pierY(x,z){for(const p of PIERS){const rx=x-p.x,rz=z-p.z,t=rx*p.dx+rz*p
 
 // ============================= PLAYER ==============================
 const player=new THREE.Group();
-// capsule-ish tunic body with belt
-const body=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.52,12,10),toon(0x2e9e57)),1.06);
-body.scale.set(1,1.05,0.75); body.position.y=1.15;
-const belt=new THREE.Mesh(new THREE.CylinderGeometry(0.58,0.58,0.16,12),toon(0x5a3a1e));
-belt.position.y=-0.16; body.add(belt);
+// tapered tunic body (wide skirt, narrow shoulders) with belt
+const body=addOutline(new THREE.Mesh(new THREE.CylinderGeometry(0.38,0.62,1.0,12).translate(0,-0.05,0),toon(0x2e9e57)),1.05);
+body.scale.set(1,1,0.82); body.position.y=1.2;
+const collar=new THREE.Mesh(new THREE.SphereGeometry(0.4,12,8),body.material); // rounded shoulders, shares tunic color
+collar.scale.set(1,0.6,0.82); collar.position.y=0.42; body.add(collar);
+const belt=new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.56,0.16,12),toon(0x5a3a1e));
+belt.position.y=-0.28; body.add(belt);
 const buckle=new THREE.Mesh(new THREE.BoxGeometry(0.16,0.14,0.08),new THREE.MeshBasicMaterial({color:0xffe27a}));
-buckle.position.set(0,-0.16,0.56); body.add(buckle);
-// big expressive head with eyes
+buckle.position.set(0,-0.28,0.5); body.add(buckle);
+// big expressive head with eyes, ears, nose
 const head=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.62,14,12),toon(0xf5c89a)),1.06);
-head.position.y=2.05; head.scale.set(1,0.95,0.95);
+head.position.y=2.1; head.scale.set(1,0.98,0.95);
 const eyeGeo=new THREE.SphereGeometry(0.075,6,6), eyeMat=new THREE.MeshBasicMaterial({color:0x22301f});
-for(const s of [-1,1]){const e=new THREE.Mesh(eyeGeo,eyeMat);e.position.set(s*0.22,0.05,0.56);head.add(e);}
-// pointy hat with brim roll and bobble
-const hat=new THREE.Mesh(new THREE.ConeGeometry(0.62,1.0,9),toon(0x1f7a43));
-hat.position.y=2.82; hat.rotation.x=0.12; // sits on the crown, not through it
-const brim=new THREE.Mesh(new THREE.TorusGeometry(0.52,0.1,6,12).rotateX(Math.PI/2),hat.material);
-brim.position.y=-0.45; hat.add(brim);
-const bobble=new THREE.Mesh(new THREE.SphereGeometry(0.12,8,6),toon(0xffe27a));
-bobble.position.y=0.6; hat.add(bobble);
-// rounded limbs, pivot at top (translated geometry)
-const limbGeo=new THREE.CylinderGeometry(0.11,0.14,0.7,7).translate(0,-0.35,0);
-const armL=new THREE.Mesh(limbGeo,toon(0x2e9e57)), armR=armL.clone();
-armL.position.set(0.56,1.55,0); armR.position.set(-0.56,1.55,0);
-const handGeo=new THREE.SphereGeometry(0.13,7,6), handMat=toon(0xf5c89a);
-for(const a of [armL,armR]){const hd=new THREE.Mesh(handGeo,handMat);hd.position.y=-0.72;a.add(hd);}
-const legGeo=new THREE.CylinderGeometry(0.13,0.15,0.7,7).translate(0,-0.35,0);
+for(const s of [-1,1]){const e=new THREE.Mesh(eyeGeo,eyeMat);e.position.set(s*0.2,0.06,0.57);head.add(e);}
+const nose=new THREE.Mesh(new THREE.ConeGeometry(0.07,0.16,6).rotateX(Math.PI/2),toon(0xecb488));
+nose.position.set(0,-0.05,0.6); head.add(nose);
+const earGeo=new THREE.ConeGeometry(0.11,0.34,5).rotateZ(-Math.PI/2), earMat=toon(0xf5c89a); // pointy elf ears
+for(const s of [-1,1]){const ear=new THREE.Mesh(earGeo,earMat);ear.position.set(s*0.58,0.02,0.02);ear.rotation.y=s*0.4;ear.scale.set(s,1,1);head.add(ear);}
+// hair cap + fringe + spikes (node kept named "hat" per contract; no wetsuit recolor)
+const HAIR=0x6b4a24;
+const hat=new THREE.Group(); hat.position.y=2.1; // sits over the head origin
+const cap=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.64,14,10,0,Math.PI*2,0,Math.PI*0.62),toon(HAIR)),1.04);
+cap.scale.set(1,0.95,1.02); cap.position.y=0.08; hat.add(cap);
+const fringe=new THREE.Mesh(new THREE.SphereGeometry(0.6,12,6,0,Math.PI*2,0,Math.PI*0.34),toon(HAIR));
+fringe.position.set(0,0.24,0.16); fringe.rotation.x=0.5; hat.add(fringe); // bangs over forehead
+const spikeGeo=new THREE.ConeGeometry(0.11,0.34,5);
+for(const[sx,sy,sz,rx,rz] of [[0,0.5,-0.2,-0.6,0],[0.3,0.42,-0.15,-0.5,0.5],[-0.3,0.42,-0.15,-0.5,-0.5]]){
+  const sp=new THREE.Mesh(spikeGeo,toon(HAIR)); sp.position.set(sx,sy,sz); sp.rotation.set(rx,0,rz); hat.add(sp); }
+// capsule limbs, pivot at top (translated geometry)
+const limbGeo=new THREE.CapsuleGeometry(0.13,0.5,4,8).translate(0,-0.35,0);
+const armL=new THREE.Mesh(limbGeo,toon(0xf5c89a)), armR=armL.clone(); // bare forearms
+armL.position.set(0.54,1.62,0); armR.position.set(-0.54,1.62,0);
+const sleeveGeo=new THREE.ConeGeometry(0.2,0.36,8).translate(0,-0.13,0), sleeveMat=toon(0x2e9e57);
+for(const a of [armL,armR]){const sl=new THREE.Mesh(sleeveGeo,sleeveMat);sl.position.y=0;a.add(sl);
+  const hd=new THREE.Mesh(new THREE.SphereGeometry(0.14,8,7),toon(0xf5c89a));hd.position.y=-0.7;a.add(hd);}
+const legGeo=new THREE.CapsuleGeometry(0.14,0.42,4,8).translate(0,-0.32,0);
 const legL=new THREE.Mesh(legGeo,toon(0x8a5a33)), legR=legL.clone();
-legL.position.set(0.24,0.7,0); legR.position.set(-0.24,0.7,0);
-const bootGeo=new THREE.SphereGeometry(0.16,7,6), bootMat=toon(0x6b4423);
-for(const l of [legL,legR]){const bt=new THREE.Mesh(bootGeo,bootMat);bt.scale.set(1,0.7,1.3);bt.position.set(0,-0.68,0.06);l.add(bt);}
+legL.position.set(0.24,0.75,0); legR.position.set(-0.24,0.75,0);
+const bootGeo=new THREE.SphereGeometry(0.17,8,6), bootMat=toon(0x6b4423);
+for(const l of [legL,legR]){const bt=new THREE.Mesh(bootGeo,bootMat);bt.scale.set(1,0.75,1.4);bt.position.set(0,-0.66,0.08);l.add(bt);}
 const blob=new THREE.Mesh(new THREE.CircleGeometry(0.7,16).rotateX(-Math.PI/2),
   new THREE.MeshBasicMaterial({color:0x11331e,transparent:true,opacity:0.3}));
 blob.position.y=0.06;
@@ -1810,9 +1820,9 @@ let wetsuit=false;
 function toggleWetsuit(){
   wetsuit=!wetsuit; wetsuitTried=true;
   body.material.color.set(wetsuit?0x14181c:0x2e9e57);
-  armL.material.color.set(wetsuit?0x14181c:0x2e9e57);
+  sleeveMat.color.set(wetsuit?0x14181c:0x2e9e57);
+  armL.material.color.set(wetsuit?0x14181c:0xf5c89a); // forearms: black suit or bare skin
   legL.material.color.set(wetsuit?0x14181c:0x8a5a33);
-  hat.material.color.set(wetsuit?0x14181c:0x1f7a43);
 }
 
 // ============================== BOAT ===============================
@@ -1921,7 +1931,7 @@ const car=buildCar(); car.userData={max:26,acc:16,land:true}; car.position.set(-
 for(const v of [scooter,tuktuk,car]) v.position.y=heightAt(v.position.x,v.position.z)+0.1;
 const ALL_RIDES=[...ALL_BOATS,scooter,tuktuk,car];
 ALL_RIDES.forEach(b=>b.userData.home=b.position.clone());
-let activeBoat=boat, namoTried=false, w1cert=false, wetsuitTried=false;
+let activeBoat=boat, namoTried=false, w1cert=false, wetsuitTried=false, rewardClaimed=false;
 
 // boat wake sprites
 const wakeTexC=document.createElement('canvas'); wakeTexC.width=wakeTexC.height=64;
@@ -1976,6 +1986,7 @@ function questLine(){
   const dives=LANDMARKS.filter(l=>l.dive), k=dives.filter(l=>l.discovered).length;
   if(k<dives.length) return `Freedive at all dive spots · ${k}/${dives.length}`;
   if(!by('King Cruiser Wreck').discovered) return 'Find the King Cruiser Wreck';
+  if(!rewardClaimed) return 'Return to NAMA to claim your prize (E)';
   return null;
 }
 let shownQuests=new Set(), halo=null;
@@ -2095,6 +2106,12 @@ function toggleBoat(){
       for(const L of LANDMARKS) if(L.dive)L.hidden=false;
       renderList(); chime([523,659,784,1047,1319],0.15);
       toast('⟡ W1 certified! Dive spots are on your map — take any boat and freedive there',4.5);
+      return;
+    }
+    if(w1cert&&!rewardClaimed&&LANDMARKS.find(l=>l.name==='King Cruiser Wreck').discovered){
+      rewardClaimed=true;
+      renderList(); chime([523,659,784,1047,1319,1568],0.14);
+      toast('⟡ You win: 1000 baht off freediving — if you come with me!',6);
       return;
     }
     toggleWetsuit();
@@ -2276,7 +2293,9 @@ function animate(){
 }
 animate();
 // ponytail: debug handle for automated smoke test
-window.__dbg={player,boat,get sailing(){return sailing},LANDMARKS,renderer,scene,camera,THREE,
+window.__dbg={player,boat,get sailing(){return sailing},
+  get flags(){return{wetsuit,wetsuitTried,namoTried,w1cert,rewardClaimed,halo:!!halo}},
+  LANDMARKS,renderer,scene,camera,THREE,
   skipIntro(){startGame();introT=INTRO_LEN;}}; // test hook: dismiss title + fast-forward fly-in
 </script>
 </body>
