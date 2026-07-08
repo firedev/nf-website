@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>The Wind Waker of Phuket</title>
+<title>Finding Nama — Solve the Mystery of Phuket</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   html,body{margin:0;height:100%;overflow:hidden;background:#9adcf0;font-family:Georgia,serif}
@@ -44,8 +44,8 @@
 <body>
 <div id="start">
   <h1>Finding Nama</h1>
-  <div class="sub">A Wind Waker voyage around Phuket</div>
-  <div class="go">Press any key to begin</div>
+  <div class="sub">Solve the mystery of Phuket</div>
+  <div class="go" id="startbtn">Loading…</div>
 </div>
 <div id="ui">
   <div id="list"></div>
@@ -1672,11 +1672,14 @@ for(const[sx,sy,sz,rx,rz] of [[0,0.5,-0.18,-0.7,0],[0.22,0.44,-0.16,-0.6,0.4],[-
   const tuft=new THREE.Mesh(new THREE.ConeGeometry(0.1,0.3,5),toon(HAIR)); tuft.position.set(sx,sy,sz); tuft.rotation.set(rx,0,rz); hat.add(tuft); }
 
 // --- ARMS: capsule, pivot at shoulder (top); tunic sleeve cap + skin hand ---
-const limbGeo=new THREE.CapsuleGeometry(0.13,0.5,4,8).translate(0,-0.35,0);
+// tucked close to the tunic (x≈0.42) so shoulders meet the body — a sleeve cap + shoulder
+// sphere bridge the join so the arm doesn't read as detached.
+const limbGeo=new THREE.CapsuleGeometry(0.12,0.5,4,8).translate(0,-0.35,0);
 const armL=new THREE.Mesh(limbGeo,toon(SKIN)), armR=armL.clone(); // bare forearms (recolored to suit)
-armL.position.set(0.52,1.6,0); armR.position.set(-0.52,1.6,0);
-const sleeveGeo=new THREE.ConeGeometry(0.2,0.34,8).translate(0,-0.12,0), sleeveMat=toon(TUNIC);
-for(const a of [armL,armR]){const sl=new THREE.Mesh(sleeveGeo,sleeveMat);sl.position.y=0;a.add(sl);
+armL.position.set(0.42,1.6,0); armR.position.set(-0.42,1.6,0);
+const sleeveGeo=new THREE.SphereGeometry(0.22,10,8), sleeveMat=toon(TUNIC);
+for(const a of [armL,armR]){
+  const sl=new THREE.Mesh(sleeveGeo,sleeveMat);sl.scale.set(1,0.85,1);sl.position.y=0.02;a.add(sl); // rounded sleeve cap overlapping the shoulder
   const hd=new THREE.Mesh(new THREE.SphereGeometry(0.14,8,7),toon(SKIN));hd.position.y=-0.68;a.add(hd);}
 
 // --- LEGS: capsule, pivot at hip (top); boot at the foot ---
@@ -1743,10 +1746,13 @@ function spawnWake(x,z){
 }
 
 // ============================== INPUT ==============================
-// start screen: dismiss on first key/click, then reveal HUD after the fly-in
-const startEl=document.getElementById('start'), uiEl=document.getElementById('ui');
-let started=false;
-function startGame(){ if(started)return; started=true; startEl.classList.add('hide'); initAudio(); }
+// start screen: shows "Loading…" until the game is ready, then flips to the prompt and
+// arms the click/key handlers — so a click before load can't look broken (nothing happens
+// until the prompt appears, at which point it always works).
+const startEl=document.getElementById('start'), uiEl=document.getElementById('ui'), startBtn=document.getElementById('startbtn');
+let started=false, ready=false;
+function startGame(){ if(!ready||started)return; started=true; startEl.classList.add('hide'); initAudio(); }
+function markReady(){ ready=true; startBtn.textContent='Press any key to begin'; } // called once init finishes (bottom of file)
 addEventListener('pointerdown',startGame);
 
 const keys={};
@@ -1792,7 +1798,8 @@ function renderList(){
   const q=questLine(); if(q)rows.push({txt:q,cls:'quest'});
   for(const l of vis) if(!l.discovered) rows.push({txt:l.name,cls:'todo'});
   for(const l of vis) if(l.discovered) rows.push({txt:l.name,cls:'done'}); // completed sink to the bottom
-  if(n===vis.length)rows.unshift({txt:'All secrets found',cls:'quest'});
+  // celebratory line ONLY when the whole game is done: every landmark (incl. dive spots/wreck) + the quest chain
+  if(LANDMARKS.every(l=>l.discovered)&&!questLine())rows.unshift({txt:'✦ Phuket solved!',cls:'done'});
   listEl.innerHTML=`<b>Phuket</b><div id="bar"><i style="width:${Math.round(n/vis.length*100)}%"></i></div>`+
     rows.map(r=>`<div class="q ${r.cls}${!shownQuests.has(r.txt)&&r.cls!=='secret'?' pop':''}"><i></i><span>${r.txt}</span></div>`).join('');
   shownQuests=new Set(rows.map(r=>r.txt));
@@ -2071,7 +2078,7 @@ function animate(){
     cy=Math.max(cy,heightAt(focus.x+(cx-focus.x)*s,focus.z+(cz-focus.z)*s)+2);
   cy=Math.max(cy,1.2);
   if(introT<INTRO_LEN){ // aerial fly-in: whole Phuket, then descend to the player
-    if(started)introT+=dt; // hold on the aerial view behind the title until the player begins
+    if(started)introT+=dt; // aerial holds behind the title; advances once you begin
     const k=Math.min(introT/INTRO_LEN,1), e=k*k*(3-2*k);
     scene.fog.far=650+(1-e)*600; // don't fog out the island during the aerial view
     camera.position.lerpVectors(AERIAL,new THREE.Vector3(cx,cy,cz),e);
@@ -2087,14 +2094,15 @@ function animate(){
   checkDiscoveries();
   if((mmTimer+=dt)>0.2){drawMinimap();mmTimer=0;}
   renderer.render(scene,camera);
+  if(!ready)markReady(); // first frame rendered — aerial is up, so arm the "Press any key" prompt
 }
 animate();
 // ponytail: debug handle for automated smoke test
 window.__dbg={player,boat,namo,get sailing(){return sailing},
   get flags(){return{wetsuit,wetsuitTried,namoTried,w1cert,rewardClaimed,halo:!!halo}},
   LANDMARKS,renderer,scene,camera,THREE,renderList,
-  skipIntro(){startGame();introT=INTRO_LEN;}}; // test hook: dismiss title + fast-forward fly-in
+  skipIntro(){ready=true;startGame();introT=INTRO_LEN;}}; // test hook: force-ready + dismiss title + fast-forward fly-in
 </script>
 </body>
 </html>
-<!--build:5df6133-->
+<!--build:91aae55-->
