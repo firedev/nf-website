@@ -5,6 +5,7 @@ title: Psychedelic Freediving to open up the soul
 
 {:.text-6xl .font-bold .tracking-tight .animate .ease .fadeIn .delay-500 .flex .text-center .justify-center .sm:text-8xl .mb-16 .z-1 .relative .inline-block .w-full .line-height[2em] .font-light .flex .flex-col .items-center}
 <span class="font-black inline-flex items-center tracking-tighter">n<img src="/images/zen-circle-grunge-brush-stroke-2.png" alt="o" class="zen-circle" style="width:1.15em;height:1.15em;margin:0 -0.08em">fins</span><span class="font-light block text-6xl sm:text-8xl">freediving</span>
+<img src="/images/zen-circle-grunge-brush-stroke-2.png" alt="nofins" class="w-28 h-28 mt-8 mx-auto">
 
 {:.light-content .text-3xl .sm:text-4xl .max-w-2xl .mx-auto .font-bold .text-center .my-10}
 Underwater calm to open your soul
@@ -42,7 +43,6 @@ Break the limits of your self
 {:.dark-content .max-w-sm .mx-auto .rounded-full .overflow-hidden .shadow-lg}
 ![](/images/transcendence.png)
 
-<hr class="block my-16">
 
 {:.light-content}
 # What does it mean?
@@ -68,7 +68,6 @@ We begin with breathwork to center your mind, relax your body in water, and find
 {:.dark-content}
 We guide you inward: awaken with breathwork, liberate through presence, and transcend in the dive. No vast ocean is needed to reach your truth.
 
-<hr class="block my-16">
 
 {:.light-content .text-3xl .font-bold .text-center .mt-20 .mb-12}
 ## Ready to Find Your Calm?
@@ -133,7 +132,6 @@ Crafted for those ready to awaken and grow.
   </div>
 </div>
 
-<hr class="block my-16">
 
 {:.light-content .text-4xl .sm:text-5xl .font-black .text-center .mt-20 .mb-12}
 # Why freediving?
@@ -285,7 +283,6 @@ The practice that combines the physical art of freediving with the psychological
 {:.dark-content}
 A fusion of freediving’s focus and the art of inner exploration. It’s a clear, open path to expand awareness, designed for anyone ready to dive into their truth.
 
-<hr class="block my-16">
 
 <div class="next-dive max-w-xl mx-auto p-8 sm:p-12 bg-white rounded-lg shadow-md text-center mb-16">
   <h2 class="text-4xl sm:text-5xl font-black mb-4 mt-0">Next dive</h2>
