@@ -1664,25 +1664,32 @@ mglint.scale.set(1.6,0.8,1); mglint.position.set(-0.13,0.05,0.6); mask.add(mglin
 const strap=new THREE.Mesh(new THREE.TorusGeometry(0.6,0.045,6,18),toon(0x2b3a45)); // band around the head
 strap.rotation.y=Math.PI/2; strap.scale.set(1,0.9,1); strap.position.y=0.0; mask.add(strap);
 
-// --- HAIR ("hat" per contract): bowl cap on crown + back; short side sweeps.
-// Fringe bottom kept at head-y≈0.28, WELL above the eyebrows (y≈0.15) and eyes (y≈0.0).
-// No wetsuit recolor. ---
+// --- HAIR ("hat" per contract): ONE cohesive cap that covers the WHOLE cranium.
+// Solved the bald-nape bug by using a full-sphere shell (theta 0..π, i.e. crown all
+// the way down past the ears) instead of a top-only hemisphere, then OPENING the
+// front face by pushing a fringe band up above the brows. The shell covers crown +
+// back + sides + nape seamlessly; only the +Z face is left bare. No wetsuit recolor. ---
 const hat=new THREE.Group(); hat.position.copy(head.position); hat.scale.copy(head.scale);
-// crown cap: top hemisphere of the skull, cut off above the forehead so the face is open
-const cap=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.62,16,10,0,Math.PI*2,0,Math.PI*0.55),toon(HAIR)),1.03);
-cap.scale.set(1.02,1.0,1.04); cap.position.y=0.06; hat.add(cap);
-// back-of-head coverage: a second cap rotated to hang down the back (nape), stays behind z=0.2
-const back=new THREE.Mesh(new THREE.SphereGeometry(0.6,16,8,0,Math.PI*2,0,Math.PI*0.45),toon(HAIR));
-back.rotation.x=-0.5; back.scale.set(1.02,1.1,0.85); back.position.set(0,-0.02,-0.12); hat.add(back);
-// short fringe: a thin curved band along the hairline, above the brows. Front edge only, never past the eyes.
-const fringe=new THREE.Mesh(new THREE.SphereGeometry(0.6,16,5,0,Math.PI*2,0,Math.PI*0.2),toon(HAIR));
-fringe.scale.set(1.02,0.6,1.04); fringe.position.set(0,0.24,0.04); hat.add(fringe);
-// two small side sweeps framing the temples (kept beside the eyes, not over them)
-const sweepGeo=new THREE.ConeGeometry(0.1,0.28,5).translate(0,-0.14,0);
-for(const s of [-1,1]){const sw=new THREE.Mesh(sweepGeo,toon(HAIR));sw.position.set(s*0.5,0.16,0.24);sw.rotation.set(0.3,0,s*0.5);hat.add(sw);}
-// a couple of playful crown tufts pointing up-back
-for(const[sx,sy,sz,rx,rz] of [[0,0.5,-0.18,-0.7,0],[0.22,0.44,-0.16,-0.6,0.4],[-0.22,0.44,-0.16,-0.6,-0.4]]){
-  const tuft=new THREE.Mesh(new THREE.ConeGeometry(0.1,0.3,5),toon(HAIR)); tuft.position.set(sx,sy,sz); tuft.rotation.set(rx,0,rz); hat.add(tuft); }
+// Main shell: an azimuthal sphere arc that wraps the back + both sides + nape but leaves
+// a GAP at the front (+Z) so the face is open. phiStart/phiLength (the 6th/7th args)
+// carve out the front ~110° facing the camera; thetaLength (last arg) runs to ~0.92π so
+// the hair reaches BELOW the ears at the back/sides — this is what kills the bald nape.
+// In three.js SphereGeometry, phi=0 is +X and sweeps toward +Z around ~π/2; the front
+// (+Z) sits at phi≈π/2, so we start the arc past the face and wrap ALL the way around.
+const FRONTGAP=1.15; // radians of front opening (centred on +Z)
+const shell=addOutline(new THREE.Mesh(
+  new THREE.SphereGeometry(0.63,20,14, Math.PI/2+FRONTGAP/2, Math.PI*2-FRONTGAP, 0, Math.PI*0.92),
+  toon(HAIR)),1.03);
+shell.scale.set(1.02,1.0,1.05); shell.position.y=0.02; hat.add(shell);
+// Fringe: a tidy curved bang along the hairline, above the brows — front edge only.
+const fringe=new THREE.Mesh(new THREE.SphereGeometry(0.62,18,6,0,Math.PI*2,0,Math.PI*0.26),toon(HAIR));
+fringe.scale.set(1.04,0.7,1.06); fringe.position.set(0,0.2,0.02); hat.add(fringe);
+// Two soft sideburns hugging the temples in front of the ears (frame the face, not over eyes).
+const sideGeo=new THREE.SphereGeometry(0.16,10,8,0,Math.PI*2,0,Math.PI*0.6);
+for(const s of [-1,1]){const sd=new THREE.Mesh(sideGeo,toon(HAIR));sd.scale.set(0.7,1.1,0.8);sd.position.set(s*0.52,-0.06,0.12);sd.rotation.z=s*0.25;hat.add(sd);}
+// A small tuft of hair at the crown-back for a bit of character (points UP-back, off the face).
+const tuft=new THREE.Mesh(new THREE.ConeGeometry(0.11,0.26,6),toon(HAIR));
+tuft.position.set(0,0.56,-0.14); tuft.rotation.x=-0.55; hat.add(tuft);
 
 // --- ARMS: capsule, pivot at shoulder (top); tunic sleeve cap + skin hand ---
 // tucked close to the tunic (x≈0.42) so shoulders meet the body — a sleeve cap + shoulder
@@ -2130,4 +2137,4 @@ window.__dbg={player,boat,namo,get sailing(){return sailing},
 </script>
 </body>
 </html>
-<!--build:0f487d7-->
+<!--build:6abb3d8-->
