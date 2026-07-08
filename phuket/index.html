@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>The Wind Waker of Phuket</title><!--build:104a978-->
+<title>The Wind Waker of Phuket</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   html,body{margin:0;height:100%;overflow:hidden;background:#9adcf0;font-family:Georgia,serif}
@@ -147,7 +147,7 @@ function rawHeight(x,z){
 
 
 // flat pads so landmark structures sit on level ground
-const FLATS=[[-39,-140],[-39,-160],[-16,187],[-36.6,143.7],[-12.9,127.6],[-37.5,207.0],[-49.8,76.3],[33.9,89.6],[-42.5,183.4],[-53.1,-11.2],[22.4,81.8],[-18,-175]];
+const FLATS=[[-39,-140],[-39,-160],[45.2,156.6],[-36.6,143.7],[-12.9,127.6],[-37.5,207.0],[-49.8,76.3],[33.9,89.6],[-42.5,183.4],[-53.1,-11.2],[22.4,81.8],[-18,-175]];
 const padH=FLATS.map(f=>rawHeight(f[0],f[1]));
 function terrainHeight(x,z){
   let h=rawHeight(x,z);
@@ -191,7 +191,7 @@ const LANDMARK_DEFS=[
   {name:'Bang Tao', x:-53.1, z:-11.2, r:15, build:'buildLagoon'},
   {name:'Khao Rang Hill', x:22.4, z:81.8, r:12, build:'buildFlagHill'},
   {name:'Phuket Airport', x:-36, z:-150, r:16, build:'buildAirport'},
-  {name:'NAMA Freediving', x:-16, z:187, r:10, build:'buildNama'},
+  {name:'NAMA Freediving', x:45.2, z:156.6, r:10, build:'buildNama'},
   {name:'Ko Maiton', x:100, z:140, r:14, build:'buildDiveIsland', hidden:true, dive:true},
   {name:'Ko Racha', x:-15, z:252, r:14, build:'buildDiveIsland', hidden:true, dive:true},
   {name:'Ko Doc Mai', x:68, z:158, r:12, build:'buildReefBuoy', hidden:true, dive:true},
@@ -412,28 +412,22 @@ function buildNama(){
   const suit=new THREE.Mesh(new THREE.BoxGeometry(0.5,1.1,0.25),toon(0x14181c)); suit.position.set(2.6,0.9,2.3); g.add(suit);
   return g;
 }
-function buildDiveIsland(){
+// dive-spot marker: a classic ring lifebuoy floating flat on the water (bright orange, white cross-bands)
+function buildLifeRing(){
   const g=new THREE.Group();
-  part(new THREE.CylinderGeometry(7,10,4,10),0xeeddaa,[0,0.6,0],{parent:g});
-  part(new THREE.ConeGeometry(5.5,3.2,9),0x4aa64f,[0,3.8,0],{parent:g});
-  for(const [dx,dz] of [[2,1],[-2.4,-1.2]]){
-    part(new THREE.CylinderGeometry(0.1,0.16,2.6,5),0x9a6b3f,[dx,5.6,dz],{parent:g});
-    part(new THREE.ConeGeometry(1.1,1.2,6),0x2f9e44,[dx,7.1,dz],{parent:g});
+  const ring=part(new THREE.TorusGeometry(1.6,0.4,12,24),0xff6a00,[0,0.3,0],{rot:[Math.PI/2,0,0],outline:1.06,parent:g});
+  // 4 white cross-bands across the tube at N/S/E/W (classic lifebuoy look)
+  const bandGeo=new THREE.TorusGeometry(0.44,0.42,8,10,Math.PI);
+  for(let i=0;i<4;i++){
+    const a=i/4*Math.PI*2;
+    part(bandGeo,0xffffff,[Math.cos(a)*1.6,0.3,Math.sin(a)*1.6],{rot:[0,-a,Math.PI/2],parent:g});
   }
-  part(GEO.buoy,0xdd2233,[11,0.5,3],{parent:g});
-  part(GEO.buoyPole,0xeeeeee,[11,1.4,3],{parent:g});
-  part(GEO.diveFlag,new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}),[11.5,1.9,3],{parent:g});
+  // thin rope loop draped over one side
+  part(new THREE.TorusGeometry(0.5,0.05,6,14),0xd9c48a,[1.6,0.55,0],{rot:[0,0,0.3],parent:g});
   return g;
 }
-function buildReefBuoy(){
-  const g=new THREE.Group();
-  for(const [dx,dz,r] of [[0,0,1.6],[2.2,1.4,1.1],[-1.8,-1.2,1.3]])
-    part(new THREE.CylinderGeometry(r*0.7,r,2.2,7),0x8d927e,[dx,0,dz],{parent:g});
-  part(GEO.buoy,0xdd2233,[4,0.5,2],{parent:g});
-  part(GEO.buoyPole,0xeeeeee,[4,1.4,2],{parent:g});
-  part(GEO.diveFlag,new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}),[4.5,1.9,2],{parent:g});
-  return g;
-}
+function buildDiveIsland(){ return buildLifeRing(); }
+function buildReefBuoy(){ return buildLifeRing(); }
 function buildWreck(){
   const g=new THREE.Group();
   part(new THREE.BoxGeometry(3,2.6,10),0x5a4a3a,[0,0.2,0],{rot:[0.12,0.5,0.42],outline:1.04,parent:g});
@@ -1606,69 +1600,93 @@ gullFlock(-12.8+0.25*14,190.5+0.97*14,4);
 gullFlock(24,161,4);
 
 // ============================= PLAYER ==============================
+// Hand-built low-poly Wind-Waker kid: rounded head, FULLY visible face,
+// tidy hair that caps the crown + back only (never over the eyes/forehead),
+// tunic body, arms, legs, boots. Contract node names preserved:
+// body, head, hat(=hair), armL, armR, legL, legR, blob, mask, sleeveMat.
 const player=new THREE.Group();
-// tapered tunic body (wide skirt, narrow shoulders) with belt
-const body=addOutline(new THREE.Mesh(new THREE.CylinderGeometry(0.38,0.62,1.0,12).translate(0,-0.05,0),toon(0x2e9e57)),1.05);
-body.scale.set(1,1,0.82); body.position.y=1.2;
-const collar=new THREE.Mesh(new THREE.SphereGeometry(0.4,12,8),body.material); // rounded shoulders, shares tunic color
-collar.scale.set(1,0.6,0.82); collar.position.y=0.42; body.add(collar);
-const belt=new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.56,0.16,12),toon(0x5a3a1e));
-belt.position.y=-0.28; body.add(belt);
-const buckle=new THREE.Mesh(new THREE.BoxGeometry(0.16,0.14,0.08),new THREE.MeshBasicMaterial({color:0xffe27a}));
-buckle.position.set(0,-0.28,0.5); body.add(buckle);
-// big expressive head with eyes, ears, nose
-const head=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.62,14,12),toon(0xf5c89a)),1.06);
-head.position.y=2.1; head.scale.set(1,0.98,0.95);
-// bright eyes: white + dark iris + catchlight, plus rosy cheeks and a small smile
-const eyeW=new THREE.SphereGeometry(0.11,8,8), eyeWMat=new THREE.MeshBasicMaterial({color:0xffffff});
-const irisGeo=new THREE.SphereGeometry(0.06,7,7), irisMat=new THREE.MeshBasicMaterial({color:0x2a4a6e});
-const glintGeo=new THREE.SphereGeometry(0.022,5,5), glintMat=new THREE.MeshBasicMaterial({color:0xffffff});
+const SKIN=0xf3c59a, SKIN2=0xecb488, TUNIC=0x2e9e57, HAIR=0x6b4a24;
+
+// --- BODY: tapered tunic (narrow shoulders, wide skirt) with belt ---
+const body=addOutline(new THREE.Mesh(new THREE.CylinderGeometry(0.4,0.6,1.0,12).translate(0,-0.05,0),toon(TUNIC)),1.05);
+body.scale.set(1,1,0.82); body.position.y=1.18;
+const collar=new THREE.Mesh(new THREE.SphereGeometry(0.4,12,8),body.material); // rounded shoulders, shares tunic material
+collar.scale.set(1,0.55,0.82); collar.position.y=0.42; body.add(collar);
+const belt=new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.56,0.15,12),toon(0x5a3a1e));
+belt.position.y=-0.3; body.add(belt);
+const buckle=new THREE.Mesh(new THREE.BoxGeometry(0.15,0.13,0.08),new THREE.MeshBasicMaterial({color:0xffe27a}));
+buckle.position.set(0,-0.3,0.5); body.add(buckle);
+
+// --- HEAD: rounded, slightly egg-shaped; face on +Z ---
+const head=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.6,16,14),toon(SKIN)),1.05);
+head.position.y=2.08; head.scale.set(1,1.02,0.96);
+// eyes: white + dark iris + catchlight. Sit LOW on the face (y≈0.0), on +Z front.
+const eyeW=new THREE.SphereGeometry(0.1,10,10), eyeWMat=new THREE.MeshBasicMaterial({color:0xffffff});
+const irisGeo=new THREE.SphereGeometry(0.058,8,8), irisMat=new THREE.MeshBasicMaterial({color:0x33506e});
+const glintGeo=new THREE.SphereGeometry(0.02,6,6), glintMat=new THREE.MeshBasicMaterial({color:0xffffff});
+const browGeo=new THREE.BoxGeometry(0.16,0.03,0.05), browMat=toon(0x5a3d1e);
 for(const s of [-1,1]){
-  const w=new THREE.Mesh(eyeW,eyeWMat); w.position.set(s*0.21,0.08,0.55); w.scale.set(1,1.15,0.6); head.add(w);
-  const ir=new THREE.Mesh(irisGeo,irisMat); ir.position.set(s*0.21,0.07,0.62); head.add(ir);
-  const gl=new THREE.Mesh(glintGeo,glintMat); gl.position.set(s*0.24,0.11,0.66); head.add(gl);
-  const ch=new THREE.Mesh(new THREE.SphereGeometry(0.09,7,6),new THREE.MeshBasicMaterial({color:0xf0a088,transparent:true,opacity:0.55}));
-  ch.position.set(s*0.34,-0.12,0.5); ch.scale.set(1,0.7,0.4); head.add(ch);
+  const w=new THREE.Mesh(eyeW,eyeWMat); w.position.set(s*0.2,0.0,0.52); w.scale.set(0.95,1.1,0.55); head.add(w);
+  const ir=new THREE.Mesh(irisGeo,irisMat); ir.position.set(s*0.2,-0.01,0.58); head.add(ir);
+  const g=new THREE.Mesh(glintGeo,glintMat); g.position.set(s*0.23,0.03,0.62); head.add(g);
+  const ch=new THREE.Mesh(new THREE.SphereGeometry(0.085,8,7),new THREE.MeshBasicMaterial({color:0xf0a088,transparent:true,opacity:0.5}));
+  ch.position.set(s*0.33,-0.16,0.46); ch.scale.set(1,0.65,0.35); head.add(ch);
+  const br=new THREE.Mesh(browGeo,browMat); br.position.set(s*0.2,0.15,0.55); br.rotation.z=s*-0.12; head.add(br);
 }
-const smile=new THREE.Mesh(new THREE.TorusGeometry(0.1,0.022,6,10,Math.PI),new THREE.MeshBasicMaterial({color:0x9c5a4a}));
-smile.rotation.z=Math.PI; smile.position.set(0,-0.24,0.56); head.add(smile);
-const nose=new THREE.Mesh(new THREE.ConeGeometry(0.06,0.13,6).rotateX(Math.PI/2),toon(0xecb488));
-nose.position.set(0,-0.05,0.6); head.add(nose);
-const earGeo=new THREE.ConeGeometry(0.11,0.34,5).rotateZ(-Math.PI/2), earMat=toon(0xf5c89a); // pointy elf ears
-for(const s of [-1,1]){const ear=new THREE.Mesh(earGeo,earMat);ear.position.set(s*0.58,0.02,0.02);ear.rotation.y=s*0.4;ear.scale.set(s,1,1);head.add(ear);}
-// freediving mask — hidden until the wetsuit goes on; sits over eyes, in front of the fringe
-const mask=new THREE.Group(); mask.position.set(0,0.06,0); mask.visible=false; head.add(mask);
-const frame=addOutline(new THREE.Mesh(new THREE.TorusGeometry(0.32,0.08,8,18),toon(0x2b3a45)),1.06); // grey silicone skirt
-frame.scale.set(1.2,0.9,1); frame.position.z=0.58; mask.add(frame);
-const lens=new THREE.Mesh(new THREE.SphereGeometry(0.3,14,10,0,Math.PI*2,0,Math.PI*0.5),new THREE.MeshBasicMaterial({color:0x9fdcf0,transparent:true,opacity:0.72}));
-lens.rotation.x=Math.PI/2; lens.scale.set(1.14,1,0.5); lens.position.z=0.6; mask.add(lens); // domed glass bulging forward
-const glint=new THREE.Mesh(new THREE.CircleGeometry(0.09,10),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0.6}));
-glint.scale.set(1.6,0.8,1); glint.position.set(-0.14,0.09,0.66); mask.add(glint); // reflection streak
-const strap=new THREE.Mesh(new THREE.TorusGeometry(0.63,0.05,6,18),toon(0x2b3a45)); // band around the head
-strap.rotation.y=Math.PI/2; strap.scale.set(1,0.92,1); strap.position.y=0.03; mask.add(strap);
-// hair cap + fringe + spikes (node kept named "hat" per contract; no wetsuit recolor)
-const HAIR=0x6b4a24;
-const hat=new THREE.Group(); hat.position.y=2.1; // sits over the head origin
-const cap=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.64,14,10,0,Math.PI*2,0,Math.PI*0.62),toon(HAIR)),1.04);
-cap.scale.set(1,0.95,1.02); cap.position.y=0.08; hat.add(cap);
-// bangs: shallow cap arc sitting on the upper forehead, kept above the eyeline (eyes at head y≈0.06,z≈0.57)
-const fringe=new THREE.Mesh(new THREE.SphereGeometry(0.62,14,6,0,Math.PI*2,0,Math.PI*0.28),toon(HAIR));
-fringe.scale.set(1,0.7,1); fringe.position.set(0,0.34,0.06); fringe.rotation.x=0.12; hat.add(fringe);
-const spikeGeo=new THREE.ConeGeometry(0.11,0.34,5);
-for(const[sx,sy,sz,rx,rz] of [[0,0.5,-0.2,-0.6,0],[0.3,0.42,-0.15,-0.5,0.5],[-0.3,0.42,-0.15,-0.5,-0.5]]){
-  const sp=new THREE.Mesh(spikeGeo,toon(HAIR)); sp.position.set(sx,sy,sz); sp.rotation.set(rx,0,rz); hat.add(sp); }
-// capsule limbs, pivot at top (translated geometry)
+const nose=new THREE.Mesh(new THREE.ConeGeometry(0.05,0.11,6).rotateX(Math.PI/2),toon(SKIN2));
+nose.position.set(0,-0.08,0.58); head.add(nose);
+const smile=new THREE.Mesh(new THREE.TorusGeometry(0.11,0.02,6,12,Math.PI),new THREE.MeshBasicMaterial({color:0x9c5a4a}));
+smile.rotation.z=Math.PI; smile.position.set(0,-0.28,0.53); head.add(smile);
+const earGeo=new THREE.SphereGeometry(0.1,8,7), earMat=toon(SKIN); // small rounded ears
+for(const s of [-1,1]){const ear=new THREE.Mesh(earGeo,earMat);ear.position.set(s*0.56,-0.04,0.02);ear.scale.set(0.6,1,0.7);head.add(ear);}
+
+// --- MASK: freediving mask, hidden until wetsuit on; over the eyes on +Z front ---
+const mask=new THREE.Group(); mask.position.set(0,0.0,0); mask.visible=false; head.add(mask);
+const frame=addOutline(new THREE.Mesh(new THREE.TorusGeometry(0.3,0.07,8,18),toon(0x2b3a45)),1.05); // silicone skirt
+frame.scale.set(1.25,0.85,1); frame.position.z=0.52; mask.add(frame);
+const lens=new THREE.Mesh(new THREE.SphereGeometry(0.28,14,10,0,Math.PI*2,0,Math.PI*0.5),new THREE.MeshBasicMaterial({color:0x9fdcf0,transparent:true,opacity:0.72}));
+lens.rotation.x=Math.PI/2; lens.scale.set(1.16,1,0.5); lens.position.z=0.54; mask.add(lens); // domed glass bulging forward
+const mglint=new THREE.Mesh(new THREE.CircleGeometry(0.08,10),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0.6}));
+mglint.scale.set(1.6,0.8,1); mglint.position.set(-0.13,0.05,0.6); mask.add(mglint); // reflection streak
+const strap=new THREE.Mesh(new THREE.TorusGeometry(0.6,0.045,6,18),toon(0x2b3a45)); // band around the head
+strap.rotation.y=Math.PI/2; strap.scale.set(1,0.9,1); strap.position.y=0.0; mask.add(strap);
+
+// --- HAIR ("hat" per contract): bowl cap on crown + back; short side sweeps.
+// Fringe bottom kept at head-y≈0.28, WELL above the eyebrows (y≈0.15) and eyes (y≈0.0).
+// No wetsuit recolor. ---
+const hat=new THREE.Group(); hat.position.copy(head.position); hat.scale.copy(head.scale);
+// crown cap: top hemisphere of the skull, cut off above the forehead so the face is open
+const cap=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.62,16,10,0,Math.PI*2,0,Math.PI*0.55),toon(HAIR)),1.03);
+cap.scale.set(1.02,1.0,1.04); cap.position.y=0.06; hat.add(cap);
+// back-of-head coverage: a second cap rotated to hang down the back (nape), stays behind z=0.2
+const back=new THREE.Mesh(new THREE.SphereGeometry(0.6,16,8,0,Math.PI*2,0,Math.PI*0.45),toon(HAIR));
+back.rotation.x=-0.5; back.scale.set(1.02,1.1,0.85); back.position.set(0,-0.02,-0.12); hat.add(back);
+// short fringe: a thin curved band along the hairline, above the brows. Front edge only, never past the eyes.
+const fringe=new THREE.Mesh(new THREE.SphereGeometry(0.6,16,5,0,Math.PI*2,0,Math.PI*0.2),toon(HAIR));
+fringe.scale.set(1.02,0.6,1.04); fringe.position.set(0,0.24,0.04); hat.add(fringe);
+// two small side sweeps framing the temples (kept beside the eyes, not over them)
+const sweepGeo=new THREE.ConeGeometry(0.1,0.28,5).translate(0,-0.14,0);
+for(const s of [-1,1]){const sw=new THREE.Mesh(sweepGeo,toon(HAIR));sw.position.set(s*0.5,0.16,0.24);sw.rotation.set(0.3,0,s*0.5);hat.add(sw);}
+// a couple of playful crown tufts pointing up-back
+for(const[sx,sy,sz,rx,rz] of [[0,0.5,-0.18,-0.7,0],[0.22,0.44,-0.16,-0.6,0.4],[-0.22,0.44,-0.16,-0.6,-0.4]]){
+  const tuft=new THREE.Mesh(new THREE.ConeGeometry(0.1,0.3,5),toon(HAIR)); tuft.position.set(sx,sy,sz); tuft.rotation.set(rx,0,rz); hat.add(tuft); }
+
+// --- ARMS: capsule, pivot at shoulder (top); tunic sleeve cap + skin hand ---
 const limbGeo=new THREE.CapsuleGeometry(0.13,0.5,4,8).translate(0,-0.35,0);
-const armL=new THREE.Mesh(limbGeo,toon(0xf5c89a)), armR=armL.clone(); // bare forearms
-armL.position.set(0.54,1.62,0); armR.position.set(-0.54,1.62,0);
-const sleeveGeo=new THREE.ConeGeometry(0.2,0.36,8).translate(0,-0.13,0), sleeveMat=toon(0x2e9e57);
+const armL=new THREE.Mesh(limbGeo,toon(SKIN)), armR=armL.clone(); // bare forearms (recolored to suit)
+armL.position.set(0.52,1.6,0); armR.position.set(-0.52,1.6,0);
+const sleeveGeo=new THREE.ConeGeometry(0.2,0.34,8).translate(0,-0.12,0), sleeveMat=toon(TUNIC);
 for(const a of [armL,armR]){const sl=new THREE.Mesh(sleeveGeo,sleeveMat);sl.position.y=0;a.add(sl);
-  const hd=new THREE.Mesh(new THREE.SphereGeometry(0.14,8,7),toon(0xf5c89a));hd.position.y=-0.7;a.add(hd);}
+  const hd=new THREE.Mesh(new THREE.SphereGeometry(0.14,8,7),toon(SKIN));hd.position.y=-0.68;a.add(hd);}
+
+// --- LEGS: capsule, pivot at hip (top); boot at the foot ---
 const legGeo=new THREE.CapsuleGeometry(0.14,0.42,4,8).translate(0,-0.32,0);
 const legL=new THREE.Mesh(legGeo,toon(0x8a5a33)), legR=legL.clone();
-legL.position.set(0.24,0.75,0); legR.position.set(-0.24,0.75,0);
+legL.position.set(0.22,0.74,0); legR.position.set(-0.22,0.74,0);
 const bootGeo=new THREE.SphereGeometry(0.17,8,6), bootMat=toon(0x6b4423);
-for(const l of [legL,legR]){const bt=new THREE.Mesh(bootGeo,bootMat);bt.scale.set(1,0.75,1.4);bt.position.set(0,-0.66,0.08);l.add(bt);}
+for(const l of [legL,legR]){const bt=new THREE.Mesh(bootGeo,bootMat);bt.scale.set(1,0.75,1.4);bt.position.set(0,-0.65,0.08);l.add(bt);}
+
+// --- SHADOW blob: flat dark circle at the feet ---
 const blob=new THREE.Mesh(new THREE.CircleGeometry(0.7,16).rotateX(-Math.PI/2),
   new THREE.MeshBasicMaterial({color:0x11331e,transparent:true,opacity:0.3}));
 blob.position.y=0.06;
@@ -1697,7 +1715,7 @@ scene.add(boat);
 const namo=makeBoat(0xffffff,0xeaf6fb); namo.userData={max:18,acc:14}; // white NAMA dive boat
 const dflag=new THREE.Mesh(new THREE.PlaneGeometry(1.2,0.8),new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}));
 dflag.position.set(0.6,5.6,-0.35); namo.add(dflag);
-namo.position.set(-6,0.3,180); namo.rotation.y=Math.PI/2; // in the water right by NAMA Freediving, facing open sea
+namo.position.set(57,0.3,156.6); namo.rotation.y=Math.PI/2; // in the water east of NAMA Freediving (Cape Panwa), facing open sea
 const namoTag=makeLabel('Namo'); namoTag.scale.set(9,1.7,1); namoTag.visible=true;
 namoTag.material.depthTest=true; // occlude behind terrain (don't show through mountains)
 namoTag.position.set(0,7,0); namo.add(namoTag); // name tag above the dive boat
@@ -1854,8 +1872,10 @@ function boardBoat(b,silent){
   }
   activeBoat=b; sailing=true; player.visible=false;
   if(b===namo&&!namoTried){
-    namoTried=true; renderList(); chime([659,784,988]);
-    toast('⟡ Great dive! Return to NAMA to complete your W1',4);
+    namoTried=true;
+    for(const L of LANDMARKS) if(L.dive)L.hidden=false; // dive spots appear on map/panel the moment you board Namo
+    renderList(); chime([659,784,988]);
+    toast('⟡ Dive spots are on your map! Freedive them, then return to NAMA for your W1',4.5);
   }
   return true;
 }
@@ -1881,9 +1901,8 @@ function toggleBoat(){
   if(Math.hypot(player.position.x-nama.x,player.position.z-nama.z)<9){
     if(namoTried&&!w1cert){
       w1cert=true;
-      for(const L of LANDMARKS) if(L.dive)L.hidden=false;
       renderList(); chime([523,659,784,1047,1319],0.15);
-      toast('⟡ W1 certified! Dive spots are on your map — take any boat and freedive there',4.5);
+      toast('⟡ W1 certified! Freedive all the dive spots on your map',4.5);
       return;
     }
     if(w1cert&&!rewardClaimed&&LANDMARKS.find(l=>l.name==='King Cruiser Wreck').discovered){
@@ -2071,10 +2090,11 @@ function animate(){
 }
 animate();
 // ponytail: debug handle for automated smoke test
-window.__dbg={player,boat,get sailing(){return sailing},
+window.__dbg={player,boat,namo,get sailing(){return sailing},
   get flags(){return{wetsuit,wetsuitTried,namoTried,w1cert,rewardClaimed,halo:!!halo}},
   LANDMARKS,renderer,scene,camera,THREE,renderList,
   skipIntro(){startGame();introT=INTRO_LEN;}}; // test hook: dismiss title + fast-forward fly-in
 </script>
 </body>
 </html>
+<!--build:5df6133-->
