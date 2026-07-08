@@ -1780,12 +1780,33 @@ buckle.position.set(0,-0.28,0.5); body.add(buckle);
 // big expressive head with eyes, ears, nose
 const head=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.62,14,12),toon(0xf5c89a)),1.06);
 head.position.y=2.1; head.scale.set(1,0.98,0.95);
-const eyeGeo=new THREE.SphereGeometry(0.075,6,6), eyeMat=new THREE.MeshBasicMaterial({color:0x22301f});
-for(const s of [-1,1]){const e=new THREE.Mesh(eyeGeo,eyeMat);e.position.set(s*0.2,0.06,0.57);head.add(e);}
-const nose=new THREE.Mesh(new THREE.ConeGeometry(0.07,0.16,6).rotateX(Math.PI/2),toon(0xecb488));
+// bright eyes: white + dark iris + catchlight, plus rosy cheeks and a small smile
+const eyeW=new THREE.SphereGeometry(0.11,8,8), eyeWMat=new THREE.MeshBasicMaterial({color:0xffffff});
+const irisGeo=new THREE.SphereGeometry(0.06,7,7), irisMat=new THREE.MeshBasicMaterial({color:0x2a4a6e});
+const glintGeo=new THREE.SphereGeometry(0.022,5,5), glintMat=new THREE.MeshBasicMaterial({color:0xffffff});
+for(const s of [-1,1]){
+  const w=new THREE.Mesh(eyeW,eyeWMat); w.position.set(s*0.21,0.08,0.55); w.scale.set(1,1.15,0.6); head.add(w);
+  const ir=new THREE.Mesh(irisGeo,irisMat); ir.position.set(s*0.21,0.07,0.62); head.add(ir);
+  const gl=new THREE.Mesh(glintGeo,glintMat); gl.position.set(s*0.24,0.11,0.66); head.add(gl);
+  const ch=new THREE.Mesh(new THREE.SphereGeometry(0.09,7,6),new THREE.MeshBasicMaterial({color:0xf0a088,transparent:true,opacity:0.55}));
+  ch.position.set(s*0.34,-0.12,0.5); ch.scale.set(1,0.7,0.4); head.add(ch);
+}
+const smile=new THREE.Mesh(new THREE.TorusGeometry(0.1,0.022,6,10,Math.PI),new THREE.MeshBasicMaterial({color:0x9c5a4a}));
+smile.rotation.z=Math.PI; smile.position.set(0,-0.24,0.56); head.add(smile);
+const nose=new THREE.Mesh(new THREE.ConeGeometry(0.06,0.13,6).rotateX(Math.PI/2),toon(0xecb488));
 nose.position.set(0,-0.05,0.6); head.add(nose);
 const earGeo=new THREE.ConeGeometry(0.11,0.34,5).rotateZ(-Math.PI/2), earMat=toon(0xf5c89a); // pointy elf ears
 for(const s of [-1,1]){const ear=new THREE.Mesh(earGeo,earMat);ear.position.set(s*0.58,0.02,0.02);ear.rotation.y=s*0.4;ear.scale.set(s,1,1);head.add(ear);}
+// freediving mask — hidden until the wetsuit goes on; sits over eyes, in front of the fringe
+const mask=new THREE.Group(); mask.position.set(0,0.06,0); mask.visible=false; head.add(mask);
+const frame=addOutline(new THREE.Mesh(new THREE.TorusGeometry(0.32,0.08,8,18),toon(0x2b3a45)),1.06); // grey silicone skirt
+frame.scale.set(1.2,0.9,1); frame.position.z=0.58; mask.add(frame);
+const lens=new THREE.Mesh(new THREE.SphereGeometry(0.3,14,10,0,Math.PI*2,0,Math.PI*0.5),new THREE.MeshBasicMaterial({color:0x9fdcf0,transparent:true,opacity:0.72}));
+lens.rotation.x=Math.PI/2; lens.scale.set(1.14,1,0.5); lens.position.z=0.6; mask.add(lens); // domed glass bulging forward
+const glint=new THREE.Mesh(new THREE.CircleGeometry(0.09,10),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0.6}));
+glint.scale.set(1.6,0.8,1); glint.position.set(-0.14,0.09,0.66); mask.add(glint); // reflection streak
+const strap=new THREE.Mesh(new THREE.TorusGeometry(0.63,0.05,6,18),toon(0x2b3a45)); // band around the head
+strap.rotation.y=Math.PI/2; strap.scale.set(1,0.92,1); strap.position.y=0.03; mask.add(strap);
 // hair cap + fringe + spikes (node kept named "hat" per contract; no wetsuit recolor)
 const HAIR=0x6b4a24;
 const hat=new THREE.Group(); hat.position.y=2.1; // sits over the head origin
@@ -1823,6 +1844,7 @@ function toggleWetsuit(){
   sleeveMat.color.set(wetsuit?0x14181c:0x2e9e57);
   armL.material.color.set(wetsuit?0x14181c:0xf5c89a); // forearms: black suit or bare skin
   legL.material.color.set(wetsuit?0x14181c:0x8a5a33);
+  mask.visible=wetsuit;
 }
 
 // ============================== BOAT ===============================
