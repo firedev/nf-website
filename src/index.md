@@ -245,12 +245,12 @@ Your own line, dropping into the blue. Someone up top has you. Each dive you go 
 # Who runs this
 
 {:.light-content}
-Nick — ex-programmer, ~20 years in front of a screen, burned out, found his way back through the breath. Molchanovs Wave 2 instructor, STA 6:15. [Meet the instructor →](/instructors/)
+Nick — software developer, still building, twenty years in. Freediving keeps him steady through it. Molchanovs Wave 2 instructor, static best 6:15. [Meet the instructor →](/instructors/)
 
 {:.dark-content}
 # Who runs this
 
-Nick — twenty years at a screen, then a way back through the breath-hold. Molchanovs Wave 2 instructor, STA 6:15. He dives the line with you. [Meet the instructor →](/instructors/)
+Nick — a developer who dives the line with you. Molchanovs Wave 2 instructor, static best 6:15. [Meet the instructor →](/instructors/)
 
 {:.light-content}
 # The idea

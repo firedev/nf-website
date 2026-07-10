@@ -16,13 +16,6 @@
     <a class="group inline-flex space-x-2 items-center rounded-2xl py-4 px-2 font-bold outline-none
     transition duration-300
     bg-transparent
-    hover:bg-white/50 hover:shadow-md hover:shadow-sky-700/30" href="/instructors/" aria-label="Instructors">
-      <span>Instructors</span>
-    </a>
-
-    <a class="group inline-flex space-x-2 items-center rounded-2xl py-4 px-2 font-bold outline-none
-    transition duration-300
-    bg-transparent
     hover:bg-white/50 hover:shadow-md hover:shadow-sky-700/30" href="https://thinkforward.academy/book" aria-label="The book">
   <span class="ease transition duration-300 opacity-100 group-hover:opacity-0 translate-x-4 group-hover:-translate-x-4">
     <sl-icon library="remixicon" name="document/file-text-fill"></sl-icon>
