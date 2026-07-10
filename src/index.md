@@ -35,4 +35,4 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
 </div>
 
 {:.max-w-xl .mx-auto .text-center .text-lg .mb-16}
-Run by Nick — a developer who dives the line with you. Molchanovs Wave 2 instructor, static best 6:15. [More →](/instructors/)
+Run by Nick — a developer who dives the line with you. Molchanovs Wave 2 instructor, static best 6:15. [More →](/instructors/nikolay-ostrovsky/)
