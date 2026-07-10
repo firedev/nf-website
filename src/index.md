@@ -1,6 +1,6 @@
 ---
 layout: homepage
-title: Psychedelic Freediving to open up the soul
+title: Come up more alive — freediving off Phuket
 ---
 
 {:.text-6xl .font-bold .tracking-tight .animate .ease .fadeIn .delay-500 .flex .text-center .justify-center .sm:text-8xl .mb-16 .z-1 .relative .inline-block .w-full .line-height[2em] .font-light .flex .flex-col .items-center}
@@ -13,118 +13,105 @@ title: Psychedelic Freediving to open up the soul
 ![](/images/transcendence.png)
 
 {:.light-content .text-3xl .sm:text-4xl .max-w-2xl .mx-auto .font-bold .text-center .my-10}
-Underwater calm to open your soul
+Come up more alive.
 
 {:.dark-content .text-3xl .sm:text-4xl .max-w-2xl .mx-auto .font-bold .text-center .my-10}
-Break the limits of your self
+Go deeper. Come up more alive.
 
 {:.light-content .text-2xl .sm:text-4xl .text-center .mb-8 .mt-0}
-**Psyche** (ψυχή) — mind, soul
+Your own buoy. Dive when you want. Nobody talking. Someone watching over you.
 
 {:.dark-content .text-2xl .sm:text-4xl .text-center .mb-8 .mt-0}
-**Trans** — across, beyond
+One line down into the blue. Your own pace. Someone watching over you.
 
 {:.light-content .text-2xl .sm:text-4xl .text-center .mb-8 .mt-0}
-**Dēlos** (δήλος) — to make visible
+Your own headspace, off Phuket.
 
 {:.dark-content .text-2xl .sm:text-4xl .text-center .mb-8 .mt-0}
-**Scandere** — to climb
-
-{:.light-content .text-2xl .sm:text-4xl .text-center .mb-8 .mt-0}
-**Psychedelic** — soul-revealing
-
-{:.dark-content .text-2xl .sm:text-4xl .text-center .mb-8 .mt-0}
-**Transcendental** — beyond limits
-
-{:.light-content .text-2xl .sm:text-4xl .text-center .mb-8 .mt-0}
-**Freediving** — the art of relaxation underwater
-
-{:.dark-content .text-2xl .sm:text-4xl .text-center .mb-8 .mt-0}
-**Freediving** — the path to inner depth
+Your own headspace, off Phuket.
 
 
 {:.light-content}
-# What does it mean?
+# What this is
 
 {:.dark-content}
-# Deep immersion
+# Going deeper
 
 {:.light-content}
-Freediving is a journey inward. No breathing. No noise. No thoughts. Just you, the silence, and the depth.
+One breath. Warm water. You and the line. Everything up top goes quiet and you come back with room in your head.
 
 {:.dark-content}
-No fins and minimum gear to awaken, liberate, and transcend.
+No fins, minimal gear. Just you, the line, and the pull of the blue.
 
 {:.light-content}
-It is a gentle path to inner calm. You glide into silence, free from noise, and connect with your soul. Through slow breaths and relaxed movement, you ease stress, build confidence, and sharpen focus. This practice reveals your inner clarity without needing the deep ocean.
+You breathe, you relax, you drop in slow. The fried, buzzing nervous system finally gets to rest — and then you surface with energy you forgot you had. That's the whole thing. You leave lighter.
 
 {:.dark-content}
-Start with deep, slow breaths to center your awareness, grounding you in the moment. As you dive, the water’s stillness frees you from fear and doubt, opening your spirit. In the depth’s silence, you connect with your essence, rising beyond limits to pure clarity. This is your climb to a freer, expansive self.
+The deeper you go, the more the noise falls away and the more present you get. Every meter you're more here, more focused, more alive. You come up carrying that.
 
 {:.light-content}
-We begin with breathwork to center your mind, relax your body in water, and find peace within. You’ll grow stronger in life and diving, step by step.
+We start with breathwork, get you easy in the water, and build from there — one step at a time, your pace, no rush.
 
 {:.dark-content}
-We guide you inward: awaken with breathwork, liberate through presence, and transcend in the dive. No vast ocean is needed to reach your truth.
+Breathwork first, then the line. Each dive you go a little deeper into being here — and bring it back up with you.
 
 
 {:.light-content .text-3xl .font-bold .text-center .mt-20 .mb-12}
-## Ready to Find Your Calm?
+## Come and dive
 
 {:.dark-content .text-3xl .font-bold .text-center .mt-20 .mb-12}
-## Ready to Awaken Your Spirit?
+## Come and dive
 
 {:.light-content .max-w-3xl .mx-auto .text-center .mb-8}
-Join us in **Phuket, Thailand** for a freediving experience that blends gentle movement with soulful discovery.
+**Phuket, Thailand.** Warm water, real instruction, your own space on the line.
 
 {:.dark-content .max-w-3xl .mx-auto .text-center .mb-8}
-Join us in **Phuket, Thailand** for a freediving journey to awaken your spirit and rise beyond limits.
+**Phuket, Thailand.** Warm water, real instruction, and the blue underneath.
 
 {:.light-content .max-w-3xl .mx-auto .text-center .mb-8}
-Perfect for beginners and divers seeking peace.
+Private, not a group class. One buoy is yours for the session.
 
 {:.dark-content .max-w-3xl .mx-auto .text-center .mb-8}
-Crafted for those ready to awaken and grow.
+Private, not a group class. The line is yours to go down at your pace.
 
 <div class="grid md:grid-cols-2 gap-8 text-center">
   <div class="p-6 bg-white rounded-lg shadow-sm">
-    <img src="/images/spiritual.png" alt="Spiritual Freediving" class="w-[12rem] h-auto mx-auto">
-    <h3 class="text-3xl font-black mb-4">Spiritual Pool</h3>
+    <img src="/images/spiritual.png" alt="Surface program" class="w-[12rem] h-auto mx-auto">
+    <h3 class="text-3xl font-black mb-4">Surface</h3>
     <div class="light-content">
-      <p class="font-bold">Gentle underwater calm</p>
+      <p class="font-bold">Warm water, your own pace</p>
       <div>
-        <div>Beginner-friendly</div>
-        <div>Ease stress</div>
-        <div>Build relaxation</div>
+        <div>Breathwork first</div>
+        <div>Rest the nervous system</div>
+        <div>Surface with energy</div>
       </div>
     </div>
     <div class="dark-content">
-      <p class="font-bold">Water meditation</p>
+      <p class="font-bold">The calm before the line</p>
       <div>
-        <div>Awaken focus</div>
-        <div>Deepen presence</div>
-        <div>Find clarity</div>
+        <div>Slow the breath</div>
+        <div>Settle in</div>
+        <div>Come up sharp</div>
       </div>
     </div>
-    <p class="mt-8 text-xl"> <a href="https://www.instagram.com/spiritualfreediving/" class="text-blue-600 hover:underline">@spiritualfreediving</a></p>
   </div>
   <div class="p-6 bg-white rounded-lg shadow-sm">
-    <img src="/images/psychedelic.png" alt="Psychedelic Freediving" class="w-[12rem] h-auto mx-auto">
-    <h3 class="text-3xl font-black mb-4">Psychedelic Wave</h3>
+    <img src="/images/psychedelic.png" alt="Depth program" class="w-[12rem] h-auto mx-auto">
+    <h3 class="text-3xl font-black mb-4">Depth</h3>
     <div class="light-content">
-      <p class="font-bold">Open water free immersion</p>
+      <p class="font-bold">Open water, your own buoy</p>
       <div>
-        <div>Minimal gear</div>
-        <div>Full presence</div>
-        <div>Your inner space</div>
+        <div>No fins</div>
+        <div>Fully present</div>
+        <div>Your own headspace</div>
       </div>
     </div>
     <div class="dark-content">
-      <p class="font-bold">Oceanic awakening</p>
+      <p class="font-bold">Down the line, into the blue</p>
       <div>
         <div>Free immersion</div>
         <div>No fins</div>
-        <div>Embrace depth</div>
+        <div>Deeper, more alive</div>
       </div>
     </div>
     <p class="mt-8 text-xl"> <a href="https://www.instagram.com/nofins/" class="text-blue-600 hover:underline">@nofins</a></p>
@@ -142,10 +129,10 @@ Crafted for those ready to awaken and grow.
   <div class="p-8 sm:p-12 bg-white rounded-lg shadow-md">
     <h3 class="text-3xl sm:text-4xl font-black mb-6">The art of staying calm</h3>
     <div class="light-content">
-      <p class="text-xl sm:text-2xl">It isn't about swimming — it's mental discipline. The more relaxed you are, the longer and easier the water holds you. The urge to breathe isn't a lack of oxygen; it's just a reflex, a signal. The calmest go deepest. So does the calmest life.</p>
+      <p class="text-xl sm:text-2xl">It isn't about swimming — it's mental. The more relaxed you are, the longer and easier the water holds you. The urge to breathe isn't a lack of oxygen; it's just a signal. The calmest go deepest. So does the calmest life.</p>
     </div>
     <div class="dark-content">
-      <p class="text-xl sm:text-2xl">A breath-hold is active meditation — a mental sport that lets you slip out from under the mind's control. By following the breath, you settle consciousness, and the mind becomes still water. Hold longer — learn more.</p>
+      <p class="text-xl sm:text-2xl">A breath-hold is one long moment of full attention. You follow the breath down, the body settles, and you get to feel what it's like to be fully here. Hold longer — feel more.</p>
     </div>
   </div>
 </div>
@@ -154,133 +141,127 @@ Crafted for those ready to awaken and grow.
   <div class="p-7 bg-white rounded-lg shadow-sm">
     <h3 class="text-2xl sm:text-3xl font-black mb-3">The wall is you</h3>
     <div class="light-content">
-      <p class="text-lg">Every extra meter touches what you believed was your limit. Don't fight, don't speed up — keep the same pace. You see it was never a physical limit. Only a limit of perception you took for real.</p>
+      <p class="text-lg">Every extra meter touches what you believed was your limit. Don't fight, don't speed up — keep the same pace. You find it was never a physical wall. Only a line in your head you took for real.</p>
     </div>
     <div class="dark-content">
-      <p class="text-lg">You pass through the wall, and it disappears. The body isn't convinced by arguments — it needs the lived moment: <em>I met this, and it was easy.</em> Same in life. You calmly walk toward what you thought was impossible.</p>
+      <p class="text-lg">You pass through the wall and it's gone. The body doesn't take arguments — it takes the lived moment: <em>I met this, and it was easy.</em> Same in life. You walk toward what you thought was out of reach.</p>
     </div>
   </div>
   <div class="p-7 bg-white rounded-lg shadow-sm">
     <h3 class="text-2xl sm:text-3xl font-black mb-3">Leave the character above</h3>
     <div class="light-content">
-      <p class="text-lg">You dive, and you leave the character on the surface. The masks fall away, and what remains is what was always there. The best dive is when you aren't thinking anything at all.</p>
+      <p class="text-lg">You dive, and you leave the character on the surface. The masks come off, and what's left is what was always there. The best dive is when you're just here, all of you.</p>
     </div>
     <div class="dark-content">
-      <p class="text-lg">Under water, on a breath-hold, you feel a living movement toward your true self. You stop being the character and become yourself — nothing else exists.</p>
+      <p class="text-lg">Under water, on a breath-hold, you feel a live pull toward yourself. You stop being the character and just are — fully here, nothing else running.</p>
     </div>
   </div>
 </div>
 
 <div class="grid md:grid-cols-3 gap-6 text-center mb-16">
   <div class="p-6 bg-white rounded-lg shadow-sm">
-    <h3 class="text-xl font-black mb-3">Active meditation</h3>
+    <h3 class="text-xl font-black mb-3">Rest that lands</h3>
     <div class="light-content">
-      <p>Slow breaths, relaxed movement, silence. You glide into calm and the noise drops away — a gym for the mind.</p>
+      <p>Slow breaths, easy movement, warm water. The nervous system finally downshifts — and you come up with energy, not drained.</p>
     </div>
     <div class="dark-content">
-      <p>The breath-hold teaches the mind to be clean and calm like still water, opening the path to inner silence and clarity.</p>
+      <p>The breath-hold gives the system a rest it can't get on land. You surface clear, settled, and more here than when you went down.</p>
     </div>
   </div>
   <div class="p-6 bg-white rounded-lg shadow-sm">
-    <h3 class="text-xl font-black mb-3">It reformats you</h3>
+    <h3 class="text-xl font-black mb-3">It clears room</h3>
     <div class="light-content">
-      <p>Freediving washes out everything unnecessary. Many things simply stop mattering. You become calmer — in the water and out of it.</p>
+      <p>A dive washes out the static. A lot of what was buzzing simply lifts, and calm floods in — in the water and out of it.</p>
     </div>
     <div class="dark-content">
-      <p>It cleans the junk from your head, recalibrates the compass, reformats the brain. You can't dive angry, irritated, or hurt.</p>
+      <p>It clears the head and resets the compass. What's left is room — for energy, for focus, for being here.</p>
     </div>
   </div>
   <div class="p-6 bg-white rounded-lg shadow-sm">
     <h3 class="text-xl font-black mb-3">Free as in freedom</h3>
     <div class="light-content">
-      <p>No fins, minimal gear, maximum relaxation. One person on a buoy, your own inner space, nothing to distract you.</p>
+      <p>No fins, minimal gear, your own pace. One person on a buoy, your own headspace, nothing pulling at you.</p>
     </div>
     <div class="dark-content">
-      <p>Under water — reunion with space, with the primordial. Long breath-holds open a psychedelic state without any substance. Free as in freedom.</p>
+      <p>Under water, on a long breath-hold, you meet a wide open state — no substance, just you and the blue. Free as in freedom.</p>
     </div>
   </div>
 </div>
 
 {:.light-content .text-2xl .sm:text-3xl .font-black .text-center .mt-16 .mb-3}
-## Fear dissolves
+## Fear washes out, joy comes in
 
 {:.dark-content .text-2xl .sm:text-3xl .font-black .text-center .mt-16 .mb-3}
-## Fear dissolves
+## Fear washes out, joy comes in
 
 {:.light-content .max-w-2xl .mx-auto .text-center .text-lg .mb-10}
-You don't fight it. You relax — and the water dissolves it for you. The most beautiful thing is watching people who were wary of water bloom.
+You relax, the water carries the fear off, and the space it leaves fills with the plain joy of being alive. The best part is watching someone wary of water light up.
 
 {:.dark-content .max-w-2xl .mx-auto .text-center .text-lg .mb-10}
-Fear is a wall. You pass through it once, and it's simply gone. The same wall, again and again, in the water and in life.
+Joy is the absence of fear. You pass through the wall once, the fear's gone, and what floods in is aliveness. The same wall, again and again, in the water and in life.
 
 <div class="grid md:grid-cols-3 gap-6 text-center mb-16">
   <div class="p-6 bg-white rounded-lg shadow-sm">
     <h3 class="text-xl font-black mb-3">Come as you are</h3>
     <div class="light-content">
-      <p>Wary of water? Good. That's where it starts. Begin with breathwork on the surface, relax into the water, and feel safe within. No experience needed.</p>
+      <p>Wary of water? Good — that's where it starts. Breathwork on the surface, easy into the water, safe the whole way. You'll feel it settle fast.</p>
     </div>
     <div class="dark-content">
-      <p>Spiritual freediving is underwater meditation — learning to feel the soul, to stop fearing depth, and to relax under water. Step by step.</p>
+      <p>Start on the surface with the breath, then go down at your pace. Learn to be easy under water and to let the depth pull you in. Step by step.</p>
     </div>
   </div>
   <div class="p-6 bg-white rounded-lg shadow-sm">
-    <h3 class="text-xl font-black mb-3">The wall dissolves</h3>
+    <h3 class="text-xl font-black mb-3">The wall gives way</h3>
     <div class="light-content">
-      <p>Don't push, don't speed up — keep the same pace. The body isn't convinced by arguments; it needs the lived moment: I met this, and it was easy.</p>
+      <p>Don't push, don't speed up — keep the same pace. The body doesn't take arguments; it takes the lived moment: I met this, and it was easy.</p>
     </div>
     <div class="dark-content">
-      <p>You pass through the wall, and it disappears. All you have to do is calm the one inside you. It was never a physical limit — only a limit of perception.</p>
+      <p>You pass through the wall and it opens. All you do is settle the one inside you. It was never a physical limit — only a line in your head.</p>
     </div>
   </div>
   <div class="p-6 bg-white rounded-lg shadow-sm">
     <h3 class="text-xl font-black mb-3">It carries over</h3>
     <div class="light-content">
-      <p>The calm you find under water comes up with you. You walk toward what you thought was impossible — gently, without forcing.</p>
+      <p>The calm you find under water comes up with you. You walk toward what you thought was out of reach — easy, no forcing.</p>
     </div>
     <div class="dark-content">
-      <p>We live in a maze of invisible walls. They vanish the moment you walk through them. The only way: stop believing in them.</p>
+      <p>The walls we live inside are mostly in the head. They open the moment you walk through them. You just stop believing in them.</p>
     </div>
   </div>
 </div>
 
 {:.light-content}
-# The experience
+# The session
 
 {:.light-content}
-We offer an ideal setup, and each dive is an opportunity to quiet the mind, expand awareness, and connect with your soul. You may feel euphoria, mental clarity, and a sense of unity, that lasts long after the dive.
+Your own buoy, your own pace. Nobody talking, someone watching over you. Each dive you drop the static, get present, and come up with clear energy that stays with you after.
 
 {:.dark-content}
-# The journey
+# The descent
 
-Each dive is a chance to center your mind, release boundaries, and connect with your essence. You’ll surface with clarity, focus, and a deeper sense of self.
-
-{:.light-content}
-# Who is it for?
+Your own line, dropping into the blue. Someone up top has you. Each dive you go a little deeper into being here, and surface clear, focused, and more alive.
 
 {:.light-content}
-Suitable for newcomers, with a focus on relaxation and self-discovery. Accessible for **everyone** — no experience needed.
+# Who runs this
+
+{:.light-content}
+Nick — ex-programmer, ~20 years in front of a screen, burned out, found his way back through the breath. Molchanovs Wave 2 instructor, STA 6:15. [Meet the instructor →](/instructors/)
 
 {:.dark-content}
-# Who’s It For?
+# Who runs this
 
-For freedivers seeking clarity and growth. **No experience needed** — just an open mind and a desire to dive deeper.
-
-{:.light-content}
-# Join us
+Nick — twenty years at a screen, then a way back through the breath-hold. Molchanovs Wave 2 instructor, STA 6:15. He dives the line with you. [Meet the instructor →](/instructors/)
 
 {:.light-content}
-Ready to dive deeper into your soul? Let Psychedelic Freediving guide you on a journey where each breath opens a new door.
+# The idea
+
+{:.light-content}
+It's perfectly normal to consistently feel good. That's not an achievement — it's the norm. Freediving is one clean door back to it: warm water, your own pace, a nervous system that finally rests. You come up more alive.
 
 {:.dark-content}
-# Begin now
+# The idea
 
-Ready to explore your inner depths? Psychedelic Freediving guides you to clarity and expansion with every dive.
-
-{:.light-content}
-The practice that combines the physical art of freediving with the psychological and spiritual benefits of meditation and self-discovery. By emphasizing its soul-manifesting potential, it offers a safe, accessible, and transformative experience for anyone seeking to explore the depths of their soul—without mind-altering substances.
-
-{:.dark-content}
-A fusion of freediving’s focus and the art of inner exploration. It’s a clear, open path to expand awareness, designed for anyone ready to dive into their truth.
+Go deep enough and the noise lifts on its own. What's left is presence — the plain, full feeling of being alive. My second life, and now I want every drop of it. The line is the door.
 
 
 <div class="next-dive max-w-xl mx-auto p-8 sm:p-12 bg-white rounded-lg shadow-md text-center mb-16">
