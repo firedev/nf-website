@@ -1,13 +1,12 @@
 @import "shoelaced.css";
-@import "theme-dark.css";
 
 @import "jit-refresh.css"; /* triggers frontend rebuilds */
 
 /* Tailwind v4: single import; scan templates for class names */
 @import "tailwindcss";
-/* Class-based dark variant: theme-switcher.js toggles .theme-dark on :root, so
-   dark: utilities must key off that class, not prefers-color-scheme (v4 default).
-   Syntax per tailwindcss.com/docs/dark-mode (class selector form). */
+/* Class-based dark variant keyed off .theme-dark on :root. The theme switcher
+   was retired (#21), so nothing adds the class today — dark: utilities in the
+   templates compile but stay dormant. Syntax per tailwindcss.com/docs/dark-mode. */
 @custom-variant dark (&:where(.theme-dark, .theme-dark *));
 @source "../../src/**/*.{html,md,liquid,erb,serb,rb}";
 @source "../javascript/**/*.js";
@@ -41,24 +40,6 @@
 
   ul, ol {
     @apply mb-4;
-  }
-
-  /* Theme content visibility */
-  .light-content {
-    display: block;
-  }
-  
-  .dark-content {
-    display: none;
-  }
-
-  /* Dark theme styles */
-  :root.theme-dark .light-content {
-    display: none;
-  }
-  
-  :root.theme-dark .dark-content {
-    display: block;
   }
 
   .break-words { word-break: break-word }
