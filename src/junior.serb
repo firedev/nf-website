@@ -49,13 +49,32 @@ title: Freediving for Kids
   </div>
 
   <div class="rounded-2xl border border-current/10 p-6 sm:p-8 mb-14">
-    <p class="font-black text-xl mb-4">For parents</p>
-    <div class="space-y-3 text-base text-slate-600">
-      <p>One kid at a time. Your child has the instructor's full attention for the whole session.</p>
-      <p>You stay close — on the deck, or in the water on your own buoy.</p>
-      <p>The session starts wherever your child is that day — feet on the steps, waist-deep, already swimming — and moves at their pace from there. Each step into the water is theirs, and that's what makes it stick.</p>
-      <p>Attention sets the length: the session runs as long as your child's interest does.</p>
-      <p>Play leads. Certification follows when the child wants it.</p>
+    <p class="font-black text-xl mb-6">For parents</p>
+    <div class="space-y-5">
+      <div>
+        <p class="font-black mb-1">Can I watch — can I be in the water?</p>
+        <p class="text-base text-slate-600 dark:text-slate-300">Both. You stay close — on the deck, or in the water on your own buoy.</p>
+      </div>
+      <div>
+        <p class="font-black mb-1">How many kids per instructor?</p>
+        <p class="text-base text-slate-600 dark:text-slate-300">One. Your child has the instructor's full attention for the whole session.</p>
+      </div>
+      <div>
+        <p class="font-black mb-1">What if my child stays at the water's edge?</p>
+        <p class="text-base text-slate-600 dark:text-slate-300">Then that's where the session is. It starts wherever your child is that day — feet on the steps, waist-deep, already swimming — and moves at their pace. Each step into the water is theirs, and that's what makes it stick.</p>
+      </div>
+      <div>
+        <p class="font-black mb-1">Are there tests or badges?</p>
+        <p class="text-base text-slate-600 dark:text-slate-300">Play leads. Certification follows when the child wants it.</p>
+      </div>
+      <div>
+        <p class="font-black mb-1">What does a session look like for a 5-year-old vs a teenager?</p>
+        <p class="text-base text-slate-600 dark:text-slate-300">For a five-year-old: floating, splashing, breath games — water comfort is the whole lesson. For a teenager: technique, longer glides, real depth when they're ready. The age bands above walk through it. Either way, attention sets the length: the session runs as long as your child's interest does.</p>
+      </div>
+      <div>
+        <p class="font-black mb-1">Is breath-holding safe for a developing child?</p>
+        <p class="text-base text-slate-600 dark:text-slate-300">Kids' sessions stay shallow and playful — one instructor, one child, always within arm's reach. Breath games are short and easy, and there are no numbers to chase: the session follows your child's comfort, and comfort is the measure.</p>
+      </div>
     </div>
   </div>
 
@@ -65,6 +84,8 @@ title: Freediving for Kids
     <p>A child who feels at home in the water carries that calm back out of it, into the rest of their day.</p>
 
     <p>We meet at <a href="/schools/namafreediving/" class="font-bold decoration-sky-200 decoration-8">Nama Freediving</a>, a Molchanovs beachfront center on Panwa beach.</p>
+
+    <p>Want to feel it yourself first? Come dive a Saturday — <a href="/first-dive/" class="font-bold decoration-sky-200 decoration-8">your first dive →</a></p>
   </div>
 
   <p class="text-center">
