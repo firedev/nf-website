@@ -66,9 +66,12 @@ The site uses a single Bridgetown collection:
 - `instructors` - Instructor profiles, grouped onto school pages by `affiliation:`. Currently 7: nikolay-ostrovsky, ben, tony, court (Nama Freediving); artur, roman (Molchanova Freediving School); victoria (ScubaNicks)
 
 ### Theme System
-Plain light/dark **appearance** toggle (same copy in both themes — the old dual-*content* system with `.light-content`/`.dark-content` blocks and Spiritual Pool / Psychedelic Wave messaging was retired 2026-07-13, issue #21):
-- Switcher in `frontend/javascript/theme-switcher.js` — toggles `theme-dark` on `:root`, respects `prefers-color-scheme`, persists in localStorage
-- Dark styles via Tailwind `dark:` utility classes on elements (not content-swapping); leftover `frontend/styles/theme-dark.css` is being phased out
+Plain light/dark **appearance** toggle, ONE mechanism (#27, 2026-07-13; the old dual-*content* system and the 433-line `theme-dark.css` gradient stylesheet are both gone):
+- Switcher in `frontend/javascript/theme-switcher.js` — toggles `theme-dark` on `:root`, respects `prefers-color-scheme`, persists localStorage key `theme`
+- `frontend/styles/index.css` wires Tailwind 4 to that class: `@custom-variant dark (&:where(.theme-dark, .theme-dark *));` — so every `dark:` utility keys off `.theme-dark`, not `prefers-color-scheme`
+- Dark base lives in index.css only: `body … dark:bg-slate-950 dark:text-slate-100` + zen-circle `invert(1)`. Everything else is per-element `dark:` utilities in templates — do NOT reintroduce a parallel dark stylesheet
+- Dark palette: bg slate-950, cards dark:bg-slate-900 (or bg-white/5 for the booking card), secondary text dark:text-slate-300/400, accents unchanged (sky-200 underlines read fine on dark)
+- New/changed elements with hardcoded light colors (bg-white, text-slate-5xx/6xx/950) MUST get a `dark:` variant — verify both themes by screenshot (inject `localStorage.setItem("theme","dark")` after `<head>` in an output copy; note `min-h-screen` on `<main>` pushes the footer below any viewport-sized screenshot)
 
 ### Deployment
 - Deploys to legacy GitHub Pages at nofins.com: repo `firedev/nf-website`, Pages serves branch `master` path `/`. Source code lives on branch `source` of the same repo
@@ -101,7 +104,7 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 - JavaScript modules go in `frontend/javascript/`
 - Styles use Tailwind utilities in `frontend/styles/`
 - No Shoelace / web-component library — icons are inline SVG (removed 2026-07-13, #25)
-- Dark styling is Tailwind `dark:` utilities on elements; the toggle hangs `theme-dark` on `:root` (there is no `data-theme` attribute, no per-theme content blocks)
+- Dark styling is Tailwind `dark:` utilities on elements; the toggle hangs `theme-dark` on `:root` (there is no `data-theme` attribute, no per-theme content blocks, no separate dark stylesheet — see Theme System)
 
 ### Building and Testing Changes
 1. Run `yarn start` for development server
