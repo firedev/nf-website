@@ -73,7 +73,7 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
     </div>
     <div>
       <h3 class="font-black text-lg mt-0 mb-1">When do you dive?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">nofins dives every weekend off Phuket: Saturday is deep water from the boat, Sunday is pool — technique and breath-work. Book one day or the whole weekend.</p>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">nofins dives every weekend off Phuket: Saturday is deep water from the boat, Sunday is pool — technique and breath-work. Come for a day or the whole weekend.</p>
     </div>
     <div>
       <h3 class="font-black text-lg mt-0 mb-1">Is breath-holding safe — what about blackouts?</h3>

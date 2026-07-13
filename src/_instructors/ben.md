@@ -1,5 +1,6 @@
 ---
 layout: instructor
+published: false
 name: "Benoit Piguet"
 affiliation: "Nama Freediving"
 affiliation_url: "https://namafreediving.com"
