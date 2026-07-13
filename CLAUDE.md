@@ -109,3 +109,5 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 3. Frontend assets require restart if `esbuild.config.js` is modified
 4. Test both light and dark themes for any UI changes
 5. Verify responsive design with Tailwind breakpoints
+
+**Gotcha — `bin/bridgetown build` alone leaves CSS STALE.** Tailwind/PostCSS runs in the esbuild step (`frontend:build`), NOT in `bin/bridgetown build`. So a **newly-added utility class** (e.g. `bg-sky-500` not used elsewhere) won't be in the CSS bundle after a bare `build` — it silently has no styling, and screenshots off `output/` mislead. To verify a new class locally: `bin/bridgetown frontend:build && bin/bridgetown build`, then `grep <class> output/_bridgetown/static/index.*.css`. `yarn start` and `yarn deploy` both run `frontend:build` first, so the real deploy is fine — this only bites local verification.
