@@ -12,6 +12,11 @@ Full body-mind · anti-desk therapy.
 {:.text-2xl .sm:text-3xl .text-center .mb-8 .mt-0 .max-w-2xl .mx-auto}
 Freediving as a way back to yourself. Your own buoy, your own pace, someone watching over you.
 
+<div class="prose mx-auto text-left max-w-xl my-12 text-lg sm:text-xl space-y-4">
+  <p>I'm Nick. I live in Phuket, Thailand, and work online. On weekends I go freediving.</p>
+  <p>I'm a Molchanovs-certified instructor, and part of an active freediving community here — we train at the pool, and we take the boat out for trips.</p>
+</div>
+
 <div class="not-prose max-w-md mx-auto text-center text-lg my-16 leading-relaxed">
   <p class="my-2"><span class="font-bold">Who</span> · any level, first-timer to freediver</p>
   <p class="my-2"><span class="font-bold">The buoy</span> · one person per buoy, always your own</p>
