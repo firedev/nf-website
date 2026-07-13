@@ -1,44 +1,70 @@
 ---
 layout: default
-title: Junior Freediving
+title: Freediving for Kids
 ---
 
 <div class="max-w-2xl mx-auto px-4 py-16">
 
-  <h1 class="text-4xl font-black mb-2 text-center">Junior Freediving</h1>
+  <h1 class="text-4xl font-black mb-2 text-center">Freediving for Kids</h1>
   <p class="text-lg text-slate-500 mb-14 text-center">
-    Kids meet the water — breath, play, and calm. Ages 4 to 17.
+    Kids meet the water — breath, play, and calm.
   </p>
 
   <p class="prose mx-auto text-left mb-12">
-    Freediving gives a child room to grow. Steady breath, a strong body, a calm mind — learned in play, in the water, at their own pace. We teach the Molchanovs kids method, the same lineage the whole school comes from.
+    Freediving gives a child room to grow. Steady breath, a strong body, a calm mind — learned in play, in the water, at their own pace. Water comfort comes first, taught by Molchanovs-certified instructors — the same lineage the whole school comes from.
   </p>
+
+  <div class="grid gap-6 sm:grid-cols-3 mb-14">
+    <div class="rounded-2xl border border-current/10 p-5">
+      <p class="font-black mb-1">Little kids</p>
+      <p class="text-base text-slate-600">Play and water comfort. Floating, splashing, breath games — feeling at home in the water is the whole lesson.</p>
+    </div>
+    <div class="rounded-2xl border border-current/10 p-5">
+      <p class="font-black mb-1">Older kids</p>
+      <p class="text-base text-slate-600">Breath and technique, still learned in play: longer glides, cleaner dives, calm before each one.</p>
+    </div>
+    <div class="rounded-2xl border border-current/10 p-5">
+      <p class="font-black mb-1">16–17</p>
+      <p class="text-base text-slate-600">The full Molchanovs Wave 1 course — real depth, real certification, with parental consent.</p>
+    </div>
+  </div>
 
   <div class="grid gap-6 sm:grid-cols-2 mb-14">
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Body</p>
-      <p class="text-base text-slate-500">Posture, lung capacity, and a real ease in the water.</p>
+      <p class="text-base text-slate-600">Posture, lung capacity, and ease in the water.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Focus</p>
-      <p class="text-base text-slate-500">Attention and concentration, built dive by dive.</p>
+      <p class="text-base text-slate-600">Attention and concentration, built dive by dive.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Safety</p>
-      <p class="text-base text-slate-500">How to swim and dive safely, from the first session.</p>
+      <p class="text-base text-slate-600">How to swim and dive safely, from the first session.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Love of water</p>
-      <p class="text-base text-slate-500">Care for the ocean and a lasting bond with it.</p>
+      <p class="text-base text-slate-600">Care for the ocean and a lasting bond with it.</p>
+    </div>
+  </div>
+
+  <div class="rounded-2xl border border-current/10 p-6 sm:p-8 mb-14">
+    <p class="font-black text-xl mb-4">For parents</p>
+    <div class="space-y-3 text-base text-slate-600">
+      <p>One kid at a time. Your child has the instructor's full attention for the whole session.</p>
+      <p>You stay close — on the deck, or in the water on your own buoy.</p>
+      <p>The session starts wherever your child is that day — feet on the steps, waist-deep, already swimming — and moves at their pace from there. Each step into the water is theirs, and that's what makes it stick.</p>
+      <p>Attention sets the length: the session runs as long as your child's interest does.</p>
+      <p>Play leads. Certification follows when the child wants it.</p>
     </div>
   </div>
 
   <div class="prose mx-auto text-left space-y-5 mb-14">
     <p>Comfort in the water is where a child begins. Before any skill, they get to simply be in it: unhurried, at their own pace, with someone they trust right there beside them. That ease is the whole point.</p>
 
-    <p>From there, everything else grows on its own. Steady breath, a strong body, real attention — all of it learned in play. A child who feels at home in the water carries that calm back out of it, into the rest of their day.</p>
+    <p>A child who feels at home in the water carries that calm back out of it, into the rest of their day.</p>
 
-    <p>We teach the Molchanovs kids method, the same lineage the whole school comes from, out of <a href="/schools/namafreediving/" class="font-bold decoration-sky-200 decoration-8">Nama Freediving</a> on Panwa beach. One kid at a time, at their own pace.</p>
+    <p>We meet at <a href="/schools/namafreediving/" class="font-bold decoration-sky-200 decoration-8">Nama Freediving</a>, a Molchanovs beachfront center on Panwa beach.</p>
   </div>
 
   <p class="text-center">
