@@ -6,7 +6,7 @@ title: Your First Dive
 <div class="max-w-2xl mx-auto px-4 py-16">
 
   <h1 class="text-4xl font-black mb-2 text-center">Your first dive</h1>
-  <p class="text-lg text-slate-500 mb-14 text-center">
+  <p class="text-lg text-slate-500 dark:text-slate-400 mb-14 text-center">
     A Saturday morning on the sea off Phuket — your own buoy, an instructor beside you.
   </p>
 

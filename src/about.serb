@@ -6,7 +6,7 @@ title: About
 <div class="max-w-2xl mx-auto px-4 py-16">
 
   <h1 class="text-4xl font-black mb-2 text-center">About</h1>
-  <p class="text-lg text-slate-500 mb-14 text-center">
+  <p class="text-lg text-slate-500 dark:text-slate-400 mb-14 text-center">
     Where we're going, we don't fins.
   </p>
 

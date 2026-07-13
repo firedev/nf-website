@@ -24,7 +24,7 @@ layout: default
   {% end %}
 
   {% if resource.data.affiliation and resource.data.affiliation != "" %}
-    <p class="text-lg text-slate-500 mb-8">
+    <p class="text-lg text-slate-500 dark:text-slate-400 mb-8">
       {% if resource.data.affiliation_url and resource.data.affiliation_url != "" %}
         <a href="{{ resource.data.affiliation_url }}" class="font-bold decoration-sky-200 decoration-8">{{ resource.data.affiliation }}</a>
       {% else %}

@@ -6,7 +6,7 @@ title: Freediving for Kids
 <div class="max-w-2xl mx-auto px-4 py-16">
 
   <h1 class="text-4xl font-black mb-2 text-center">Freediving for Kids</h1>
-  <p class="text-lg text-slate-500 mb-14 text-center">
+  <p class="text-lg text-slate-500 dark:text-slate-400 mb-14 text-center">
     Kids meet the water — breath, play, and calm.
   </p>
 
@@ -17,34 +17,34 @@ title: Freediving for Kids
   <div class="grid gap-6 sm:grid-cols-3 mb-14">
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Little kids</p>
-      <p class="text-base text-slate-600">Play and water comfort. Floating, splashing, breath games — feeling at home in the water is the whole lesson.</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Play and water comfort. Floating, splashing, breath games — feeling at home in the water is the whole lesson.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Older kids</p>
-      <p class="text-base text-slate-600">Breath and technique, still learned in play: longer glides, cleaner dives, calm before each one.</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Breath and technique, still learned in play: longer glides, cleaner dives, calm before each one.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">16–17</p>
-      <p class="text-base text-slate-600">The full Molchanovs Wave 1 course — real depth, real certification, with parental consent.</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">The full Molchanovs Wave 1 course — real depth, real certification, with parental consent.</p>
     </div>
   </div>
 
   <div class="grid gap-6 sm:grid-cols-2 mb-14">
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Body</p>
-      <p class="text-base text-slate-600">Posture, lung capacity, and ease in the water.</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Posture, lung capacity, and ease in the water.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Focus</p>
-      <p class="text-base text-slate-600">Attention and concentration, built dive by dive.</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Attention and concentration, built dive by dive.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Safety</p>
-      <p class="text-base text-slate-600">How to swim and dive safely, from the first session.</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">How to swim and dive safely, from the first session.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Love of water</p>
-      <p class="text-base text-slate-600">Care for the ocean and a lasting bond with it.</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Care for the ocean and a lasting bond with it.</p>
     </div>
   </div>
 

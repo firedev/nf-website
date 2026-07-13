@@ -21,17 +21,17 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
 </div>
 
 <div class="not-prose max-w-3xl mx-auto grid gap-6 sm:grid-cols-3 my-16">
-  <div class="rounded-2xl bg-white shadow-md p-6 text-center">
+  <div class="rounded-2xl bg-white dark:bg-slate-900 shadow-md p-6 text-center">
     <p class="text-xl font-black mb-1">Deep</p>
-    <p class="text-base text-slate-500">Down the line, off the boat. Depth at your own pace.</p>
+    <p class="text-base text-slate-500 dark:text-slate-400">Down the line, off the boat. Depth at your own pace.</p>
   </div>
-  <div class="rounded-2xl bg-white shadow-md p-6 text-center">
+  <div class="rounded-2xl bg-white dark:bg-slate-900 shadow-md p-6 text-center">
     <p class="text-xl font-black mb-1">Static</p>
-    <p class="text-base text-slate-500">One breath, held still. The quiet at the centre of it all.</p>
+    <p class="text-base text-slate-500 dark:text-slate-400">One breath, held still. The quiet at the centre of it all.</p>
   </div>
-  <div class="rounded-2xl bg-white shadow-md p-6 text-center">
+  <div class="rounded-2xl bg-white dark:bg-slate-900 shadow-md p-6 text-center">
     <p class="text-xl font-black mb-1">Pool</p>
-    <p class="text-base text-slate-500">Technique and breath-work in calm, controlled water.</p>
+    <p class="text-base text-slate-500 dark:text-slate-400">Technique and breath-work in calm, controlled water.</p>
   </div>
 </div>
 

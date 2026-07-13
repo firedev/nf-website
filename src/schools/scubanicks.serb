@@ -6,7 +6,7 @@ title: ScubaNicks
 <div class="max-w-6xl mx-auto px-4 py-16">
 
   <h1 class="text-4xl font-black mb-2 text-center">ScubaNicks</h1>
-  <p class="text-lg text-slate-500 mb-10 text-center">
+  <p class="text-lg text-slate-500 dark:text-slate-400 mb-10 text-center">
     Boutique dive center in Rawai, Phuket —
     <a href="https://scubanicks.net" target="_blank" rel="noopener" class="font-bold decoration-sky-200 decoration-8">scubanicks.net</a>
   </p>
