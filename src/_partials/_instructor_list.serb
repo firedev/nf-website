@@ -30,7 +30,7 @@
           <p class="text-base text-slate-500 dark:text-slate-300">{{ i.data.certifications.first }}</p>
         {% end %}
         {% if i.data.location and i.data.location != "" %}
-          <p class="text-base text-slate-400 dark:text-slate-400 font-bold uppercase tracking-wide mt-1">{{ i.data.location }}{% if i.data.affiliation and i.data.affiliation != "" %} · {{ i.data.affiliation }}{% end %}</p>
+          <p class="text-base text-slate-400 dark:text-slate-400 font-bold uppercase tracking-wide mt-1">{% if i.data.affiliation and i.data.affiliation != "" %}{{ i.data.affiliation }} · {% end %}{{ i.data.location }}</p>
         {% end %}
       </div>
     </a>
