@@ -11,9 +11,15 @@ layout: default
 
   <h1 class="text-4xl font-black mb-2">{{ resource.data.name }}</h1>
 
+  {% if resource.data.instagram and resource.data.instagram != "" %}
+    <p class="mb-3">
+      <a href="https://instagram.com/{{ resource.data.instagram }}" target="_blank" rel="noopener" class="text-lg font-bold text-sky-600 dark:text-sky-300 no-underline">@{{ resource.data.instagram }}</a>
+    </p>
+  {% end %}
+
   {% if resource.data.junior_instructor %}
     <p class="mb-2">
-      <span class="inline-block rounded-full bg-sky-200 text-slate-950 px-4 py-1 text-sm font-black tracking-wide uppercase">Junior Instructor</span>
+      <span class="inline-block rounded-full bg-sky-200 text-slate-950 px-4 py-1 text-base font-black tracking-wide uppercase">Junior Instructor</span>
     </p>
   {% end %}
 
@@ -65,5 +71,7 @@ layout: default
       {% end %}
     </p>
   {% end %}
+
+  {%@ "booking" %}
 
 </div>
