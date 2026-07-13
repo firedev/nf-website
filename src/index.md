@@ -69,7 +69,7 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
     </div>
     <div>
       <h3 class="font-black text-lg mt-0 mb-1">Where exactly do you dive?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">We dive off Panwa beach, Phuket — pool sessions and boat trips run from Nama Freediving, a Molchanovs beachfront center. Meet on the sand, a short briefing, then the boat.</p>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">We dive off Panwa beach, Phuket — pool on Sundays, the boat on Saturdays. Meet on the sand, a short briefing, then the water.</p>
     </div>
     <div>
       <h3 class="font-black text-lg mt-0 mb-1">When do you dive?</h3>

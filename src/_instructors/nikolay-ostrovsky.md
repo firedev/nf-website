@@ -1,8 +1,8 @@
 ---
 layout: instructor
 name: "Nikolay Ostrovsky"
-affiliation: "Nama Freediving"
-affiliation_url: "https://namafreediving.com"
+affiliation: "nofins"
+affiliation_url: "https://nofins.com"
 location: "Phuket"
 instagram: "_nikolayx_"
 image: "/images/nick.jpg"
