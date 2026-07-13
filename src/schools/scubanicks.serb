@@ -3,7 +3,7 @@ layout: default
 title: ScubaNicks
 ---
 
-<div class="max-w-4xl mx-auto px-4 py-16">
+<div class="max-w-6xl mx-auto px-4 py-16">
 
   <h1 class="text-4xl font-black mb-2 text-center">ScubaNicks</h1>
   <p class="text-lg text-slate-500 mb-10 text-center">

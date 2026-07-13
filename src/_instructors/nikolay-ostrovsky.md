@@ -4,10 +4,11 @@ name: "Nikolay Ostrovsky"
 affiliation: "Nama Freediving"
 affiliation_url: "https://namafreediving.com"
 location: "Phuket"
+instagram: "_nikolayx_"
 image: "/images/nick.jpg"
 order: 1
 certifications:
-  - "Molchanovs Wave 2 — Depth & Pool"
+  - "Molchanovs Wave 2 Instructor"
 languages:
   - "English"
   - "Russian"

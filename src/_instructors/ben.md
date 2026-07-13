@@ -1,11 +1,12 @@
 ---
 layout: instructor
-name: "Ben"
+name: "Benoit Piguet"
 affiliation: "Nama Freediving"
 affiliation_url: "https://namafreediving.com"
 location: "Phuket"
+instagram: "0xyben"
 image: "/images/ben.jpg"
-order: 2
+order: 4
 certifications:
   - "Molchanovs Wave 3 Instructor Trainer"
   - "Certified Yoga Instructor"

@@ -4,8 +4,9 @@ name: "Artur Tikhonov"
 affiliation: "Molchanova Freediving School"
 affiliation_url: "https://molchanova.school"
 location: "Moscow"
+instagram: "artur_tichonov"
 image: "/images/artur.jpg"
-order: 6
+order: 7
 certifications:
   - "Molchanovs Wave 2 Instructor"
   - "Freediving rescue & first aid"

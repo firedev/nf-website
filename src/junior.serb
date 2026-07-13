@@ -17,19 +17,19 @@ title: Junior Freediving
   <div class="grid gap-6 sm:grid-cols-2 mb-14">
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Body</p>
-      <p class="text-sm text-slate-500">Posture, lung capacity, and a real ease in the water.</p>
+      <p class="text-base text-slate-500">Posture, lung capacity, and a real ease in the water.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Focus</p>
-      <p class="text-sm text-slate-500">Attention and concentration, built dive by dive.</p>
+      <p class="text-base text-slate-500">Attention and concentration, built dive by dive.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Safety</p>
-      <p class="text-sm text-slate-500">How to swim and dive safely, from the first session.</p>
+      <p class="text-base text-slate-500">How to swim and dive safely, from the first session.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Love of water</p>
-      <p class="text-sm text-slate-500">Care for the ocean and a lasting bond with it.</p>
+      <p class="text-base text-slate-500">Care for the ocean and a lasting bond with it.</p>
     </div>
   </div>
 

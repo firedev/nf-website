@@ -39,7 +39,7 @@ layout: default
   {% if resource.data.certifications and resource.data.certifications.size > 0 %}
     <div class="flex flex-wrap justify-center gap-2 mb-6">
       {% resource.data.certifications.each do |cert| %}
-        <span class="rounded-full border border-current/30 px-4 py-1.5 text-sm font-bold opacity-90">{{ cert }}</span>
+        <span class="rounded-full border border-current/30 px-4 py-2 text-base font-bold opacity-90">{{ cert }}</span>
       {% end %}
     </div>
   {% end %}
@@ -47,7 +47,7 @@ layout: default
   {% if resource.data.languages and resource.data.languages.size > 0 %}
     <div class="flex flex-wrap justify-center gap-2 mb-10">
       {% resource.data.languages.each do |lang| %}
-        <span class="rounded-full border border-current/30 px-4 py-1.5 text-sm font-bold opacity-90">{{ lang }}</span>
+        <span class="rounded-full border border-current/30 px-4 py-2 text-base font-bold opacity-90">{{ lang }}</span>
       {% end %}
     </div>
   {% end %}

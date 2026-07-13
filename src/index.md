@@ -18,7 +18,7 @@ Learn to just be — in the water and in life.
 {:.text-2xl .sm:text-3xl .text-center .mb-8 .mt-0 .max-w-2xl .mx-auto}
 Freediving as a way back to yourself. Your own buoy, your own pace, someone watching over you. Off Phuket.
 
-{:.text-sm .sm:text-base .text-center .font-black .tracking-[0.2em] .uppercase .text-slate-400 .my-10}
+{:.text-base .text-center .font-black .tracking-[0.2em] .uppercase .text-slate-400 .my-10}
 Full body-mind · anti-desk therapy
 
 <div class="not-prose max-w-md mx-auto text-center text-lg my-16 leading-relaxed">
@@ -32,15 +32,15 @@ Full body-mind · anti-desk therapy
 <div class="not-prose max-w-3xl mx-auto grid gap-6 sm:grid-cols-3 my-16">
   <div class="rounded-2xl bg-white shadow-md p-6 text-center">
     <p class="text-xl font-black mb-1">Deep</p>
-    <p class="text-sm text-slate-500">Down the line, off the boat. Depth at your own pace.</p>
+    <p class="text-base text-slate-500">Down the line, off the boat. Depth at your own pace.</p>
   </div>
   <div class="rounded-2xl bg-white shadow-md p-6 text-center">
     <p class="text-xl font-black mb-1">Static</p>
-    <p class="text-sm text-slate-500">One breath, held still. The quiet at the centre of it all.</p>
+    <p class="text-base text-slate-500">One breath, held still. The quiet at the centre of it all.</p>
   </div>
   <div class="rounded-2xl bg-white shadow-md p-6 text-center">
     <p class="text-xl font-black mb-1">Pool</p>
-    <p class="text-sm text-slate-500">Technique and breath-work in calm, controlled water.</p>
+    <p class="text-base text-slate-500">Technique and breath-work in calm, controlled water.</p>
   </div>
 </div>
 

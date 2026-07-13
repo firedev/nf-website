@@ -17,15 +17,15 @@ title: Senior Freediving
   <div class="grid gap-6 sm:grid-cols-3 mb-14">
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Wave 1 — Beginner</p>
-      <p class="text-sm text-slate-500">Your first breath-holds and dives, safe and unhurried.</p>
+      <p class="text-base text-slate-500">Your first breath-holds and dives, safe and unhurried.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Wave 2 — Advanced</p>
-      <p class="text-sm text-slate-500">Deeper lines, cleaner technique, real ease at depth.</p>
+      <p class="text-base text-slate-500">Deeper lines, cleaner technique, real ease at depth.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Wave 3 — Master</p>
-      <p class="text-sm text-slate-500">The deep end — for divers ready to go all the way.</p>
+      <p class="text-base text-slate-500">The deep end — for divers ready to go all the way.</p>
     </div>
   </div>
 

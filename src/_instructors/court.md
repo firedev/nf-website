@@ -1,12 +1,13 @@
 ---
 layout: instructor
-name: "Court"
+name: "Court Burgon"
 affiliation: "Nama Freediving"
 affiliation_url: "https://namafreediving.com"
 location: "Phuket"
+instagram: "burgon_underwater"
 junior_instructor: true
 image: "/images/court.jpg"
-order: 4
+order: 2
 certifications:
   - "Molchanovs Wave 2 Instructor"
 languages:

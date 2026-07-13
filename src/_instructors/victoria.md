@@ -4,9 +4,10 @@ name: "Victoria Fawcus-Robinson"
 affiliation: "ScubaNicks"
 affiliation_url: "https://scubanicks.net"
 location: "Phuket"
+instagram: "barefootblondiephuket"
 junior_instructor: true
 image: "/images/victoria.jpg"
-order: 7
+order: 3
 certifications:
   - "SSI Senior Instructor"
   - "Freediving Instructor"

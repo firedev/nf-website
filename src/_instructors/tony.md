@@ -1,11 +1,12 @@
 ---
 layout: instructor
-name: "Tony"
+name: "Tony Myshlyaev"
 affiliation: "Nama Freediving"
 affiliation_url: "https://namafreediving.com"
 location: "Phuket"
+instagram: "tones.of.blue"
 image: "/images/tony.jpg"
-order: 3
+order: 5
 certifications:
   - "Molchanovs Wave 3 Instructor"
   - "Underwater photographer"

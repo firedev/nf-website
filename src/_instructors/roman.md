@@ -4,8 +4,9 @@ name: "Roman Garaikhanov"
 affiliation: "Molchanova Freediving School"
 affiliation_url: "https://molchanova.school"
 location: "Moscow"
+instagram: "roman_gara"
 image: "/images/roman.jpg"
-order: 5
+order: 6
 certifications:
   - "Molchanovs Wave 3 Instructor"
   - "Molchanovs Kids Instructor L1 & L2"
