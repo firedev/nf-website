@@ -48,10 +48,7 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
   </div>
 </div>
 
-{%@ "booking" %}
 
-{:.text-center .text-lg .mb-16}
-[Community →](/community/){:.font-bold .decoration-sky-200 .decoration-8}
 
 <div class="not-prose max-w-xl mx-auto my-16 text-center text-lg sm:text-xl leading-relaxed">
   <h2 class="text-2xl font-black mb-4">Kids dive too</h2>

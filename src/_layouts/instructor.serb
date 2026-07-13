@@ -72,6 +72,5 @@ layout: default
     </p>
   {% end %}
 
-  {%@ "booking" %}
 
 </div>

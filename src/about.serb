@@ -21,6 +21,5 @@ title: About
     <p>I'm writing a book about the thinking behind it — <a href="https://thinkforward.academy/book" class="font-bold decoration-sky-200 decoration-8">think → forward</a>.</p>
   </div>
 
-  {%@ "booking" %}
 
 </div>
