@@ -5,6 +5,8 @@ import "@shoelace-style/shoelace/dist/components/button/button.js"
 import "@shoelace-style/shoelace/dist/components/icon/icon.js"
 import "@shoelace-style/shoelace/dist/components/spinner/spinner.js"
 
+import  "./theme-switcher.js"
+
 // Use the public icons folder:
 import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path.js"
 // setBasePath("/shoelace-assets")
@@ -48,3 +50,5 @@ registerIconLibrary('heroicons', {
 setBasePath("/images");
 // Import all JavaScript & CSS files from src/_components
 import components from "$components/**/*.{js,jsx,js.rb,css}"
+
+console.info("Bridgetown is loaded!")
