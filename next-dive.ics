@@ -9,7 +9,7 @@ DTEND;VALUE=DATE:20260719
 RRULE:FREQ=WEEKLY;BYDAY=SA
 SUMMARY:Freediving with nofins — deep water, Phuket
 LOCATION:Phuket, Thailand
-DESCRIPTION:Saturday deep water off the boat. Reserve a spot: nick@firedev.com or Instagram @nofins
+DESCRIPTION:Saturday deep water off the boat. Reserve a spot: nick@firedev.com or Instagram @nofinsfreediving
 END:VEVENT
 BEGIN:VEVENT
 UID:weekly-pool@nofins.com
@@ -19,6 +19,6 @@ DTEND;VALUE=DATE:20260720
 RRULE:FREQ=WEEKLY;BYDAY=SU
 SUMMARY:Freediving with nofins — pool session, Phuket
 LOCATION:Phuket, Thailand
-DESCRIPTION:Sunday pool session — technique and breath-work. Reserve a spot: nick@firedev.com or Instagram @nofins
+DESCRIPTION:Sunday pool session — technique and breath-work. Reserve a spot: nick@firedev.com or Instagram @nofinsfreediving
 END:VEVENT
 END:VCALENDAR
