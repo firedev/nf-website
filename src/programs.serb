@@ -1,0 +1,54 @@
+---
+layout: default
+title: Programs
+---
+
+<div class="max-w-2xl mx-auto px-4 py-16">
+
+  <h1 class="text-4xl font-black mb-2 text-center">Programs</h1>
+  <p class="text-lg text-slate-500 mb-14 text-center">
+    Saturday sea, Sunday pool, the full Wave 1 path — flat prices, your own buoy.
+  </p>
+
+  <p class="prose mx-auto text-left mb-12">
+    Every program here runs one to one. Molchanovs standards allow four students per instructor in open water and eight in the pool; a nofins session is you, your instructor, and a buoy that's yours alone.
+  </p>
+
+  <div class="grid gap-6 sm:grid-cols-2 mb-14">
+    <div class="rounded-2xl border border-current/10 p-6">
+      <p class="text-lg font-black mb-1">First Dive</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Saturday · boat off Panwa beach · your own buoy</p>
+      <p class="text-2xl font-black my-3">฿7,900</p>
+      <p class="text-base text-slate-600 dark:text-slate-300 mb-3">You surface knowing how depth feels on one breath — and that it's yours to come back to.</p>
+      <a href="/first-dive/" class="font-bold decoration-sky-200 decoration-8">How the Saturday goes →</a>
+    </div>
+    <div class="rounded-2xl border border-current/10 p-6">
+      <p class="text-lg font-black mb-1">Sunday Pool</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Sunday · pool · one to one</p>
+      <p class="text-2xl font-black my-3">฿4,500</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">You leave with a longer, calmer breath-hold and technique set in still water.</p>
+    </div>
+    <div class="rounded-2xl border border-current/10 p-6">
+      <p class="text-lg font-black mb-1">The Weekend</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Saturday + Sunday · sea and pool</p>
+      <p class="text-2xl font-black my-3">฿11,900</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Depth on Saturday, technique on Sunday — you go home with both.</p>
+    </div>
+    <div class="rounded-2xl border border-current/10 p-6">
+      <p class="text-lg font-black mb-1">Wave 1 — private</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Theory + pool + two open-water days · Panwa beach</p>
+      <p class="text-2xl font-black my-3">฿21,900</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">You walk away with a Molchanovs certification recognised worldwide, dives to 12–20 m, and lifetime access to Base Training. The swim test is the only prerequisite.</p>
+    </div>
+    <div class="rounded-2xl border border-current/10 p-6">
+      <p class="text-lg font-black mb-1">Kids First Session</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Pool · one kid at a time</p>
+      <p class="text-2xl font-black my-3">฿3,900</p>
+      <p class="text-base text-slate-600 dark:text-slate-300 mb-3">A child who feels at home in the water — ease first, everything else grows from it.</p>
+      <a href="/junior/" class="font-bold decoration-sky-200 decoration-8">Junior freediving →</a>
+    </div>
+  </div>
+
+  {%@ "booking" %}
+
+</div>
