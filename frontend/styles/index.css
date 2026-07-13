@@ -1,5 +1,3 @@
-@import "theme-dark.css";
-
 @import "jit-refresh.css"; /* triggers frontend rebuilds */
 
 /* Tailwind v4: single import; scan templates for class names */
@@ -42,24 +40,6 @@
     @apply mb-4;
   }
 
-  /* Theme content visibility */
-  .light-content {
-    display: block;
-  }
-  
-  .dark-content {
-    display: none;
-  }
-
-  /* Dark theme styles */
-  :root.theme-dark .light-content {
-    display: none;
-  }
-  
-  :root.theme-dark .dark-content {
-    display: block;
-  }
-
   .break-words { word-break: break-word }
   .colorful {
     @apply text-sky-900;
@@ -68,7 +48,7 @@
   [aria-current="page"] {
     @apply decoration-4 decoration-sky-200 underline font-bold;
   }
-  .prose a:visited { @apply text-slate-500}
+  .prose a:visited { @apply text-slate-500 dark:text-slate-400 }
 
   .prose a {
     @apply decoration-8 decoration-sky-200 underline font-medium;
@@ -82,7 +62,7 @@
     @apply list-decimal list-inside mb-4;
   }
   .prose blockquote {
-    @apply pl-8 border-l-2 border-l-slate-300;
+    @apply pl-8 border-l-2 border-l-slate-300 dark:border-l-slate-700;
   }
 
   blockquote.bubble {
@@ -106,15 +86,15 @@
   }
 }
 
-:root {
-  --body-background: rgb(255 251 235); /* bg-amber-50 */
-  --body-color: rgb(69 26 3); /* bg-amber-950 */
-  --heading-color: black;
-  --action-color: #d64045;
+/* Calm dark base: slate-night background, light text. Everything else is
+   per-element dark: utilities in the templates — no parallel dark stylesheet. */
+body {
+  @apply text-slate-950 text-xl/8 bg-slate-50 dark:bg-slate-950 dark:text-slate-100;
 }
 
-body {
-  @apply text-slate-950 text-xl/8 bg-slate-50;
+/* Zen-circle logo: black brush stroke inverts to white on dark */
+.theme-dark img.zen-circle {
+  filter: invert(1);
 }
 
 .bg-logo {
