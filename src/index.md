@@ -6,6 +6,9 @@ title: Learn to just be — freediving off Phuket
 {:.text-6xl .font-bold .tracking-tight .animate .ease .fadeIn .delay-500 .flex .text-center .justify-center .sm:text-8xl .mb-16 .z-1 .relative .inline-block .w-full .line-height[2em] .font-light .flex .flex-col .items-center}
 <span class="font-black inline-flex items-center tracking-tighter">n<img src="/images/zen-circle-grunge-brush-stroke-2.png" alt="o" class="zen-circle" style="width:1.15em;height:1.15em;margin:0 -0.08em">fins</span><span class="font-light block text-6xl sm:text-8xl">freediving</span>
 
+{:.text-center .text-lg .sm:text-xl .mt-6 .mb-0}
+Off Phuket · every weekend · [Reserve →](#book){:.font-bold .decoration-sky-200 .decoration-8}
+
 {:.max-w-sm .mx-auto .rounded-full .overflow-hidden .shadow-lg .mt-8}
 ![](/images/meditation.png)
 
@@ -41,7 +44,7 @@ Full body-mind · anti-desk therapy
   </div>
 </div>
 
-<div class="next-dive max-w-xl mx-auto p-8 sm:p-12 bg-white dark:bg-white/5 rounded-lg shadow-md text-center my-16">
+<div id="book" class="next-dive max-w-xl mx-auto p-8 sm:p-12 bg-white dark:bg-white/5 rounded-lg shadow-md text-center my-16">
   <h2 class="text-4xl sm:text-5xl font-black mb-4 mt-0">Every weekend</h2>
   <p class="text-2xl sm:text-3xl font-bold mb-2">Saturday deep water · Sunday pool</p>
   <p class="text-lg mb-8">Phuket · one person per buoy · all levels</p>
