@@ -7,7 +7,7 @@ title: Community
 
   <h1 class="text-4xl font-black mb-2 text-center">Community</h1>
   <p class="text-lg text-slate-500 dark:text-slate-400 mb-14 text-center">
-    We just hang out — on the water. Every weekend, off Phuket.
+    We just hang out — on the water. Every weekend.
   </p>
 
   <p class="prose mx-auto text-left mb-12">
@@ -26,7 +26,7 @@ title: Community
     </div>
     <div class="rounded-2xl border border-current/10 p-6">
       <p class="text-lg font-black mb-1">First Dive</p>
-      <p class="text-base text-slate-600 dark:text-slate-300">Saturday · boat off Panwa beach · your own buoy</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Saturday · from the boat · your own buoy</p>
       <p class="text-base text-slate-600 dark:text-slate-300 mb-3">You surface knowing how depth feels on one breath — and that it's yours to come back to. Your dives get filmed; the video is yours the same day.</p>
       <a href="/first-dive/" class="font-bold decoration-sky-200 decoration-8">How the Saturday goes →</a>
     </div>

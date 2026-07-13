@@ -7,11 +7,11 @@ title: Your First Dive
 
   <h1 class="text-4xl font-black mb-2 text-center">Your first dive</h1>
   <p class="text-lg text-slate-500 dark:text-slate-400 mb-14 text-center">
-    A Saturday morning on the sea off Phuket — your own buoy, an instructor beside you.
+    A Saturday morning on the sea — your own buoy, an instructor beside you.
   </p>
 
   <div class="prose mx-auto text-left space-y-5 mb-14">
-    <p><span class="font-bold">Morning, Panwa beach.</span> We meet on Panwa beach, right on the sand. A short briefing before the water — how the day flows, how the line works. Then the boat.</p>
+    <p><span class="font-bold">Morning, on the beach.</span> We meet right on the sand. A short briefing before the water — how the day flows, how the line works. Then the boat.</p>
 
     <p><span class="font-bold">The boat out.</span> The bay opens up, buoys ahead. You get a few quiet minutes to watch the water and arrive.</p>
 
@@ -34,7 +34,7 @@ title: Your First Dive
 
     <p>Before your first session you'll fill in a short medical questionnaire — a few minutes, so we know how to guide exactly you.</p>
 
-    <p>The Phuket sea has its moods. When a Saturday moves, your weekend moves with it.</p>
+    <p>The sea has its moods. When a Saturday moves, your weekend moves with it.</p>
   </div>
 
   <div class="grid gap-6 sm:grid-cols-3 mb-14 text-center">

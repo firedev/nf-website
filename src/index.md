@@ -1,6 +1,6 @@
 ---
 layout: homepage
-title: Learn to just be — freediving off Phuket
+title: nofins freediving — come up more alive
 ---
 
 {:.text-6xl .font-bold .tracking-tight .animate .ease .fadeIn .delay-500 .flex .text-center .justify-center .sm:text-8xl .mb-16 .z-1 .relative .inline-block .w-full .line-height[2em] .font-light .flex .flex-col .items-center}
@@ -10,10 +10,9 @@ title: Learn to just be — freediving off Phuket
 Full body-mind · anti-desk therapy.
 
 {:.text-2xl .sm:text-3xl .text-center .mb-8 .mt-0 .max-w-2xl .mx-auto}
-Freediving as a way back to yourself. Your own buoy, your own pace, someone watching over you. Off Phuket.
+Freediving as a way back to yourself. Your own buoy, your own pace, someone watching over you.
 
 <div class="not-prose max-w-md mx-auto text-center text-lg my-16 leading-relaxed">
-  <p class="my-2"><span class="font-bold">Where</span> · Phuket, Thailand</p>
   <p class="my-2"><span class="font-bold">Who</span> · any level, first-timer to freediver</p>
   <p class="my-2"><span class="font-bold">The buoy</span> · one person per buoy, always your own</p>
   <p class="my-2"><span class="font-bold">Gear</span> · no fins, minimal gear</p>
@@ -68,12 +67,8 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
       <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Comfortable swimming is the only prerequisite for your first freediving session. The first dives are relaxed hangs on the line — one breath, a little way down — and the session builds from wherever you are.</p>
     </div>
     <div>
-      <h3 class="font-black text-lg mt-0 mb-1">Where exactly do you dive?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">We dive off Panwa beach, Phuket — pool on Sundays, the boat on Saturdays. Meet on the sand, a short briefing, then the water.</p>
-    </div>
-    <div>
       <h3 class="font-black text-lg mt-0 mb-1">When do you dive?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">nofins dives every weekend off Phuket: Saturday is deep water from the boat, Sunday is pool — technique and breath-work. Come for a day or the whole weekend.</p>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">nofins dives every weekend: Saturday is deep water from the boat, Sunday is pool — technique and breath-work. Come for a day or the whole weekend.</p>
     </div>
     <div>
       <h3 class="font-black text-lg mt-0 mb-1">Is breath-holding safe — what about blackouts?</h3>
@@ -87,4 +82,4 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
 </div>
 
 {:.max-w-xl .mx-auto .text-center .text-lg .mb-16}
-Run by Nick — developer turned freediving instructor. Molchanovs Wave 2. [More →](/instructors/nikolay-ostrovsky/) · [Meet the team →](/instructors/)
+Run by Nick — developer turned freediving instructor. Molchanovs Wave 2.
