@@ -22,7 +22,7 @@ title: Community
     <div class="rounded-2xl border border-current/10 p-6">
       <p class="text-lg font-black mb-1">Sunday Pool</p>
       <p class="text-base text-slate-600 dark:text-slate-300">Every Sunday · pool · one to one</p>
-      <p class="text-2xl font-black my-3">฿4,500</p>
+      <p class="text-2xl font-black my-3">฿2,000</p>
       <p class="text-base text-slate-600 dark:text-slate-300">The weekly one. A longer, calmer breath-hold and technique set in still water.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-6">
@@ -35,13 +35,13 @@ title: Community
     <div class="rounded-2xl border border-current/10 p-6">
       <p class="text-lg font-black mb-1">The Weekend</p>
       <p class="text-base text-slate-600 dark:text-slate-300">Two days · pool first, then the sea</p>
-      <p class="text-2xl font-black my-3">฿9,000</p>
+      <p class="text-2xl font-black my-3">฿6,500</p>
       <p class="text-base text-slate-600 dark:text-slate-300">Technique first, then depth — you go home with both.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-6">
       <p class="text-lg font-black mb-1">Kids Session</p>
       <p class="text-base text-slate-600 dark:text-slate-300">Pool · one kid at a time</p>
-      <p class="text-2xl font-black my-3">฿3,500</p>
+      <p class="text-2xl font-black my-3">฿2,500</p>
       <p class="text-base text-slate-600 dark:text-slate-300 mb-3">A child who feels at home in the water — ease first, everything else grows from it.</p>
       <a href="/junior/" class="font-bold decoration-sky-200 decoration-8">Freediving for kids →</a>
     </div>
