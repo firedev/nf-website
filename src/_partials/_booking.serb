@@ -3,8 +3,7 @@
   <p class="text-2xl sm:text-3xl font-bold mb-2">Saturday deep water · Sunday pool</p>
   <p class="text-lg mb-8">Phuket · one person per buoy · all levels</p>
   <div class="flex flex-col sm:flex-row gap-4 justify-center">
-    <a href="https://t.me/{{ site.metadata.telegram }}" class="next-dive-btn rounded-2xl py-3 px-6 font-bold bg-slate-950 text-white shadow-xl shadow-sky-950/10 no-underline dark:bg-transparent dark:border dark:border-white/30 dark:hover:bg-white/50">Message on Telegram</a>
-    <a href="https://www.instagram.com/{{ site.metadata.instagram }}/" class="next-dive-btn rounded-2xl py-3 px-6 font-bold bg-white border border-slate-300 shadow-sm no-underline dark:bg-transparent dark:border-white/30 dark:text-slate-100 dark:hover:bg-white/50">DM @{{ site.metadata.instagram }}</a>
+    <a href="https://www.instagram.com/{{ site.metadata.instagram }}/" class="next-dive-btn rounded-2xl py-3 px-6 font-bold bg-slate-950 text-white shadow-xl shadow-sky-950/10 no-underline dark:bg-transparent dark:border dark:border-white/30 dark:hover:bg-white/50">DM @{{ site.metadata.instagram }}</a>
     <a href="mailto:nick@firedev.com?subject=Freediving%20this%20weekend" class="next-dive-btn rounded-2xl py-3 px-6 font-bold bg-white border border-slate-300 shadow-sm no-underline dark:bg-transparent dark:border-white/30 dark:text-slate-100 dark:hover:bg-white/50">Email Nick</a>
   </div>
   <p class="text-base mt-6 mb-0">A short message is enough — Nick replies himself. Booked? <a href="/next-dive.ics" class="font-bold decoration-sky-200 decoration-8">Add the weekend to your calendar</a></p>
