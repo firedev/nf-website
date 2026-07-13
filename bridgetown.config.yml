@@ -1,9 +1,9 @@
 url: "https://nofins.com"
 permalink: simple
-timezone: America/Los_Angeles
+timezone: Asia/Bangkok
 template_engine: serbea
 
-available_locales: [en, ru]
+available_locales: [en]
 default_locale: en
 prefix_default_locale: false
 

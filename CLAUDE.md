@@ -1,6 +1,6 @@
 # Sites/nofins — nofins.com
 
-Bridgetown static site for Psychedelic Freediving (Phuket, Thailand) — read this before any work in this folder. The site features a unique dual-theme system where light and dark modes display different content and messaging. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/CLAUDE.md`.
+Bridgetown static site for nofins freediving (Phuket, Thailand) — read this before any work in this folder. Freediving-instructorship landing: hero «Learn to just be», junior/senior programs, 3 partner schools (Nama / ScubaNicks / Molchanova) + 7 instructors, dark-mode via Tailwind `dark:` classes. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/CLAUDE.md`.
 
 ## Development Commands
 
@@ -44,7 +44,8 @@ rake frontend:build           # Build frontend assets for production
 - **Serbea** - Template engine for layouts and components
 - **Tailwind CSS** - Utility-first CSS framework
 - **esbuild** - JavaScript bundler
-- **Shoelace** - Web component library for UI elements
+
+(Shoelace was removed 2026-07-13, #25 — the footer icon is an inline SVG now; JS bundle went 177KB → ~7KB)
 
 ### Key Directories
 - `src/` - Source content and templates
@@ -52,9 +53,10 @@ rake frontend:build           # Build frontend assets for production
   - `_layouts/` - Page templates in Serbea format
   - `_instructors/` - Instructor profiles collection
   - `schools/` - One page per partner school (`namafreediving`, `scubanicks`, `molchanova`) + `index.serb` hub. Each school page reuses the `instructor_list` partial filtered by `affiliation:` — so a new school needs its page + instructors carrying the matching `affiliation`, or it renders empty. Navbar links `/schools/`; individual school pages are reachable only via that hub (instructor cards link to the school's EXTERNAL site via `affiliation_url`, not the internal page — deliberate)
-  - `index.md` - Homepage content (contains both light/dark theme variations)
+  - `index.md` - Homepage content (single copy, no per-theme variations)
+  - `_partials/_booking.serb` - shared «Every weekend» booking card (`id="book"`), included on homepage, junior/senior/about and the instructor layout (#2)
 - `frontend/` - Frontend assets
-  - `javascript/` - JS modules (theme switcher, testimonials, etc.)
+  - `javascript/` - JS modules (theme switcher, etc.)
   - `styles/` - CSS files including Tailwind and theme styles
 - `output/` - Built static site (git-ignored in this repo; itself a separate git checkout of `firedev/nf-website` branch `master` — the deployment target)
 - `plugins/` - Custom Bridgetown plugins
@@ -64,11 +66,9 @@ The site uses a single Bridgetown collection:
 - `instructors` - Instructor profiles, grouped onto school pages by `affiliation:`. Currently 7: nikolay-ostrovsky, ben, tony, court (Nama Freediving); artur, roman (Molchanova Freediving School); victoria (ScubaNicks)
 
 ### Theme System
-The site implements a unique dual-content theme system:
-- Light theme ("Spiritual Pool") - Beginner-friendly messaging
-- Dark theme ("Psychedelic Wave") - Advanced/psychedelic messaging
-- Theme switcher in `frontend/javascript/theme-switcher.js` (toggles `theme-dark` class on `:root`, persists in localStorage)
-- Different content blocks shown via `.light-content` / `.dark-content` classes (`{:.light-content}` markers in `index.md`)
+Plain light/dark **appearance** toggle (same copy in both themes — the old dual-*content* system with `.light-content`/`.dark-content` blocks and Spiritual Pool / Psychedelic Wave messaging was retired 2026-07-13, issue #21):
+- Switcher in `frontend/javascript/theme-switcher.js` — toggles `theme-dark` on `:root`, respects `prefers-color-scheme`, persists in localStorage
+- Dark styles via Tailwind `dark:` utility classes on elements (not content-swapping); leftover `frontend/styles/theme-dark.css` is being phased out
 
 ### Deployment
 - Deploys to legacy GitHub Pages at nofins.com: repo `firedev/nf-website`, Pages serves branch `master` path `/`. Source code lives on branch `source` of the same repo
@@ -79,8 +79,7 @@ The site implements a unique dual-content theme system:
   3. Commits and pushes `output/` to `master` of `firedev/nf-website`
 
 ### Internationalization
-- English and Russian locales declared in `bridgetown.config.yml` (`available_locales`); ru content does not exist yet — the site is en-only in practice
-- Configured in `bridgetown.config.yml`
+- **en-only.** `available_locales: [en]` in `bridgetown.config.yml` (ru was declared but never had content — dropped 2026-07-13, #25). Re-add `ru` only alongside real ru content
 - Prefix URLs disabled for cleaner paths
 
 ## Development Guidelines
@@ -94,13 +93,15 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 ### Adding Content
 - Instructors: Add to `src/_instructors/` collection
 - Static pages: Add Markdown or HTML files to `src/`
-- Homepage copy lives in `src/index.md` — every block exists twice (`{:.light-content}` + `{:.dark-content}`)
+- Homepage copy lives in `src/index.md` — single content (no per-theme copy swap)
+- Schools: one page per school in `src/schools/`, grouped by instructor `affiliation:`; add the school to `src/schools/index.serb` hub too (nothing else links the page)
+- `src/next-dive.ics` is **hand-maintained** — recurring RRULE (SA deep water / SU pool). If the weekend schedule pauses or shifts, edit this file, else it becomes a standing false promise. Homepage «Every weekend» block in `index.md` must stay in sync
 
 ### Frontend Development
 - JavaScript modules go in `frontend/javascript/`
 - Styles use Tailwind utilities in `frontend/styles/`
-- Shoelace components are available globally after build
-- To show/hide content based on theme use `.light-content` / `.dark-content` classes; dark styles hang off `:root.theme-dark` (there is no `data-theme` attribute in this codebase)
+- No Shoelace / web-component library — icons are inline SVG (removed 2026-07-13, #25)
+- Dark styling is Tailwind `dark:` utilities on elements; the toggle hangs `theme-dark` on `:root` (there is no `data-theme` attribute, no per-theme content blocks)
 
 ### Building and Testing Changes
 1. Run `yarn start` for development server
