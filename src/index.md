@@ -10,7 +10,7 @@ title: Learn to just be — freediving off Phuket
 Off Phuket · every weekend · [Reserve →](#book){:.font-bold .decoration-sky-200 .decoration-8}
 
 {:.text-3xl .sm:text-4xl .max-w-2xl .mx-auto .font-bold .text-center .my-10}
-Learn to just be — in the water and in life.
+Full body-mind · anti-desk therapy.
 
 {:.text-2xl .sm:text-3xl .text-center .mb-8 .mt-0 .max-w-2xl .mx-auto}
 Freediving as a way back to yourself. Your own buoy, your own pace, someone watching over you. Off Phuket.
@@ -39,7 +39,7 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
 </div>
 
 <div class="not-prose max-w-2xl mx-auto my-24 text-center">
-  <h2 class="text-2xl sm:text-3xl font-black tracking-tight mb-6">Full body-mind · anti-desk therapy</h2>
+  <h2 class="text-2xl sm:text-3xl font-black tracking-tight mb-6">Learn to just be — in the water and in life</h2>
   <div class="text-lg sm:text-xl space-y-3 leading-relaxed">
     <p>Saturday morning you're on the water, holding your own buoy.</p>
     <p>One slow breath down the line and the body switches fully on. Attention gathers. You're finally here.</p>
