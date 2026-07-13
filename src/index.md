@@ -67,28 +67,28 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
   <h2 class="text-2xl sm:text-3xl font-black mb-8 text-center">Questions</h2>
   <div class="space-y-6">
     <div>
-      <p class="font-black text-lg mb-1">Do I need experience?</p>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Comfortable swimming covers it. Your first dives are warm-ups — one breath, a relaxed hang a little way down — and the session builds from wherever you are.</p>
+      <h3 class="font-black text-lg mt-0 mb-1">Do I need experience to try freediving?</h3>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Comfortable swimming is the only prerequisite for your first freediving session. The first dives are relaxed hangs on the line — one breath, a little way down — and the session builds from wherever you are.</p>
     </div>
     <div>
-      <p class="font-black text-lg mb-1">How deep will I go?</p>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">The day's depth is yours to set. Any point on the line is a complete dive — you bring the ease up with you either way, and the line is there again next Saturday.</p>
+      <h3 class="font-black text-lg mt-0 mb-1">How much does freediving cost on Phuket?</h3>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">A first freediving session with nofins on Phuket costs ฿7,900 — flat, one to one. Sunday pool is ฿4,500, the full Weekend ฿11,900, a private Molchanovs Wave 1 course ฿21,900. <a href="/programs/" class="font-bold decoration-sky-200 decoration-8">Programs & prices →</a></p>
     </div>
     <div>
-      <p class="font-black text-lg mb-1">Can I stop whenever I want?</p>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">You surface whenever you choose — that stays true on your first session and at every level after. Recovery breathing at the surface, your instructor beside you, then down again when you're ready.</p>
+      <h3 class="font-black text-lg mt-0 mb-1">Where exactly do you dive?</h3>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">We dive off Panwa beach, Phuket — pool sessions and boat trips run from Nama Freediving, a Molchanovs beachfront center. Meet on the sand, a short briefing, then the boat.</p>
     </div>
     <div>
-      <p class="font-black text-lg mb-1">What about my ears?</p>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Ears learn to equalize — it's a skill we teach from the first session. The pace of the course is the pace of your ears: each new depth comes when they're ready.</p>
+      <h3 class="font-black text-lg mt-0 mb-1">When do you dive?</h3>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">nofins dives every weekend off Phuket: Saturday is deep water from the boat, Sunday is pool — technique and breath-work. Book one day or the whole weekend.</p>
     </div>
     <div>
-      <p class="font-black text-lg mb-1">Is breath-holding safe — what about blackouts?</p>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">The progression is conservative: you dive no deeper than the depth you've earned, an instructor meets you on every ascent, and the buoy is yours alone. Safety is the structure of the whole session, built in before the first breath-hold.</p>
+      <h3 class="font-black text-lg mt-0 mb-1">Is breath-holding safe — what about blackouts?</h3>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Freediving with nofins follows a conservative progression: you dive no deeper than the depth you've earned, an instructor meets you on every ascent, and the buoy is yours alone. Safety is the structure of the whole session, built in before the first breath-hold.</p>
     </div>
     <div>
-      <p class="font-black text-lg mb-1">When do you dive?</p>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Every weekend, off Phuket. Saturday is deep water — off the boat, down the line. Sunday is pool — technique and breath-work in calm water. Book one day or the whole weekend.</p>
+      <h3 class="font-black text-lg mt-0 mb-1">Can I stop or turn back whenever I want?</h3>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Yes — you surface whenever you choose, and any point on the line is a complete dive. Recovery breathing at the surface, your instructor beside you, then down again when you're ready.</p>
     </div>
   </div>
 </div>

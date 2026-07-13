@@ -52,27 +52,31 @@ title: Freediving for Kids
     <p class="font-black text-xl mb-6">For parents</p>
     <div class="space-y-5">
       <div>
-        <p class="font-black mb-1">Can I watch — can I be in the water?</p>
+        <h3 class="font-black text-base mt-0 mb-1">Can I watch — can I be in the water?</h3>
         <p class="text-base text-slate-600 dark:text-slate-300">Both. You stay close — on the deck, or in the water on your own buoy.</p>
       </div>
       <div>
-        <p class="font-black mb-1">How many kids per instructor?</p>
+        <h3 class="font-black text-base mt-0 mb-1">How many kids per instructor?</h3>
         <p class="text-base text-slate-600 dark:text-slate-300">One. Your child has the instructor's full attention for the whole session.</p>
       </div>
       <div>
-        <p class="font-black mb-1">What if my child stays at the water's edge?</p>
+        <h3 class="font-black text-base mt-0 mb-1">At what age can a child start freediving?</h3>
+        <p class="text-base text-slate-600 dark:text-slate-300">Water comfort starts as young as a child is happy to play in the pool — every session runs at their pace. At 16–17 the full Molchanovs Wave 1 course opens up, with parental consent.</p>
+      </div>
+      <div>
+        <h3 class="font-black text-base mt-0 mb-1">What if my child stays at the water's edge?</h3>
         <p class="text-base text-slate-600 dark:text-slate-300">Then that's where the session is. It starts wherever your child is that day — feet on the steps, waist-deep, already swimming — and moves at their pace. Each step into the water is theirs, and that's what makes it stick.</p>
       </div>
       <div>
-        <p class="font-black mb-1">Are there tests or badges?</p>
-        <p class="text-base text-slate-600 dark:text-slate-300">Play leads. Certification follows when the child wants it.</p>
-      </div>
-      <div>
-        <p class="font-black mb-1">What does a session look like for a 5-year-old vs a teenager?</p>
+        <h3 class="font-black text-base mt-0 mb-1">What does a session look like for a 5-year-old vs a teenager?</h3>
         <p class="text-base text-slate-600 dark:text-slate-300">For a five-year-old: floating, splashing, breath games — water comfort is the whole lesson. For a teenager: technique, longer glides, real depth when they're ready. The age bands above walk through it. Either way, attention sets the length: the session runs as long as your child's interest does.</p>
       </div>
       <div>
-        <p class="font-black mb-1">Is breath-holding safe for a developing child?</p>
+        <h3 class="font-black text-base mt-0 mb-1">Can my child get a freediving certification?</h3>
+        <p class="text-base text-slate-600 dark:text-slate-300">Yes — from 16, with parental consent, teens take the full Molchanovs Wave 1 course and leave certified freedivers. Until then play leads, and certification follows when the child wants it.</p>
+      </div>
+      <div>
+        <h3 class="font-black text-base mt-0 mb-1">Is breath-holding safe for a developing child?</h3>
         <p class="text-base text-slate-600 dark:text-slate-300">Kids' sessions stay shallow and playful — one instructor, one child, always within arm's reach. Breath games are short and easy, and there are no numbers to chase: the session follows your child's comfort, and comfort is the measure.</p>
       </div>
     </div>
