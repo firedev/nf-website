@@ -33,47 +33,9 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
   </div>
 </div>
 
-<div class="not-prose max-w-2xl mx-auto my-24 text-center">
-  <h2 class="text-2xl sm:text-3xl font-black tracking-tight mb-6">Learn to just be — in the water and in life</h2>
-  <div class="text-lg sm:text-xl space-y-3 leading-relaxed">
-    <p>Saturday morning you're on the water, holding your own buoy.</p>
-    <p>One slow breath down the line and the body switches fully on. Attention gathers. You're finally here.</p>
-    <p>The ease you find stays — it comes back to the desk with you.</p>
-  </div>
-</div>
 
 
 
-<div class="not-prose max-w-xl mx-auto my-16 text-center text-lg sm:text-xl leading-relaxed">
-  <h2 class="text-2xl font-black mb-4">Kids grow up in this water</h2>
-  <p>Sunday mornings at the pool are for families too — kids play their breath games in the shallow end, parents float on their own buoys close by.</p>
-  <p class="mt-4"><a href="/junior/" class="font-bold decoration-sky-200 decoration-8">Kids in the water →</a></p>
-</div>
 
-<div class="not-prose max-w-xl mx-auto my-16 text-center text-lg sm:text-xl leading-relaxed">
-  <h2 class="text-2xl font-black mb-4">We just hang out — on the water</h2>
-  <p>Saturday morning the boat goes out. Everyone on their own buoy, each in their own water. Breakfast together after.</p>
-</div>
 
-<div class="not-prose max-w-2xl mx-auto my-20 text-left">
-  <h2 class="text-2xl sm:text-3xl font-black mb-8 text-center">Questions</h2>
-  <div class="space-y-6">
-    <div>
-      <h3 class="font-black text-lg mt-0 mb-1">Does freediving take experience?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Comfortable swimming is enough to start. First dives are relaxed hangs on the line — one breath, a little way down — and everything builds from wherever a person is.</p>
-    </div>
-    <div>
-      <h3 class="font-black text-lg mt-0 mb-1">When do we dive?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Every weekend: Saturday is deep water from the boat, Sunday is pool — technique and breath-work.</p>
-    </div>
-    <div>
-      <h3 class="font-black text-lg mt-0 mb-1">Is breath-holding safe — what about blackouts?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">We follow a conservative progression: nobody dives deeper than the depth they've earned, someone meets every diver on the ascent, and the buoy is never shared. Safety is the structure of the whole session, built in before the first breath-hold.</p>
-    </div>
-    <div>
-      <h3 class="font-black text-lg mt-0 mb-1">Can a diver stop whenever they want?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Always — a freediver surfaces whenever they choose, and any point on the line is a complete dive. Recovery breathing at the surface, then down again when ready.</p>
-    </div>
-  </div>
-</div>
 
