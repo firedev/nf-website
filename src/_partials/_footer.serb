@@ -3,7 +3,7 @@
     <nav class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-base font-bold">
       <a href="/schools/" class="no-underline hover:underline decoration-sky-200 decoration-8">Partner schools</a>
       <a href="/instructors/" class="no-underline hover:underline decoration-sky-200 decoration-8">Instructors</a>
-      <a href="/programs/" class="no-underline hover:underline decoration-sky-200 decoration-8">Programs</a>
+      <a href="/programs/" class="no-underline hover:underline decoration-sky-200 decoration-8">Community</a>
     </nav>
     <div class="my-8">
       <a href="https://firedev.com" target="_blank" class="inline-flex">

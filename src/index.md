@@ -50,7 +50,7 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
 {%@ "booking" %}
 
 {:.text-center .text-lg .mb-16}
-[Programs & prices →](/programs/){:.font-bold .decoration-sky-200 .decoration-8}
+[Community & prices →](/programs/){:.font-bold .decoration-sky-200 .decoration-8}
 
 <div class="not-prose max-w-xl mx-auto my-16 text-center text-lg sm:text-xl leading-relaxed">
   <h2 class="text-2xl font-black mb-4">Kids dive too</h2>
@@ -72,7 +72,7 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
     </div>
     <div>
       <h3 class="font-black text-lg mt-0 mb-1">How much does freediving cost on Phuket?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">A first freediving session with nofins on Phuket costs ฿7,900 — flat, one to one. Sunday pool is ฿4,500, the full Weekend ฿11,900, a private Molchanovs Wave 1 course ฿21,900. <a href="/programs/" class="font-bold decoration-sky-200 decoration-8">Programs & prices →</a></p>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">A first freediving session with nofins on Phuket costs ฿7,900 — flat, one to one. Sunday pool is ฿4,500, the full Weekend ฿11,900, a private Molchanovs Wave 1 course ฿21,900. <a href="/programs/" class="font-bold decoration-sky-200 decoration-8">Community & prices →</a></p>
     </div>
     <div>
       <h3 class="font-black text-lg mt-0 mb-1">Where exactly do you dive?</h3>
