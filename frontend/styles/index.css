@@ -93,6 +93,12 @@ body {
 }
 
 /* Zen-circle logo: black brush stroke inverts to white on dark */
+/* Dark: depth gradient — surface water up top, near-black at depth (fixed so long pages don't band) */
+.theme-dark body {
+  background: linear-gradient(180deg, #082f49 0%, #0c1a33 45%, #020617 100%);
+  background-attachment: fixed;
+}
+
 .theme-dark img.zen-circle {
   filter: invert(1);
 }
