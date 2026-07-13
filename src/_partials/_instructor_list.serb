@@ -17,7 +17,7 @@
         <div class="relative aspect-[3/4] overflow-hidden bg-slate-100">
           <img src="{{ i.data.image }}" alt="{{ i.data.name }}" class="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105">
           {% if i.data.junior_instructor %}
-            <span class="absolute bottom-3 left-3 rounded-full bg-sky-200 text-slate-950 px-3 py-1 text-sm font-black uppercase tracking-wide shadow">Junior Instructor</span>
+            <span class="absolute bottom-3 left-3 rounded-full bg-sky-500 text-white px-3 py-1 text-base font-black uppercase tracking-wide shadow-lg ring-1 ring-white/30">Junior Instructor</span>
           {% end %}
         </div>
       {% end %}
