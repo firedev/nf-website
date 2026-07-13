@@ -1,0 +1,60 @@
+---
+layout: default
+title: Your First Dive
+---
+
+<div class="max-w-2xl mx-auto px-4 py-16">
+
+  <h1 class="text-4xl font-black mb-2 text-center">Your first dive</h1>
+  <p class="text-lg text-slate-500 mb-14 text-center">
+    A Saturday morning on the sea off Phuket — your own buoy, an instructor beside you.
+  </p>
+
+  <div class="prose mx-auto text-left space-y-5 mb-14">
+    <p><span class="font-bold">Morning, Panwa beach.</span> We meet at Nama Freediving, right on the sand. A short briefing before the water — how the day flows, how the line works. Then the boat.</p>
+
+    <p><span class="font-bold">The boat out.</span> The bay opens up, buoys ahead. You get a few quiet minutes to watch the water and arrive.</p>
+
+    <p><span class="font-bold">Your own buoy.</span> Yours for the whole session. You hold the line and breathe — slow, easy surface breathing while the sea rocks under you.</p>
+
+    <p><span class="font-bold">First hangs on the line.</span> The first dives are warm-ups: one breath, then a relaxed hang a little way down. The body finds its dive mode on its own — heart slowing, everything going soft.</p>
+
+    <p><span class="font-bold">Dive, breathe, dive again.</span> Recovery breathing at the surface after every dive, your instructor right beside you. Down again whenever you're ready. The day's depth is yours to set — and any point on the line is a complete dive.</p>
+
+    <p><span class="font-bold">Back on the beach by noon.</span> Salt on your skin, most of the day still ahead. The ease you found on the line comes up with you.</p>
+  </div>
+
+  <div class="not-prose max-w-md mx-auto text-center text-lg my-14 leading-relaxed">
+    <p class="my-2"><span class="font-bold">Bring</span> · swimwear — that covers it</p>
+    <p class="my-2"><span class="font-bold">Prerequisite</span> · comfortable swimming</p>
+  </div>
+
+  <div class="prose mx-auto text-left space-y-5 mb-14">
+    <p>Nick is beside you the whole session — Molchanovs Wave 2 instructor, in the water with you from the first breath to the last dive.</p>
+
+    <p>Before your first session you'll fill in a short medical questionnaire — a few minutes, so we know how to guide exactly you.</p>
+
+    <p>The Phuket sea has its moods. When a Saturday moves, your booking moves with it.</p>
+  </div>
+
+  <div class="grid gap-6 sm:grid-cols-3 mb-14 text-center">
+    <div class="rounded-2xl border border-current/10 p-5">
+      <p class="text-lg font-black mb-1">First dive</p>
+      <p class="text-base text-slate-600 dark:text-slate-300 mb-3">Saturday on the sea, your own buoy</p>
+      <p class="text-2xl font-black">฿7,900</p>
+    </div>
+    <div class="rounded-2xl border border-current/10 p-5">
+      <p class="text-lg font-black mb-1">Sunday pool</p>
+      <p class="text-base text-slate-600 dark:text-slate-300 mb-3">Technique and breath-work, one to one</p>
+      <p class="text-2xl font-black">฿4,500</p>
+    </div>
+    <div class="rounded-2xl border border-current/10 p-5">
+      <p class="text-lg font-black mb-1">The Weekend</p>
+      <p class="text-base text-slate-600 dark:text-slate-300 mb-3">Both days, sea and pool</p>
+      <p class="text-2xl font-black">฿11,900</p>
+    </div>
+  </div>
+
+  {%@ "booking" %}
+
+</div>
