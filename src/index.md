@@ -17,12 +17,6 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
   <p>I'm a Molchanovs-certified freediver, and part of an active freediving community here — we train at the pool, and we take the boat out for trips.</p>
 </div>
 
-<div class="not-prose max-w-md mx-auto text-center text-lg my-16 leading-relaxed">
-  <p class="my-2"><span class="font-bold">The rhythm</span> · Saturday deep water, Sunday pool</p>
-  <p class="my-2"><span class="font-bold">The buoy</span> · one person per buoy, always your own</p>
-  <p class="my-2"><span class="font-bold">Gear</span> · no fins, minimal gear</p>
-  <p class="my-2"><span class="font-bold">The way</span> · Molchanovs, Wave 1–3</p>
-</div>
 
 <div class="not-prose max-w-3xl mx-auto grid gap-6 sm:grid-cols-3 my-16">
   <div class="rounded-2xl bg-white dark:bg-slate-900 shadow-md p-6 text-center">

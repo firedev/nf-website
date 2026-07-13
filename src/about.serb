@@ -10,13 +10,6 @@ title: About
     Where we're going, we don't fins.
   </p>
 
-
-  <div class="not-prose max-w-md mx-auto text-center text-lg my-14 leading-relaxed">
-    <p class="my-2"><span class="font-bold">Who</span> · any level, first-timer to freediver</p>
-    <p class="my-2"><span class="font-bold">The buoy</span> · one person per buoy, always your own</p>
-    <p class="my-2"><span class="font-bold">Gear</span> · no fins, minimal gear</p>
-  </div>
-
   <div class="prose mx-auto text-left space-y-5 mb-14">
     <p>I'm writing a book about the thinking behind it — <a href="https://thinkforward.academy/book" class="font-bold decoration-sky-200 decoration-8">think → forward</a>.</p>
   </div>
