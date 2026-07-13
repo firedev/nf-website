@@ -81,5 +81,3 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
   </div>
 </div>
 
-{:.max-w-xl .mx-auto .text-center .text-lg .mb-16}
-Run by Nick — developer turned freediving instructor. Molchanovs Wave 2.

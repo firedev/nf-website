@@ -26,14 +26,8 @@ title: About
   </div>
 
   <div class="prose mx-auto text-left space-y-5 mb-14">
-    <p>Run by Nick — developer turned freediving instructor. Molchanovs Wave 2. Freediving changed my life.</p>
-
-    <p>I'm writing a book about the thinking behind it — <a href="https://thinkforward.academy/book" class="font-bold decoration-sky-200 decoration-8">think → forward</a>.</p>
+    <p>The thinking behind it lives in a book — <a href="https://thinkforward.academy/book" class="font-bold decoration-sky-200 decoration-8">think → forward</a>.</p>
   </div>
-
-  <p class="text-center">
-    <a href="/instructors/" class="font-bold decoration-sky-200 decoration-8">Meet the instructors →</a>
-  </p>
 
   {%@ "booking" %}
 

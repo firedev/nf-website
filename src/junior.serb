@@ -93,7 +93,6 @@ title: Freediving for Kids
   </div>
 
   <p class="text-center">
-    <a href="/instructors/" class="font-bold decoration-sky-200 decoration-8">Meet the instructors →</a>
   </p>
 
   {%@ "booking" %}
