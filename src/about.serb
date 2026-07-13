@@ -7,7 +7,7 @@ title: About
 
   <h1 class="text-4xl font-black mb-2 text-center">About</h1>
   <p class="text-lg text-slate-500 mb-14 text-center">
-    Where we're going, we don't need fins.
+    Where we're going, we don't fins.
   </p>
 
   <div class="prose mx-auto text-left space-y-5">
@@ -21,13 +21,15 @@ title: About
   <div class="not-prose max-w-md mx-auto text-center text-lg my-14 leading-relaxed">
     <p class="my-2"><span class="font-bold">Where</span> · Phuket, Thailand</p>
     <p class="my-2"><span class="font-bold">Who</span> · any level, first-timer to freediver</p>
-    <p class="my-2"><span class="font-bold">Gear</span> · nothing is needed</p>
+    <p class="my-2"><span class="font-bold">The buoy</span> · one person per buoy, always your own</p>
+    <p class="my-2"><span class="font-bold">Gear</span> · no fins, minimal gear</p>
+    <p class="my-2"><span class="font-bold">Guide</span> · Molchanovs Wave 2 instructor</p>
   </div>
 
   <div class="prose mx-auto text-left space-y-5 mb-14">
-    <p>Run by Nick — a developer who dives the line with you. Molchanovs Wave 2 instructor, static best 6:15.</p>
+    <p>Run by Nick — developer turned freediving instructor. Molchanovs Wave 2. Freediving changed my life.</p>
 
-    <p>I'm also writing a book about the thinking behind all this — <a href="https://thinkforward.academy/book" class="font-bold decoration-sky-200 decoration-8">think → forward</a>.</p>
+    <p>I'm writing a book about the thinking behind it — <a href="https://thinkforward.academy/book" class="font-bold decoration-sky-200 decoration-8">think → forward</a>.</p>
   </div>
 
   <p class="text-center">
