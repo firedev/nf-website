@@ -1,67 +1,54 @@
 ---
 layout: default
-title: Freediving for Adults
+title: Freediving
 ---
 
 <div class="max-w-2xl mx-auto px-4 py-16">
 
-  <h1 class="text-4xl font-black mb-2 text-center">Freediving for Adults</h1>
+  <h1 class="text-4xl font-black mb-2 text-center">Freediving</h1>
   <p class="text-lg text-slate-500 dark:text-slate-400 mb-14 text-center">
     A way back to yourself — your own buoy, your own pace.
   </p>
 
   <p class="prose mx-auto text-left mb-12">
-    Just breath, body, and attention. We teach the steadiness of the breath-hold — it follows you back into your day, into whatever the day holds. Start where you are; the water meets you there. Molchanovs Wave 1 through 3.
+    Just breath, body, and attention. The steadiness of the breath-hold follows you back into your day, into whatever the day holds. We train the Molchanovs way — Wave 1 through 3.
   </p>
 
   <div class="prose mx-auto text-left space-y-5 mb-14">
     <p>The urge to breathe is a reflex — and once you feel that for yourself, the whole thing opens up. You stay with it, ease arrives on its own, and the line becomes somewhere you want to be.</p>
 
-    <p>Your body already knows how. Put your face in the water and the heart slows down by itself — the mammalian dive reflex, a calm the body has carried all along. Freediving is learning to rest inside it.</p>
+    <p>The body already knows how. Put your face in the water and the heart slows down by itself — the mammalian dive reflex, a calm the body has carried all along. Freediving is learning to rest inside it.</p>
 
-    <p>Any point on the line is a complete dive — the day's depth is yours to set. That ease is what you take back up. You come up more alive, and it follows you.</p>
+    <p>Any point on the line is a complete dive — the day's depth is each diver's own. That ease is what comes back up. You come up more alive, and it follows you.</p>
   </div>
+
+  <p class="prose mx-auto text-left mb-6">
+    The Molchanovs path we train in, wave by wave:
+  </p>
 
   <div class="grid gap-6 sm:grid-cols-3 mb-6">
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Wave 1 · 12–20 m</p>
-      <p class="text-base text-slate-600 dark:text-slate-300 mb-3">Your first real dives. Theory, pool and open water: breath-holds, equalization, safety, the line. The one prerequisite is a swim test.</p>
-      <p class="text-base text-slate-600 dark:text-slate-300">You leave a certified freediver, at home in open water.</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">First real dives. Theory, pool and open water: breath-holds, equalization, safety, the line.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Wave 2 · 24–30 m</p>
-      <p class="text-base text-slate-600 dark:text-slate-300 mb-3">Frenzel equalization and your first freefall — the part of the dive where the water carries you. For Wave 1 divers and crossovers from other agencies.</p>
-      <p class="text-base text-slate-600 dark:text-slate-300">You leave with clean technique and the freefall in your body.</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Frenzel equalization and the first freefall — the part of the dive where the water carries you.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Wave 3 · 34–40 m</p>
-      <p class="text-base text-slate-600 dark:text-slate-300 mb-3">Mouthfill equalization and long, quiet freefalls — ease at depth, staying soft and clear where the light turns blue.</p>
-      <p class="text-base text-slate-600 dark:text-slate-300">You leave with mastery that feels like rest.</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">Mouthfill and long, quiet freefalls — ease at depth, soft and clear where the light turns blue.</p>
     </div>
   </div>
 
   <p class="prose mx-auto text-left mb-14">
-    Every Wave ends with a Molchanovs certification recognized worldwide — and lifetime access to Base Training, structured practice for the time between courses.
+    Each Wave carries a certification recognised worldwide, with Base Training in between — structured practice for the time between waves. That's the system this community grows in.
   </p>
-
-  <div class="rounded-2xl border border-current/10 p-6 sm:p-8 mb-14">
-    <p class="font-black text-xl mb-4">Your first session</p>
-    <div class="space-y-3 text-base text-slate-600 dark:text-slate-300">
-      <p>Your first dives are warm-ups — short, easy, well within what your body can do.</p>
-      <p>Your instructor is right beside you, dive after dive.</p>
-      <p>You surface whenever you choose. The line waits.</p>
-      <p>Before we start, a short medical questionnaire — so we know your body and can look after you properly in the water.</p>
-    </div>
-  </div>
 
   <div class="prose mx-auto text-left space-y-5 mb-14">
-    <p>We run two rhythms: <span class="font-bold">deep water on Saturdays</span> — off the boat, down the line — and <span class="font-bold">pool sessions on Sundays</span> for technique and breath-work. One person per buoy, always your own. Come to either, or both.</p>
+    <p>Our weekends run in two rhythms: <span class="font-bold">deep water on Saturdays</span> — off the boat, down the line — and <span class="font-bold">pool on Sundays</span> for technique and breath-work. One person per buoy, always your own.</p>
 
-    <p>Kids learn the same way, in the same water — <a href="/junior/" class="font-bold decoration-sky-200 decoration-8">freediving for kids</a>.</p>
+    <p>The kids of the community grow up in the same water — <a href="/junior/" class="font-bold decoration-sky-200 decoration-8">freediving for kids</a>.</p>
   </div>
-
-  <p class="text-center">
-  </p>
-
 
 </div>

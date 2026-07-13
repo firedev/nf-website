@@ -18,10 +18,10 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
 </div>
 
 <div class="not-prose max-w-md mx-auto text-center text-lg my-16 leading-relaxed">
-  <p class="my-2"><span class="font-bold">Who</span> · any level, first-timer to freediver</p>
+  <p class="my-2"><span class="font-bold">The rhythm</span> · Saturday deep water, Sunday pool</p>
   <p class="my-2"><span class="font-bold">The buoy</span> · one person per buoy, always your own</p>
   <p class="my-2"><span class="font-bold">Gear</span> · no fins, minimal gear</p>
-  <p class="my-2"><span class="font-bold">Guide</span> · Molchanovs Wave 2 instructor</p>
+  <p class="my-2"><span class="font-bold">The way</span> · Molchanovs, Wave 1–3</p>
 </div>
 
 <div class="not-prose max-w-3xl mx-auto grid gap-6 sm:grid-cols-3 my-16">
@@ -51,9 +51,9 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
 
 
 <div class="not-prose max-w-xl mx-auto my-16 text-center text-lg sm:text-xl leading-relaxed">
-  <h2 class="text-2xl font-black mb-4">Kids dive too</h2>
-  <p>Sunday at the pool: your child in the water with their own instructor — one kid at a time — while you float on your own buoy close by.</p>
-  <p class="mt-4"><a href="/junior/" class="font-bold decoration-sky-200 decoration-8">Freediving for kids →</a></p>
+  <h2 class="text-2xl font-black mb-4">Kids grow up in this water</h2>
+  <p>Sunday mornings at the pool are for families too — kids play their breath games in the shallow end, parents float on their own buoys close by.</p>
+  <p class="mt-4"><a href="/junior/" class="font-bold decoration-sky-200 decoration-8">Kids in the water →</a></p>
 </div>
 
 <div class="not-prose max-w-xl mx-auto my-16 text-center text-lg sm:text-xl leading-relaxed">
@@ -65,20 +65,20 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
   <h2 class="text-2xl sm:text-3xl font-black mb-8 text-center">Questions</h2>
   <div class="space-y-6">
     <div>
-      <h3 class="font-black text-lg mt-0 mb-1">Do I need experience to try freediving?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Comfortable swimming is the only prerequisite for your first freediving session. The first dives are relaxed hangs on the line — one breath, a little way down — and the session builds from wherever you are.</p>
+      <h3 class="font-black text-lg mt-0 mb-1">Does freediving take experience?</h3>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Comfortable swimming is enough to start. First dives are relaxed hangs on the line — one breath, a little way down — and everything builds from wherever a person is.</p>
     </div>
     <div>
-      <h3 class="font-black text-lg mt-0 mb-1">When do you dive?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">nofins dives every weekend: Saturday is deep water from the boat, Sunday is pool — technique and breath-work. Come for a day or the whole weekend.</p>
+      <h3 class="font-black text-lg mt-0 mb-1">When do we dive?</h3>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Every weekend: Saturday is deep water from the boat, Sunday is pool — technique and breath-work.</p>
     </div>
     <div>
       <h3 class="font-black text-lg mt-0 mb-1">Is breath-holding safe — what about blackouts?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Freediving with nofins follows a conservative progression: you dive no deeper than the depth you've earned, an instructor meets you on every ascent, and the buoy is yours alone. Safety is the structure of the whole session, built in before the first breath-hold.</p>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">We follow a conservative progression: nobody dives deeper than the depth they've earned, someone meets every diver on the ascent, and the buoy is never shared. Safety is the structure of the whole session, built in before the first breath-hold.</p>
     </div>
     <div>
-      <h3 class="font-black text-lg mt-0 mb-1">Can I stop or turn back whenever I want?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Yes — you surface whenever you choose, and any point on the line is a complete dive. Recovery breathing at the surface, your instructor beside you, then down again when you're ready.</p>
+      <h3 class="font-black text-lg mt-0 mb-1">Can a diver stop whenever they want?</h3>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">Always — a freediver surfaces whenever they choose, and any point on the line is a complete dive. Recovery breathing at the surface, then down again when ready.</p>
     </div>
   </div>
 </div>

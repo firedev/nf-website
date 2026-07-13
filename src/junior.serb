@@ -1,33 +1,18 @@
 ---
 layout: default
-title: Freediving for Kids
+title: Kids in the water
 ---
 
 <div class="max-w-2xl mx-auto px-4 py-16">
 
-  <h1 class="text-4xl font-black mb-2 text-center">Freediving for Kids</h1>
+  <h1 class="text-4xl font-black mb-2 text-center">Kids in the water</h1>
   <p class="text-lg text-slate-500 dark:text-slate-400 mb-14 text-center">
-    Kids meet the water — breath, play, and calm.
+    The kids of our community grow up in the water — breath, play, and calm.
   </p>
 
   <p class="prose mx-auto text-left mb-12">
-    Freediving gives a child room to grow. Steady breath, a strong body, a calm mind — learned in play, in the water, at their own pace. Water comfort comes first, taught by Molchanovs-certified instructors — the same lineage the whole school comes from.
+    Freediving gives a child room to grow. Steady breath, a strong body, a calm mind — learned in play, in the water, at their own pace. Water comfort comes first; skills grow out of it on their own.
   </p>
-
-  <div class="grid gap-6 sm:grid-cols-3 mb-14">
-    <div class="rounded-2xl border border-current/10 p-5">
-      <p class="font-black mb-1">Little kids</p>
-      <p class="text-base text-slate-600 dark:text-slate-300">Play and water comfort. Floating, splashing, breath games — feeling at home in the water is the whole lesson.</p>
-    </div>
-    <div class="rounded-2xl border border-current/10 p-5">
-      <p class="font-black mb-1">Older kids</p>
-      <p class="text-base text-slate-600 dark:text-slate-300">Breath and technique, still learned in play: longer glides, cleaner dives, calm before each one.</p>
-    </div>
-    <div class="rounded-2xl border border-current/10 p-5">
-      <p class="font-black mb-1">16–17</p>
-      <p class="text-base text-slate-600 dark:text-slate-300">The full Molchanovs Wave 1 course — real depth, real certification, with parental consent.</p>
-    </div>
-  </div>
 
   <div class="grid gap-6 sm:grid-cols-2 mb-14">
     <div class="rounded-2xl border border-current/10 p-5">
@@ -40,7 +25,7 @@ title: Freediving for Kids
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Safety</p>
-      <p class="text-base text-slate-600 dark:text-slate-300">How to swim and dive safely, from the first session.</p>
+      <p class="text-base text-slate-600 dark:text-slate-300">How to swim and dive safely, from the first day.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-5">
       <p class="font-black mb-1">Love of water</p>
@@ -48,52 +33,14 @@ title: Freediving for Kids
     </div>
   </div>
 
-  <div class="rounded-2xl border border-current/10 p-6 sm:p-8 mb-14">
-    <p class="font-black text-xl mb-6">For parents</p>
-    <div class="space-y-5">
-      <div>
-        <h3 class="font-black text-base mt-0 mb-1">Can I watch — can I be in the water?</h3>
-        <p class="text-base text-slate-600 dark:text-slate-300">Both. You stay close — on the deck, or in the water on your own buoy.</p>
-      </div>
-      <div>
-        <h3 class="font-black text-base mt-0 mb-1">How many kids per instructor?</h3>
-        <p class="text-base text-slate-600 dark:text-slate-300">One. Your child has the instructor's full attention for the whole session.</p>
-      </div>
-      <div>
-        <h3 class="font-black text-base mt-0 mb-1">At what age can a child start freediving?</h3>
-        <p class="text-base text-slate-600 dark:text-slate-300">Water comfort starts as young as a child is happy to play in the pool — every session runs at their pace. At 16–17 the full Molchanovs Wave 1 course opens up, with parental consent.</p>
-      </div>
-      <div>
-        <h3 class="font-black text-base mt-0 mb-1">What if my child stays at the water's edge?</h3>
-        <p class="text-base text-slate-600 dark:text-slate-300">Then that's where the session is. It starts wherever your child is that day — feet on the steps, waist-deep, already swimming — and moves at their pace. Each step into the water is theirs, and that's what makes it stick.</p>
-      </div>
-      <div>
-        <h3 class="font-black text-base mt-0 mb-1">What does a session look like for a 5-year-old vs a teenager?</h3>
-        <p class="text-base text-slate-600 dark:text-slate-300">For a five-year-old: floating, splashing, breath games — water comfort is the whole lesson. For a teenager: technique, longer glides, real depth when they're ready. The age bands above walk through it. Either way, attention sets the length: the session runs as long as your child's interest does.</p>
-      </div>
-      <div>
-        <h3 class="font-black text-base mt-0 mb-1">Can my child get a freediving certification?</h3>
-        <p class="text-base text-slate-600 dark:text-slate-300">Yes — from 16, with parental consent, teens take the full Molchanovs Wave 1 course and leave certified freedivers. Until then play leads, and certification follows when the child wants it.</p>
-      </div>
-      <div>
-        <h3 class="font-black text-base mt-0 mb-1">Is breath-holding safe for a developing child?</h3>
-        <p class="text-base text-slate-600 dark:text-slate-300">Kids' sessions stay shallow and playful — one instructor, one child, always within arm's reach. Breath games are short and easy, and there are no numbers to chase: the session follows your child's comfort, and comfort is the measure.</p>
-      </div>
-    </div>
-  </div>
-
   <div class="prose mx-auto text-left space-y-5 mb-14">
     <p>Comfort in the water is where a child begins. Before any skill, they get to simply be in it: unhurried, at their own pace, with someone they trust right there beside them. That ease is the whole point.</p>
 
+    <p>On our Sunday pool mornings the little ones float, splash and play breath games; the older kids work on longer glides and calm before each dive. Parents are right there — on the deck or in the water on their own buoy. Everything moves at the child's pace: a session that starts with feet on the steps is a real session.</p>
+
+    <p>From 16, teens can walk the same Molchanovs path as the adults — Wave 1, real depth, real certification, with parental consent.</p>
+
     <p>A child who feels at home in the water carries that calm back out of it, into the rest of their day.</p>
-
-    
-
-    <p>Want to feel it yourself first? Come dive a Saturday — <a href="/first-dive/" class="font-bold decoration-sky-200 decoration-8">your first dive →</a></p>
   </div>
-
-  <p class="text-center">
-  </p>
-
 
 </div>
