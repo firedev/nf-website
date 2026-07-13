@@ -22,33 +22,29 @@ title: Community
     <div class="rounded-2xl border border-current/10 p-6">
       <p class="text-lg font-black mb-1">Sunday Pool</p>
       <p class="text-base text-slate-600 dark:text-slate-300">Every Sunday · pool · one to one</p>
-      <p class="text-2xl font-black my-3">฿2,000</p>
       <p class="text-base text-slate-600 dark:text-slate-300">The weekly one. A longer, calmer breath-hold and technique set in still water.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-6">
       <p class="text-lg font-black mb-1">First Dive</p>
       <p class="text-base text-slate-600 dark:text-slate-300">Saturday · boat off Panwa beach · your own buoy</p>
-      <p class="text-2xl font-black my-3">฿5,000</p>
       <p class="text-base text-slate-600 dark:text-slate-300 mb-3">You surface knowing how depth feels on one breath — and that it's yours to come back to. Your dives get filmed; the video is yours the same day.</p>
       <a href="/first-dive/" class="font-bold decoration-sky-200 decoration-8">How the Saturday goes →</a>
     </div>
     <div class="rounded-2xl border border-current/10 p-6">
       <p class="text-lg font-black mb-1">The Weekend</p>
       <p class="text-base text-slate-600 dark:text-slate-300">Two days · pool first, then the sea</p>
-      <p class="text-2xl font-black my-3">฿6,500</p>
       <p class="text-base text-slate-600 dark:text-slate-300">Technique first, then depth — you go home with both.</p>
     </div>
     <div class="rounded-2xl border border-current/10 p-6">
       <p class="text-lg font-black mb-1">Kids Session</p>
       <p class="text-base text-slate-600 dark:text-slate-300">Pool · one kid at a time</p>
-      <p class="text-2xl font-black my-3">฿2,500</p>
       <p class="text-base text-slate-600 dark:text-slate-300 mb-3">A child who feels at home in the water — ease first, everything else grows from it.</p>
       <a href="/junior/" class="font-bold decoration-sky-200 decoration-8">Freediving for kids →</a>
     </div>
   </div>
 
   <p class="prose mx-auto text-left mb-14">
-    Want the certification? The <span class="font-bold">Molchanovs Wave 1</span> — theory, pool, two open-water days — grows out of the same weekends: dives to 12–20 m, a certification recognised worldwide, lifetime access to Base Training. ฿22,000, and the swim test is the only prerequisite. <a href="/senior/" class="font-bold decoration-sky-200 decoration-8">The whole path →</a>
+    Want the certification? The <span class="font-bold">Molchanovs Wave 1</span> — theory, pool, two open-water days — grows out of the same weekends: dives to 12–20 m, a certification recognised worldwide, lifetime access to Base Training. The swim test is the only prerequisite. <a href="/senior/" class="font-bold decoration-sky-200 decoration-8">The whole path →</a>
   </p>
 
   {%@ "booking" %}
