@@ -72,7 +72,7 @@ Freediving as a way back to yourself. Your own buoy, your own pace, someone watc
     </div>
     <div>
       <h3 class="font-black text-lg mt-0 mb-1">How much does freediving cost on Phuket?</h3>
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">A first freediving session with nofins on Phuket costs ฿7,900 — flat, one to one. Sunday pool is ฿4,500, the full Weekend ฿11,900, a private Molchanovs Wave 1 course ฿21,900. <a href="/programs/" class="font-bold decoration-sky-200 decoration-8">Community & prices →</a></p>
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">A first freediving session with nofins on Phuket costs ฿5,000 — flat, one to one. Sunday pool is ฿4,500, the full Weekend ฿9,000, a private Molchanovs Wave 1 course ฿22,000. <a href="/programs/" class="font-bold decoration-sky-200 decoration-8">Community & prices →</a></p>
     </div>
     <div>
       <h3 class="font-black text-lg mt-0 mb-1">Where exactly do you dive?</h3>
