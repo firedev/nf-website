@@ -1,4 +1,3 @@
-@import "shoelaced.css";
 @import "theme-dark.css";
 
 @import "jit-refresh.css"; /* triggers frontend rebuilds */
@@ -112,10 +111,6 @@
   --body-color: rgb(69 26 3); /* bg-amber-950 */
   --heading-color: black;
   --action-color: #d64045;
-  --sl-font-sans:
-    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
 }
 
 body {
@@ -126,11 +121,6 @@ body {
   background-image: url("../../src/images/zen-circle-grunge-brush-stroke-2.png");
   background-size: contain;
   background-repeat: no-repeat;
-}
-
-sl-icon {
-  width: 1.5em; height: 1.5em;
-  @apply block;
 }
 
 .homepage .homepage-no-shadow { box-shadow: none }
