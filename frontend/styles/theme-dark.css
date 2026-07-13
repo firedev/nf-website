@@ -122,15 +122,16 @@
    ================================================================= */
 
 :root.theme-dark {
-  & a {
+  /* Content links go blue; nav + button links are driven by dark: utilities */
+  & a:not(.nav-link):not(.next-dive-btn) {
     color: #4299e1 !important;
     text-decoration-color: #4299e1 !important;
-    
+
     &:hover {
       color: #60a5fa !important;
       text-decoration-color: #60a5fa !important;
     }
-    
+
     &:focus {
       outline: 2px solid var(--dark-border-focus);
       outline-offset: 2px;
@@ -143,18 +144,20 @@
    ================================================================= */
 
 :root.theme-dark {
-  & .grid div {
+  /* Feature-card grids (senior/junior). Instructor cards opt out via .group —
+     they carry their own dark: surface utilities. */
+  & .grid div:not(.group *) {
     background-color: var(--dark-surface-1) !important;
     color: var(--dark-text-primary);
     border: none !important;
     box-shadow: none !important;
   }
 
-  & .grid div h3 {
+  & .grid div:not(.group *) h3 {
     color: var(--dark-accent-primary);
   }
 
-  & .grid div a {
+  & .grid div:not(.group *) a {
     color: #4299e1;
   }
   
@@ -251,11 +254,6 @@
    ================================================================= */
 
 :root.theme-dark {
-  & nav {
-    background-color: var(--dark-surface-0);
-    border-bottom: 1px solid var(--dark-border-secondary);
-  }
-  
   & #mobile-menu sl-button::part(base) {
     color: var(--dark-text-primary);
     background-color: var(--dark-surface-1);
@@ -428,23 +426,3 @@
   filter: invert(1);
 }
 
-/* Header wordmark follows theme text color */
-:root.theme-dark .logo-text {
-  color: var(--dark-text-primary);
-}
-
-/* Next dive card: dark surface instead of white, outline buttons */
-:root.theme-dark .next-dive {
-  background-color: var(--dark-surface-1);
-  color: var(--dark-text-primary);
-}
-
-:root.theme-dark .next-dive a {
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: var(--dark-text-primary) !important;
-}
-
-:root.theme-dark .next-dive a:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-}

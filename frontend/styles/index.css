@@ -5,6 +5,10 @@
 
 /* Tailwind v4: single import; scan templates for class names */
 @import "tailwindcss";
+/* Class-based dark variant: theme-switcher.js toggles .theme-dark on :root, so
+   dark: utilities must key off that class, not prefers-color-scheme (v4 default).
+   Syntax per tailwindcss.com/docs/dark-mode (class selector form). */
+@custom-variant dark (&:where(.theme-dark, .theme-dark *));
 @source "../../src/**/*.{html,md,liquid,erb,serb,rb}";
 @source "../javascript/**/*.js";
 

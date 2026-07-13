@@ -1,0 +1,22 @@
+---
+layout: default
+title: Molchanova Freediving School
+---
+
+<div class="max-w-2xl mx-auto px-4 py-16">
+
+  <h1 class="text-4xl font-black mb-2 text-center">Molchanova Freediving School</h1>
+  <p class="text-lg text-slate-500 mb-10 text-center">
+    The Natalia Molchanova school —
+    <a href="https://molchanova.school" target="_blank" rel="noopener" class="font-bold decoration-sky-200 decoration-8">molchanova.school</a>
+  </p>
+
+  <p class="prose mx-auto text-left mb-14">
+    The freediving school founded on Natalia Molchanova's method — the same lineage the whole Molchanovs system comes from. Competing athletes who teach, from a child's first breath to the deep line. These are the instructors who dive with us out of Moscow.
+  </p>
+
+  <h2 class="text-2xl font-black mb-8 text-center">The instructors</h2>
+
+  {%@ "instructor_list", affiliation: "Molchanova Freediving School" %}
+
+</div>

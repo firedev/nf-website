@@ -1,0 +1,19 @@
+---
+layout: default
+title: Instructors in Moscow
+---
+
+<div class="max-w-2xl mx-auto px-4 py-16">
+
+  <h1 class="text-4xl font-black mb-2 text-center">Moscow</h1>
+  <p class="text-lg text-slate-500 mb-14 text-center">
+    The people you'll train with in the pool in Moscow.
+  </p>
+
+  {%@ "instructor_list", location: "Moscow" %}
+
+  <p class="text-center mt-12">
+    <a href="/instructors/" class="font-bold decoration-sky-200 decoration-8">All instructors →</a>
+  </p>
+
+</div>

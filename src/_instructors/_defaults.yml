@@ -2,6 +2,9 @@
 layout: instructor
 name: ""
 affiliation: ""
+affiliation_url: ""
+location: ""
+junior_instructor: false
 profile: ""
 image: ""
 order: 0

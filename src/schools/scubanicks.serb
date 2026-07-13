@@ -1,0 +1,22 @@
+---
+layout: default
+title: ScubaNicks
+---
+
+<div class="max-w-2xl mx-auto px-4 py-16">
+
+  <h1 class="text-4xl font-black mb-2 text-center">ScubaNicks</h1>
+  <p class="text-lg text-slate-500 mb-10 text-center">
+    Boutique dive center in Rawai, Phuket —
+    <a href="https://scubanicks.net" target="_blank" rel="noopener" class="font-bold decoration-sky-200 decoration-8">scubanicks.net</a>
+  </p>
+
+  <p class="prose mx-auto text-left mb-14">
+    Twenty years on the water off Phuket, one dive at a time. ScubaNicks keeps it boutique — small groups, private charters, and instructors who teach every level from first breath to dive professional. Freediving, scuba, and mermaid, all out of Rawai.
+  </p>
+
+  <h2 class="text-2xl font-black mb-8 text-center">The instructors</h2>
+
+  {%@ "instructor_list", affiliation: "ScubaNicks" %}
+
+</div>

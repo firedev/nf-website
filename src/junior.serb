@@ -1,0 +1,48 @@
+---
+layout: default
+title: Junior Freediving
+---
+
+<div class="max-w-2xl mx-auto px-4 py-16">
+
+  <h1 class="text-4xl font-black mb-2 text-center">Junior Freediving</h1>
+  <p class="text-lg text-slate-500 mb-14 text-center">
+    Kids meet the water — breath, play, and calm. Ages 4 to 17.
+  </p>
+
+  <p class="prose mx-auto text-left mb-12">
+    Freediving gives a child room to grow. Steady breath, a strong body, a calm mind — learned in play, in the water, at their own pace. We teach the Molchanovs kids method, the same lineage the whole school comes from.
+  </p>
+
+  <div class="grid gap-6 sm:grid-cols-2 mb-14">
+    <div class="rounded-2xl border border-current/10 p-5">
+      <p class="font-black mb-1">Body</p>
+      <p class="text-sm text-slate-500">Posture, lung capacity, and a real ease in the water.</p>
+    </div>
+    <div class="rounded-2xl border border-current/10 p-5">
+      <p class="font-black mb-1">Focus</p>
+      <p class="text-sm text-slate-500">Attention and concentration, built dive by dive.</p>
+    </div>
+    <div class="rounded-2xl border border-current/10 p-5">
+      <p class="font-black mb-1">Safety</p>
+      <p class="text-sm text-slate-500">How to swim and dive safely, from the first session.</p>
+    </div>
+    <div class="rounded-2xl border border-current/10 p-5">
+      <p class="font-black mb-1">Love of water</p>
+      <p class="text-sm text-slate-500">Care for the ocean and a lasting bond with it.</p>
+    </div>
+  </div>
+
+  <div class="prose mx-auto text-left space-y-5 mb-14">
+    <p>Comfort in the water is where a child begins. Before any skill, they get to simply be in it: unhurried, at their own pace, with someone they trust right there beside them. That ease is the whole point.</p>
+
+    <p>From there, everything else grows on its own. Steady breath, a strong body, real attention — all of it learned in play. A child who feels at home in the water carries that calm back out of it, into the rest of their day.</p>
+
+    <p>We teach the Molchanovs kids method, the same lineage the whole school comes from, out of <a href="/schools/namafreediving/" class="font-bold decoration-sky-200 decoration-8">Nama Freediving</a> on Panwa beach. One kid at a time, at their own pace.</p>
+  </div>
+
+  <p class="text-center">
+    <a href="/instructors/" class="font-bold decoration-sky-200 decoration-8">Meet the instructors →</a>
+  </p>
+
+</div>

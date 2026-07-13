@@ -1,0 +1,22 @@
+---
+layout: default
+title: Nama Freediving
+---
+
+<div class="max-w-2xl mx-auto px-4 py-16">
+
+  <h1 class="text-4xl font-black mb-2 text-center">Nama Freediving</h1>
+  <p class="text-lg text-slate-500 mb-10 text-center">
+    Beachfront freediving center on Panwa beach, Phuket —
+    <a href="https://namafreediving.com" target="_blank" rel="noopener" class="font-bold decoration-sky-200 decoration-8">namafreediving.com</a>
+  </p>
+
+  <p class="prose mx-auto text-left mb-14">
+    We dive out of Nama — a Molchanovs beachfront center on Panwa beach. No fins, just breath, body, and attention, off the boats and down the line. These are the instructors you'll be in the water with.
+  </p>
+
+  <h2 class="text-2xl font-black mb-8 text-center">The instructors</h2>
+
+  {%@ "instructor_list", affiliation: "Nama Freediving" %}
+
+</div>

@@ -1,0 +1,32 @@
+---
+layout: default
+title: Schools
+---
+
+<div class="max-w-2xl mx-auto px-4 py-16">
+
+  <h1 class="text-4xl font-black mb-2 text-center">Schools</h1>
+  <p class="text-lg text-slate-500 mb-14 text-center">
+    The centers we dive out of, off Phuket and beyond.
+  </p>
+
+  <div class="grid gap-6 sm:grid-cols-1">
+    <a href="/schools/namafreediving/" class="block rounded-2xl border border-current/10 p-6 transition hover:shadow-lg hover:shadow-sky-700/10 hover:-translate-y-0.5 no-underline">
+      <p class="text-xl font-black mb-1 text-slate-950">Nama Freediving</p>
+      <p class="text-sm text-slate-500">Molchanovs beachfront center on Panwa beach, Phuket. Our home water.</p>
+    </a>
+    <a href="/schools/scubanicks/" class="block rounded-2xl border border-current/10 p-6 transition hover:shadow-lg hover:shadow-sky-700/10 hover:-translate-y-0.5 no-underline">
+      <p class="text-xl font-black mb-1 text-slate-950">ScubaNicks</p>
+      <p class="text-sm text-slate-500">Boutique dive center in Rawai — freediving, scuba, and mermaid.</p>
+    </a>
+    <a href="/schools/molchanova/" class="block rounded-2xl border border-current/10 p-6 transition hover:shadow-lg hover:shadow-sky-700/10 hover:-translate-y-0.5 no-underline">
+      <p class="text-xl font-black mb-1 text-slate-950">Molchanova Freediving School</p>
+      <p class="text-sm text-slate-500">The Natalia Molchanova school — the lineage the whole system comes from.</p>
+    </a>
+  </div>
+
+  <p class="text-center mt-14">
+    <a href="/instructors/" class="font-bold decoration-sky-200 decoration-8">Meet the instructors →</a>
+  </p>
+
+</div>

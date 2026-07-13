@@ -1,0 +1,37 @@
+---
+layout: default
+title: About
+---
+
+<div class="max-w-2xl mx-auto px-4 py-16">
+
+  <h1 class="text-4xl font-black mb-2 text-center">About</h1>
+  <p class="text-lg text-slate-500 mb-14 text-center">
+    Where we're going, we don't need fins.
+  </p>
+
+  <div class="prose mx-auto text-left space-y-5">
+    <p>nofins is freediving off Phuket — a way back to yourself. Your own buoy, your own pace, someone watching over you. Minimal gear, all the time in the world.</p>
+
+    <p>Freediving teaches the nervous system to settle. Slow the breath, drop down the line, and the ease you find there starts to follow you up — into your day, into whatever the day holds. You come up more alive. That's the part we care about, and the part we teach.</p>
+
+    <p>We dive out of <a href="/schools/namafreediving/" class="font-bold decoration-sky-200 decoration-8">Nama Freediving</a>, a Molchanovs beachfront center on Panwa beach, and we teach the whole Molchanovs path — kids and adults, first-timer to freediver.</p>
+  </div>
+
+  <div class="not-prose max-w-md mx-auto text-center text-lg my-14 leading-relaxed">
+    <p class="my-2"><span class="font-bold">Where</span> · Phuket, Thailand</p>
+    <p class="my-2"><span class="font-bold">Who</span> · any level, first-timer to freediver</p>
+    <p class="my-2"><span class="font-bold">Gear</span> · nothing is needed</p>
+  </div>
+
+  <div class="prose mx-auto text-left space-y-5 mb-14">
+    <p>Run by Nick — a developer who dives the line with you. Molchanovs Wave 2 instructor, static best 6:15.</p>
+
+    <p>I'm also writing a book about the thinking behind all this — <a href="https://thinkforward.academy/book" class="font-bold decoration-sky-200 decoration-8">think → forward</a>.</p>
+  </div>
+
+  <p class="text-center">
+    <a href="/instructors/" class="font-bold decoration-sky-200 decoration-8">Meet the instructors →</a>
+  </p>
+
+</div>

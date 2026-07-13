@@ -51,6 +51,7 @@ rake frontend:build           # Build frontend assets for production
   - `_components/` - Reusable Ruby/Serbea components
   - `_layouts/` - Page templates in Serbea format
   - `_instructors/` - Instructor profiles collection
+  - `schools/` - One page per partner school (`namafreediving`, `scubanicks`, `molchanova`) + `index.serb` hub. Each school page reuses the `instructor_list` partial filtered by `affiliation:` — so a new school needs its page + instructors carrying the matching `affiliation`, or it renders empty. Navbar links `/schools/`; individual school pages are reachable only via that hub (instructor cards link to the school's EXTERNAL site via `affiliation_url`, not the internal page — deliberate)
   - `index.md` - Homepage content (contains both light/dark theme variations)
 - `frontend/` - Frontend assets
   - `javascript/` - JS modules (theme switcher, testimonials, etc.)
@@ -60,7 +61,7 @@ rake frontend:build           # Build frontend assets for production
 
 ### Content Collections
 The site uses a single Bridgetown collection:
-- `instructors` - Instructor profiles (currently one: nick-plekhanov)
+- `instructors` - Instructor profiles, grouped onto school pages by `affiliation:`. Currently 7: nikolay-ostrovsky, ben, tony, court (Nama Freediving); artur, roman (Molchanova Freediving School); victoria (ScubaNicks)
 
 ### Theme System
 The site implements a unique dual-content theme system:
