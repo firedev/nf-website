@@ -17,8 +17,16 @@
   #start h1{margin:0;font-size:clamp(48px,9vw,120px);color:#fff;text-shadow:0 4px 0 #1a5f86,0 8px 22px rgba(0,0,0,.35);letter-spacing:2px}
   #start .sub{margin-top:6px;font-size:clamp(16px,2.4vw,26px);color:#eafaff;text-shadow:0 2px 6px rgba(0,0,0,.4);font-style:italic}
   #start .go{margin-top:38px;font-size:clamp(18px,2.6vw,28px);color:#0d3b56;background:#ffe27a;border:3px solid #fff;border-radius:40px;padding:12px 40px;box-shadow:0 6px 18px rgba(0,0,0,.3);animation:gopulse 1.6s ease-in-out infinite}
-  #action{position:fixed;top:18px;right:18px;z-index:20;color:#0d3b56;background:#ffe27a;border:3px solid #fff;border-radius:40px;padding:10px 22px;box-shadow:0 6px 18px rgba(0,0,0,.25);font:700 17px Arial,sans-serif;text-decoration:none}
-  #action:focus-visible{outline:3px solid #0d3b56;outline-offset:3px}
+  #nav{position:fixed;top:18px;right:18px;z-index:20;display:flex;gap:10px;align-items:flex-start;font:700 17px Arial,sans-serif}
+  #nav a,#videos summary{display:block;color:#0d3b56;background:#ffe27a;border:3px solid #fff;border-radius:40px;padding:10px 22px;box-shadow:0 6px 18px rgba(0,0,0,.25);text-decoration:none;cursor:pointer;list-style:none}
+  #videos summary::-webkit-details-marker{display:none}
+  #videos[open] summary{border-radius:22px 22px 0 0}
+  #videoPanel{position:absolute;right:0;top:50px;width:min(92vw,390px);max-height:calc(100vh - 86px);overflow:auto;background:rgba(10,38,56,.94);border:3px solid #fff;border-radius:22px 0 22px 22px;box-shadow:0 10px 28px rgba(0,0,0,.32);padding:14px}
+  #videoPanel iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:12px;margin:0 0 12px;background:#082f49}
+  #videoPanel .ig{margin:0 0 12px}
+  #videoPanel p{margin:0 0 10px;color:#eafaff;font-size:15px;line-height:1.35}
+  #videoPanel a{display:inline;color:#ffe27a;background:none;border:0;border-radius:0;padding:0;box-shadow:none;text-decoration:underline}
+  #nav a:focus-visible,#videos summary:focus-visible{outline:3px solid #0d3b56;outline-offset:3px}
   @keyframes gopulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
   #flash{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,225,120,.95),rgba(255,190,60,0) 70%);opacity:0;pointer-events:none;transition:opacity .4s}
   #toast{position:absolute;bottom:90px;width:100%;text-align:center;font-size:34px;text-shadow:0 2px 6px rgba(0,0,0,.5);letter-spacing:1px}
@@ -44,7 +52,19 @@
 </script>
 </head>
 <body>
-<a id="action" href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener">Train with Nick</a>
+<nav id="nav" aria-label="Links">
+  <details id="videos">
+    <summary>Video</summary>
+    <div id="videoPanel">
+      <p>Weekend @ 35m by <a href="https://www.instagram.com/_nikolayx_/" target="_blank" rel="noopener">@_nikolayx_</a></p>
+      <blockquote class="instagram-media ig" data-instgrm-permalink="https://www.instagram.com/reel/DPwQd2dEzGN/" data-instgrm-version="14"></blockquote>
+      <iframe src="https://www.youtube.com/embed/CSzB2v1H2o8" title="Benoit Piguet: The 10-Minute-Breath-Hold Freediving Ninja" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/0ImWGfZPs8Q" title="Freediving Taught Me I Was the Love I'd Been Searching For" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <p><a href="https://www.youtube.com/@thinkforward101" target="_blank" rel="noopener">Open Think Forward on YouTube</a></p>
+    </div>
+  </details>
+  <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener">Train</a>
+</nav>
 <div id="start">
   <h1>Finding Nama</h1>
   <div class="sub">Solve the mystery of Phuket</div>
@@ -2137,6 +2157,10 @@ window.__dbg={player,boat,namo,get sailing(){return sailing},
   get flags(){return{wetsuit,wetsuitTried,namoTried,w1cert,rewardClaimed,halo:!!halo,coins:coinsGot,coinsTotal:COINS.length}},
   LANDMARKS,COINS,renderer,scene,camera,THREE,renderList,
   skipIntro(){ready=true;startGame();introT=INTRO_LEN;}}; // test hook: force-ready + dismiss title + fast-forward fly-in
+</script>
+<script async src="//www.instagram.com/embed.js"></script>
+<script>
+if(location.hash==='#videos')document.getElementById('videos')?.setAttribute('open','');
 </script>
 </body>
 </html>
