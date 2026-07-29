@@ -2,7 +2,7 @@
   <div class="group flex flex-col items-center justify-center">
     <nav class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-base font-bold">
       <a href="/senior/">Practice</a>
-      <a href="/about/">Nick</a>
+      <a href="/about/">About</a>
       <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener">Instagram</a>
       <a href="https://t.me/firedev" target="_blank" rel="noopener">Telegram</a>
     </nav>
