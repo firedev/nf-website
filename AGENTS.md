@@ -2,7 +2,7 @@
 
 Bridgetown static site for nofins freediving (Phuket, Thailand) — read this before any work in this folder. Freediving-instructorship landing: hero «Freediving trains life» (full-bleed underwater photo, CTA to `t.me/firedev`), junior/senior programs, 3 partner schools (Nama / ScubaNicks / Molchanova) + 7 instructors, dark-mode via Tailwind `dark:` classes. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/AGENTS.md`.
 
-**Навигация двухрежимная** (`_components/shared/navbar.serb`): на главной (`layout == "homepage"`) — якоря по секциям (`#why`, `#practice`, `#nofins`, `#nick`) плюс `/phuket/`, `/videos/` и внешний Train; на внутренних страницах — обычные ссылки (`/senior/`, `/junior/`, `/about/`, `/phuket/`, `/videos/`). Подпись пункта — **About**, якорь остаётся `#nick` (2026-07-29, Ник: «instead of Nick and /nick, make it about»). Тот же пункт дублируется в `_partials/_footer.serb` — менять подпись в обоих местах.
+**Навигация двухрежимная** (`_components/shared/navbar.serb`): на главной (`layout == "homepage"`) — якоря по секциям (`#why`, `#practice`, `#nofins`, `#about`) плюс `/phuket/`, `/videos/` и внешний Train; на внутренних страницах — обычные ссылки (`/senior/`, `/junior/`, `/about/`, `/phuket/`, `/videos/`). Пункт называется **About** везде — подпись, якорь и путь (2026-07-29, Ник: «rename all to about, not #nick»; имя Ника из навигации убрано намеренно). Якорь живёт в двух местах: `href="#about"` в навбаре и `<section id="about">` в `index.md` — менять парой, иначе ссылка ведёт в пустоту. Тот же пункт дублируется в `_partials/_footer.serb`.
 
 ## Development Commands
 

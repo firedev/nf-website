@@ -76,7 +76,7 @@ title: nofins | Freediving trains life
   </div>
 </section>
 
-<section id="nick" class="bg-white text-slate-950 dark:bg-slate-900 dark:text-slate-100">
+<section id="about" class="bg-white text-slate-950 dark:bg-slate-900 dark:text-slate-100">
   <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 sm:px-10 sm:py-28 md:grid-cols-[0.8fr_1.2fr] md:gap-16 lg:px-12">
     <img src="/images/nick.jpg" alt="Nick Ostrovsky on a freediving boat" width="900" height="900" loading="lazy" class="aspect-square w-full rounded-xl object-cover">
     <div>

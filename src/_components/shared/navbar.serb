@@ -10,7 +10,7 @@
         <a class="nav-link rounded-2xl py-2 px-2 text-sm sm:px-3 sm:text-base transition no-underline hover:bg-black/5 dark:hover:bg-white/10" href="#why">Why freedive?</a>
         <a class="nav-link rounded-2xl py-2 px-2 text-sm sm:px-3 sm:text-base transition no-underline hover:bg-black/5 dark:hover:bg-white/10" href="#practice">Practice</a>
         <a class="nav-link rounded-2xl py-2 px-2 text-sm sm:px-3 sm:text-base transition no-underline hover:bg-black/5 dark:hover:bg-white/10" href="#nofins">Nofins</a>
-        <a class="nav-link rounded-2xl py-2 px-2 text-sm sm:px-3 sm:text-base transition no-underline hover:bg-black/5 dark:hover:bg-white/10" href="#nick">About</a>
+        <a class="nav-link rounded-2xl py-2 px-2 text-sm sm:px-3 sm:text-base transition no-underline hover:bg-black/5 dark:hover:bg-white/10" href="#about">About</a>
         <a class="nav-link rounded-2xl py-2 px-2 text-sm sm:px-3 sm:text-base transition no-underline hover:bg-black/5 dark:hover:bg-white/10" href="/phuket/">Phuket</a>
         <a class="nav-link rounded-2xl py-2 px-2 text-sm sm:px-3 sm:text-base transition no-underline hover:bg-black/5 dark:hover:bg-white/10" href="/videos/">Video</a>
         <a class="nav-link rounded-2xl py-2 px-2 text-sm sm:px-3 sm:text-base transition no-underline hover:bg-black/5 dark:hover:bg-white/10" href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener">Train</a>
