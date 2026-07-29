@@ -1,54 +1,63 @@
 ---
 layout: default
-title: Freediving
+title: Freediving trains life
 ---
 
-<div class="max-w-2xl mx-auto px-4 py-16">
+<div class="mx-auto max-w-4xl px-4 py-16">
+  <header class="mx-auto mb-16 max-w-3xl text-center">
+    <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">The practice</p>
+    <h1 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-6xl">Freediving trains life.</h1>
+    <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">The water makes attention physical. What happens between a body signal and your reaction is the real training.</p>
+  </header>
 
-  <h1 class="text-4xl font-black mb-2 text-center">Freediving</h1>
-  <p class="text-lg text-slate-500 dark:text-slate-400 mb-14 text-center">
-    A way back to yourself — your own buoy, your own pace.
-  </p>
+  <section class="prose mx-auto mb-16 max-w-3xl text-left text-lg">
+    <h2>Meditation with honest feedback</h2>
+    <p>A freedive has clear signals: relaxation, pressure, equalization, buoyancy, the urge to breathe, the turn and the recovery breath.</p>
+    <p>During training, notice each signal early. Relax what can relax. Equalize before pressure builds. Turn on the plan.</p>
+    <p>The dive is complete when the diver surfaces with reserve and finishes recovery breathing calmly.</p>
+  </section>
 
-  <p class="prose mx-auto text-left mb-12">
-    Just breath, body, and attention. The steadiness of the breath-hold follows you back into your day, into whatever the day holds. We train the Molchanovs way — Wave 1 through 3.
-  </p>
-
-  <div class="prose mx-auto text-left space-y-5 mb-14">
-    <p>The urge to breathe is a reflex — and once you feel that for yourself, the whole thing opens up. You stay with it, ease arrives on its own, and the line becomes somewhere you want to be.</p>
-
-    <p>The body already knows how. Put your face in the water and the heart slows down by itself — the mammalian dive reflex, a calm the body has carried all along. Freediving is learning to rest inside it.</p>
-
-    <p>Any point on the line is a complete dive — the day's depth is each diver's own. That ease is what comes back up. You come up more alive, and it follows you.</p>
-  </div>
-
-  <p class="prose mx-auto text-left mb-6">
-    The Molchanovs path we train in, wave by wave:
-  </p>
-
-  <div class="grid gap-6 sm:grid-cols-3 mb-6">
-    <div class="rounded-2xl border border-current/10 p-5">
-      <p class="font-black mb-1">Wave 1 · 12–20 m</p>
-      <p class="text-base text-slate-600 dark:text-slate-300">First real dives. Theory, pool and open water: breath-holds, equalization, safety, the line.</p>
+  <section class="mb-16">
+    <div class="mb-10 max-w-3xl">
+      <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">The mental ladder</p>
+      <h2 class="mb-4 mt-0 text-3xl font-black sm:text-4xl">From one point to the whole field.</h2>
+      <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Molchanovs builds the mental side wave by wave. Each step has a clear practice.</p>
     </div>
-    <div class="rounded-2xl border border-current/10 p-5">
-      <p class="font-black mb-1">Wave 2 · 24–30 m</p>
-      <p class="text-base text-slate-600 dark:text-slate-300">Frenzel equalization and the first freefall — the part of the dive where the water carries you.</p>
+
+    <div class="grid gap-6 sm:grid-cols-2">
+      <article class="rounded-2xl border border-current/10 p-6">
+        <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-sky-600 dark:text-sky-400">Wave 1</p>
+        <h3 class="mb-3 mt-0 text-2xl font-black">Body scan &amp; visualization</h3>
+        <p class="mb-0 text-base leading-relaxed text-slate-600 dark:text-slate-300">Scan the body before the dive. Rehearse the dive route, the turn and the recovery breath.</p>
+      </article>
+      <article class="rounded-2xl border border-current/10 p-6">
+        <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-sky-600 dark:text-sky-400">Wave 2</p>
+        <h3 class="mb-3 mt-0 text-2xl font-black">Mindfulness</h3>
+        <p class="mb-0 text-base leading-relaxed text-slate-600 dark:text-slate-300">Notice breath, heartbeat, contractions and thought. Keep attention on the next action.</p>
+      </article>
+      <article class="rounded-2xl border border-current/10 p-6">
+        <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-sky-600 dark:text-sky-400">Wave 3</p>
+        <h3 class="mb-3 mt-0 text-2xl font-black">Attention deconcentration</h3>
+        <p class="mb-0 text-base leading-relaxed text-slate-600 dark:text-slate-300">Widen attention from one point into a field. See the periphery. Hear the soundscape. Feel the body at once.</p>
+      </article>
+      <article class="rounded-2xl border border-current/10 p-6">
+        <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-sky-600 dark:text-sky-400">Wave 4</p>
+        <h3 class="mb-3 mt-0 text-2xl font-black">Pressure practice</h3>
+        <p class="mb-0 text-base leading-relaxed text-slate-600 dark:text-slate-300">Use a repeatable start ritual, simple self-talk and a clear focus for the dive.</p>
+      </article>
     </div>
-    <div class="rounded-2xl border border-current/10 p-5">
-      <p class="font-black mb-1">Wave 3 · 34–40 m</p>
-      <p class="text-base text-slate-600 dark:text-slate-300">Mouthfill and long, quiet freefalls — ease at depth, soft and clear where the light turns blue.</p>
-    </div>
-  </div>
+  </section>
 
-  <p class="prose mx-auto text-left mb-14">
-    Each Wave carries a certification recognised worldwide, with Base Training in between — structured practice for the time between waves. That's the system this community grows in.
-  </p>
+  <section class="mb-16 rounded-2xl bg-sky-950 p-8 text-slate-100 sm:p-10">
+    <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-400">Train with Nick</p>
+    <h2 class="mb-4 mt-0 text-3xl font-black sm:text-4xl">The advanced work starts early.</h2>
+    <p class="text-lg leading-relaxed text-slate-300">I teach body, technique and attention as one practice. In official Molchanovs training I currently teach through Wave 2. Separately, I share the advanced attention practices I use myself; these sessions do not issue Wave 3 or Wave 4 certification.</p>
+    <p class="text-lg leading-relaxed text-slate-300">One person. One buoy. Your own pace and mental space. Someone fully watching.</p>
+    <a href="https://t.me/firedev" target="_blank" rel="noopener" class="mt-3 inline-flex min-h-12 items-center justify-center rounded-xl bg-sky-500 px-6 py-3 text-base font-bold text-slate-950 no-underline transition hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Message Nick</a>
+  </section>
 
-  <div class="prose mx-auto text-left space-y-5 mb-14">
-    <p>Our weekends run in two rhythms: <span class="font-bold">deep water on Saturdays</span> — off the boat, down the line — and <span class="font-bold">pool on Sundays</span> for technique and breath-work. One person per buoy, always your own.</p>
-
-    <p>The kids of the community grow up in the same water — <a href="/junior/" class="font-bold decoration-sky-200 decoration-8">freediving for kids</a>.</p>
-  </div>
-
+  <aside class="rounded-2xl border border-amber-300/60 bg-amber-50 p-6 text-base leading-relaxed text-amber-950 dark:border-amber-300/20 dark:bg-amber-950/30 dark:text-amber-100">
+    <p class="mb-2 font-black">Breath-hold safety is not a mental trick.</p>
+    <p class="mb-0">Never train in water alone and never hyperventilate before a dive. Every in-water session uses an active, qualified buddy, conservative limits and a clear decision to surface with reserve.</p>
+  </aside>
 </div>
