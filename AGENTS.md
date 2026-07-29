@@ -1,6 +1,8 @@
 # Sites/nofins — nofins.com
 
-Bridgetown static site for nofins freediving (Phuket, Thailand) — read this before any work in this folder. Freediving-instructorship landing: hero «Learn to just be», junior/senior programs, 3 partner schools (Nama / ScubaNicks / Molchanova) + 7 instructors, dark-mode via Tailwind `dark:` classes. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/CLAUDE.md`.
+Bridgetown static site for nofins freediving (Phuket, Thailand) — read this before any work in this folder. Freediving-instructorship landing: hero «Freediving trains life» (full-bleed underwater photo, CTA to `t.me/firedev`), junior/senior programs, 3 partner schools (Nama / ScubaNicks / Molchanova) + 7 instructors, dark-mode via Tailwind `dark:` classes. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/AGENTS.md`.
+
+**Навигация двухрежимная** (`_components/shared/navbar.serb`): на главной (`layout == "homepage"`) — якоря по секциям (`#why`, `#practice`, `#nofins`, `#nick`) плюс `/phuket/`, `/videos/` и внешний Train; на внутренних страницах — обычные ссылки (`/senior/`, `/junior/`, `/about/`, `/phuket/`, `/videos/`). Подпись пункта — **About**, якорь остаётся `#nick` (2026-07-29, Ник: «instead of Nick and /nick, make it about»). Тот же пункт дублируется в `_partials/_footer.serb` — менять подпись в обоих местах.
 
 ## Development Commands
 
@@ -53,7 +55,10 @@ rake frontend:build           # Build frontend assets for production
   - `_layouts/` - Page templates in Serbea format
   - `_instructors/` - Instructor profiles collection
   - `schools/` - One page per partner school (`namafreediving`, `scubanicks`, `molchanova`) + `index.serb` hub. Each school page reuses the `instructor_list` partial filtered by `affiliation:` — so a new school needs its page + instructors carrying the matching `affiliation`, or it renders empty. The `/schools/` hub is linked from the footer only (deliberately out of primary nav, #24 — it routed premium traffic to cheaper substitutes); individual school pages are reachable via that hub and inline mentions on about/junior (instructor cards link to the school's EXTERNAL site via `affiliation_url`, not the internal page — deliberate)
-  - `index.md` - Homepage content (single copy, no per-theme variations)
+  - `index.md` - Homepage content (single copy, no per-theme variations). Секции несут `id=` под якоря навбара: `#why`, `#practice`, `#nofins`, `#nick`
+  - `videos.md` - `/videos/`: инстаграм-эмбед (reel) + два ютуб-ифрейма + ссылка на канал think→forward
+  - `phuket/index.html` - `/phuket/`: браузерная игра Finding Nama (three.js, ~155KB одним инлайн-файлом, без бандлера). Портфолио-карточка проекта живёт на **другом** сайте — `Sites/firedev/src/_projects/finding-nama.md` и ссылается сюда; правишь игру — проверь, не устарело ли описание там
+  - `images/home/` - hero и секционные webp редизайна 2026-07
   - `_partials/_booking.serb` - shared «Every weekend» booking card (`id="book"`), included on homepage, junior/senior/about and the instructor layout (#2)
 - `frontend/` - Frontend assets
   - `javascript/` - JS modules (theme switcher, etc.)
