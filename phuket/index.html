@@ -1687,29 +1687,29 @@ buckle.position.set(0,-0.3,0.5); body.add(buckle);
 
 // --- HEAD: broad brow, flat graphic face, small chin; face points +Z ---
 const headGeo=loftGeo([[-0.52,0.04,0.34,0.45],[-0.28,0.06,0.56,0.6],
-  [0.14,0.02,0.61,0.61],[0.42,-0.04,0.55,0.55],[0.52,-0.1,0.47,0.45]],8);
+  [0.14,0.02,0.59,0.59],[0.4,-0.03,0.54,0.53],[0.51,-0.08,0.47,0.45]],12);
 const head=addOutline(new THREE.Mesh(headGeo,toon(SKIN)),1.045);
-head.position.y=2.12; head.scale.set(1.12,1.12,1.08);
+head.position.y=2.12; head.scale.set(1.08,1.1,1.07);
 // Wind-Waker-style graphic eyes sit on the face plane instead of bulging out.
 const eyeW=new THREE.CircleGeometry(0.1,10), eyeWMat=new THREE.MeshBasicMaterial({color:0xffffff});
 const irisGeo=new THREE.CircleGeometry(0.06,9), irisMat=new THREE.MeshBasicMaterial({color:0x27445d});
 const glintGeo=new THREE.CircleGeometry(0.02,7), glintMat=new THREE.MeshBasicMaterial({color:0xffffff});
 const browGeo=new THREE.BoxGeometry(0.16,0.03,0.05), browMat=toon(0x5a3d1e);
 for(const s of [-1,1]){
-  const w=new THREE.Mesh(eyeW,eyeWMat); w.position.set(s*0.2,0.0,0.525); w.scale.set(0.92,1.65,1); head.add(w);
-  const ir=new THREE.Mesh(irisGeo,irisMat); ir.position.set(s*0.2,-0.025,0.528); ir.scale.set(0.8,1.45,1); head.add(ir);
-  const g=new THREE.Mesh(glintGeo,glintMat); g.position.set(s*0.18,0.025,0.531); head.add(g);
-  const ch=new THREE.Mesh(new THREE.CircleGeometry(0.075,8),new THREE.MeshBasicMaterial({color:0xf0a088,transparent:true,opacity:0.45}));
-  ch.position.set(s*0.35,-0.19,0.523); ch.scale.set(1,0.55,1); head.add(ch);
-  const br=new THREE.Mesh(browGeo,browMat); br.position.set(s*0.2,0.18,0.51); br.rotation.z=s*-0.15; head.add(br);
+  const w=new THREE.Mesh(eyeW,eyeWMat); w.position.set(s*0.19,0.025,0.515); w.scale.set(0.86,1.5,1); head.add(w);
+  const ir=new THREE.Mesh(irisGeo,irisMat); ir.position.set(s*0.19,0.005,0.519); ir.scale.set(0.72,1.25,1); head.add(ir);
+  const g=new THREE.Mesh(glintGeo,glintMat); g.position.set(s*0.17,0.045,0.522); head.add(g);
+  const ch=new THREE.Mesh(new THREE.CircleGeometry(0.06,8),new THREE.MeshBasicMaterial({color:0xf0a088,transparent:true,opacity:0.38}));
+  ch.position.set(s*0.34,-0.17,0.514); ch.scale.set(1,0.5,1); head.add(ch);
+  const br=new THREE.Mesh(browGeo,browMat); br.position.set(s*0.19,0.19,0.5); br.scale.x=0.85;br.rotation.z=s*-0.1;head.add(br);
 }
-const nose=new THREE.Mesh(new THREE.ConeGeometry(0.05,0.11,6).rotateX(Math.PI/2),toon(SKIN2));
-nose.position.set(0,-0.09,0.55); head.add(nose);
+const nose=new THREE.Mesh(new THREE.CircleGeometry(0.018,6),toon(SKIN2));
+nose.position.set(0,-0.08,0.526);head.add(nose);
 const smile=new THREE.Mesh(new THREE.TorusGeometry(0.11,0.02,6,12,Math.PI),new THREE.MeshBasicMaterial({color:0x9c5a4a}));
-smile.rotation.z=Math.PI; smile.position.set(0,-0.31,0.53); head.add(smile);
+smile.scale.set(1.05,0.75,1);smile.rotation.z=Math.PI;smile.position.set(0,-0.29,0.522);head.add(smile);
 // Pointed ears widen the silhouette and keep the fantasy-adventurer read.
 for(const s of [-1,1])
-  part(slabGeo([[0,-0.13],[s*0.3,0.02],[0,0.16]],0.045),SKIN,[s*0.5,-0.03,-0.02],{outline:1.04,parent:head});
+  part(slabGeo([[0,-0.11],[s*0.2,0.02],[0,0.13]],0.04),SKIN,[s*0.48,-0.03,-0.02],{outline:1.04,parent:head});
 
 // --- MASK: freediving mask, hidden until wetsuit on; over the eyes on +Z front ---
 const mask=new THREE.Group(); mask.position.set(0,0.0,0); mask.visible=false; head.add(mask);
@@ -1743,9 +1743,6 @@ part(slabGeo([[-0.13,0],[0.02,0.3],[0.16,0.04],[0.08,-0.18]],0.04),HAIR,
 for(const [x,r] of [[-0.32,-0.3],[0,0],[0.32,0.3]])
   part(slabGeo([[-0.13,0.14],[0.1,0.1],[0.04,-0.34],[-0.1,-0.2]],0.04),HAIR,
     [x,-0.05,-0.5],{rot:[0,r,0],parent:hat});
-const capMat=toon(TUNIC),capGeo=loftGeo([[-1.62,0.18,0.025,0.025],[-1.42,0.42,0.1,0.1],
-  [-1.08,0.64,0.22,0.17],[-0.64,0.62,0.4,0.22],[-0.28,0.46,0.52,0.26]],7);
-hat.add(addOutline(new THREE.Mesh(capGeo,capMat),1.035));
 
 // --- ARMS: tapered custom forearms, pivot at shoulder; sleeve + mitten hand ---
 const limbGeo=loftGeo([[-0.58,0,0.1,0.1],[-0.28,0,0.14,0.13],[-0.04,0,0.15,0.14],[0,0,0.12,0.11]],6);
@@ -1783,7 +1780,6 @@ function toggleWetsuit(){
   wetsuit=!wetsuit; wetsuitTried=true;
   body.material.color.set(wetsuit?0x14181c:0x2e9e57);
   sleeveMat.color.set(wetsuit?0x14181c:0x2e9e57);
-  capMat.color.set(wetsuit?0x14181c:0x2e9e57);
   armL.material.color.set(wetsuit?0x14181c:0xf5c89a); // forearms: black suit or bare skin
   legL.material.color.set(wetsuit?0x14181c:0x8a5a33);
   mask.visible=wetsuit;
@@ -2254,4 +2250,4 @@ window.__dbg={player,boat,namo,get sailing(){return sailing},
 </script>
 </body>
 </html>
-<!--build:c85740c-->
+<!--build:0ee59bc-->
