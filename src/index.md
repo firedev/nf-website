@@ -6,15 +6,15 @@ title: nofins | Freediving trains life
 <section class="home-hero relative isolate flex min-h-[100dvh] items-center overflow-hidden text-white">
   <picture class="absolute inset-0 block h-full w-full">
     <source media="(max-width: 767px)" srcset="/images/home/hero-mobile.webp">
-    <img src="/images/home/hero.webp" alt="Nick holding the freediving line underwater in the nofins album" width="1920" height="1200" loading="eager" fetchpriority="high" class="h-full w-full object-cover object-center">
+    <img src="/images/home/hero.webp" alt="Freediver holding the line underwater in the nofins album" width="1920" height="1200" loading="eager" fetchpriority="high" class="h-full w-full object-cover object-center">
   </picture>
   <div class="home-hero-shade absolute inset-0"></div>
 
   <div class="relative z-1 mx-auto w-full max-w-7xl px-6 pb-16 pt-32 sm:px-10 lg:px-12">
     <div class="max-w-3xl">
-      <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-300">Freediving with Nick</p>
+      <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-300">Freediving practice</p>
       <h1 class="home-title mb-6 mt-0 max-w-[13ch] text-[2.8rem] font-black leading-[0.96] tracking-[-0.05em] sm:text-6xl lg:text-8xl">Freediving trains life.</h1>
-      <p class="mb-8 max-w-2xl text-lg leading-relaxed text-slate-100 sm:text-xl">One breath makes attention physical. I teach freediving through the mental skills behind clear, easy dives: from body scan to attention deconcentration.</p>
+      <p class="mb-8 max-w-2xl text-lg leading-relaxed text-slate-100 sm:text-xl">One breath makes attention physical. Freediving here is taught through the mental skills behind clear, easy dives: from body scan to attention deconcentration.</p>
       <a href="https://t.me/firedev" target="_blank" rel="noopener" class="home-cta inline-flex min-h-12 items-center justify-center rounded-xl bg-sky-500 px-6 py-3 text-base font-bold text-slate-950 no-underline transition hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white active:translate-y-px">Let&rsquo;s freedive</a>
     </div>
   </div>
@@ -37,9 +37,9 @@ title: nofins | Freediving trains life
 <section id="practice" class="bg-slate-50 text-slate-950 dark:bg-slate-900 dark:text-slate-100">
   <div class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12">
     <div class="mb-14 max-w-3xl">
-      <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">What I teach</p>
+      <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">What the training covers</p>
       <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">The advanced work starts early.</h2>
-      <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Molchanovs introduces its deeper attention work across Wave 3 and Wave 4. I bring the same principles into ordinary training from the beginning: in plain language, through the body.</p>
+      <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Molchanovs introduces its deeper attention work across Wave 3 and Wave 4. The same principles come into ordinary training from the beginning: in plain language, through the body.</p>
     </div>
 
     <div class="grid gap-6 md:grid-cols-3">
@@ -60,7 +60,7 @@ title: nofins | Freediving trains life
       </article>
     </div>
 
-    <p class="mt-8 max-w-3xl text-base leading-relaxed text-slate-500 dark:text-slate-400">I currently teach official Molchanovs courses through Wave 2. Advanced attention practice is separate and does not issue Wave 3 or Wave 4 certification.</p>
+    <p class="mt-8 max-w-3xl text-base leading-relaxed text-slate-500 dark:text-slate-400">Official Molchanovs courses run through Wave 2. Advanced attention practice is separate and does not issue Wave 3 or Wave 4 certification.</p>
   </div>
 </section>
 
@@ -78,14 +78,14 @@ title: nofins | Freediving trains life
 
 <section id="about" class="bg-white text-slate-950 dark:bg-slate-900 dark:text-slate-100">
   <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 sm:px-10 sm:py-28 md:grid-cols-[0.8fr_1.2fr] md:gap-16 lg:px-12">
-    <img src="/images/nick.jpg" alt="Nick Ostrovsky on a freediving boat" width="900" height="900" loading="lazy" class="aspect-square w-full rounded-xl object-cover">
+    <img src="/images/nick.jpg" alt="Freediving instructor on the boat before a depth session" width="900" height="900" loading="lazy" class="aspect-square w-full rounded-xl object-cover">
     <div>
-      <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">Why Nick?</p>
-      <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">I train attention in the water.</h2>
+      <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">About</p>
+      <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">Attention, trained in the water.</h2>
       <div class="max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-        <p>I spent twenty years training a developer's attention at a screen. I still build software. In the water, I train the same attention through the body.</p>
-        <p>I came from extreme sports. Freediving gave me a calmer practice: breathing, equalization, movement, safety and attention.</p>
-        <p>I teach the way I train: one person, one buoy, your own pace, someone fully watching.</p>
+        <p>Twenty years of a developer's attention at a screen, and the software work still runs. In the water, that same attention is trained through the body.</p>
+        <p>The road here ran through extreme sports. Freediving turned that into a calmer practice: breathing, equalization, movement, safety and attention.</p>
+        <p>Teaching follows the same shape as training: one person, one buoy, your own pace, someone fully watching.</p>
       </div>
       <ul class="m-0 flex list-none flex-wrap gap-2 p-0 text-sm font-bold">
         <li class="rounded-full bg-sky-100 px-4 py-2 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Molchanovs Wave 2 Instructor</li>
@@ -99,9 +99,9 @@ title: nofins | Freediving trains life
 
 <section id="where" class="bg-slate-100 text-slate-950 dark:bg-slate-950 dark:text-slate-100">
   <div class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12">
-    <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">Where I train</p>
+    <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">Where the training happens</p>
     <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">Home water: Phuket, Thailand.</h2>
-    <p class="mb-12 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">Pool mornings. Boat weekends. Lines around the Racha Islands and the Andaman. I travel for deep pools, camps and good people. Dates appear when they are real.</p>
+    <p class="mb-12 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">Pool mornings. Boat weekends. Lines around the Racha Islands and the Andaman. Trips run out to deep pools, camps and good people. Dates appear when they are real.</p>
 
     <div class="grid gap-8 md:grid-cols-3">
       <img src="/images/home/phuket-1.webp" alt="Clear water and green islands near Phuket" width="900" height="650" loading="lazy" class="aspect-[18/13] w-full rounded-xl object-cover">
@@ -120,7 +120,7 @@ title: nofins | Freediving trains life
       <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-400">Mind · body · connection</p>
       <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">Train life.</h2>
       <p class="mb-8 max-w-xl text-lg leading-relaxed text-slate-200">If this is the kind of freediving you want, message me. We start with where you are, not with a number on the line.</p>
-      <a href="https://t.me/firedev" target="_blank" rel="noopener" class="home-cta inline-flex min-h-12 items-center justify-center rounded-xl bg-sky-500 px-6 py-3 text-base font-bold text-slate-950 no-underline transition hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white active:translate-y-px">Message Nick</a>
+      <a href="https://t.me/firedev" target="_blank" rel="noopener" class="home-cta inline-flex min-h-12 items-center justify-center rounded-xl bg-sky-500 px-6 py-3 text-base font-bold text-slate-950 no-underline transition hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white active:translate-y-px">Get in touch</a>
       <p class="mt-6 max-w-xl text-sm leading-relaxed text-slate-300">All in-water breath-hold practice uses an active, qualified buddy. No hyperventilation. Attention never replaces safety or the decision to surface.</p>
     </div>
   </div>
