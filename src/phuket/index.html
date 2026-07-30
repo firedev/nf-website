@@ -244,6 +244,35 @@ function part(geo,colorOrMat,pos=[0,0,0],opts={}){
   if(opts.parent)opts.parent.add(m);
   return m;
 }
+// Hand-authored low-poly geometry. Faces may be triangles or polygons; polygons
+// are fanned into triangles and kept non-indexed for crisp, faceted normals.
+function polyGeo(vertices,faces){
+  const p=[];
+  for(const face of faces)for(let i=1;i<face.length-1;i++)
+    for(const n of [face[0],face[i],face[i+1]])p.push(...vertices[n]);
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));
+  g.computeVertexNormals(); return g;
+}
+// Elliptical cross-sections along Z make one continuous sculpted body instead
+// of a row of overlapping spheres/boxes. section = [z, centerY, halfWidth, halfHeight].
+function loftGeo(sections,sides=8){
+  const v=[],f=[];
+  for(const [z,y,rx,ry] of sections)
+    for(let i=0;i<sides;i++){const a=i/sides*Math.PI*2;v.push([Math.cos(a)*rx,y+Math.sin(a)*ry,z]);}
+  for(let r=0;r<sections.length-1;r++)for(let i=0;i<sides;i++){
+    const a=r*sides+i,b=r*sides+(i+1)%sides,c=b+sides,d=a+sides;
+    f.push([a,b,c,d]);
+  }
+  f.push([...Array(sides).keys()].reverse(),[...Array(sides).keys()].map(i=>(sections.length-1)*sides+i));
+  return polyGeo(v,f);
+}
+function slabGeo(points,depth=0.06){
+  const v=points.map(([x,y])=>[x,y,-depth]).concat(points.map(([x,y])=>[x,y,depth]));
+  const n=points.length,f=[[...Array(n).keys()].reverse(),[...Array(n).keys()].map(i=>i+n)];
+  for(let i=0;i<n;i++)f.push([i,(i+1)%n,(i+1)%n+n,i+n]);
+  return polyGeo(v,f);
+}
 // GEO: cache for geometries that are EXACT duplicates across builders (dive-buoy kit)
 const GEO={
   buoy:new THREE.SphereGeometry(0.6,8,8),
@@ -255,7 +284,8 @@ const GEO={
 // shared palm parts (45+ instances)
 const trunkMat=toon(0x9a6b3f), leafMat=toon(0x2f9e44), cocoMat=toon(0x6b4423);
 const segGeo=new THREE.CylinderGeometry(0.13,0.18,1.15,6),
-      leafGeo=new THREE.ConeGeometry(0.35,2.6,4), cocoGeo=new THREE.SphereGeometry(0.16,6,5);
+      leafGeo=slabGeo([[-0.06,0],[-0.3,0.7],[-0.22,1.55],[0,2.65],[0.22,1.55],[0.3,0.7],[0.06,0]],0.018),
+      cocoGeo=new THREE.SphereGeometry(0.16,6,5);
 function palm(){ // returns the group; caller positions + scene.adds
   const g=new THREE.Group(), bend=(Math.random()-0.5)*0.4;
   g.rotation.y=Math.random()*Math.PI*2;
@@ -339,14 +369,31 @@ function buildLighthouse(){
 function buildPatong(){
   const g=new THREE.Group();
   const cols=[0xf25c5c,0xf2b705,0x2ea8c9,0xef6ea8];
-  for(let i=0;i<5;i++){
-    const u=new THREE.Group();
-    part(new THREE.CylinderGeometry(0.06,0.06,2,5),0xdddddd,[0,1,0],{parent:u});
-    part(new THREE.ConeGeometry(1.1,0.7,8),cols[i%4],[0,2.1,0],{parent:u});
-    u.position.set(i*2.4-5,0,(i%2)*2.2); g.add(u);
+  const poleGeo=new THREE.CylinderGeometry(0.06,0.06,2,5), lounGeo=new THREE.BoxGeometry(0.55,0.1,1.5);
+  for(let i=0;i<6;i++){ // parasol + a pair of loungers under each
+    const u=new THREE.Group(), c=cols[i%4];
+    part(poleGeo,0xdddddd,[0,1,0],{parent:u});
+    part(new THREE.ConeGeometry(1.1,0.7,8),c,[0,2.1,0],{outline:1.04,parent:u});
+    part(new THREE.SphereGeometry(0.1,6,5),c,[0,2.5,0],{parent:u}); // finial
+    for(const s of [-1,1]){
+      part(lounGeo,0xf6efe2,[s*0.75,0.22,0],{parent:u});
+      part(new THREE.BoxGeometry(0.55,0.1,0.5),0xf6efe2,[s*0.75,0.4,0.6],{rot:[-0.7,0,0],parent:u}); // raised backrest
+      for(const dz of [-0.6,0.55])part(new THREE.CylinderGeometry(0.04,0.04,0.3,4),0xc9c2b4,[s*0.75,0.09,dz],{parent:u});
+    }
+    u.position.set(i*2.3-5.8,0,(i%2)*2.2); u.rotation.y=(hash(i,11)-0.5)*0.5; g.add(u);
   }
-  for(let i=0;i<3;i++)
-    part(new THREE.BoxGeometry(3,3+i,2.4),[0xf6d8b8,0xcfe6f2,0xf2e6c9][i],[i*3.6-3.6,(3+i)/2,-5],{parent:g});
+  // beachfront strip: hotels + shopfronts with awnings and lit windows
+  const winMat=toon(0xffe9a8), awnCols=[0xd94f3d,0x2ea8c9,0xf2b705];
+  for(let i=0;i<4;i++){
+    const h=3.2+hash(i,5)*2.6, u=new THREE.Group();
+    part(new THREE.BoxGeometry(3,h,2.6),[0xf6d8b8,0xcfe6f2,0xf2e6c9,0xf4e0ea][i],[0,h/2,0],{outline:1.04,parent:u});
+    part(new THREE.BoxGeometry(3.2,0.3,2.8),0xfdf6ec,[0,h+0.1,0],{parent:u}); // roof cap
+    for(let r=0;r<Math.floor(h/1.3);r++) // window rows
+      for(const s of [-0.85,0,0.85])
+        part(new THREE.BoxGeometry(0.42,0.5,0.1),winMat,[s,1.5+r*1.3,1.33],{parent:u});
+    part(new THREE.BoxGeometry(3.1,0.12,1),awnCols[i%3],[0,1.05,1.75],{rot:[0.35,0,0],outline:1.04,parent:u}); // awning
+    u.position.set(i*3.4-5.1,0,-5.4); u.rotation.y=(hash(i,13)-0.5)*0.14; g.add(u);
+  }
   return g;
 }
 function buildOldTown(){
@@ -392,9 +439,22 @@ function buildBridge(){
 function buildLagoon(){
   const g=new THREE.Group();
   part(new THREE.CircleGeometry(5,20).rotateX(-Math.PI/2),new THREE.MeshBasicMaterial({color:0x54c8d8}),[0,0.25,0],{parent:g});
-  for(let i=0;i<3;i++){
-    part(new THREE.BoxGeometry(2.2,1.8,2.2),0xfdf6ec,[i*3-3,0.9,-6],{parent:g});
-    part(new THREE.ConeGeometry(1.9,1.2,4),0xc97b4a,[i*3-3,2.4,-6],{rot:[0,Math.PI/4,0],parent:g});
+  const stiltGeo=new THREE.CylinderGeometry(0.1,0.1,1.5,5), stiltMat=toon(0x7a5a36),
+        thatch=toon(0xc97b4a), deckMat=toon(0xb08a5a);
+  for(let i=0;i<3;i++){ // stilted bungalows: deck on posts, thatched roof, ladder to the water
+    const u=new THREE.Group();
+    for(const [dx,dz] of [[1,1],[-1,1],[1,-1],[-1,-1]])
+      part(stiltGeo,stiltMat,[dx*1.1,0.75,dz*1.1],{parent:u});
+    part(new THREE.BoxGeometry(2.8,0.16,3.2),deckMat,[0,1.55,0.4],{outline:1.04,parent:u}); // deck extends toward the water
+    part(new THREE.BoxGeometry(2.2,1.6,2.2),0xfdf6ec,[0,2.4,-0.4],{outline:1.04,parent:u});
+    part(new THREE.BoxGeometry(0.6,0.7,0.1),0x9fd7e8,[0,2.5,0.72],{parent:u}); // window facing the lagoon
+    part(new THREE.ConeGeometry(2,1.2,4),thatch,[0,3.85,-0.4],{rot:[0,Math.PI/4,0],outline:1.05,parent:u});
+    part(new THREE.ConeGeometry(0.9,0.55,4),thatch,[0,4.6,-0.4],{rot:[0,Math.PI/4,0],parent:u}); // roof cap
+    for(const s of [-1,1]) // deck rail
+      part(new THREE.CylinderGeometry(0.05,0.05,3,4).rotateX(Math.PI/2),stiltMat,[s*1.3,1.9,0.4],{parent:u});
+    for(let r=0;r<3;r++) // ladder down into the lagoon
+      part(new THREE.BoxGeometry(0.5,0.06,0.06),stiltMat,[0,1.4-r*0.42,1.95],{parent:u});
+    u.position.set(i*3.4-3.4,0,-6); u.rotation.y=(hash(i,17)-0.5)*0.3; g.add(u);
   }
   return g;
 }
@@ -461,11 +521,11 @@ function buildCrab(){
   const g=new THREE.Group();
   const shellCol=0xe8562f, bellyCol=0xffb27a, clawCol=0xff7a3c, legCol=0xd8451f, darkCol=0xb8360f;
 
-  // shell: domed, wider than tall, tapered toward the back
-  part(new THREE.SphereGeometry(0.62,20,16),shellCol,[0,0.5,0],{scale:[1.55,0.78,1.25],outline:1.05,parent:g});
-
-  // belly rim: flatter squashed sphere peeking under the front of the shell
-  part(new THREE.SphereGeometry(0.5,16,12),bellyCol,[0,0.28,0.12],{scale:[1.3,0.4,1.0],parent:g});
+  // Uneven hand-sculpted shell: broad brow, pinched rear, low belly rim.
+  part(loftGeo([[-0.7,0.43,0.48,0.2],[-0.35,0.5,0.9,0.38],[0.18,0.52,0.98,0.42],
+    [0.62,0.44,0.72,0.3],[0.78,0.38,0.36,0.16]],8),shellCol,[0,0,0],{outline:1.05,parent:g});
+  part(loftGeo([[-0.5,0.25,0.4,0.05],[0,0.24,0.68,0.09],[0.52,0.28,0.55,0.07]],6),
+    bellyCol,[0,0,0],{parent:g});
 
   // eye stalks: tapered capsules poking up-forward, capped with white+pupil
   const stalkGeo=new THREE.CapsuleGeometry(0.05,0.22,4,8);
@@ -531,8 +591,10 @@ function buildTurtle(){
   const g=new THREE.Group();
   const shellC=0x2e9e57, shellD=0x1f7a44, skin=0xc7d94a, belly=0xf2e6b6;
 
-  // domed shell — top hemisphere of a squashed sphere
-  g.add(part(new THREE.SphereGeometry(1,20,14,0,Math.PI*2,0,Math.PI*0.5),shellC,[0,0.5,0],{scale:[1.1,0.62,1.5],outline:1.04}));
+  // One faceted shell with a pinched bow and stern.
+  g.add(part(loftGeo([[-1.48,0.42,0.12,0.08],[-1.14,0.5,0.72,0.32],
+    [-0.35,0.58,1.08,0.56],[0.45,0.57,1.05,0.54],[1.18,0.48,0.66,0.28],
+    [1.5,0.4,0.1,0.06]],10),shellC,[0,0,0],{outline:1.04}));
 
   // raised scutes — a few slightly-raised patches for a hexagon feel
   const scuteGeo=new THREE.SphereGeometry(0.26,10,8,0,Math.PI*2,0,Math.PI*0.5);
@@ -591,17 +653,12 @@ function buildElephant(){
   const g=new THREE.Group();
   const BODY=0x8a9bb0, EAR=0x7d8ea6, TUSK=0xfdf6e3, GOLD=0xe0a53a, RED=0xb43a3a;
 
-  // body — fat tapered capsule, lying horizontal
-  g.add(part(new THREE.CapsuleGeometry(1.05,0.9,8,16),BODY,[0,1.55,0],{rot:[0,0,Math.PI/2],scale:[1,1,0.92],outline:1.05}));
-
-  // rump — rounded back end
-  g.add(part(new THREE.SphereGeometry(1.02,16,14),BODY,[-1.0,1.55,0],{scale:[0.95,1,0.9],outline:1.05}));
-
-  // head — big round ball up front
-  g.add(part(new THREE.SphereGeometry(1.1,18,16),BODY,[1.15,1.75,0],{scale:[0.95,1,0.95],outline:1.05}));
-
-  // forehead bump
-  g.add(part(new THREE.SphereGeometry(0.55,14,12),BODY,[1.35,2.35,0],{scale:[1,0.8,1.1],outline:1.05}));
+  const bodyGeo=loftGeo([[-1.65,1.5,0.3,0.35],[-1.35,1.55,0.82,0.88],
+    [-0.5,1.58,1.02,1.02],[0.4,1.62,1.02,1.0],[0.95,1.72,0.72,0.82]],8);
+  bodyGeo.rotateY(Math.PI/2); g.add(part(bodyGeo,BODY,[0,0,0],{outline:1.05}));
+  const headGeo=loftGeo([[0.55,1.72,0.55,0.66],[0.92,1.82,0.95,1.04],
+    [1.45,1.85,1.02,1.12],[1.82,1.72,0.66,0.82],[1.98,1.55,0.28,0.38]],8);
+  headGeo.rotateY(Math.PI/2); g.add(part(headGeo,BODY,[0,0,0],{outline:1.05}));
 
   // ears — big flattened floppy discs
   const ears=[];
@@ -821,126 +878,136 @@ function buildAirport(){
   part(new THREE.ConeGeometry(0.35,1,6),0xf2842a,[0.5,1.4,-17],{rot:[0,0,Math.PI/2],parent:g});
   return g;
 }
-function wheel(r,w){return new THREE.Mesh(new THREE.CylinderGeometry(r,r,w,10).rotateZ(Math.PI/2),toon(0x22262b));}
+// wheel(): tyre + paler hub, so a rolling wheel reads as round instead of a black disc
+function wheel(r,w){
+  const g=new THREE.Group();
+  const tyre=new THREE.Mesh(new THREE.CylinderGeometry(r,r,w,12).rotateZ(Math.PI/2),toon(0x22262b));
+  addOutline(tyre,1.06); g.add(tyre);
+  for(const s of [-1,1]) // hub cap on each face
+    part(new THREE.CylinderGeometry(r*0.42,r*0.42,w*0.25,8).rotateZ(Math.PI/2),0xcfd4d8,[s*w*0.55,0,0],{parent:g});
+  return g;
+}
 function buildScooter(){
-  const v=new THREE.Group();
-  part(new THREE.BoxGeometry(0.5,0.15,1.7),0x3fa7d6,[0,0.45,0],{parent:v});
-  part(new THREE.BoxGeometry(0.45,0.25,0.8),0x22262b,[0,0.75,-0.4],{parent:v});
-  part(new THREE.CylinderGeometry(0.06,0.06,0.9,6),0x3fa7d6,[0,0.9,0.62],{rot:[0.4,0,0],parent:v});
-  part(new THREE.CylinderGeometry(0.05,0.05,0.7,6).rotateZ(Math.PI/2),0x22262b,[0,1.32,0.45],{parent:v});
-  const w1=wheel(0.28,0.16); w1.position.set(0,0.28,0.8); const w2=wheel(0.28,0.16); w2.position.set(0,0.28,-0.8);
+  const v=new THREE.Group(), BODY=0x3fa7d6, DARK=toon(0x22262b);
+  // One swept fairing gives the scooter a drawn silhouette instead of stacked boxes.
+  part(new THREE.BoxGeometry(0.5,0.12,1.15),0x2b3238,[0,0.42,0.1],{parent:v}); // floorboard
+  part(loftGeo([[-0.95,0.62,0.17,0.16],[-0.72,0.72,0.3,0.34],[-0.28,0.74,0.31,0.38],
+    [0.12,0.48,0.23,0.12],[0.55,0.7,0.25,0.38],[0.92,1.05,0.16,0.24]],6),
+    BODY,[0,0,0],{outline:1.05,parent:v});
+  part(new THREE.BoxGeometry(0.44,0.16,0.62),0x8b5a3c,[0,0.97,-0.42],{outline:1.05,parent:v}); // saddle
+  part(new THREE.BoxGeometry(0.4,0.14,0.3),0x8b5a3c,[0,1.02,-0.86],{parent:v}); // pillion pad
+  part(new THREE.CylinderGeometry(0.05,0.05,0.85,6),DARK,[0,1.05,0.78],{rot:[0.34,0,0],parent:v}); // fork/steering column
+  part(new THREE.CylinderGeometry(0.04,0.04,0.66,6).rotateZ(Math.PI/2),DARK,[0,1.38,0.66],{parent:v}); // handlebar
+  for(const s of [-1,1]) // grips
+    part(new THREE.CylinderGeometry(0.055,0.055,0.14,6).rotateZ(Math.PI/2),0x14181c,[s*0.29,1.38,0.66],{parent:v});
+  part(new THREE.SphereGeometry(0.13,8,6),0xfff2a8,[0,1.2,0.9],{scale:[1,1,0.6],parent:v}); // headlight
+  part(new THREE.BoxGeometry(0.16,0.1,0.06),0xd42a2a,[0,0.86,-0.92],{parent:v}); // tail light
+  part(new THREE.CylinderGeometry(0.07,0.09,0.5,6).rotateZ(Math.PI/2),0xb8bcc0,[0.18,0.42,-0.7],{parent:v}); // exhaust
+  for(const s of [-1,1]) // mirrors
+    part(new THREE.BoxGeometry(0.16,0.1,0.04),0xcfd4d8,[s*0.3,1.56,0.6],{rot:[0,s*0.3,0],parent:v});
+  const w1=wheel(0.28,0.16); w1.position.set(0,0.28,0.85); const w2=wheel(0.28,0.16); w2.position.set(0,0.28,-0.72);
   v.add(w1,w2); return v;
 }
 function buildTuktuk(){
-  const v=new THREE.Group();
-  part(new THREE.BoxGeometry(1.5,1.1,2.4),0xd94f3d,[0,0.95,0],{outline:1.05,parent:v});
-  part(new THREE.BoxGeometry(1.7,0.15,2.7),0xf2c14e,[0,1.65,0],{parent:v});
-  part(new THREE.PlaneGeometry(1.2,0.7),new THREE.MeshBasicMaterial({color:0x9fd7e8,side:THREE.DoubleSide}),[0,1.2,1.21],{parent:v});
-  const wf=wheel(0.3,0.2); wf.position.set(0,0.3,1.15);
-  const wl=wheel(0.3,0.2); wl.position.set(-0.7,0.3,-0.8);
-  const wr=wheel(0.3,0.2); wr.position.set(0.7,0.3,-0.8);
+  const v=new THREE.Group(), RED=0xd94f3d, GOLD=toon(0xf2c14e), CHROME=toon(0xcfd4d8);
+  // Phuket tuk-tuk: narrow cab up front, OPEN passenger box behind with facing benches
+  const cab=polyGeo([
+    [-0.72,0.35,0.15],[0.72,0.35,0.15],[-0.72,0.35,1.5],[0.72,0.35,1.5],
+    [-0.7,1.22,0.15],[0.7,1.22,0.15],[-0.5,1.48,1.38],[0.5,1.48,1.38]
+  ],[[0,2,3,1],[0,4,6,2],[1,3,7,5],[2,6,7,3],[0,1,5,4],[4,5,7,6]]);
+  part(cab,RED,[0,0,0],{outline:1.04,parent:v});
+  part(new THREE.BoxGeometry(1.05,0.55,0.06),new THREE.MeshBasicMaterial({color:0x9fd7e8,transparent:true,opacity:0.6,side:THREE.DoubleSide}),[0,1.1,1.48],{parent:v}); // windscreen
+  part(loftGeo([[-1.35,0.62,0.68,0.3],[-0.65,0.6,0.78,0.34],[0.15,0.62,0.72,0.3]],6),
+    RED,[0,0,0],{outline:1.04,parent:v}); // flared passenger tub
+  part(new THREE.BoxGeometry(1.36,0.35,1.36),0x7d2f22,[0,0.78,-0.55],{parent:v}); // dark interior well = reads as open
+  for(const z of [-0.15,-0.95]) // facing bench seats
+    part(new THREE.BoxGeometry(1.3,0.14,0.34),0xf2e2ba,[0,0.95,z],{parent:v});
+  // corner posts + curved canopy roof
+  for(const [dx,dz] of [[0.68,0.05],[-0.68,0.05],[0.68,-1.2],[-0.68,-1.2]])
+    part(new THREE.CylinderGeometry(0.045,0.045,1,6),CHROME,[dx,1.35,dz],{parent:v});
+  part(new THREE.CylinderGeometry(1.1,1.1,3.1,10,1,false,0,Math.PI).rotateZ(Math.PI/2),GOLD,[0,1.35,-0.1],{scale:[1,0.42,1],outline:1.04,parent:v}); // one arched roof spanning cab + tub
+  part(new THREE.CylinderGeometry(0.04,0.04,0.6,6).rotateZ(Math.PI/2),0x22262b,[0,1.15,1.15],{parent:v}); // handlebar
+  for(const s of [-1,1]) // twin headlights + chrome bumper
+    part(new THREE.SphereGeometry(0.13,8,6),0xfff2a8,[s*0.45,0.78,1.5],{scale:[1,1,0.55],parent:v});
+  part(new THREE.CylinderGeometry(0.06,0.06,1.35,6).rotateZ(Math.PI/2),CHROME,[0,0.5,1.52],{parent:v});
+  part(new THREE.BoxGeometry(1.4,0.1,0.08),0xd42a2a,[0,0.85,-1.32],{parent:v}); // tail bar
+  const wf=wheel(0.3,0.2); wf.position.set(0,0.3,1.3);
+  const wl=wheel(0.32,0.22); wl.position.set(-0.75,0.32,-0.85);
+  const wr=wheel(0.32,0.22); wr.position.set(0.75,0.32,-0.85);
   v.add(wf,wl,wr); return v;
 }
 function buildCar(){
-  const v=new THREE.Group();
-  part(new THREE.BoxGeometry(1.9,0.8,3.6),0x2e6f8e,[0,0.75,0],{outline:1.04,parent:v});
-  part(new THREE.BoxGeometry(1.6,0.7,1.8),0x9fd7e8,[0,1.45,-0.2],{parent:v});
-  for(const [x,z] of [[-0.85,1.2],[0.85,1.2],[-0.85,-1.2],[0.85,-1.2]]){const w=wheel(0.35,0.25); w.position.set(x,0.35,z); v.add(w);}
+  const v=new THREE.Group(), BODY=0x2e6f8e, GLASS=new THREE.MeshBasicMaterial({color:0x9fd7e8,transparent:true,opacity:0.7,side:THREE.DoubleSide});
+  const shell=polyGeo([
+    [-0.72,0.45,1.82],[0.72,0.45,1.82],[-0.82,0.9,1.7],[0.82,0.9,1.7],
+    [-0.92,0.45,0.62],[0.92,0.45,0.62],[-0.84,1.0,0.62],[0.84,1.0,0.62],
+    [-0.72,1.66,0.35],[0.72,1.66,0.35],[-0.68,1.58,-1.02],[0.68,1.58,-1.02],
+    [-0.9,0.45,-1.82],[0.9,0.45,-1.82],[-0.82,0.9,-1.72],[0.82,0.9,-1.72]
+  ],[
+    [0,1,3,2],[0,2,6,4],[1,5,7,3],[2,3,7,6],
+    [4,6,8,10,14,12],[5,13,15,11,9,7],[6,7,9,8],[8,9,11,10],
+    [10,11,15,14],[12,14,15,13],[0,4,12,13,5,1]
+  ]);
+  part(shell,BODY,[0,0,0],{outline:1.035,parent:v});
+  part(new THREE.BoxGeometry(1.95,0.18,3.66),0x1f4c63,[0,0.44,0],{parent:v}); // sill shadow line
+  part(new THREE.BoxGeometry(1.5,0.5,0.08),GLASS,[0,1.38,0.58],{rot:[0.28,0,0],parent:v}); // windscreen
+  part(new THREE.BoxGeometry(1.5,0.42,0.08),GLASS,[0,1.38,-1.08],{rot:[-0.2,0,0],parent:v}); // rear glass
+  for(const s of [-1,1]) // side windows
+    part(new THREE.BoxGeometry(0.08,0.4,1.5),GLASS,[s*0.8,1.4,-0.25],{parent:v});
+  for(const s of [-1,1]){ // headlights, tail lights, mirrors
+    part(new THREE.BoxGeometry(0.4,0.18,0.1),0xfff2a8,[s*0.62,0.85,1.82],{parent:v});
+    part(new THREE.BoxGeometry(0.36,0.16,0.1),0xd42a2a,[s*0.64,0.9,-1.82],{parent:v});
+    part(new THREE.BoxGeometry(0.16,0.1,0.06),0xcfd4d8,[s*1.02,1.3,0.42],{parent:v});
+  }
+  for(const z of [1.83,-1.83]) // bumpers
+    part(new THREE.BoxGeometry(1.86,0.2,0.14),0xcfd4d8,[0,0.5,z],{parent:v});
+  for(const [x,z] of [[-0.85,1.2],[0.85,1.2],[-0.85,-1.2],[0.85,-1.2]]){
+    part(new THREE.BoxGeometry(0.28,0.5,0.95),0x1f4c63,[x*1.02,0.72,z],{parent:v}); // wheel arch
+    const w=wheel(0.35,0.25); w.position.set(x,0.35,z); v.add(w);
+  }
   return v;
 }
 // ---- round 2 wildlife ----
 function buildDolphin(){
-  const g=new THREE.Group();
-  const top=0x5b86b5, belly=0xdfeaf2;
+  const g=new THREE.Group(), top=0x5b86b5, belly=0xdfeaf2;
+  // A single eight-sided loft carries the melon, torso, beak and tail stock.
+  const bodyGeo=loftGeo([[-1.4,0,0.05,0.05],[-1.05,0,0.2,0.17],[-0.62,0,0.4,0.36],
+    [-0.1,0,0.55,0.48],[0.46,0.04,0.53,0.48],[0.86,0.05,0.4,0.38],
+    [1.08,0.04,0.22,0.19],[1.52,0.1,0.11,0.09],[1.7,0.12,0.025,0.02]],8);
+  bodyGeo.rotateY(Math.PI/2);
+  g.add(addOutline(new THREE.Mesh(bodyGeo,toon(top)),1.04));
+  // Pale belly is a fitted polygonal plate, not another body hidden inside.
+  const bellyGeo=loftGeo([[-0.85,-0.16,0.15,0.05],[-0.4,-0.3,0.4,0.1],
+    [0.25,-0.34,0.44,0.11],[0.75,-0.22,0.3,0.07],[1.18,-0.09,0.08,0.025]],6);
+  bellyGeo.rotateY(Math.PI/2); g.add(new THREE.Mesh(bellyGeo,toon(belly)));
 
-  // sleek body: chain of tapered capsules, nose forward along +x
-  // segments {x, r, len, sy(vertical squash)}
-  const segs=[
-    {x: 1.05, r:0.18, len:0.35, sy:0.85}, // beak base
-    {x: 0.72, r:0.34, len:0.55, sy:0.92},
-    {x: 0.30, r:0.52, len:0.75, sy:1.00}, // fat middle
-    {x:-0.20, r:0.50, len:0.75, sy:1.00},
-    {x:-0.68, r:0.34, len:0.60, sy:0.95},
-    {x:-1.05, r:0.16, len:0.40, sy:0.80}  // tail stalk
-  ];
-  for(const s of segs){
-    const c=new THREE.Mesh(new THREE.CapsuleGeometry(s.r,s.len,8,16),toon(top));
-    c.rotation.z=Math.PI/2;
-    c.position.set(s.x,0,0);
-    c.scale.set(1,s.sy,1);
-    g.add(addOutline(c));
-  }
-
-  // rounded head cap
-  const head=new THREE.Mesh(new THREE.SphereGeometry(0.55,16,14),toon(top));
-  head.position.set(0.52,0.02,0);
-  head.scale.set(1.05,0.98,1);
-  g.add(addOutline(head));
-
-  // pointy upturned beak tip
-  const beak=new THREE.Mesh(new THREE.CapsuleGeometry(0.13,0.4,6,12),toon(top));
-  beak.rotation.z=Math.PI/2;
-  beak.position.set(1.28,0.06,0);
-  beak.scale.set(1,0.82,0.82);
-  g.add(addOutline(beak));
-
-  // pale belly: flattened tapered shape underneath
-  for(const s of segs.slice(1,5)){
-    const b=new THREE.Mesh(new THREE.CapsuleGeometry(s.r*0.82,s.len,6,14),toon(belly));
-    b.rotation.z=Math.PI/2;
-    b.position.set(s.x,-s.r*0.42,0);
-    b.scale.set(1,0.5,0.92);
-    g.add(b);
-  }
-
-  // happy smile: torus arc under the beak
+  // happy smile: a tiny graphic accent under the integrated beak
   const mouth=new THREE.Mesh(new THREE.TorusGeometry(0.18,0.035,8,16,Math.PI),new THREE.MeshBasicMaterial({color:0x243244}));
-  mouth.position.set(0.98,-0.06,0.30);
+  mouth.position.set(1.36,-0.02,0.13);
   mouth.rotation.set(Math.PI/2,0,Math.PI);
   g.add(mouth);
-  const mouth2=mouth.clone();mouth2.position.z=-0.30;g.add(mouth2);
 
-  // eyes: white sphere + dark pupil, both sides
+  // Eyes stay simple graphic dots; the silhouette itself is fully sculpted.
   for(const sz of[1,-1]){
-    const w=new THREE.Mesh(new THREE.SphereGeometry(0.15,12,12),new THREE.MeshBasicMaterial({color:0xffffff}));
-    w.position.set(0.72,0.18,0.34*sz);
+    const w=new THREE.Mesh(new THREE.SphereGeometry(0.13,8,6),new THREE.MeshBasicMaterial({color:0xffffff}));
+    w.position.set(0.84,0.17,0.32*sz);
     g.add(w);
-    const p=new THREE.Mesh(new THREE.SphereGeometry(0.085,10,10),new THREE.MeshBasicMaterial({color:0x141414}));
-    p.position.set(0.80,0.20,0.40*sz);
+    const p=new THREE.Mesh(new THREE.SphereGeometry(0.075,7,5),new THREE.MeshBasicMaterial({color:0x141414}));
+    p.position.set(0.91,0.18,0.37*sz);
     g.add(p);
-    const sh=new THREE.Mesh(new THREE.SphereGeometry(0.03,6,6),new THREE.MeshBasicMaterial({color:0xffffff}));
-    sh.position.set(0.85,0.24,0.42*sz);
-    g.add(sh);
   }
 
-  // curved dorsal fin: flattened scaled cone, swept back
-  const dorsal=new THREE.Mesh(new THREE.ConeGeometry(0.28,0.7,14),toon(top));
-  dorsal.position.set(-0.05,0.5,0);
-  dorsal.rotation.z=-0.5;
-  dorsal.scale.set(1,1,0.28);
-  g.add(addOutline(dorsal));
-
-  // side flippers: flattened cones angled down
+  const dorsal=part(slabGeo([[-0.35,0],[0.05,0.72],[0.34,0.08]],0.045),top,[-0.05,0.35,0],{outline:1.06,parent:g});
   for(const sz of[1,-1]){
-    const f=new THREE.Mesh(new THREE.ConeGeometry(0.2,0.6,12),toon(top));
-    f.position.set(0.28,-0.32,0.34*sz);
-    f.rotation.set(sz*0.7,0,Math.PI*0.62);
-    f.scale.set(1,1,0.3);
-    g.add(addOutline(f));
+    part(slabGeo([[-0.12,0],[0.8,-0.22],[0.16,0.14]],0.045),top,[0.25,-0.2,sz*0.36],
+      {rot:[sz*Math.PI/2,0,sz*0.18],outline:1.06,parent:g});
   }
 
-  // tail flukes: two horizontal lobes from flattened cones
   const tail=new THREE.Group();
-  tail.position.set(-1.2,0,0);
-  for(const sz of[1,-1]){
-    const fl=new THREE.Mesh(new THREE.ConeGeometry(0.24,0.7,12),toon(top));
-    fl.position.set(-0.18,0,0.28*sz);
-    fl.rotation.set(0,0,Math.PI*0.5+sz*0.15);
-    fl.scale.set(1,1,0.26);
-    tail.add(addOutline(fl));
-  }
+  tail.position.set(-1.38,0,0);
+  part(slabGeo([[-0.12,0],[-0.42,0.72],[0.18,0.26],[0.3,0],
+    [0.18,-0.26],[-0.42,-0.72]],0.045),top,[0,0,0],{rot:[Math.PI/2,0,0],outline:1.06,parent:tail});
   g.add(tail);
-
   g.userData={tail,dorsal};
   return g;
 }
@@ -1061,117 +1128,56 @@ function buildShark(){
   return g;
 }
 function buildManta(){
-  const g=new THREE.Group();
-  const topC=0x1c2b57, bellyC=0xf2f6ff, hornC=0x24356b;
+  const g=new THREE.Group(), topC=0x1c2b57, bellyC=0xf2f6ff, hornC=0x24356b;
+  // Central diamond and skull are one continuous low-poly loft.
+  part(loftGeo([[-1.28,0.02,0.26,0.11],[-0.86,0.05,0.8,0.22],[-0.2,0,1.02,0.3],
+    [0.62,0,0.78,0.24],[1.05,0,0.28,0.1]],8),topC,[0,0,0],{outline:1.04,parent:g});
+  part(loftGeo([[-1.12,-0.09,0.2,0.03],[-0.65,-0.18,0.66,0.08],
+    [0.1,-0.2,0.78,0.08],[0.78,-0.1,0.38,0.035]],8),bellyC,[0,0,0],{parent:g});
 
-  // central body: flat wide squashed sphere -> diamond core
-  const body=new THREE.Mesh(new THREE.SphereGeometry(0.95,20,14),toon(topC));
-  body.scale.set(1.15,0.32,1.35);
-  addOutline(body);
-  g.add(body);
-
-  // belly plate (pale) tucked just under the body
-  const belly=new THREE.Mesh(new THREE.SphereGeometry(0.9,18,12),toon(bellyC));
-  belly.scale.set(1.05,0.22,1.2);
-  belly.position.y=-0.14;
-  g.add(belly);
-
-  // pale belly patches
-  const patchGeo=new THREE.SphereGeometry(0.22,12,10);
-  [[-0.42,-0.17,0.15],[0.42,-0.17,0.15]].forEach(p=>{
-    const m=new THREE.Mesh(patchGeo,toon(bellyC));
-    m.scale.set(1,0.28,1.2);
-    m.position.set(p[0],p[1],p[2]);
-    g.add(m);
-  });
-
-  // wing builder: flattened tapered cone, tip raised, swept back
+  const wingShape=[[0,-0.72],[0.75,-0.62],[1.55,-0.25],[2.25,0.12],
+    [1.72,0.55],[0.72,0.78],[0,0.58]];
   const makeWing=side=>{
-    const w=new THREE.Group();
-    const wing=new THREE.Mesh(new THREE.ConeGeometry(0.7,1.7,16,1),toon(topC));
-    wing.geometry.translate(0,-0.85,0);   // pivot at wing root
-    wing.rotation.z=Math.PI/2*side;        // point outward
-    wing.rotation.y=side*0.35;             // sweep back
-    wing.scale.set(1,1,0.28);              // flatten thin vertically
-    addOutline(wing);
-    w.add(wing);
-    // pale trailing edge accent under wingtip
-    const acc=new THREE.Mesh(new THREE.ConeGeometry(0.4,1.2,14,1),toon(bellyC));
-    acc.geometry.translate(0,-0.85,0);
-    acc.rotation.z=Math.PI/2*side;
-    acc.rotation.y=side*0.35;
-    acc.scale.set(1,1,0.2);
-    acc.position.y=-0.08;
-    w.add(acc);
-    w.position.set(side*0.7,0.04,0);
-    w.rotation.z=side*0.16;                 // raise tips a touch
-    return w;
+    const w=new THREE.Group(); w.position.set(side*0.68,0,0);
+    const wing=part(slabGeo(wingShape,0.045),topC,[0,0,0],{rot:[Math.PI/2,0,0],outline:1.04,parent:w});
+    wing.scale.x=side;
+    const flash=part(slabGeo([[0,-0.48],[0.65,-0.38],[1.55,0.02],[0.7,0.4],[0,0.34]],0.02),
+      bellyC,[0,-0.07,0],{rot:[Math.PI/2,0,0],parent:w});
+    flash.scale.x=side; return w;
   };
-  const wingL=makeWing(1), wingR=makeWing(-1);
-  g.add(wingL); g.add(wingR);
+  const wingL=makeWing(-1),wingR=makeWing(1); g.add(wingL,wingR);
 
-  // cephalic horns: two small tapered cones poking forward
-  const hornGeo=new THREE.ConeGeometry(0.12,0.55,12,1);
-  [[-0.3,0.02,-1.0],[0.3,0.02,-1.0]].forEach(p=>{
-    const h=new THREE.Mesh(hornGeo,toon(hornC));
-    const hh=new THREE.Group();
-    h.rotation.x=-Math.PI/2*0.72;          // tilt forward-down
-    h.position.set(0,0,-0.27);
-    hh.add(h);
-    hh.position.set(p[0],p[1],p[2]);
-    hh.rotation.y=-p[0]*0.5;                // splay outward
-    addOutline(h);
-    g.add(hh);
-  });
+  // Rolled cephalic fins are small custom wedges aimed forward.
+  for(const s of [-1,1])
+    part(slabGeo([[-0.12,0],[0.12,0],[0.06,-0.72],[-0.08,-0.58]],0.06),hornC,
+      [s*0.33,-0.02,-1.03],{rot:[Math.PI/2,0,s*0.18],outline:1.05,parent:g});
 
-  // head bump front-center
-  const head=new THREE.Mesh(new THREE.SphereGeometry(0.5,16,12),toon(topC));
-  head.scale.set(1,0.5,0.8);
-  head.position.set(0,0.06,-0.7);
-  addOutline(head);
-  g.add(head);
-
-  // big friendly eyes on the sides of the head
-  const eyeW=new THREE.SphereGeometry(0.17,14,12);
-  const pupG=new THREE.SphereGeometry(0.09,12,10);
+  const eyeW=new THREE.SphereGeometry(0.15,8,6),pupG=new THREE.SphereGeometry(0.08,7,5);
   [-1,1].forEach(s=>{
     const e=new THREE.Mesh(eyeW,new THREE.MeshBasicMaterial({color:0xffffff}));
-    e.position.set(s*0.42,0.14,-0.72);
+    e.position.set(s*0.58,0.13,-0.75);
     g.add(e);
     const p=new THREE.Mesh(pupG,new THREE.MeshBasicMaterial({color:0x11131f}));
-    p.position.set(s*0.47,0.15,-0.83);
-    g.add(p);
-    const sp=new THREE.Mesh(new THREE.SphereGeometry(0.03,8,6),new THREE.MeshBasicMaterial({color:0xffffff}));
-    sp.position.set(s*0.5,0.19,-0.89);
-    g.add(sp);
+    p.position.set(s*0.62,0.14,-0.85); g.add(p);
   });
-
-  // slender whip tail: long thin tapered cone swept back+up
-  const tail=new THREE.Mesh(new THREE.ConeGeometry(0.14,2.0,12,1),toon(topC));
-  tail.geometry.translate(0,1.0,0);        // base at origin, points +y
-  tail.rotation.x=Math.PI/2*0.86;          // lay back over the tail
-  tail.position.set(0,0.06,1.1);
-  addOutline(tail);
-  g.add(tail);
-
+  part(loftGeo([[0,0,0.12,0.08],[0.8,0.02,0.075,0.05],[1.8,0.1,0.025,0.02],[2.5,0.18,0.006,0.006]],5),
+    topC,[0,0,0.95],{outline:1.05,parent:g});
   g.userData={wingL,wingR};
   return g;
 }
 function buildBuffalo(){
   const g=new THREE.Group();
   const HIDE=0x6b7480, MUZZLE=0x3a3f47, HORN=0xe8dcc0, DARK=0x232528;
-  // body: chunky tapered capsule barrel, slightly tilted, head-low posture
-  g.add(part(new THREE.CapsuleGeometry(0.62,1.35,6,10),HIDE,[0,1.05,0.05],{rot:[0,0,Math.PI/2],scale:[1,1,1.12],outline:1.05}));
-  // chest/belly puff for chunkiness
-  g.add(part(new THREE.SphereGeometry(0.68,12,10),HIDE,[0,0.78,0.15],{scale:[1.05,0.9,1.1],outline:1.05}));
-  // neck: tapered capsule connecting body to lowered head
-  g.add(part(new THREE.CapsuleGeometry(0.34,0.5,6,8),HIDE,[0,0.82,0.95],{rot:[1.05,0,0],outline:1.05}));
+  part(loftGeo([[-1.05,1.08,0.22,0.25],[-0.8,1.05,0.58,0.6],[-0.1,1.05,0.76,0.7],
+    [0.58,0.96,0.68,0.64],[1.05,0.78,0.4,0.4],[1.25,0.66,0.26,0.26]],8),
+    HIDE,[0,0,0],{outline:1.05,parent:g});
   // head group, lowered
   const head=new THREE.Group();
   head.position.set(0,0.62,1.35);
   head.rotation.x=0.45;
   g.add(head);
-  head.add(part(new THREE.SphereGeometry(0.5,14,12),HIDE,[0,0,0],{scale:[1,0.92,1.02],outline:1.05}));
+  head.add(part(loftGeo([[-0.32,0.02,0.25,0.24],[0,0,0.5,0.46],[0.42,-0.08,0.45,0.38],
+    [0.62,-0.16,0.25,0.2]],8),HIDE,[0,0,0],{outline:1.05}));
   // muzzle: rounded scaled sphere, darker
   head.add(part(new THREE.SphereGeometry(0.33,12,10),MUZZLE,[0,-0.18,0.42],{scale:[1,0.72,0.85],outline:1.05}));
   // nostrils
@@ -1255,8 +1261,10 @@ function buildBuffalo(){
 function buildHornbill(){
   const g=new THREE.Group();
 
-  // BODY: fat rounded egg, HORIZONTAL, leaning forward (longer than tall)
-  g.add(part(new THREE.SphereGeometry(0.6,16,16),0x0a0a0a,[0,0.75,-0.1],{scale:[0.95,0.85,1.35],rot:[-0.25,0,0],outline:1.05})); // plump, forward lean
+  // Asymmetric pear body: pinched tail, full breast, forward lean.
+  g.add(part(loftGeo([[-0.95,0.82,0.14,0.16],[-0.65,0.82,0.42,0.4],
+    [-0.1,0.78,0.58,0.52],[0.48,0.86,0.48,0.46],[0.72,1.02,0.25,0.3]],8),
+    0x0a0a0a,[0,0,0],{outline:1.05}));
 
   // CHEST: cream front puff, the leaning breast
   g.add(part(new THREE.SphereGeometry(0.45,14,14),0xf5deb3,[0,0.7,0.55],{scale:[0.85,0.8,0.6],outline:1.04}));
@@ -1264,18 +1272,19 @@ function buildHornbill(){
   // NECK: short cream taper up to the head at the FRONT
   g.add(part(new THREE.ConeGeometry(0.34,0.5,12),0xf5deb3,[0,1.15,0.55],{rot:[0.4,0,0],outline:1.04}));
 
-  // HEAD: big round ball up FRONT (not stacked on top)
-  const head=part(new THREE.SphereGeometry(0.52,16,16),0x0a0a0a,[0,1.5,0.7],{scale:[1.0,1.0,0.95],outline:1.05,parent:g});
+  const head=part(loftGeo([[0.4,1.42,0.28,0.32],[0.68,1.5,0.5,0.52],
+    [0.96,1.48,0.42,0.44],[1.12,1.4,0.18,0.2]],8),0x0a0a0a,[0,0,0],{outline:1.05,parent:g});
   g.userData.head=head;
 
-  // BEAK: BIG cheerful forward hook, two tapered cones pointing +z
-  // Upper mandible — long, points forward, dips down at tip
-  g.add(part(new THREE.ConeGeometry(0.26,1.15,10),0xffa500,[0,1.42,1.35],{rot:[Math.PI/2+0.28,0,0],scale:[1.05,1.0,0.9],outline:1.05}));
-  // Lower mandible — shorter, meets upper at the tip
-  g.add(part(new THREE.ConeGeometry(0.19,0.9,10),0xf5a300,[0,1.3,1.25],{rot:[Math.PI/2+0.42,0,0],scale:[0.95,0.9,0.9],outline:1.04}));
+  const beak=polyGeo([
+    [-0.3,1.65,0.82],[0.3,1.65,0.82],[-0.27,1.3,0.82],[0.27,1.3,0.82],
+    [-0.12,1.36,1.9],[0.12,1.36,1.9],[0,1.22,2.08]
+  ],[[0,1,5,4],[0,4,6,2],[1,3,6,5],[2,6,3],[0,2,3,1]]);
+  g.add(part(beak,0xffa500,[0,0,0],{outline:1.04}));
 
   // CASQUE: bright bulbous horn riding on TOP of the upper mandible base
-  g.add(part(new THREE.SphereGeometry(0.28,12,12),0xffc000,[0,1.72,0.95],{scale:[0.75,0.9,1.5],rot:[0.3,0,0],outline:1.05})); // ridge along the bill
+  g.add(part(loftGeo([[0.72,1.7,0.12,0.1],[1.0,1.82,0.23,0.2],[1.35,1.76,0.2,0.16],
+    [1.58,1.58,0.08,0.06]],6),0xffc000,[0,0,0],{outline:1.05}));
 
   // EYES: big round eyes, white + pupil + colorful ring, on sides of head
   function makeEye(sx){
@@ -1361,9 +1370,12 @@ function rope(x1,y1,z1,x2,y2,z2){
 }
 function makeBoat(hullCol,sailCol){
   const b=new THREE.Group();
-  const hull=part(taperStern(new THREE.BoxGeometry(2.2,1,5.5,1,1,4),0.08),hullCol,[0,0.5,0],{outline:1.04});
+  const hull=part(loftGeo([[-2.9,0.62,0.68,0.5],[-2.35,0.55,1.02,0.58],
+    [0,0.48,1.22,0.68],[2.25,0.58,0.96,0.62],[3.15,0.92,0.34,0.35],[3.55,1.15,0.04,0.04]],8),
+    hullCol,[0,0,0],{outline:1.04});
   const gun=part(taperStern(new THREE.BoxGeometry(2.35,0.14,5.6,1,1,4),0.08),0x6b4028,[0,1.03,0]); // gunwale strip
-  const prow=part(new THREE.ConeGeometry(1.05,2,4),hullCol,[0,0.55,3.6],{rot:[-Math.PI/2,0,Math.PI/4]});
+  const cockpit=part(loftGeo([[-2.0,1.06,0.72,0.05],[0.2,1.08,0.82,0.05],[1.55,1.08,0.55,0.05]],8),
+    0x412b22,[0,0,0],{parent:b});
   const mast=part(new THREE.CylinderGeometry(0.08,0.12,5.5,6),0x7a4a28,[0,3.2,0]);
   const boom=part(new THREE.CylinderGeometry(0.06,0.06,3.3,5),0x7a4a28,[0,1.7,-0.35],{rot:[0,0,Math.PI/2]});
   const sailGeo=new THREE.PlaneGeometry(3.2,3.8,6,3); // curved sail: billow the middle
@@ -1373,16 +1385,20 @@ function makeBoat(hullCol,sailCol){
   const sail=new THREE.Mesh(sailGeo,new THREE.MeshToonMaterial({color:sailCol,gradientMap:grad,side:THREE.DoubleSide}));
   sail.position.set(0,3.5,-0.35);
   const rudder=part(new THREE.BoxGeometry(0.14,1.1,0.7),0x5a3222,[0,0.15,-2.95]);
-  b.add(hull,gun,prow,mast,boom,sail,rudder,
+  b.add(hull,gun,mast,boom,sail,rudder,
     rope(0,5.9,0,0,1.1,3.3),rope(0,5.9,0,0,1.1,-2.6),rope(1.6,3.5,-0.35,0,1.05,-2.4));
   return b;
 }
 function makeSpeedboat(){
   const b=new THREE.Group(), W=toon(0xf5f8fa);
-  const hull=part(taperStern(new THREE.BoxGeometry(2,0.8,4.5,1,1,3),0.06),W,[0,0.45,0],{outline:1.04});
+  const hull=part(loftGeo([[-2.35,0.48,0.72,0.34],[-1.65,0.43,1.0,0.46],
+    [0.65,0.42,1.08,0.5],[2.15,0.62,0.58,0.44],[2.9,0.86,0.04,0.04]],8),
+    W,[0,0,0],{outline:1.04});
   const stripe=part(taperStern(new THREE.BoxGeometry(2.08,0.18,4.4,1,1,3),0.06),0x2b6fb0,[0,0.62,0]);
-  const bow=part(new THREE.ConeGeometry(0.95,1.6,4),W,[0,0.42,3],{rot:[-Math.PI/2+0.12,0,Math.PI/4]});
-  const console=part(new THREE.BoxGeometry(1.5,0.55,0.9),0x2b6fb0,[0,1.1,0.5]);
+  const console=part(polyGeo([
+    [-0.74,0,0.45],[0.74,0,0.45],[-0.62,0,-0.45],[0.62,0,-0.45],
+    [-0.58,0.58,0.32],[0.58,0.58,0.32],[-0.48,0.48,-0.38],[0.48,0.48,-0.38]
+  ],[[0,1,5,4],[0,4,6,2],[1,3,7,5],[2,6,7,3],[4,5,7,6],[0,2,3,1]]),0x2b6fb0,[0,0.85,0.5]);
   const wind=part(new THREE.PlaneGeometry(1.5,0.7),new THREE.MeshBasicMaterial({color:0xbfe8f5,transparent:true,opacity:0.55,side:THREE.DoubleSide}),[0,1.6,1.05],{rot:[-0.35,0,0]});
   const seatGeo=new THREE.BoxGeometry(0.7,0.22,0.7), backGeo=new THREE.BoxGeometry(0.7,0.5,0.14), seatMat=toon(0xd9534f);
   for(const z of [-0.5,-1.5]){
@@ -1390,13 +1406,14 @@ function makeSpeedboat(){
     const bk=new THREE.Mesh(backGeo,seatMat); bk.position.set(0,1.25,z-0.32); b.add(s,bk);
   }
   const motor=part(new THREE.BoxGeometry(0.4,0.8,0.3),0x14181c,[0,0.75,-2.3],{rot:[0.15,0,0]});
-  b.add(hull,stripe,bow,console,wind,motor); b.userData={max:26,acc:22}; return b;
+  b.add(hull,stripe,console,wind,motor); b.userData={max:26,acc:22}; return b;
 }
 function makeLongtail(){
   const b=new THREE.Group(), wood=toon(0x9a6b3f);
-  const hull=part(taperStern(new THREE.BoxGeometry(1.3,0.7,6.5,1,1,4),0.05),wood,[0,0.4,0],{outline:1.04});
+  const hull=part(loftGeo([[-3.3,0.44,0.42,0.3],[-2.75,0.38,0.65,0.42],
+    [0,0.34,0.76,0.5],[2.8,0.48,0.58,0.44],[3.7,0.96,0.05,0.05]],6),
+    wood,[0,0,0],{outline:1.04});
   const gun=part(taperStern(new THREE.BoxGeometry(1.4,0.1,6.55,1,1,4),0.05),0x6b4028,[0,0.78,0]);
-  const bow=part(new THREE.ConeGeometry(0.55,1.4,4),wood,[0,0.75,3.4],{rot:[-Math.PI/2+0.5,0,Math.PI/4]});
   const tail=part(new THREE.CylinderGeometry(0.06,0.06,3,6),0x3a3a3a,[0,1,-4.3],{rot:[Math.PI/2-0.52,0,0]});
   const prop=part(new THREE.BoxGeometry(0.4,0.08,0.12),0x14181c,[0,0.25,-5.55]);
   // canopy on sticks
@@ -1413,7 +1430,7 @@ function makeLongtail(){
     r.position.set((i-1)*0.18,1.15,3.75); r.rotation.set(0.3,0,(i-1)*0.25); b.add(r);
   });
   const flag=part(new THREE.PlaneGeometry(0.5,0.35),new THREE.MeshBasicMaterial({color:0xd42a2a,side:THREE.DoubleSide}),[0,1.6,3.9]);
-  b.add(hull,gun,bow,tail,prop,flag); b.userData={max:13,acc:10}; return b;
+  b.add(hull,gun,tail,prop,flag); b.userData={max:13,acc:10}; return b;
 }
 
 // name -> builder, so game.js can resolve LANDMARK_DEFS (world.js keeps pure data)
@@ -2227,4 +2244,4 @@ window.__dbg={player,boat,namo,get sailing(){return sailing},
 </script>
 </body>
 </html>
-<!--build:8c91a26-->
+<!--build:37bf990-->
