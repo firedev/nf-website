@@ -1669,40 +1669,47 @@ gullFlock(24,161,4);
 // tunic body, arms, legs, boots. Contract node names preserved:
 // body, head, hat(=hair), armL, armR, legL, legR, blob, mask, sleeveMat.
 const player=new THREE.Group();
-const SKIN=0xf3c59a, SKIN2=0xecb488, TUNIC=0x2e9e57, HAIR=0x6b4a24;
+const SKIN=0xf3c59a, SKIN2=0xecb488, TUNIC=0x2e9e57, HAIR=0xd6a23a;
 
-// --- BODY: tapered tunic (narrow shoulders, wide skirt) with belt ---
-const body=addOutline(new THREE.Mesh(new THREE.CylinderGeometry(0.4,0.6,1.0,12).translate(0,-0.05,0),toon(TUNIC)),1.05);
-body.scale.set(1.06,0.86,0.88); body.position.y=1.12; // chibi: shorter, slightly wider torso
-const collar=new THREE.Mesh(new THREE.SphereGeometry(0.4,12,8),body.material); // rounded shoulders, shares tunic material
-collar.scale.set(1,0.55,0.82); collar.position.y=0.42; body.add(collar);
+// --- BODY: hand-sculpted flared tunic, angular shoulders, fitted waist ---
+const tunicGeo=loftGeo([[-0.56,0,0.62,0.42],[-0.42,0,0.6,0.4],[-0.08,0,0.45,0.34],
+  [0.3,0,0.42,0.32],[0.5,0,0.54,0.36]],8);
+tunicGeo.rotateX(-Math.PI/2);
+const body=addOutline(new THREE.Mesh(tunicGeo,toon(TUNIC)),1.045);
+body.scale.set(1.06,0.86,0.88); body.position.y=1.14;
+// Cream V-neck and hem make the outfit read as clothes, not a green solid.
+const collar=new THREE.Mesh(slabGeo([[-0.23,0.48],[0,0.22],[0.23,0.48],[0.14,0.54],[0,0.36],[-0.14,0.54]],0.018),toon(0xf4e4b8));
+collar.position.z=0.34; body.add(collar);
 const belt=new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.56,0.15,12),toon(0x5a3a1e));
 belt.position.y=-0.3; body.add(belt);
 const buckle=new THREE.Mesh(new THREE.BoxGeometry(0.15,0.13,0.08),new THREE.MeshBasicMaterial({color:0xffe27a}));
 buckle.position.set(0,-0.3,0.5); body.add(buckle);
 
-// --- HEAD: rounded, slightly egg-shaped; face on +Z ---
-const head=addOutline(new THREE.Mesh(new THREE.SphereGeometry(0.6,16,14),toon(SKIN)),1.05);
-head.position.y=2.14; head.scale.set(1.16,1.18,1.12); // chibi: bigger head, chin resting on the collar
-// eyes: white + dark iris + catchlight. Sit LOW on the face (y≈0.0), on +Z front.
-const eyeW=new THREE.SphereGeometry(0.1,10,10), eyeWMat=new THREE.MeshBasicMaterial({color:0xffffff});
-const irisGeo=new THREE.SphereGeometry(0.058,8,8), irisMat=new THREE.MeshBasicMaterial({color:0x33506e});
-const glintGeo=new THREE.SphereGeometry(0.02,6,6), glintMat=new THREE.MeshBasicMaterial({color:0xffffff});
+// --- HEAD: broad brow, flat graphic face, small chin; face points +Z ---
+const headGeo=loftGeo([[-0.52,0.04,0.34,0.45],[-0.28,0.06,0.56,0.6],
+  [0.14,0.02,0.61,0.61],[0.42,-0.04,0.55,0.55],[0.52,-0.1,0.47,0.45]],8);
+const head=addOutline(new THREE.Mesh(headGeo,toon(SKIN)),1.045);
+head.position.y=2.12; head.scale.set(1.12,1.12,1.08);
+// Wind-Waker-style graphic eyes sit on the face plane instead of bulging out.
+const eyeW=new THREE.CircleGeometry(0.1,10), eyeWMat=new THREE.MeshBasicMaterial({color:0xffffff});
+const irisGeo=new THREE.CircleGeometry(0.06,9), irisMat=new THREE.MeshBasicMaterial({color:0x27445d});
+const glintGeo=new THREE.CircleGeometry(0.02,7), glintMat=new THREE.MeshBasicMaterial({color:0xffffff});
 const browGeo=new THREE.BoxGeometry(0.16,0.03,0.05), browMat=toon(0x5a3d1e);
 for(const s of [-1,1]){
-  const w=new THREE.Mesh(eyeW,eyeWMat); w.position.set(s*0.2,0.0,0.52); w.scale.set(0.95,1.1,0.55); head.add(w);
-  const ir=new THREE.Mesh(irisGeo,irisMat); ir.position.set(s*0.2,-0.01,0.58); head.add(ir);
-  const g=new THREE.Mesh(glintGeo,glintMat); g.position.set(s*0.23,0.03,0.62); head.add(g);
-  const ch=new THREE.Mesh(new THREE.SphereGeometry(0.085,8,7),new THREE.MeshBasicMaterial({color:0xf0a088,transparent:true,opacity:0.5}));
-  ch.position.set(s*0.33,-0.16,0.46); ch.scale.set(1,0.65,0.35); head.add(ch);
-  const br=new THREE.Mesh(browGeo,browMat); br.position.set(s*0.2,0.15,0.55); br.rotation.z=s*-0.12; head.add(br);
+  const w=new THREE.Mesh(eyeW,eyeWMat); w.position.set(s*0.2,0.0,0.525); w.scale.set(0.92,1.65,1); head.add(w);
+  const ir=new THREE.Mesh(irisGeo,irisMat); ir.position.set(s*0.2,-0.025,0.528); ir.scale.set(0.8,1.45,1); head.add(ir);
+  const g=new THREE.Mesh(glintGeo,glintMat); g.position.set(s*0.18,0.025,0.531); head.add(g);
+  const ch=new THREE.Mesh(new THREE.CircleGeometry(0.075,8),new THREE.MeshBasicMaterial({color:0xf0a088,transparent:true,opacity:0.45}));
+  ch.position.set(s*0.35,-0.19,0.523); ch.scale.set(1,0.55,1); head.add(ch);
+  const br=new THREE.Mesh(browGeo,browMat); br.position.set(s*0.2,0.18,0.51); br.rotation.z=s*-0.15; head.add(br);
 }
 const nose=new THREE.Mesh(new THREE.ConeGeometry(0.05,0.11,6).rotateX(Math.PI/2),toon(SKIN2));
-nose.position.set(0,-0.08,0.58); head.add(nose);
+nose.position.set(0,-0.09,0.55); head.add(nose);
 const smile=new THREE.Mesh(new THREE.TorusGeometry(0.11,0.02,6,12,Math.PI),new THREE.MeshBasicMaterial({color:0x9c5a4a}));
-smile.rotation.z=Math.PI; smile.position.set(0,-0.28,0.53); head.add(smile);
-const earGeo=new THREE.SphereGeometry(0.1,8,7), earMat=toon(SKIN); // small rounded ears
-for(const s of [-1,1]){const ear=new THREE.Mesh(earGeo,earMat);ear.position.set(s*0.56,-0.04,0.02);ear.scale.set(0.6,1,0.7);head.add(ear);}
+smile.rotation.z=Math.PI; smile.position.set(0,-0.31,0.53); head.add(smile);
+// Pointed ears widen the silhouette and keep the fantasy-adventurer read.
+for(const s of [-1,1])
+  part(slabGeo([[0,-0.13],[s*0.3,0.02],[0,0.16]],0.045),SKIN,[s*0.5,-0.03,-0.02],{outline:1.04,parent:head});
 
 // --- MASK: freediving mask, hidden until wetsuit on; over the eyes on +Z front ---
 const mask=new THREE.Group(); mask.position.set(0,0.0,0); mask.visible=false; head.add(mask);
@@ -1715,50 +1722,52 @@ mglint.scale.set(1.6,0.8,1); mglint.position.set(-0.13,0.05,0.6); mask.add(mglin
 const strap=new THREE.Mesh(new THREE.TorusGeometry(0.6,0.045,6,18),toon(0x2b3a45)); // band around the head
 strap.rotation.y=Math.PI/2; strap.scale.set(1,0.9,1); strap.position.y=0.0; mask.add(strap);
 
-// --- HAIR ("hat" per contract): ONE cohesive cap that covers the WHOLE cranium.
-// Solved the bald-nape bug by using a full-sphere shell (theta 0..π, i.e. crown all
-// the way down past the ears) instead of a top-only hemisphere, then OPENING the
-// front face by pushing a fringe band up above the brows. The shell covers crown +
-// back + sides + nape seamlessly; only the +Z face is left bare. No wetsuit recolor. ---
+// --- HAIR ("hat" per contract): sculpted back cap + graphic pointed locks ---
 const hat=new THREE.Group(); hat.position.copy(head.position); hat.scale.copy(head.scale);
-// Main shell: an azimuthal sphere arc that wraps the back + both sides + nape but leaves
-// a GAP at the front (+Z) so the face is open. phiStart/phiLength (the 6th/7th args)
-// carve out the front ~110° facing the camera; thetaLength (last arg) runs to ~0.92π so
-// the hair reaches BELOW the ears at the back/sides — this is what kills the bald nape.
-// In three.js SphereGeometry, phi=0 is +X and sweeps toward +Z around ~π/2; the front
-// (+Z) sits at phi≈π/2, so we start the arc past the face and wrap ALL the way around.
-const FRONTGAP=1.55; // radians of front opening (centred on +Z) — wider so the face/temples stay clear
-const shell=addOutline(new THREE.Mesh(
-  new THREE.SphereGeometry(0.63,20,14, Math.PI/2+FRONTGAP/2, Math.PI*2-FRONTGAP, 0, Math.PI*0.92),
-  toon(HAIR)),1.03);
-shell.scale.set(1.02,1.0,1.05); shell.position.y=0.02; hat.add(shell);
-// Fringe: a tidy curved bang along the hairline, well ABOVE the brows — front edge only, thin.
-const fringe=new THREE.Mesh(new THREE.SphereGeometry(0.62,18,6,0,Math.PI*2,0,Math.PI*0.2),toon(HAIR));
-fringe.scale.set(1.04,0.55,1.06); fringe.position.set(0,0.3,0.03); hat.add(fringe);
-// Two soft sideburns behind the temples, in front of the ears (frame the face, kept off the eyes).
-const sideGeo=new THREE.SphereGeometry(0.15,10,8,0,Math.PI*2,0,Math.PI*0.55);
-for(const s of [-1,1]){const sd=new THREE.Mesh(sideGeo,toon(HAIR));sd.scale.set(0.6,1.0,0.75);sd.position.set(s*0.54,-0.02,-0.02);sd.rotation.z=s*0.22;hat.add(sd);}
-// A small tuft of hair at the crown-back for a bit of character (points UP-back, off the face).
-const tuft=new THREE.Mesh(new THREE.ConeGeometry(0.11,0.26,6),toon(HAIR));
-tuft.position.set(0,0.56,-0.14); tuft.rotation.x=-0.55; hat.add(tuft);
+const hairCap=loftGeo([[-0.62,0.2,0.2,0.22],[-0.44,0.2,0.46,0.4],
+  [-0.12,0.25,0.62,0.48],[0.16,0.3,0.58,0.42],[0.3,0.34,0.44,0.3]],8);
+hat.add(addOutline(new THREE.Mesh(hairCap,toon(HAIR)),1.035));
+// Five flat, asymmetric locks create the readable Wind-Waker hairline.
+const locks=[
+  {x:-0.38,p:[[-0.16,0.34],[0.03,0.63],[0.18,0.4],[0.08,0.12],[-0.08,0.2]]},
+  {x:-0.18,p:[[-0.2,0.42],[-0.02,0.68],[0.18,0.5],[0.08,0.18],[-0.08,0.28]]},
+  {x:0.04,p:[[-0.2,0.5],[-0.02,0.7],[0.18,0.52],[0.02,0.2],[-0.12,0.3]]},
+  {x:0.27,p:[[-0.2,0.45],[-0.03,0.66],[0.18,0.42],[0.02,0.16],[-0.1,0.26]]}
+];
+for(const l of locks)part(slabGeo(l.p,0.025),HAIR,[l.x,0,0.515],{parent:hat});
+for(const s of [-1,1])
+  part(slabGeo([[0,0.2],[s*0.16,0.06],[s*0.1,-0.35],[-s*0.08,-0.18]],0.035),HAIR,
+    [s*0.5,0,0.18],{parent:hat});
+part(slabGeo([[-0.13,0],[0.02,0.3],[0.16,0.04],[0.08,-0.18]],0.04),HAIR,
+  [0,0.58,-0.22],{rot:[-0.6,0,0],parent:hat});
+for(const [x,r] of [[-0.32,-0.3],[0,0],[0.32,0.3]])
+  part(slabGeo([[-0.13,0.14],[0.1,0.1],[0.04,-0.34],[-0.1,-0.2]],0.04),HAIR,
+    [x,-0.05,-0.5],{rot:[0,r,0],parent:hat});
+const capMat=toon(TUNIC),capGeo=loftGeo([[-1.62,0.18,0.025,0.025],[-1.42,0.42,0.1,0.1],
+  [-1.08,0.64,0.22,0.17],[-0.64,0.62,0.4,0.22],[-0.28,0.46,0.52,0.26]],7);
+hat.add(addOutline(new THREE.Mesh(capGeo,capMat),1.035));
 
-// --- ARMS: capsule, pivot at shoulder (top); tunic sleeve cap + skin hand ---
-// Set OUTSIDE the skirt (x≈0.52; tunic top r≈0.4) so the whole arm is visible, not buried
-// in the skirt. A tunic sleeve cap sits at the shoulder; skin forearm + hand below it.
-const limbGeo=new THREE.CapsuleGeometry(0.15,0.34,4,8).translate(0,-0.26,0); // chibi: short + chunky
+// --- ARMS: tapered custom forearms, pivot at shoulder; sleeve + mitten hand ---
+const limbGeo=loftGeo([[-0.58,0,0.1,0.1],[-0.28,0,0.14,0.13],[-0.04,0,0.15,0.14],[0,0,0.12,0.11]],6);
+limbGeo.rotateX(-Math.PI/2);
 const armL=new THREE.Mesh(limbGeo,toon(SKIN)), armR=armL.clone(); // bare forearms (recolored to suit)
 armL.position.set(0.5,1.34,0); armR.position.set(-0.5,1.34,0);
-const sleeveGeo=new THREE.SphereGeometry(0.26,10,8), sleeveMat=toon(TUNIC);
+const sleeveGeo=loftGeo([[-0.28,0,0.2,0.18],[-0.04,0,0.27,0.24],[0,0,0.18,0.16]],6);
+sleeveGeo.rotateX(-Math.PI/2);
+const sleeveMat=toon(TUNIC);
 for(const a of [armL,armR]){
-  const sl=new THREE.Mesh(sleeveGeo,sleeveMat);sl.scale.set(1,1.05,1);sl.position.y=-0.14;a.add(sl); // short tunic sleeve over the upper arm
-  const hd=new THREE.Mesh(new THREE.SphereGeometry(0.17,8,7),toon(SKIN));hd.position.y=-0.5;a.add(hd);a.userData.hand=hd;} // mitten hand at the short arm's end
+  const sl=new THREE.Mesh(sleeveGeo,sleeveMat);sl.position.y=-0.02;a.add(sl);
+  const hd=new THREE.Mesh(loftGeo([[-0.15,0,0.1,0.1],[0,0,0.17,0.15],[0.14,0,0.12,0.11]],6),toon(SKIN));
+  hd.rotation.x=-Math.PI/2;hd.position.y=-0.54;a.add(hd);a.userData.hand=hd;}
 
-// --- LEGS: capsule, pivot at hip (top); boot at the foot ---
-const legGeo=new THREE.CapsuleGeometry(0.16,0.24,4,8).translate(0,-0.2,0); // chibi: short + chunky
+// --- LEGS: tapered shins and forward-toed custom boots ---
+const legGeo=loftGeo([[-0.44,0,0.12,0.12],[-0.18,0,0.16,0.14],[0,0,0.14,0.12]],6);
+legGeo.rotateX(-Math.PI/2);
 const legL=new THREE.Mesh(legGeo,toon(0x8a5a33)), legR=legL.clone();
 legL.position.set(0.21,0.62,0); legR.position.set(-0.21,0.62,0);
-const bootGeo=new THREE.SphereGeometry(0.17,8,6), bootMat=toon(0x6b4423);
-for(const l of [legL,legR]){const bt=new THREE.Mesh(bootGeo,bootMat);bt.scale.set(1.15,0.8,1.5);bt.position.set(0,-0.42,0.07);l.add(bt);l.userData.foot=bt;} // chunky boot at the short leg's end
+const bootGeo=loftGeo([[-0.16,-0.01,0.14,0.11],[0.06,-0.02,0.2,0.14],[0.32,-0.04,0.17,0.1],[0.42,-0.05,0.06,0.05]],6),
+      bootMat=toon(0x6b4423);
+for(const l of [legL,legR]){const bt=new THREE.Mesh(bootGeo,bootMat);bt.position.set(0,-0.4,0.05);l.add(bt);l.userData.foot=bt;}
 
 // --- SHADOW blob: flat dark circle at the feet ---
 const blob=new THREE.Mesh(new THREE.CircleGeometry(0.7,16).rotateX(-Math.PI/2),
@@ -1774,6 +1783,7 @@ function toggleWetsuit(){
   wetsuit=!wetsuit; wetsuitTried=true;
   body.material.color.set(wetsuit?0x14181c:0x2e9e57);
   sleeveMat.color.set(wetsuit?0x14181c:0x2e9e57);
+  capMat.color.set(wetsuit?0x14181c:0x2e9e57);
   armL.material.color.set(wetsuit?0x14181c:0xf5c89a); // forearms: black suit or bare skin
   legL.material.color.set(wetsuit?0x14181c:0x8a5a33);
   mask.visible=wetsuit;
@@ -2244,4 +2254,4 @@ window.__dbg={player,boat,namo,get sailing(){return sailing},
 </script>
 </body>
 </html>
-<!--build:37bf990-->
+<!--build:c85740c-->
