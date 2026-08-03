@@ -21,40 +21,11 @@ title: nofins | Freediving trains life
 </section>
 
 <section id="why" class="bg-[#041a2e] text-slate-100 dark:bg-slate-950">
-  <div class="mx-auto grid max-w-7xl gap-12 px-6 py-20 sm:px-10 sm:py-28 md:grid-cols-[0.8fr_1.2fr] md:gap-16 lg:px-12">
+  <div class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12">
     <div>
       <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-400">Why freediving?</p>
-      <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">Stay calm under pressure.</h2>
+      <h2 class="mb-0 mt-0 max-w-3xl text-4xl font-black tracking-tight sm:text-5xl">Freediving gives you your life back.</h2>
     </div>
-    <div class="max-w-2xl text-lg leading-relaxed text-slate-300">
-      <p class="mb-0">Equalize early, turn when planned and surface with enough reserve for an easy recovery.</p>
-    </div>
-  </div>
-</section>
-
-<section id="practice" class="bg-slate-50 text-slate-950 dark:bg-slate-900 dark:text-slate-100">
-  <div class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12">
-    <div class="mb-14 max-w-3xl">
-      <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">Attention in the water</p>
-      <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">Train attention from the first dive.</h2>
-    </div>
-
-    <div class="grid gap-6 md:grid-cols-3">
-      <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-white/10 dark:bg-slate-950">
-        <h3 class="mb-3 mt-0 text-2xl font-black">Read the body.</h3>
-        <p class="mb-0 text-base leading-relaxed text-slate-600 dark:text-slate-300">Use body scan and mindfulness before the dive. Notice tension, heartbeat, thoughts and the urge to breathe.</p>
-      </article>
-      <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-white/10 dark:bg-slate-950">
-        <h3 class="mb-3 mt-0 text-2xl font-black">See the whole field.</h3>
-        <p class="mb-0 text-base leading-relaxed text-slate-600 dark:text-slate-300">Use wide attention to track the line, the buddy and the body together.</p>
-      </article>
-      <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-white/10 dark:bg-slate-950">
-        <h3 class="mb-3 mt-0 text-2xl font-black">Do the next small thing.</h3>
-        <p class="mb-0 text-base leading-relaxed text-slate-600 dark:text-slate-300">Equalize. Soften the jaw. Follow the line. Turn on the plan. Finish with recovery breathing.</p>
-      </article>
-    </div>
-
-    <p class="mt-8 max-w-3xl text-base leading-relaxed text-slate-500 dark:text-slate-400">Molchanovs certification is available through Wave 2. Wave 3 and Wave 4 attention practices are taught separately.</p>
   </div>
 </section>
 
