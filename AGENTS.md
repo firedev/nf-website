@@ -1,6 +1,6 @@
 # Sites/nofins — nofins.com
 
-Bridgetown static site for nofins freediving (Phuket, Thailand) — read this before any work in this folder. Freediving-instructorship landing: hero «Freediving trains life» (full-bleed underwater photo, CTA to `t.me/firedev`), shared Why freediving page for adults and kids, 3 partner schools (Nama / ScubaNicks / Molchanova) + 7 instructors, dark-mode via Tailwind `dark:` classes. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/AGENTS.md`.
+Bridgetown static site for nofins freediving (Phuket, Thailand) — read this before any work in this folder. One-to-one freediving landing with a shared Why freediving page for adults and children, videos, the Finding Nama game and light/dark appearance. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/AGENTS.md`.
 
 **Навигация единая** (`_components/shared/navbar.serb`) на всех страницах: **Why freediving** (`/why/`), **About** (`/about/`), **Videos** (`/videos/`), **Phuket** (`/phuket/`) — только эти четыре пункта и в этом порядке. Не добавлять в неё якоря главной или внешние ссылки. Пункт **Why freediving** дублируется в `_partials/_footer.serb`.
 
@@ -55,23 +55,16 @@ rake frontend:build           # Build frontend assets for production
 - `src/` - Source content and templates
   - `_components/` - Reusable Ruby/Serbea components
   - `_layouts/` - Page templates in Serbea format
-  - `_instructors/` - Instructor profiles collection
-  - `schools/` - One page per partner school (`namafreediving`, `scubanicks`, `molchanova`) + `index.serb` hub. Each school page reuses the `instructor_list` partial filtered by `affiliation:` — so a new school needs its page + instructors carrying the matching `affiliation`, or it renders empty. The `/schools/` hub stays outside primary navigation (#24 — it routed premium traffic to cheaper substitutes); individual school pages are reachable through that hub
   - `index.md` - Homepage content (single copy, no per-theme variations). Секции могут сохранять `id=`, но навигация на них не ссылается
   - `why.serb` - `/why/`: одна короткая страница о практике для взрослых и детей; единственный владелец этой копии
   - `videos.md` - `/videos/`: инстаграм-эмбед (reel) + два ютуб-ифрейма + ссылка на канал think→forward
   - `phuket/index.html` - `/phuket/`: браузерная игра Finding Nama (three.js, ~155KB одним инлайн-файлом, без бандлера). Портфолио-карточка проекта живёт на **другом** сайте — `Sites/firedev/src/_projects/finding-nama.md` и ссылается сюда; правишь игру — проверь, не устарело ли описание там
   - `images/home/` - hero и секционные webp редизайна 2026-07
-  - `_partials/_booking.serb` - shared «Every weekend» booking card (`id="book"`), included on homepage, about and the instructor layout (#2)
 - `frontend/` - Frontend assets
   - `javascript/` - JS modules (theme switcher, etc.)
   - `styles/` - CSS files including Tailwind and theme styles
 - `output/` - Built static site (git-ignored in this repo; itself a separate git checkout of `firedev/nf-website` branch `master` — the deployment target)
 - `plugins/` - Custom Bridgetown plugins
-
-### Content Collections
-The site uses a single Bridgetown collection:
-- `instructors` - Instructor profiles, grouped onto school pages by `affiliation:`. Currently 7: nikolay-ostrovsky, ben, tony, court (Nama Freediving); artur, roman (Molchanova Freediving School); victoria (ScubaNicks)
 
 ### Theme System
 Plain light/dark **appearance** toggle, ONE mechanism (#27, 2026-07-13; the old dual-*content* system and the 433-line `theme-dark.css` gradient stylesheet are both gone):
@@ -102,10 +95,8 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 - Components can accept props and render dynamic content
 
 ### Adding Content
-- Instructors: Add to `src/_instructors/` collection
 - Static pages: Add Markdown or HTML files to `src/`
 - Homepage copy lives in `src/index.md` — single content (no per-theme copy swap)
-- Schools: one page per school in `src/schools/`, grouped by instructor `affiliation:`; add the school to `src/schools/index.serb` hub too (nothing else links the page)
 - `src/next-dive.ics` is **hand-maintained** — recurring RRULE (SA deep water / SU pool). If the weekend schedule pauses or shifts, edit this file, else it becomes a standing false promise. Homepage «Every weekend» block in `index.md` must stay in sync
 
 ### Frontend Development
