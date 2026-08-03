@@ -45,7 +45,7 @@ title: nofins | Freediving trains life
     <img src="/images/nick.jpg" alt="Freediving instructor on the boat before a depth session" width="900" height="900" loading="lazy" class="aspect-square w-full rounded-xl object-cover">
     <div>
       <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">About</p>
-      <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">One-to-one freediving in Phuket.</h2>
+      <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">One diver. One buoy.</h2>
       <div class="max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
         <p>One diver, one buoy and full instructor attention.</p>
       </div>
@@ -62,7 +62,7 @@ title: nofins | Freediving trains life
 <section id="where" class="bg-slate-100 text-slate-950 dark:bg-slate-950 dark:text-slate-100">
   <div class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12">
     <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">Where the training happens</p>
-    <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">Home water: Phuket, Thailand.</h2>
+    <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">Phuket is home.</h2>
     <p class="mb-12 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">Pool and depth sessions run in Phuket, with boat training around the Racha Islands. Trips to deep pools and freediving camps are announced with confirmed dates.</p>
 
     <div class="grid gap-8 md:grid-cols-3">
@@ -80,7 +80,7 @@ title: nofins | Freediving trains life
   <div class="relative z-1 mx-auto flex min-h-[70dvh] max-w-7xl items-center px-6 py-20 sm:px-10 lg:px-12">
     <div class="max-w-2xl">
       <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-400">Freediving in Phuket</p>
-      <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">Train with calm and clear attention.</h2>
+      <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">Let&rsquo;s freedive.</h2>
       <p class="mb-8 max-w-xl text-lg leading-relaxed text-slate-200">Message me with your experience and what you want to train. We will choose the right pool or depth session.</p>
       <a href="https://t.me/firedev" target="_blank" rel="noopener" class="home-cta inline-flex min-h-12 items-center justify-center rounded-xl bg-sky-500 px-6 py-3 text-base font-bold text-slate-950 no-underline transition hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white active:translate-y-px">Get in touch</a>
       <p class="mt-6 max-w-xl text-sm leading-relaxed text-slate-300">All in-water breath-hold practice uses an active, qualified buddy. Breathe normally before each dive and surface with reserve.</p>
