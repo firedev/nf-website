@@ -24,7 +24,7 @@ title: nofins | Freediving trains life
   <div class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12">
     <div>
       <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-400">Why freediving?</p>
-      <h2 class="mb-0 mt-0 max-w-3xl text-4xl font-black tracking-tight sm:text-5xl">Freediving gives you your life back.</h2>
+      <h2 class="mb-0 mt-0 max-w-3xl text-4xl font-black tracking-tight sm:text-5xl">Freediving gives your life back.</h2>
     </div>
   </div>
 </section>
