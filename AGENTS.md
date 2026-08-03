@@ -98,6 +98,7 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 - Static pages: Add Markdown or HTML files to `src/`
 - Homepage copy lives in `src/index.md` — single content (no per-theme copy swap)
 - `src/next-dive.ics` is **hand-maintained** — recurring RRULE (SA deep water / SU pool). If the weekend schedule pauses or shifts, edit this file, else it becomes a standing false promise. Homepage «Every weekend» block in `index.md` must stay in sync
+- `src/videos.md` — video wall, shared with nikolayx.com (same four embeds on both). **Не судить видео по названию** (2026-08-03): «Отлетевшие 4» читается как русская серия про сознание, но во фридайв-контенте она по теме — я её отфильтровал, Ник вернул. Русский язык сам по себе не дисквалифицирует: сайт en-only по копирайту, видео — нет. Сомневаешься, о чём ролик — посмотреть исходник (`OTLETEVSHIE/`, `Videos/`, `Transcripts/` в вальте) или спросить, не вырезать молча
 
 ### Frontend Development
 - JavaScript modules go in `frontend/javascript/`
