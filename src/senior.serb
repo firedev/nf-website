@@ -1,54 +1,15 @@
 ---
-layout: default
-title: Freediving trains life
+layout: null
 ---
-
-<div class="mx-auto max-w-4xl px-4 py-16">
-  <header class="mx-auto mb-16 max-w-3xl text-center">
-    <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">Freediving practice</p>
-    <h1 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-6xl">The deeper you go, the calmer you have to be.</h1>
-    <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Equalize early, turn when planned and surface with enough reserve for an easy recovery.</p>
-  </header>
-
-  <section class="mb-16">
-    <div class="mb-10 max-w-3xl">
-      <h2 class="mb-4 mt-0 text-3xl font-black sm:text-4xl">Attention by Wave.</h2>
-    </div>
-
-    <div class="grid gap-6 sm:grid-cols-2">
-      <article class="rounded-2xl border border-current/10 p-6">
-        <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-sky-600 dark:text-sky-400">Wave 1</p>
-        <h3 class="mb-3 mt-0 text-2xl font-black">Body scan &amp; visualization</h3>
-        <p class="mb-0 text-base leading-relaxed text-slate-600 dark:text-slate-300">Scan the body before the dive. Rehearse the dive route, the turn and the recovery breath.</p>
-      </article>
-      <article class="rounded-2xl border border-current/10 p-6">
-        <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-sky-600 dark:text-sky-400">Wave 2</p>
-        <h3 class="mb-3 mt-0 text-2xl font-black">Mindfulness</h3>
-        <p class="mb-0 text-base leading-relaxed text-slate-600 dark:text-slate-300">Notice breath, heartbeat, contractions and thought. Keep attention on the next action.</p>
-      </article>
-      <article class="rounded-2xl border border-current/10 p-6">
-        <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-sky-600 dark:text-sky-400">Wave 3</p>
-        <h3 class="mb-3 mt-0 text-2xl font-black">Wide attention</h3>
-        <p class="mb-0 text-base leading-relaxed text-slate-600 dark:text-slate-300">Widen attention from one point into a field. See the periphery. Hear the soundscape. Feel the body at once.</p>
-      </article>
-      <article class="rounded-2xl border border-current/10 p-6">
-        <p class="mb-2 text-sm font-bold uppercase tracking-[0.14em] text-sky-600 dark:text-sky-400">Wave 4</p>
-        <h3 class="mb-3 mt-0 text-2xl font-black">Pressure practice</h3>
-        <p class="mb-0 text-base leading-relaxed text-slate-600 dark:text-slate-300">Use a repeatable start ritual, simple self-talk and a clear focus for the dive.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="mb-16 rounded-2xl bg-sky-950 p-8 text-slate-100 sm:p-10">
-    <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-400">Train with us</p>
-    <h2 class="mb-4 mt-0 text-3xl font-black sm:text-4xl">Train body, technique and attention together.</h2>
-    <p class="text-lg leading-relaxed text-slate-300">Molchanovs certification is available through Wave 2. Wave 3 and Wave 4 attention practices are taught separately.</p>
-    <p class="text-lg leading-relaxed text-slate-300">Each session gives one diver a buoy, a clear plan and full instructor attention.</p>
-    <a href="https://t.me/firedev" target="_blank" rel="noopener" class="mt-3 inline-flex min-h-12 items-center justify-center rounded-xl bg-sky-500 px-6 py-3 text-base font-bold text-slate-950 no-underline transition hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Get in touch</a>
-  </section>
-
-  <aside class="rounded-2xl border border-amber-300/60 bg-amber-50 p-6 text-base leading-relaxed text-amber-950 dark:border-amber-300/20 dark:bg-amber-950/30 dark:text-amber-100">
-    <p class="mb-2 font-black">Breath-hold safety comes first.</p>
-    <p class="mb-0">Train in water with an active, qualified buddy. Breathe normally before each dive, use conservative limits and surface with reserve.</p>
-  </aside>
-</div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url=/why/">
+  <link rel="canonical" href="https://nofins.com/why/">
+  <title>Why freediving</title>
+</head>
+<body>
+  <p><a href="/why/">Continue to Why freediving</a></p>
+</body>
+</html>

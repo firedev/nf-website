@@ -1,10 +1,10 @@
 # Sites/nofins — nofins.com
 
-Bridgetown static site for nofins freediving (Phuket, Thailand) — read this before any work in this folder. Freediving-instructorship landing: hero «Freediving trains life» (full-bleed underwater photo, CTA to `t.me/firedev`), junior/senior programs, 3 partner schools (Nama / ScubaNicks / Molchanova) + 7 instructors, dark-mode via Tailwind `dark:` classes. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/AGENTS.md`.
+Bridgetown static site for nofins freediving (Phuket, Thailand) — read this before any work in this folder. Freediving-instructorship landing: hero «Freediving trains life» (full-bleed underwater photo, CTA to `t.me/firedev`), shared Why freediving page for adults and kids, 3 partner schools (Nama / ScubaNicks / Molchanova) + 7 instructors, dark-mode via Tailwind `dark:` classes. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/AGENTS.md`.
 
-**Навигация единая** (`_components/shared/navbar.serb`) на всех страницах и ведёт только на существующие страницы: `/senior/`, `/junior/`, `/about/`, `/phuket/`, `/videos/`. Не добавлять в неё якоря главной или внешние ссылки. Пункт называется **About** — имя Ника из навигации убрано намеренно (2026-07-29). Тот же пункт дублируется в `_partials/_footer.serb`.
+**Навигация единая** (`_components/shared/navbar.serb`) на всех страницах: **Why freediving** (`/why/`), **About** (`/about/`), **Videos** (`/videos/`), **Phuket** (`/phuket/`) — только эти четыре пункта и в этом порядке. Не добавлять в неё якоря главной или внешние ссылки. Пункт **Why freediving** дублируется в `_partials/_footer.serb`.
 
-**Главная не дублирует внутренние страницы** (2026-08-03). Она коротко представляет направление и ведёт дальше; `/senior/` владеет Practice и техникой глубины. Не переносить их текст или инструкции в `index.md`.
+**Главная не дублирует внутренние страницы** (2026-08-03). Она коротко представляет направление и ведёт дальше; `/why/` владеет кратким объяснением практики для взрослых и детей. `/senior/` и `/junior/` — только совместимые редиректы на `/why/`; не возвращать туда копию.
 
 ## Development Commands
 
@@ -56,12 +56,13 @@ rake frontend:build           # Build frontend assets for production
   - `_components/` - Reusable Ruby/Serbea components
   - `_layouts/` - Page templates in Serbea format
   - `_instructors/` - Instructor profiles collection
-  - `schools/` - One page per partner school (`namafreediving`, `scubanicks`, `molchanova`) + `index.serb` hub. Each school page reuses the `instructor_list` partial filtered by `affiliation:` — so a new school needs its page + instructors carrying the matching `affiliation`, or it renders empty. The `/schools/` hub is linked from the footer only (deliberately out of primary nav, #24 — it routed premium traffic to cheaper substitutes); individual school pages are reachable via that hub and inline mentions on about/junior (instructor cards link to the school's EXTERNAL site via `affiliation_url`, not the internal page — deliberate)
+  - `schools/` - One page per partner school (`namafreediving`, `scubanicks`, `molchanova`) + `index.serb` hub. Each school page reuses the `instructor_list` partial filtered by `affiliation:` — so a new school needs its page + instructors carrying the matching `affiliation`, or it renders empty. The `/schools/` hub stays outside primary navigation (#24 — it routed premium traffic to cheaper substitutes); individual school pages are reachable through that hub
   - `index.md` - Homepage content (single copy, no per-theme variations). Секции могут сохранять `id=`, но навигация на них не ссылается
+  - `why.serb` - `/why/`: одна короткая страница о практике для взрослых и детей; единственный владелец этой копии
   - `videos.md` - `/videos/`: инстаграм-эмбед (reel) + два ютуб-ифрейма + ссылка на канал think→forward
   - `phuket/index.html` - `/phuket/`: браузерная игра Finding Nama (three.js, ~155KB одним инлайн-файлом, без бандлера). Портфолио-карточка проекта живёт на **другом** сайте — `Sites/firedev/src/_projects/finding-nama.md` и ссылается сюда; правишь игру — проверь, не устарело ли описание там
   - `images/home/` - hero и секционные webp редизайна 2026-07
-  - `_partials/_booking.serb` - shared «Every weekend» booking card (`id="book"`), included on homepage, junior/senior/about and the instructor layout (#2)
+  - `_partials/_booking.serb` - shared «Every weekend» booking card (`id="book"`), included on homepage, about and the instructor layout (#2)
 - `frontend/` - Frontend assets
   - `javascript/` - JS modules (theme switcher, etc.)
   - `styles/` - CSS files including Tailwind and theme styles

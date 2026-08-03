@@ -1,0 +1,24 @@
+---
+layout: default
+title: Why freediving
+---
+
+<div class="mx-auto max-w-3xl px-4 py-16">
+  <header class="mb-16 text-center">
+    <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">Why freediving</p>
+    <h1 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-6xl">Freediving gives you your life back.</h1>
+  </header>
+
+  <section class="mb-12">
+    <h2 class="mb-4 mt-0 text-3xl font-black sm:text-4xl">The deeper you go, the calmer you have to be.</h2>
+    <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Equalize early, turn when planned and surface with enough reserve for a calm recovery breath.</p>
+    <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Molchanovs Wave 1 and Wave 2 certification is available. In water, always train with an active, qualified buddy and stay within conservative limits.</p>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="mb-4 mt-0 text-3xl font-black sm:text-4xl">A child who feels at home in the water carries that calm into life.</h2>
+    <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Children float, swim, glide and dive with a qualified instructor beside them, one skill at a time.</p>
+  </section>
+
+  <a href="https://t.me/firedev" target="_blank" rel="noopener" class="inline-flex min-h-12 items-center justify-center rounded-xl bg-sky-500 px-6 py-3 text-base font-bold text-slate-950 no-underline transition hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-4 dark:focus-visible:outline-white">Get in touch</a>
+</div>
