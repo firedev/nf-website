@@ -8,25 +8,14 @@ title: About
     <img src="/images/nick.jpg" alt="Freediving instructor on the boat before a depth session" width="900" height="900" class="aspect-square w-full rounded-2xl object-cover">
     <div>
       <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">About</p>
-      <h1 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-6xl">Attention, trained in the water.</h1>
+      <h1 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-6xl">Freediving with Nick Ostrovsky.</h1>
       <div class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-        <p>Twenty years of building software, still running. Freediving added a second way to use the same attention: through the body, under real pressure, away from the screen.</p>
-        <p>The road here ran through extreme sports. Freediving trains that attention in a calmer form — breath, equalization, movement, safety, recovery.</p>
-        <p>Sessions run from Phuket, Thailand, in English and Russian.</p>
+        <p>Nick teaches one-to-one depth and pool sessions from Phuket.</p>
       </div>
     </div>
   </section>
 
-  <section class="mx-auto my-16 max-w-3xl">
-    <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">What the training covers</p>
-    <h2 class="mb-5 mt-0 text-3xl font-black sm:text-4xl">Notice the signal. Choose the action.</h2>
-    <div class="prose text-lg">
-      <p>Freediving gives direct feedback. The body gives a signal. The diver notices it and chooses the next action.</p>
-      <p>That sequence is the whole lesson. Notice, relax, equalize, turn, recover.</p>
-    </div>
-  </section>
-
-  <section class="mx-auto mb-16 max-w-3xl rounded-2xl border border-current/10 p-8">
+  <section class="mx-auto my-16 max-w-3xl rounded-2xl border border-current/10 p-8">
     <h2 class="mb-5 mt-0 text-3xl font-black">The short version</h2>
     <dl class="grid gap-6 text-base sm:grid-cols-2">
       <div>

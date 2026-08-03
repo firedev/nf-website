@@ -55,7 +55,7 @@ rake frontend:build           # Build frontend assets for production
   - `_layouts/` - Page templates in Serbea format
   - `_instructors/` - Instructor profiles collection
   - `schools/` - One page per partner school (`namafreediving`, `scubanicks`, `molchanova`) + `index.serb` hub. Each school page reuses the `instructor_list` partial filtered by `affiliation:` — so a new school needs its page + instructors carrying the matching `affiliation`, or it renders empty. The `/schools/` hub is linked from the footer only (deliberately out of primary nav, #24 — it routed premium traffic to cheaper substitutes); individual school pages are reachable via that hub and inline mentions on about/junior (instructor cards link to the school's EXTERNAL site via `affiliation_url`, not the internal page — deliberate)
-  - `index.md` - Homepage content (single copy, no per-theme variations). Секции несут `id=` под якоря навбара: `#why`, `#practice`, `#nofins`, `#nick`
+  - `index.md` - Homepage content (single copy, no per-theme variations). Секции несут `id=` под якоря навбара: `#why`, `#practice`, `#nofins`, `#about`
   - `videos.md` - `/videos/`: инстаграм-эмбед (reel) + два ютуб-ифрейма + ссылка на канал think→forward
   - `phuket/index.html` - `/phuket/`: браузерная игра Finding Nama (three.js, ~155KB одним инлайн-файлом, без бандлера). Портфолио-карточка проекта живёт на **другом** сайте — `Sites/firedev/src/_projects/finding-nama.md` и ссылается сюда; правишь игру — проверь, не устарело ли описание там
   - `images/home/` - hero и секционные webp редизайна 2026-07
