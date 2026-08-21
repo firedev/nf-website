@@ -7,7 +7,7 @@ title: Videos
   <div class="grid gap-x-12 gap-y-10 lg:grid-cols-[1fr_390px]">
     <header class="lg:col-start-1 lg:row-start-1">
     <h1 class="mb-5 mt-0 text-balance text-4xl font-black tracking-tight sm:text-6xl">Watch freediving.</h1>
-    <p class="mb-8 max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Training, depth and conversations from the water. Longer talks live on the think&rarr;forward channel.</p>
+    <p class="mb-8 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Training, depth and conversations from the water. Longer talks live on the think&rarr;forward channel.</p>
     <a href="https://www.youtube.com/@thinkforward101" target="_blank" rel="noopener" class="btn">Think Forward YouTube</a>
     </header>
 
