@@ -7,12 +7,27 @@ noindex: true
 <div class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
   <header class="mb-16 max-w-3xl">
     <h1 class="mb-5 mt-0 text-balance text-4xl font-black tracking-tight sm:text-6xl">Friends I love to train with.</h1>
-    <p class="mb-0 max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Instructors I share water with — off Phuket, and in the pool in Moscow. Go and find them.</p>
+    <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Instructors I share water with — off Phuket, and in the pool in Moscow. Go and find them.</p>
   </header>
 
   <h2 class="mb-10 mt-0 text-3xl font-black tracking-tight sm:text-4xl">Phuket</h2>
 
   <div class="grid gap-14">
+    <article class="grid gap-8 border-t border-current/10 pt-10 md:grid-cols-[220px_1fr] md:gap-10">
+      <img src="/images/ben.jpg" alt="Benoit Piguet" width="463" height="462" loading="lazy" class="aspect-[3/4] w-full max-w-[220px] rounded-xl bg-slate-200 object-cover object-top ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/10">
+      <div>
+        <h3 class="mb-1 mt-0 text-2xl font-black tracking-tight">Benoit Piguet</h3>
+        <p class="mb-4 text-base font-bold"><a href="https://instagram.com/0xyben" target="_blank" rel="noopener" class="text-sky-700 no-underline hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">@0xyben</a><span class="mx-2 text-slate-400">·</span><a href="https://namafreediving.com" target="_blank" rel="noopener" class="text-slate-600 no-underline hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">Nama Freediving</a></p>
+        <ul class="mb-5 flex list-none flex-wrap gap-2 p-0 text-sm font-bold">
+          <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Molchanovs Wave 3 Instructor Trainer</li>
+          <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Certified Yoga Instructor</li>
+        </ul>
+        <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Twelve years travelling the world, and freediving is the thing that made him stop and stay. Benoit found it on a trip to Thailand in 2019, and it reshaped everything after.</p>
+        <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">He teaches breath-hold and yoga together — the two practices lean on each other, and he coaches from that overlap. Calm body, calm breath, one feeding the other.</p>
+        <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">On his days off you&rsquo;ll find him deep in his favourite discipline: static.</p>
+      </div>
+    </article>
+
     <article class="grid gap-8 border-t border-current/10 pt-10 md:grid-cols-[220px_1fr] md:gap-10">
       <img src="/images/court.jpg" alt="Court Burgon" width="799" height="799" loading="lazy" class="aspect-[3/4] w-full max-w-[220px] rounded-xl bg-slate-200 object-cover object-top ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/10">
       <div>
@@ -21,8 +36,8 @@ noindex: true
         <ul class="mb-5 flex list-none flex-wrap gap-2 p-0 text-sm font-bold">
           <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Molchanovs Wave 2 Instructor</li>
         </ul>
-        <p class="max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">A zoology degree, then Phuket in 2017 to build a life in the water. Over a thousand hours underwater as a scuba and freediving instructor gave Court a deep read on the local reef and the ocean around it.</p>
-        <p class="mb-0 max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">He teaches freediving, scuba, and swimming to adults and kids alike, and his sessions are built to feel relaxed and safe — a supportive room where you progress at your own pace.</p>
+        <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">A zoology degree, then Phuket in 2017 to build a life in the water. Over a thousand hours underwater as a scuba and freediving instructor gave Court a deep read on the local reef and the ocean around it.</p>
+        <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">He teaches freediving, scuba, and swimming to adults and kids alike, and his sessions are built to feel relaxed and safe — a supportive room where you progress at your own pace.</p>
       </div>
     </article>
 
@@ -37,23 +52,8 @@ noindex: true
           <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Mermaid Instructor</li>
           <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">SSI Scuba Explorer Instructor (kids)</li>
         </ul>
-        <p class="max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Victoria came to the water in 2015 and went pro in 2018. She&rsquo;s now Senior Instructor at ScubaNicks in Rawai, teaching every level up to dive professional.</p>
-        <p class="mb-0 max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Freediving, scuba, and mermaid — she moves easily between them, and she&rsquo;s known for the patience that makes her a favourite with kids and first-time divers. Calm, unhurried, right there beside you.</p>
-      </div>
-    </article>
-
-    <article class="grid gap-8 border-t border-current/10 pt-10 md:grid-cols-[220px_1fr] md:gap-10">
-      <img src="/images/ben.jpg" alt="Benoit Piguet" width="463" height="462" loading="lazy" class="aspect-[3/4] w-full max-w-[220px] rounded-xl bg-slate-200 object-cover object-top ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/10">
-      <div>
-        <h3 class="mb-1 mt-0 text-2xl font-black tracking-tight">Benoit Piguet</h3>
-        <p class="mb-4 text-base font-bold"><a href="https://instagram.com/0xyben" target="_blank" rel="noopener" class="text-sky-700 no-underline hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">@0xyben</a><span class="mx-2 text-slate-400">·</span><a href="https://namafreediving.com" target="_blank" rel="noopener" class="text-slate-600 no-underline hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">Nama Freediving</a></p>
-        <ul class="mb-5 flex list-none flex-wrap gap-2 p-0 text-sm font-bold">
-          <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Molchanovs Wave 3 Instructor Trainer</li>
-          <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Certified Yoga Instructor</li>
-        </ul>
-        <p class="max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Twelve years travelling the world, and freediving is the thing that made him stop and stay. Benoit found it on a trip to Thailand in 2019, and it reshaped everything after.</p>
-        <p class="max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">He teaches breath-hold and yoga together — the two practices lean on each other, and he coaches from that overlap. Calm body, calm breath, one feeding the other.</p>
-        <p class="mb-0 max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">On his days off you&rsquo;ll find him deep in his favourite discipline: static.</p>
+        <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Victoria came to the water in 2015 and went pro in 2018. She&rsquo;s now Senior Instructor at ScubaNicks in Rawai, teaching every level up to dive professional.</p>
+        <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Freediving, scuba, and mermaid — she moves easily between them, and she&rsquo;s known for the patience that makes her a favourite with kids and first-time divers. Calm, unhurried, right there beside you.</p>
       </div>
     </article>
 
@@ -66,8 +66,8 @@ noindex: true
           <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Molchanovs Wave 3 Instructor</li>
           <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Underwater photographer</li>
         </ul>
-        <p class="max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Thirteen years in the water and a photographer&rsquo;s eye. Tony taught freediving on Koh Tao for seven years before moving to Phuket in 2022, and he brings a calm presence to every line.</p>
-        <p class="mb-0 max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">His camera background shows up in the coaching — he reads your body position, your movement, your efficiency the way he&rsquo;d frame a shot, and helps you refine it. Divers of all levels progress with him, safely and at their own pace.</p>
+        <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Thirteen years in the water and a photographer&rsquo;s eye. Tony taught freediving on Koh Tao for seven years before moving to Phuket in 2022, and he brings a calm presence to every line.</p>
+        <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">His camera background shows up in the coaching — he reads your body position, your movement, your efficiency the way he&rsquo;d frame a shot, and helps you refine it. Divers of all levels progress with him, safely and at their own pace.</p>
       </div>
     </article>
   </div>
@@ -84,9 +84,9 @@ noindex: true
           <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Molchanovs Wave 3 Instructor</li>
           <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Molchanovs Kids Instructor L1 &amp; L2</li>
         </ul>
-        <p class="max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Swimming and diving since childhood — Roman came up through competitive swimming and swam for his city team before freediving became the centre of it.</p>
-        <p class="max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">He&rsquo;s a competing freediver, still refining his own dives while he coaches. Certified to teach both adults (Wave 3) and kids (L1 &amp; L2) in the Molchanovs system, and an experienced safety diver and coach.</p>
-        <p class="mb-0 max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">He organises the amateur <em>I love freediving</em> competitions and works as sports manager at the Natalia Molchanova Freediving School.</p>
+        <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Swimming and diving since childhood — Roman came up through competitive swimming and swam for his city team before freediving became the centre of it.</p>
+        <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">He&rsquo;s a competing freediver, still refining his own dives while he coaches. Certified to teach both adults (Wave 3) and kids (L1 &amp; L2) in the Molchanovs system, and an experienced safety diver and coach.</p>
+        <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">He organises the amateur <em>I love freediving</em> competitions and works as sports manager at the Natalia Molchanova Freediving School.</p>
       </div>
     </article>
 
@@ -99,8 +99,8 @@ noindex: true
           <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Molchanovs Wave 2 Instructor</li>
           <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Freediving rescue &amp; first aid</li>
         </ul>
-        <p class="max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">A competing finswimmer turned freediving instructor — Artur has won national underwater-sport titles in both bi-fins and monofin, and he brings that athlete&rsquo;s precision to the pool.</p>
-        <p class="mb-0 max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Personal bests tell the story: 248 m bi-fins, 227 m monofin, 161 m breaststroke, and a 7:24 static. He teaches Wave 1 and Wave 2 courses in the pool, and he&rsquo;s a certified freediving rescue and first-aid specialist — the calm hand you want on safety.</p>
+        <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">A competing finswimmer turned freediving instructor — Artur has won national underwater-sport titles in both bi-fins and monofin, and he brings that athlete&rsquo;s precision to the pool.</p>
+        <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Personal bests tell the story: 248 m bi-fins, 227 m monofin, 161 m breaststroke, and a 7:24 static. He teaches Wave 1 and Wave 2 courses in the pool, and he&rsquo;s a certified freediving rescue and first-aid specialist — the calm hand you want on safety.</p>
       </div>
     </article>
   </div>

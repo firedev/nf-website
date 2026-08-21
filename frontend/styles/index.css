@@ -34,6 +34,8 @@
 
   p {
     @apply mb-4;
+    /* keeps a paragraph from ending on a single stranded word */
+    text-wrap: pretty;
   }
 
   ul, ol {

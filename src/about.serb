@@ -8,7 +8,7 @@ title: About
     <img src="/images/nick.jpg" alt="Freediving instructor on the boat before a depth session" width="900" height="900" class="aspect-square w-full rounded-2xl object-cover md:order-2">
     <div class="md:order-1">
       <h1 class="mb-5 mt-0 text-balance text-4xl font-black tracking-tight sm:text-6xl">Freedive with Nick.</h1>
-      <p class="mb-0 max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Nick teaches one-to-one depth and pool sessions from Phuket.</p>
+      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Nick teaches one-to-one depth and pool sessions from Phuket.</p>
     </div>
   </section>
 

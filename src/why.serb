@@ -12,13 +12,13 @@ title: Why freediving
   <div class="grid gap-12 sm:grid-cols-2 sm:gap-14">
     <section>
       <h2 class="mb-4 mt-0 text-3xl font-black tracking-tight sm:text-4xl">Deeper means calmer.</h2>
-      <p class="max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Equalize early, turn when planned and surface with enough reserve for a calm recovery breath.</p>
-      <p class="mb-0 max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Molchanovs Wave 1 and Wave 2 certification is available. In water, always train with an active, qualified buddy and stay within conservative limits.</p>
+      <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Equalize early, turn when planned and surface with enough reserve for a calm recovery breath.</p>
+      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Molchanovs Wave 1 and Wave 2 certification is available. In water, always train with an active, qualified buddy and stay within conservative limits.</p>
     </section>
 
     <section>
       <h2 class="mb-4 mt-0 text-3xl font-black tracking-tight sm:text-4xl">Water teaches calm for life.</h2>
-      <p class="mb-0 max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Children float, swim, glide and dive with a qualified instructor beside them, one skill at a time.</p>
+      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Children float, swim, glide and dive with a qualified instructor beside them, one skill at a time.</p>
     </section>
   </div>
 
