@@ -1,19 +1,27 @@
 ---
 layout: default
-title: About
+title: Relax harder
 ---
 
 <div class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
   <section class="grid items-center gap-10 md:grid-cols-[1.2fr_0.8fr] md:gap-14">
-    <img src="/images/nick.jpg" alt="Freediving instructor on the boat before a depth session" width="900" height="900" class="aspect-square w-full rounded-2xl object-cover md:order-2">
+    <img src="/images/nick.jpg" alt="Nick Ostrovsky, freediving instructor, on the boat before a depth session" width="900" height="900" class="aspect-square w-full rounded-2xl object-cover md:order-2">
     <div class="md:order-1">
-      <h1 class="mb-5 mt-0 text-balance text-4xl font-black tracking-tight sm:text-6xl">Freedive with Nick.</h1>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Nick teaches one-to-one depth and pool sessions from Phuket.</p>
+      <h1 class="mb-5 mt-0 text-balance text-4xl font-black tracking-tight sm:text-6xl">Relax harder.</h1>
+      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">We train calm and relaxation in your own headspace. Only that &mdash; on the surface and at depth, in every style, until that depth feels like home.</p>
     </div>
+  </section>
+
+  <section class="mt-16 max-w-3xl">
+    <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">No fins, just breath, body, and attention. I teach the calm side of the breath-hold off Phuket &mdash; the part that follows you back to the desk, to the hard conversation, to the 3am&nbsp;wake-up.</p>
   </section>
 
   <section class="my-16 rounded-2xl border border-current/10 p-8 sm:p-10">
     <dl class="grid gap-8 text-base sm:grid-cols-2">
+      <div>
+        <dt class="font-black">Instructor</dt>
+        <dd class="mt-1 text-slate-600 dark:text-slate-300">Nick Ostrovsky</dd>
+      </div>
       <div>
         <dt class="font-black">Training</dt>
         <dd class="mt-1 text-slate-600 dark:text-slate-300">Molchanovs Wave 2 Instructor · Depth &amp; Pool</dd>

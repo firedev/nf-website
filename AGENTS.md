@@ -2,7 +2,11 @@
 
 Bridgetown static site for nofins freediving (Phuket, Thailand) — read this before any work in this folder. One-to-one freediving landing with a shared Why freediving page for adults and children, videos, the Finding Nama game and light/dark appearance. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/AGENTS.md`.
 
-**Навигация единая** (`_components/shared/navbar.serb`) на всех страницах: **Why freediving** (`/why/`), **About** (`/about/`), **Videos** (`/videos/`), **Phuket** (`/phuket/`) — только эти четыре пункта и в этом порядке. Не добавлять в неё якоря главной или внешние ссылки. Пункт **Why freediving** дублируется в `_partials/_footer.serb`.
+**Навигация единая** (`_components/shared/navbar.serb`) на всех страницах: **Why freediving** (`/why/`), **About** (`/about/`), **Friends** (`/friends/`), **Videos** (`/videos/`), **Phuket** (`/phuket/`) — только эти пять пунктов и в этом порядке (Friends добавлен 21.08.2026 по просьбе Ника). Не добавлять в неё якоря главной или внешние ссылки. Футер (`_partials/_footer.serb`) повторяет те же пять плюс Instagram и Telegram.
+
+На мобиле пять пунктов влезают в одну строку только на `text-sm` (десктоп — `sm:text-lg`). Кнопка темы при этом уходит на вторую строку по центру — это осознанно, кроить паддинги до `px-0.5` ради неё не надо.
+
+**`/about/` — «Relax harder.»** (2026-08-21). Заголовок и `title` страницы — слова Ника; под ним его же строка про то, как он тренирует: «We train calm and relaxation in your own headspace. Only that — on the surface and at depth, in every style, until that depth feels like home.» Это его формулировки, при правке — резать и переставлять, не переписывать (`me/writing-rules.md`).
 
 **Главная не дублирует внутренние страницы** (2026-08-03). Она коротко представляет направление и ведёт дальше; `/why/` владеет кратким объяснением практики для взрослых и детей. `/senior/` и `/junior/` — только совместимые редиректы на `/why/`; не возвращать туда копию.
 
@@ -89,8 +93,12 @@ Plain light/dark **appearance** toggle, ONE mechanism (#27, 2026-07-13; the old 
 
 ## Development Guidelines
 
-### Hidden page: `/friends/` (2026-08-21)
-`src/friends.serb` — «Friends I love to train with», шесть инструкторов, с которыми Ник ныряет (Пхукет: Court, Victoria, Ben, Tony; Москва: Roman, Artur). **Страница намеренно ни от куда не слинкована** — её нет ни в навбаре, ни в футере, и она отдаёт `<meta name="robots" content="noindex, nofollow">` через `noindex: true` во фронтматтере (обрабатывается в `_partials/_head.serb`). Это не сирота и не забытый файл — **не удалять как «на неё ничего не ссылается»**.
+### `/friends/` (2026-08-21)
+`src/friends.serb` — «Friends I love to train with», инструкторы, с которыми Ник ныряет. Порядок: **Пхукет** (Ben первым — прямое указание Ника, дальше Court, Victoria, Tony), **Бали** (Yan), **Москва** (Roman, Artur). Заводилась как скрытая, в тот же день Ник попросил вынести в меню — сейчас она в навбаре и футере, `noindex` снят.
+
+- Механизм `noindex: true` во фронтматтере остался в `_partials/_head.serb` — пригодится, если снова понадобится непубличная страница
+- **У Yan нет фотографии.** Его карточка держит пустую колонку 220px, чтобы текст стоял в одну линию с остальными. Появится фото — просто вставить `<img>` вместо `<div aria-hidden="true">`
+- Данные по Yan — с `balifreedivers.com` (школа Bali Freedivers, Amed; SSI Level 3 и Molchanovs; украинец, в Индонезии с 2013; пять стран, 500+ учеников). Фамилия и личный инстаграм на сайте не указаны — не додумывать
 
 - Данные восстановлены из коллекции `_instructors/`, снесённой в `7218c12` — имена, инстаграмы, сертификаты и тексты оттуда, ничего не придумано. Нужны старые исходники — `git show 7218c12^:src/_instructors/<имя>.md`
 - Коллекцию и шаблоны `instructor.serb` / `_instructor_list.serb` **не восстанавливали**: шесть человек на одной странице не требуют коллекции, отдельных детальных страниц и фильтрованных хабов — всё это пришлось бы тоже прятать

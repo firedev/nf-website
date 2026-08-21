@@ -1,13 +1,12 @@
 ---
 layout: default
 title: Friends I love to train with
-noindex: true
 ---
 
 <div class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
   <header class="mb-16 max-w-3xl">
     <h1 class="mb-5 mt-0 text-balance text-4xl font-black tracking-tight sm:text-6xl">Friends I love to train with.</h1>
-    <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Instructors I share water with — off Phuket, and in the pool in Moscow. Go and find them.</p>
+    <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Instructors I share water with — off Phuket, over in Amed, and in the pool in Moscow. Go and find them.</p>
   </header>
 
   <h2 class="mb-10 mt-0 text-3xl font-black tracking-tight sm:text-4xl">Phuket</h2>
@@ -68,6 +67,24 @@ noindex: true
         </ul>
         <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Thirteen years in the water and a photographer&rsquo;s eye. Tony taught freediving on Koh Tao for seven years before moving to Phuket in 2022, and he brings a calm presence to every line.</p>
         <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">His camera background shows up in the coaching — he reads your body position, your movement, your efficiency the way he&rsquo;d frame a shot, and helps you refine it. Divers of all levels progress with him, safely and at their own pace.</p>
+      </div>
+    </article>
+  </div>
+
+  <h2 class="mb-10 mt-20 text-3xl font-black tracking-tight sm:text-4xl">Bali</h2>
+
+  <div class="grid gap-14">
+    <article class="grid gap-8 border-t border-current/10 pt-10 md:grid-cols-[220px_1fr] md:gap-10">
+      <div aria-hidden="true"></div>
+      <div>
+        <h3 class="mb-1 mt-0 text-2xl font-black tracking-tight">Yan</h3>
+        <p class="mb-4 text-base font-bold"><a href="https://www.balifreedivers.com/" target="_blank" rel="noopener" class="text-sky-700 no-underline hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">Bali Freedivers</a><span class="mx-2 text-slate-400">·</span><a href="https://www.instagram.com/balifreedivers.amed" target="_blank" rel="noopener" class="text-slate-600 no-underline hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">@balifreedivers.amed</a><span class="mx-2 text-slate-400">·</span><span class="text-slate-600 dark:text-slate-400">Amed</span></p>
+        <ul class="mb-5 flex list-none flex-wrap gap-2 p-0 text-sm font-bold">
+          <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">SSI Level 3</li>
+          <li class="rounded-full bg-sky-100 px-3 py-1.5 text-sky-950 dark:bg-sky-900 dark:text-sky-100">Molchanovs</li>
+        </ul>
+        <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">In the water since he was five. Yan is Ukrainian, moved to Indonesia in 2013, and has taught across five countries and more than five hundred students since.</p>
+        <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">He runs Bali Freedivers in Amed and leans towards beginners, shaping sessions around what you actually do in the water — spearfishing, surfing — with the breathwork and safety skills that hold up when it gets tight.</p>
       </div>
     </article>
   </div>
