@@ -1,15 +1,17 @@
 <footer class="overflow-hidden">
-  <div class="group flex flex-col items-center justify-center">
-    <nav class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-base font-bold">
-      <a href="/why/">Why freediving</a>
-      <a href="/about/">About</a>
-      <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://t.me/firedev" target="_blank" rel="noopener">Telegram</a>
+  <div class="mx-auto flex max-w-screen-2xl flex-col items-center justify-center px-6 py-14">
+    <nav class="flex flex-wrap justify-center gap-x-7 gap-y-3 text-base font-bold">
+      <a class="no-underline transition hover:text-sky-300" href="/why/">Why freediving</a>
+      <a class="no-underline transition hover:text-sky-300" href="/about/">About</a>
+      <a class="no-underline transition hover:text-sky-300" href="/videos/">Videos</a>
+      <a class="no-underline transition hover:text-sky-300" href="/phuket/">Phuket</a>
+      <a class="no-underline transition hover:text-sky-300" href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener">Instagram</a>
+      <a class="no-underline transition hover:text-sky-300" href="https://t.me/firedev" target="_blank" rel="noopener">Telegram</a>
     </nav>
-    <div class="my-8">
-      <a href="https://firedev.com" target="_blank" class="inline-flex">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-[1.5em] h-[1.5em] text-red-700 dark:text-red-400" aria-hidden="true"><path d="M12 23C7.85786 23 4.5 19.6421 4.5 15.5C4.5 13.3462 5.40786 11.4045 6.86179 10.0366C8.20403 8.77375 11.5 6.49951 11 1.5C17 5.5 20 9.5 14 15.5C15 15.5 16.5 15.5 19 13.0296C19.2697 13.8032 19.5 14.6345 19.5 15.5C19.5 19.6421 16.1421 23 12 23Z"/></svg>
-        <b class="font-extrabold">fire</b>dev
+    <div class="mt-10">
+      <a href="https://firedev.com" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-slate-400 no-underline transition hover:text-slate-200">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-[1.2em] h-[1.2em] text-red-400" aria-hidden="true"><path d="M12 23C7.85786 23 4.5 19.6421 4.5 15.5C4.5 13.3462 5.40786 11.4045 6.86179 10.0366C8.20403 8.77375 11.5 6.49951 11 1.5C17 5.5 20 9.5 14 15.5C15 15.5 16.5 15.5 19 13.0296C19.2697 13.8032 19.5 14.6345 19.5 15.5C19.5 19.6421 16.1421 23 12 23Z"/></svg>
+        <span class="text-base"><b class="font-extrabold">fire</b>dev</span>
       </a>
     </div>
   </div>

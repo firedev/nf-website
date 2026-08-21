@@ -10,6 +10,7 @@
       <a class="nav-link rounded-2xl py-2 px-2 sm:px-3 transition no-underline hover:bg-black/5 dark:hover:bg-white/10" href="/about/">About</a>
       <a class="nav-link rounded-2xl py-2 px-2 sm:px-3 transition no-underline hover:bg-black/5 dark:hover:bg-white/10" href="/videos/">Videos</a>
       <a class="nav-link rounded-2xl py-2 px-2 sm:px-3 transition no-underline hover:bg-black/5 dark:hover:bg-white/10" href="/phuket/">Phuket</a>
+      <div id="theme-switcher" class="ml-1 flex items-center"></div>
     </nav>
 
   </div>

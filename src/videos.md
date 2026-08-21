@@ -3,11 +3,10 @@ layout: default
 title: Videos
 ---
 
-<div class="mx-auto max-w-6xl px-4 py-16">
+<div class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
   <header class="mb-12 max-w-3xl">
-    <p class="mb-4 text-sm font-bold uppercase tracking-[0.18em] text-sky-600 dark:text-sky-400">Video</p>
     <h1 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-6xl">Watch freediving.</h1>
-    <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Training, depth and conversations from the water.</p>
+    <p class="mb-0 max-w-[62ch] text-lg leading-relaxed text-slate-600 dark:text-slate-300">Training, depth and conversations from the water.</p>
   </header>
 
   <div class="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
@@ -23,7 +22,7 @@ title: Videos
       <iframe class="aspect-video w-full rounded-xl bg-slate-200 dark:bg-slate-950" src="https://www.youtube.com/embed/0ImWGfZPs8Q" title="Freediving Taught Me I Was the Love I'd Been Searching For" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       <iframe class="aspect-video w-full rounded-xl bg-slate-200 dark:bg-slate-950" src="https://www.youtube.com/embed/S5Ir00rigL0" title="Wave 3 certification" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       <iframe class="aspect-video w-full rounded-xl bg-slate-200 dark:bg-slate-950" src="https://www.youtube.com/embed/0akztwfm4CA" title="Отлетевшие 4, серия 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      <a href="https://www.youtube.com/@thinkforward101" target="_blank" rel="noopener" class="inline-flex min-h-12 w-fit items-center justify-center rounded-xl bg-sky-500 px-6 py-3 text-base font-bold text-slate-950 no-underline transition hover:bg-sky-400">Think Forward YouTube</a>
+      <a href="https://www.youtube.com/@thinkforward101" target="_blank" rel="noopener" class="btn">Think Forward YouTube</a>
     </div>
   </div>
 </div>

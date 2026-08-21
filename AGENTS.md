@@ -69,6 +69,7 @@ rake frontend:build           # Build frontend assets for production
 ### Theme System
 Plain light/dark **appearance** toggle, ONE mechanism (#27, 2026-07-13; the old dual-*content* system and the 433-line `theme-dark.css` gradient stylesheet are both gone):
 - Switcher in `frontend/javascript/theme-switcher.js` — toggles `theme-dark` on `:root`, respects `prefers-color-scheme`, persists localStorage key `theme`
+- **Нужен `<div id="theme-switcher">` в разметке** — скрипт монтирует кнопку только туда. Точка монтирования живёт в `_components/shared/navbar.serb`, последним элементом `nav`. Была потеряна до 2026-08-21: скрипт грузился, кнопки не было, тёмная тема включалась только системной настройкой. Тронул навбар — проверь, что див на месте
 - `frontend/styles/index.css` wires Tailwind 4 to that class: `@custom-variant dark (&:where(.theme-dark, .theme-dark *));` — so every `dark:` utility keys off `.theme-dark`, not `prefers-color-scheme`
 - Dark base lives in index.css only: `body … dark:bg-slate-950 dark:text-slate-100` + zen-circle `invert(1)`. Everything else is per-element `dark:` utilities in templates — do NOT reintroduce a parallel dark stylesheet
 - Dark palette: bg slate-950, cards dark:bg-slate-900 (or bg-white/5 for the booking card), secondary text dark:text-slate-300/400, accents unchanged (sky-200 underlines read fine on dark)
@@ -87,6 +88,13 @@ Plain light/dark **appearance** toggle, ONE mechanism (#27, 2026-07-13; the old 
 - Prefix URLs disabled for cleaner paths
 
 ## Development Guidelines
+
+### Design conventions (2026-08-21)
+- **Кнопки и стрелка-ссылки — `.btn` и `.link-arrow`** из `@layer components` в `frontend/styles/index.css`. Не копировать длинный список утилит на каждую кнопку: фокус-ринг (`outline-sky-500`, читается и на светлом, и на тёмном) и тень заданы один раз
+- **Никаких кикеров/надзаголовков** над h2/h1 (`text-sm uppercase tracking-[0.18em]`). Ник снял такой кикер с главного экрана (355d74d), 2026-08-21 сняты остальные восемь. Заголовок несёт себя сам; смысл кикера — в заголовок или в текст
+- **Футер — тёмная плашка на всех страницах** (`footer { background: #020617 }`), не только на главной. Внутренние страницы короткие, `min-h-screen` на `<main>` оставляет серую пустоту — тёмная плашка даёт странице явный конец
+- **Мера строки** ~62ch (`max-w-[62ch]`) для абзацев. До этого текст на `/why/` шёл на ~85ch
+- Секция-заглушка (заголовок без текста и без ссылки) — дефект, а не «воздух»: блок `#why` на главной висел тупиком, теперь ведёт на `/why/`
 
 ### Working with Components
 Components are Ruby objects in `src/_components/`. When creating new components:

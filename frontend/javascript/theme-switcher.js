@@ -85,12 +85,13 @@ class ThemeSwitcher {
     // right: 20px;
     // z-index: 1000;
     button.style.cssText = `
+      position: relative;
       border: none;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       border-radius: 50%;
-      width: 48px;
-      height: 48px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -148,14 +149,19 @@ class ThemeSwitcher {
     styles.id = 'theme-toggle-styles';
     styles.textContent = `
       .theme-toggle-btn {
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        color: #1a1a1a;
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        color: currentColor;
+      }
+
+      .theme-toggle-btn:focus-visible {
+        outline: 2px solid #0ea5e9;
+        outline-offset: 3px;
       }
       
       .theme-toggle-btn:hover {
         transform: scale(1.05);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        background: rgba(0, 0, 0, 0.05);
       }
       
       .theme-toggle-btn:active {
@@ -183,12 +189,13 @@ class ThemeSwitcher {
       /* Dark theme styles */
       :root.theme-dark .theme-toggle-btn {
         background: transparent;
-        color: #f5f5f5;
+        border-color: rgba(255, 255, 255, 0.25);
+        color: currentColor;
         box-shadow: none;
       }
 
       :root.theme-dark .theme-toggle-btn:hover {
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.12);
       }
       
       :root.theme-dark .theme-icon-sun {
@@ -216,10 +223,8 @@ class ThemeSwitcher {
       /* Mobile adjustments */
       @media (max-width: 768px) {
         .theme-toggle-btn {
-          top: 16px;
-          right: 16px;
-          width: 44px;
-          height: 44px;
+          width: 40px;
+          height: 40px;
         }
       }
     `;

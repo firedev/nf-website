@@ -86,6 +86,27 @@
   }
 }
 
+/* One button, one arrow link — used by every page. Focus ring is sky-500 so it
+   reads on both the light pages and the dark hero bands. */
+@layer components {
+  .btn {
+    @apply inline-flex min-h-12 w-fit items-center justify-center gap-2 rounded-xl bg-sky-500 px-6 py-3 text-base font-bold text-slate-950 no-underline transition hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-500 active:translate-y-px;
+    box-shadow: 0 8px 28px rgb(14 165 233 / 0.22);
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-2 text-base font-bold no-underline transition;
+  }
+
+  .link-arrow svg {
+    @apply transition-transform;
+  }
+
+  .link-arrow:hover svg {
+    transform: translateX(0.25rem);
+  }
+}
+
 /* Calm dark base: slate-night background, light text. Everything else is
    per-element dark: utilities in the templates — no parallel dark stylesheet. */
 body {
@@ -139,7 +160,16 @@ body {
   background: rgb(255 255 255 / 0.12);
 }
 
-.homepage footer {
+/* Header sits on the hero photo: the toggle borrows the light nav colour */
+.homepage > header .theme-toggle-btn {
+  border-color: rgb(255 255 255 / 0.25);
+}
+
+.homepage > header .theme-toggle-btn:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+
+footer {
   background: #020617;
   color: #f8fafc;
 }
@@ -156,10 +186,6 @@ body {
 
 .home-title {
   text-wrap: balance;
-}
-
-.home-cta {
-  box-shadow: 0 10px 32px rgb(14 165 233 / 0.2);
 }
 
 @media (max-width: 767px) {
