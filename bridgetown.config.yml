@@ -7,13 +7,18 @@ available_locales: [en]
 default_locale: en
 prefix_default_locale: false
 
-collections:
-  instructors:
-    output: true
-    sort_by: order
-    name: Instructors
-
 html_inspector_parser: nokolexbor
+
+# Link preview card. bridgetown-seo-tag reads `image` off the page, not off
+# site.metadata — without this default every share previews blank and the
+# twitter card stays "summary" instead of "summary_large_image".
+defaults:
+  - scope:
+      path: ""
+    values:
+      image:
+        path: /images/og.jpg
+        alt: "Freediver on the line under the surface — nofins, Phuket"
 
 # Environment-specific settings
 development:

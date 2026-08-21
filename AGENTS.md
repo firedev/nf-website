@@ -89,12 +89,21 @@ Plain light/dark **appearance** toggle, ONE mechanism (#27, 2026-07-13; the old 
 
 ## Development Guidelines
 
+### Share card, favicon, SEO (2026-08-21)
+- **`bridgetown-seo-tag` читает `image` со страницы, не из `site.metadata`.** Поэтому карточка ссылки задана через `defaults:` в `bridgetown.config.yml` (`image.path` + `image.alt`). До этого `og:image` не было вообще — любая ссылка на nofins.com в инстаграме/телеграме превьюилась пустой, а `twitter:card` стоял `summary`. С `image` он сам становится `summary_large_image`
+- **Пересобрать `src/images/og.jpg`** (1200×630): отрендерить HTML-карточку в headless Chrome и снять скрин, потом `sips -s format jpeg`. Композиция повторяет герой — фото справа, тип в тёмной зоне слева. Меняешь герой или таглайн — пересобери карточку
+- **Фавиконки** — `src/favicon-32.png` / `-180.png` (apple-touch) / `-512.png`, дзен-круг на светлой плашке `#f8fafc`. Сделаны из `images/zen-circle-grunge-brush-stroke-2.png`. Раньше фавиконки не было совсем
+
 ### Design conventions (2026-08-21)
 - **Кнопки и стрелка-ссылки — `.btn` и `.link-arrow`** из `@layer components` в `frontend/styles/index.css`. Не копировать длинный список утилит на каждую кнопку: фокус-ринг (`outline-sky-500`, читается и на светлом, и на тёмном) и тень заданы один раз
 - **Никаких кикеров/надзаголовков** над h2/h1 (`text-sm uppercase tracking-[0.18em]`). Ник снял такой кикер с главного экрана (355d74d), 2026-08-21 сняты остальные восемь. Заголовок несёт себя сам; смысл кикера — в заголовок или в текст
 - **Футер — тёмная плашка на всех страницах** (`footer { background: #020617 }`), не только на главной. Внутренние страницы короткие, `min-h-screen` на `<main>` оставляет серую пустоту — тёмная плашка даёт странице явный конец
 - **Мера строки** ~62ch (`max-w-[62ch]`) для абзацев. До этого текст на `/why/` шёл на ~85ch
 - Секция-заглушка (заголовок без текста и без ссылки) — дефект, а не «воздух»: блок `#why` на главной висел тупиком, теперь ведёт на `/why/`
+- **Портретный рил и ландшафтные ютубы не гридятся в одну сетку.** На `/videos/` рил стоит правой колонкой на две строки (`lg:row-span-2`), слева — шапка и 2×2 ютубов. Высоты колонок сходятся; любая попытка положить их в общий грид даёт дыру в 400px
+- **Размер кнопки темы живёт в стилях, не в `button.style.cssText`.** Инлайн-стиль бьёт медиазапрос — мобильное правило в `theme-switcher.js` годами не работало
+- **`@resource.data.homepage` не существует** — проверять `@resource.data.layout == 'homepage'`. На этом условии висит скрытие лого на мобильной главной; пока условие было мёртвым, шапка на мобиле занимала 179px из 844
+- `/phuket/` — самостоятельный HTML со своей палитрой (золото/навy). В нём есть `#backhome` — ссылка назад на сайт в стиле игры, а не тейлвиндовая кнопка. Игрок не должен оказываться в тупике
 
 ### Working with Components
 Components are Ruby objects in `src/_components/`. When creating new components:
@@ -105,8 +114,8 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 ### Adding Content
 - Static pages: Add Markdown or HTML files to `src/`
 - Homepage copy lives in `src/index.md` — single content (no per-theme copy swap)
-- `src/next-dive.ics` is **hand-maintained** — recurring RRULE (SA deep water / SU pool). If the weekend schedule pauses or shifts, edit this file, else it becomes a standing false promise. Homepage «Every weekend» block in `index.md` must stay in sync
-- `src/videos.md` — video wall, shared with nikolayx.com (same four embeds on both). **Не судить видео по названию** (2026-08-03): «Отлетевшие 4» читается как русская серия про сознание, но во фридайв-контенте она по теме — я её отфильтровал, Ник вернул. Русский язык сам по себе не дисквалифицирует: сайт en-only по копирайту, видео — нет. Сомневаешься, о чём ролик — посмотреть исходник (`OTLETEVSHIE/`, `Videos/`, `Transcripts/` в вальте) или спросить, не вырезать молча
+- `src/next-dive.ics` is **hand-maintained** — recurring RRULE (SA deep water / SU pool). If the weekend schedule pauses or shifts, edit this file, else it becomes a standing false promise. **Сейчас на него ничего не ссылается**: блока «Every weekend» на главной нет (был удалён, дата неизвестна), файл просто лежит по `/next-dive.ics`. Либо вернуть блок, либо удалить файл — висящее расписание, которого никто не видит, всё равно остаётся публичным обещанием
+- `src/videos.md` — video wall, shared with nikolayx.com (same four embeds on both). Раскладка: шапка + 2×2 ютубов слева, инстаграм-рил правой колонкой на две строки. **Не судить видео по названию** (2026-08-03): «Отлетевшие 4» читается как русская серия про сознание, но во фридайв-контенте она по теме — я её отфильтровал, Ник вернул. Русский язык сам по себе не дисквалифицирует: сайт en-only по копирайту, видео — нет. Сомневаешься, о чём ролик — посмотреть исходник (`OTLETEVSHIE/`, `Videos/`, `Transcripts/` в вальте) или спросить, не вырезать молча
 
 ### Frontend Development
 - JavaScript modules go in `frontend/javascript/`
