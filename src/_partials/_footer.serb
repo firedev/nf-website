@@ -3,6 +3,7 @@
     <nav class="flex flex-wrap justify-center gap-x-7 gap-y-3 text-base font-bold">
       <a class="no-underline transition hover:text-sky-300" href="/why/">Why freediving</a>
       <a class="no-underline transition hover:text-sky-300" href="/about/">About</a>
+      <a class="no-underline transition hover:text-sky-300" href="/friends/">Friends</a>
       <a class="no-underline transition hover:text-sky-300" href="/videos/">Videos</a>
       <a class="no-underline transition hover:text-sky-300" href="/phuket/">Phuket</a>
       <a class="no-underline transition hover:text-sky-300" href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener">Instagram</a>
