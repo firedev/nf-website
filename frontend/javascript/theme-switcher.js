@@ -90,8 +90,6 @@ class ThemeSwitcher {
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -149,6 +147,8 @@ class ThemeSwitcher {
     styles.id = 'theme-toggle-styles';
     styles.textContent = `
       .theme-toggle-btn {
+        width: 40px;
+        height: 40px;
         background: transparent;
         border: 1px solid rgba(0, 0, 0, 0.15);
         color: currentColor;
@@ -223,8 +223,8 @@ class ThemeSwitcher {
       /* Mobile adjustments */
       @media (max-width: 768px) {
         .theme-toggle-btn {
-          width: 40px;
-          height: 40px;
+          width: 34px;
+          height: 34px;
         }
       }
     `;

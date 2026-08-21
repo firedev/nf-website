@@ -18,6 +18,11 @@
   #start .sub{margin-top:6px;font-size:clamp(16px,2.4vw,26px);color:#eafaff;text-shadow:0 2px 6px rgba(0,0,0,.4);font-style:italic}
   #start .go{margin-top:38px;font-size:clamp(18px,2.6vw,28px);color:#0d3b56;background:#ffe27a;border:3px solid #fff;border-radius:40px;padding:12px 40px;box-shadow:0 6px 18px rgba(0,0,0,.3);animation:gopulse 1.6s ease-in-out infinite}
   @keyframes gopulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  #backhome{position:fixed;top:14px;right:14px;z-index:11;display:flex;align-items:center;gap:8px;padding:9px 15px;border-radius:40px;border:2px solid rgba(255,215,110,.5);background:linear-gradient(160deg,rgba(22,42,62,.88),rgba(10,24,38,.88));box-shadow:0 6px 20px rgba(0,0,0,.35);color:#ffe27a;font-family:Georgia,serif;font-size:15px;text-decoration:none;transition:border-color .2s,transform .2s}
+  #backhome:hover{border-color:rgba(255,215,110,.95);transform:translateY(-1px)}
+  #backhome:focus-visible{outline:2px solid #ffe27a;outline-offset:3px}
+  #backhome svg{width:15px;height:15px}
+  @media (max-width:720px){#backhome{font-size:13px;padding:7px 12px}}
   #flash{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,225,120,.95),rgba(255,190,60,0) 70%);opacity:0;pointer-events:none;transition:opacity .4s}
   #toast{position:absolute;bottom:90px;width:100%;text-align:center;font-size:34px;text-shadow:0 2px 6px rgba(0,0,0,.5);letter-spacing:1px}
   #hint{position:absolute;bottom:18px;width:100%;text-align:center;font-size:17px;color:#eaf6ff;text-shadow:0 1px 4px rgba(0,0,0,.6);transition:opacity 2s}
@@ -42,6 +47,10 @@
 </script>
 </head>
 <body>
+<a id="backhome" href="/" aria-label="Back to nofins.com">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H6M11 6l-6 6 6 6"/></svg>
+  nofins.com
+</a>
 <div id="start">
   <h1>Finding Nama</h1>
   <div class="sub">Solve the mystery of Phuket</div>
