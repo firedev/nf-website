@@ -27,7 +27,7 @@ yarn deploy    # Build production site and deploy to GitHub Pages
 rake deploy    # Alternative: build only, no push
 ```
 
-`yarn deploy` requires `output/` to be an initialized git repo (`ls output/.git`). If `.git` is missing, restore it by cloning the live repo first (do NOT force-push):
+`yarn deploy` requires `output/` to be an initialized git repo (`ls output/.git`). **`bin/bridgetown clean` сносит `output/` целиком вместе с `.git`** — после него деплой падает, пока чекаут не восстановлен (проверено 2026-08-21). If `.git` is missing, restore it by cloning the live repo first (do NOT force-push):
 
 ```bash
 rm -rf output && git clone git@github.com:firedev/nf-website.git output && yarn deploy
