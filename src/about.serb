@@ -20,17 +20,12 @@ title: Relax harder
 
     <div class="mb-14">
       <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">Let everything go.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">The better you switch off your character, the better you dive. That is the whole secret. There is no other one.</p>
-    </div>
-
-    <div class="mb-14">
-      <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">No fins.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">Just breath, body, and attention.</p>
+      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">The better you switch off your head, the better you dive. That is the whole secret.</p>
     </div>
 
     <div>
       <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">One diver. One buoy.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">Full attention, in the pool or on the line. <a href="/why/" class="font-bold decoration-sky-200 decoration-8">What the dive does to you</a> is the same either way.</p>
+      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">Full attention, in the pool or on the line. Either way, <a href="/why/" class="font-bold decoration-sky-200 decoration-8">the dive does the same thing to you</a>.</p>
     </div>
   </section>
 
@@ -39,8 +34,8 @@ title: Relax harder
       <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DcFTJ_nv7jm/" data-instgrm-version="14"></blockquote>
     </div>
     <div class="lg:pt-6">
-      <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">My daughter is thirteen.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">Past ten metres you stop swimming and start to fall. Go still and you fall faster, and that is the best part of it. Five children, all of them freedivers.</p>
+      <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">Then you fall.</p>
+      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">Past ten metres you stop swimming and start to fall. Go still and you fall faster, and that is the best part of it.</p>
     </div>
   </section>
 
@@ -71,7 +66,6 @@ title: Relax harder
 
   <div class="flex flex-wrap gap-4">
     <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn">Let&rsquo;s freedive</a>
-    <a href="https://t.me/firedev" target="_blank" rel="noopener" class="link-arrow px-2 text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">Get in touch<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
   </div>
 </div>
 

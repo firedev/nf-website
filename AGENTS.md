@@ -1,10 +1,10 @@
 # Sites/nofins — nofins.com
 
-Bridgetown static site for nofins freediving (Phuket, Thailand) — read this before any work in this folder. One-to-one freediving landing with a shared Why freediving page for adults and children, videos, the Finding Nama game and light/dark appearance. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/AGENTS.md`.
+Bridgetown static site for nofins freediving (Phuket, Thailand) — read this before any work in this folder. One-to-one freediving landing with a shared Why freediving page for adults and children, videos and the Finding Nama game. Тема одна — тёмная. Общий дизайн-слой, голос и грабли всех сайтов — `Sites/AGENTS.md`.
 
-**Навигация единая** (`_components/shared/navbar.serb`) на всех страницах: **Why freediving** (`/why/`), **About** (`/about/`), **Friends** (`/friends/`), **Videos** (`/videos/`), **Phuket** (`/phuket/`) — только эти пять пунктов и в этом порядке (Friends добавлен 21.08.2026 по просьбе Ника). Не добавлять в неё якоря главной или внешние ссылки. Футер (`_partials/_footer.serb`) повторяет те же пять плюс Instagram и Telegram.
+**Навигация единая** (`_components/shared/navbar.serb`) на всех страницах: **Why freediving** (`/why/`), **About** (`/about/`), **Friends** (`/friends/`), **Videos** (`/videos/`), **Phuket** (`/phuket/`) — только эти пять пунктов и в этом порядке (Friends добавлен 21.08.2026 по просьбе Ника). Не добавлять в неё якоря главной или внешние ссылки. Футер (`_partials/_footer.serb`) повторяет те же пять плюс Instagram. **Telegram снят отовсюду** (Ник, 26.08.2026) — и из футера, и со всех CTA «Get in touch»: единственный контакт — инстаграм `@nofinsfreediving`.
 
-На мобиле пять пунктов влезают в одну строку только на `text-sm` (десктоп — `sm:text-lg`). Кнопка темы при этом уходит на вторую строку по центру — это осознанно, кроить паддинги до `px-0.5` ради неё не надо.
+На мобиле пять пунктов влезают в одну строку только на `text-sm` (десктоп — `sm:text-lg`).
 
 **`/about/` — «Relax harder.»** (2026-08-21). Заголовок и `title` страницы — слова Ника; под ним его же строка про то, как он тренирует: «We train calm and relaxation in your own headspace. Only that — on the surface and at depth, in every style, until that depth feels like home.» Это его формулировки, при правке — резать и переставлять, не переписывать (`me/writing-rules.md`).
 
@@ -55,31 +55,30 @@ rake frontend:build           # Build frontend assets for production
 - **Tailwind CSS** - Utility-first CSS framework
 - **esbuild** - JavaScript bundler
 
-(Shoelace was removed 2026-07-13, #25 — the footer icon is an inline SVG now; JS bundle went 177KB → ~7KB)
+(Shoelace was removed 2026-07-13, #25 — the footer icon is an inline SVG now. С удалением тем-свитчера 26.08.2026 бандл стал 75B: JS на сайте фактически нет)
 
 ### Key Directories
 - `src/` - Source content and templates
   - `_components/` - Reusable Ruby/Serbea components
   - `_layouts/` - Page templates in Serbea format
-  - `index.md` - Homepage content (single copy, no per-theme variations). Секции могут сохранять `id=`, но навигация на них не ссылается
+  - `index.md` - Homepage content. Секции могут сохранять `id=`, но навигация на них не ссылается
   - `why.serb` - `/why/`: одна короткая страница о практике для взрослых и детей; единственный владелец этой копии
   - `videos.md` - `/videos/`: инстаграм-эмбед (reel) + два ютуб-ифрейма + ссылка на канал think→forward
   - `phuket/index.html` - `/phuket/`: браузерная игра Finding Nama (three.js, ~155KB одним инлайн-файлом, без бандлера). Портфолио-карточка проекта живёт на **другом** сайте — `Sites/firedev/src/_projects/finding-nama.md` и ссылается сюда; правишь игру — проверь, не устарело ли описание там
   - `images/home/` - hero и секционные webp редизайна 2026-07
 - `frontend/` - Frontend assets
-  - `javascript/` - JS modules (theme switcher, etc.)
-  - `styles/` - CSS files including Tailwind and theme styles
+  - `javascript/` - JS modules (сейчас только точка входа: бандл 75B)
+  - `styles/` - CSS files including Tailwind and the dark base
 - `output/` - Built static site (git-ignored in this repo; itself a separate git checkout of `firedev/nf-website` branch `master` — the deployment target)
 - `plugins/` - Custom Bridgetown plugins
 
 ### Theme System
-Plain light/dark **appearance** toggle, ONE mechanism (#27, 2026-07-13; the old dual-*content* system and the 433-line `theme-dark.css` gradient stylesheet are both gone):
-- Switcher in `frontend/javascript/theme-switcher.js` — toggles `theme-dark` on `:root`, respects `prefers-color-scheme`, persists localStorage key `theme`
-- **Нужен `<div id="theme-switcher">` в разметке** — скрипт монтирует кнопку только туда. Точка монтирования живёт в `_components/shared/navbar.serb`, последним элементом `nav`. Была потеряна до 2026-08-21: скрипт грузился, кнопки не было, тёмная тема включалась только системной настройкой. Тронул навбар — проверь, что див на месте
-- `frontend/styles/index.css` wires Tailwind 4 to that class: `@custom-variant dark (&:where(.theme-dark, .theme-dark *));` — so every `dark:` utility keys off `.theme-dark`, not `prefers-color-scheme`
-- Dark base lives in index.css only: `body … dark:bg-slate-950 dark:text-slate-100` + zen-circle `invert(1)`. Everything else is per-element `dark:` utilities in templates — do NOT reintroduce a parallel dark stylesheet
-- Dark palette: bg slate-950, cards dark:bg-slate-900 (or bg-white/5 for the booking card), secondary text dark:text-slate-300/400, accents unchanged (sky-200 underlines read fine on dark)
-- New/changed elements with hardcoded light colors (bg-white, text-slate-5xx/6xx/950) MUST get a `dark:` variant — verify both themes by screenshot (inject `localStorage.setItem("theme","dark")` after `<head>` in an output copy; note `min-h-screen` on `<main>` pushes the footer below any viewport-sized screenshot)
+**Сайт тёмный, светлой версии нет** (Ник, 26.08.2026: «remove light version, the default body color should be dark»). Переключателя тоже нет — `frontend/javascript/theme-switcher.js` удалён, `<div id="theme-switcher">` из навбара снят, JS-бандл ушёл с ~7KB до 75B.
+- `theme-dark` прибит гвоздями к `<html>` в `src/_layouts/default.serb`. Механизм `@custom-variant dark (&:where(.theme-dark, .theme-dark *));` в `frontend/styles/index.css` остался — все `dark:` утилиты в шаблонах работают как раньше, просто всегда
+- Фон — градиент глубины из `.theme-dark body` (surface water #082f49 → #020617, `background-attachment: fixed`), поверх `dark:bg-slate-950`. `meta theme-color` — `#020617`
+- Dark palette: bg slate-950, cards dark:bg-slate-900 (or bg-white/5), secondary text dark:text-slate-300/400, accents unchanged (sky-200 underlines read fine on dark)
+- Новый элемент с захардкоженным светлым цветом (bg-white, text-slate-5xx/6xx/950) обязан получить `dark:` вариант, иначе он останется светлым пятном. Проверять скриншотом (`min-h-screen` на `<main>` уводит футер ниже вьюпорта — снимать высоким окном)
+- Светлые правила ещё лежат в index.css мёртвым грузом (`code`, `blockquote.bubble`, `.gif-from-jpeg::before`) — не используются на этом сайте, сносить только если реально мешают
 
 ### Deployment
 - Deploys to legacy GitHub Pages at nofins.com: repo `firedev/nf-website`, Pages serves branch `master` path `/`. Source code lives on branch `source` of the same repo
@@ -119,7 +118,6 @@ Plain light/dark **appearance** toggle, ONE mechanism (#27, 2026-07-13; the old 
 - **Не резать абзацы по `max-w-[Nch]`.** Ник (21.08.2026): «wraps the line on the last word» — кап по мере оставлял последнее слово одиноким на строке. Вместо этого `text-wrap: pretty` на `p` в базовом слое `index.css` — браузер сам не даёт абзацу закончиться сиротой, на любой ширине. Ширину держит контейнер (`max-w-2xl`, колонка грида), а не класс на самом абзаце
 - Секция-заглушка (заголовок без текста и без ссылки) — дефект, а не «воздух»: блок `#why` на главной висел тупиком, теперь ведёт на `/why/`
 - **Портретный рил и ландшафтные ютубы не гридятся в одну сетку.** На `/videos/` рил стоит правой колонкой на две строки (`lg:row-span-2`), слева — шапка и 2×2 ютубов. Высоты колонок сходятся; любая попытка положить их в общий грид даёт дыру в 400px
-- **Размер кнопки темы живёт в стилях, не в `button.style.cssText`.** Инлайн-стиль бьёт медиазапрос — мобильное правило в `theme-switcher.js` годами не работало
 - **`@resource.data.homepage` не существует** — проверять `@resource.data.layout == 'homepage'`. На этом условии висит скрытие лого на мобильной главной; пока условие было мёртвым, шапка на мобиле занимала 179px из 844
 - `/phuket/` — самостоятельный HTML со своей палитрой (золото/навy). В нём есть `#backhome` — ссылка назад на сайт в стиле игры, а не тейлвиндовая кнопка. Игрок не должен оказываться в тупике
 
@@ -131,20 +129,30 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 
 ### Adding Content
 - Static pages: Add Markdown or HTML files to `src/`
-- Homepage copy lives in `src/index.md` — single content (no per-theme copy swap)
+- Homepage copy lives in `src/index.md` — single content
 - `src/videos.md` — video wall, shared with nikolayx.com (same four embeds on both). Раскладка: шапка + 2×2 ютубов слева, инстаграм-рил правой колонкой на две строки. **Не судить видео по названию** (2026-08-03): «Отлетевшие 4» читается как русская серия про сознание, но во фридайв-контенте она по теме — я её отфильтровал, Ник вернул. Русский язык сам по себе не дисквалифицирует: сайт en-only по копирайту, видео — нет. Сомневаешься, о чём ролик — посмотреть исходник (`OTLETEVSHIE/`, `Videos/`, `Transcripts/` в вальте) или спросить, не вырезать молча
 
 ### Frontend Development
 - JavaScript modules go in `frontend/javascript/`
 - Styles use Tailwind utilities in `frontend/styles/`
 - No Shoelace / web-component library — icons are inline SVG (removed 2026-07-13, #25)
-- Dark styling is Tailwind `dark:` utilities on elements; the toggle hangs `theme-dark` on `:root` (there is no `data-theme` attribute, no per-theme content blocks, no separate dark stylesheet — see Theme System)
+- Dark styling is Tailwind `dark:` utilities on elements; `theme-dark` is hardcoded on `<html>` (there is no toggle, no `data-theme` attribute, no separate dark stylesheet — see Theme System)
 
 ### Building and Testing Changes
 1. Run `yarn start` for development server
 2. Site rebuilds automatically on content changes
 3. Frontend assets require restart if `esbuild.config.js` is modified
-4. Test both light and dark themes for any UI changes
+4. Проверять скриншотом — тема одна, тёмная
 5. Verify responsive design with Tailwind breakpoints
 
 **Gotcha — `bin/bridgetown build` alone leaves CSS STALE.** Tailwind/PostCSS runs in the esbuild step (`frontend:build`), NOT in `bin/bridgetown build`. So a **newly-added utility class** (e.g. `bg-sky-500` not used elsewhere) won't be in the CSS bundle after a bare `build` — it silently has no styling, and screenshots off `output/` mislead. To verify a new class locally: `bin/bridgetown frontend:build && bin/bridgetown build`, then `grep <class> output/_bridgetown/static/index.*.css`. `yarn start` and `yarn deploy` both run `frontend:build` first, so the real deploy is fine — this only bites local verification.
+
+### Голос и правки копирайта (2026-08-26)
+Ник прошёлся по всем страницам: «the english doesn't make sense». Что чинилось и что теперь нельзя ломать заново:
+
+- **Не заявлять, что тренировка — это no-fins.** Ник: «don't claim we train no fins, it's just the brand». `nofins` — имя, а не дисциплина. Тренируется расслабление в любом стиле (bi-fins, monofin, no fins, руки по тросу). Блок «No fins. / Just breath, body, and attention.» с `/about/` снят, секция `#nofins` на главной переписана на «в любом стиле»
+- **«Your character» — калька с русского «характер».** По-английски это персонаж книги, а не голос в голове. На `/why/` и `/about/` теперь «your head» / «switch off your head». Любой новый перевод внутренней речи Ника проверять этим тестом
+- Заголовок не пересказывается абзацем дословно (было «One diver. One buoy.» + «One diver, one buoy and full instructor attention.»)
+- Термин вводится до употребления: «The reflex» → «The dive reflex» на `/junior/`
+- Безличный корпоративный залог режется: «trips are announced with confirmed dates», «practice uses an active, qualified buddy», «No-fins develops efficient movement through coordination and feel» — всё переписано живым английским
+- Про Еву (реел на `/about/` подписан «EVA 13Y FREEFALL 20M`): блок «My daughter is thirteen» и строку «Five children, all of them freedivers» Ник велел снять, оставить только про падение. Не возвращать без его слова
