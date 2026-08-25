@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <title>Finding Nama — Solve the Mystery of Phuket</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <style>
   html,body{margin:0;height:100%;overflow:hidden;background:#9adcf0;font-family:Georgia,serif}
-  canvas{display:block}
+  canvas{display:block;touch-action:none}
   #ui{position:fixed;inset:0;pointer-events:none;color:#fff}
   #list{position:absolute;top:14px;left:14px;min-width:250px;max-height:calc(100vh - 28px);overflow-y:auto;background:linear-gradient(160deg,rgba(22,42,62,.88),rgba(10,24,38,.88));border:2px solid rgba(255,215,110,.5);border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.35);padding:12px 16px;font-size:16px;opacity:0;transition:opacity .8s}
-  #list b{display:block;text-align:center;font-size:20px;color:#ffe27a;letter-spacing:1px}
+  #list b{display:block;text-align:center;font-size:20px;color:#ffe27a;letter-spacing:1px;pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  #list.collapsed #bar,#list.collapsed .q:not(.quest){display:none}
   #minimap{position:absolute;bottom:14px;right:14px;background:rgba(20,40,60,.55);border-radius:10px;pointer-events:auto;cursor:pointer;opacity:0;transition:opacity .8s}
   #ui.ready #list,#ui.ready #minimap{opacity:1}
   #start{position:fixed;inset:0;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 38%,#bfeaf7,#7cc4e0 70%,#4a97bd);color:#fff;text-align:center;transition:opacity .7s;cursor:pointer}
@@ -18,11 +19,6 @@
   #start .sub{margin-top:6px;font-size:clamp(16px,2.4vw,26px);color:#eafaff;text-shadow:0 2px 6px rgba(0,0,0,.4);font-style:italic}
   #start .go{margin-top:38px;font-size:clamp(18px,2.6vw,28px);color:#0d3b56;background:#ffe27a;border:3px solid #fff;border-radius:40px;padding:12px 40px;box-shadow:0 6px 18px rgba(0,0,0,.3);animation:gopulse 1.6s ease-in-out infinite}
   @keyframes gopulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-  #backhome{position:fixed;top:14px;right:14px;z-index:11;display:flex;align-items:center;gap:8px;padding:9px 15px;border-radius:40px;border:2px solid rgba(255,215,110,.5);background:linear-gradient(160deg,rgba(22,42,62,.88),rgba(10,24,38,.88));box-shadow:0 6px 20px rgba(0,0,0,.35);color:#ffe27a;font-family:Georgia,serif;font-size:15px;text-decoration:none;transition:border-color .2s,transform .2s}
-  #backhome:hover{border-color:rgba(255,215,110,.95);transform:translateY(-1px)}
-  #backhome:focus-visible{outline:2px solid #ffe27a;outline-offset:3px}
-  #backhome svg{width:15px;height:15px}
-  @media (max-width:720px){#backhome{font-size:13px;padding:7px 12px}}
   #flash{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,225,120,.95),rgba(255,190,60,0) 70%);opacity:0;pointer-events:none;transition:opacity .4s}
   #toast{position:absolute;bottom:90px;width:100%;text-align:center;font-size:34px;text-shadow:0 2px 6px rgba(0,0,0,.5);letter-spacing:1px}
   #hint{position:absolute;bottom:18px;width:100%;text-align:center;font-size:17px;color:#eaf6ff;text-shadow:0 1px 4px rgba(0,0,0,.6);transition:opacity 2s}
@@ -41,16 +37,33 @@
   .q.secret i{border-color:#63798a}
   .q.quest i{border-color:#ffe27a}
   .pop{animation:qpop .7s cubic-bezier(.34,1.56,.64,1)}
+  /* on-screen controls: touch/coarse-pointer devices only */
+  #touch{display:none}
+  #touch button{pointer-events:auto;touch-action:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;
+    font:inherit;font-size:22px;color:#eaf6ff;background:rgba(16,36,54,.5);border:2px solid rgba(255,215,110,.45);border-radius:14px;
+    width:60px;height:60px;padding:0;display:flex;align-items:center;justify-content:center}
+  #touch button.on{background:rgba(255,215,110,.55);color:#0d3b56;border-color:#ffe27a}
+  #dpad{position:absolute;left:calc(12px + env(safe-area-inset-left));bottom:calc(14px + env(safe-area-inset-bottom));
+    display:grid;grid-template-columns:repeat(3,60px);grid-template-rows:repeat(3,60px);gap:5px}
+  #dpad .u{grid-area:1/2}#dpad .l{grid-area:2/1}#dpad .r{grid-area:2/3}#dpad .d{grid-area:3/2}
+  #acts{position:absolute;right:calc(12px + env(safe-area-inset-right));bottom:calc(14px + env(safe-area-inset-bottom));display:grid;gap:12px;justify-items:end}
+  #acts button{border-radius:50%}
+  #acts .big{width:76px;height:76px;font-size:26px;color:#ffe27a}
+  @media (hover:none) and (pointer:coarse){
+    #ui.ready #touch{display:block}
+    #hint{display:none}
+    #list{font-size:13px;min-width:0;max-width:54vw;padding:8px 11px;top:calc(10px + env(safe-area-inset-top));left:calc(10px + env(safe-area-inset-left))}
+    #list b{font-size:15px}
+    #minimap{width:92px;height:190px;top:calc(10px + env(safe-area-inset-top));right:calc(10px + env(safe-area-inset-right));bottom:auto}
+    #toast{font-size:22px;bottom:auto;top:calc(58px + env(safe-area-inset-top))}
+    #banner{font-size:30px}
+  }
 </style>
 <script type="importmap">
 { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
 </script>
 </head>
 <body>
-<a id="backhome" href="/" aria-label="Back to nofins.com">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H6M11 6l-6 6 6 6"/></svg>
-  nofins.com
-</a>
 <div id="start">
   <h1>Finding Nama</h1>
   <div class="sub">Solve the mystery of Phuket</div>
@@ -62,6 +75,19 @@
   <div id="toast"></div>
   <div id="hint">WASD move &nbsp;·&nbsp; Shift run &nbsp;·&nbsp; Space jump &nbsp;·&nbsp; drag mouse to look &nbsp;·&nbsp; scroll to zoom &nbsp;·&nbsp; E board/leave boat &nbsp;·&nbsp; discover all landmarks</div>
   <div id="banner">⟡ All of Phuket Discovered! ⟡</div>
+  <div id="touch">
+    <div id="dpad">
+      <button class="u" data-k="KeyW">▲</button>
+      <button class="l" data-k="KeyA">◀</button>
+      <button class="r" data-k="KeyD">▶</button>
+      <button class="d" data-k="KeyS">▼</button>
+    </div>
+    <div id="acts">
+      <button data-k="ShiftLeft" data-toggle="1">⚡</button>
+      <button data-k="Space">⤒</button>
+      <button class="big" data-e="1">E</button>
+    </div>
+  </div>
   <div id="flash"></div>
 </div>
 <script type="module">
@@ -1847,7 +1873,7 @@ addEventListener('keydown',e=>{
   keys[e.code]=true; initAudio(); if(e.code==='KeyE')toggleBoat(); if(e.code==='Space')e.preventDefault();
 });
 addEventListener('keyup',e=>keys[e.code]=false);
-addEventListener('blur',()=>{for(const k in keys)keys[k]=false; dragging=false;}); // stuck-key guard on tab/window switch
+addEventListener('blur',()=>{for(const k in keys)keys[k]=false; dragging=false; clearTouch();}); // stuck-key guard on tab/window switch
 document.addEventListener('visibilitychange',()=>{if(document.hidden)for(const k in keys)keys[k]=false;});
 let camYaw=Math.PI, camPitch=0.42, camDist=14, dragging=false, px=0,py=0;
 addEventListener('pointerdown',e=>{dragging=true;px=e.clientX;py=e.clientY;initAudio();});
@@ -1887,12 +1913,34 @@ function renderList(){
   for(const l of vis) if(l.discovered) rows.push({txt:l.name,cls:'done'}); // completed sink to the bottom
   // celebratory line ONLY when the whole game is done: every landmark (incl. dive spots/wreck) + the quest chain
   if(LANDMARKS.every(l=>l.discovered)&&!questLine())rows.unshift({txt:'✦ Phuket solved!',cls:'done'});
-  listEl.innerHTML=`<b>Phuket</b><div id="bar"><i style="width:${Math.round(n/vis.length*100)}%"></i></div>`+
+  listEl.innerHTML=`<b>Phuket ${listEl.classList.contains('collapsed')?'▸':'▾'}</b><div id="bar"><i style="width:${Math.round(n/vis.length*100)}%"></i></div>`+
     rows.map(r=>`<div class="q ${r.cls}${!shownQuests.has(r.txt)&&r.cls!=='secret'?' pop':''}"><i></i><span>${r.txt}</span></div>`).join('');
   shownQuests=new Set(rows.map(r=>r.txt));
 }
 renderList();
 setTimeout(()=>hintEl.style.opacity=0,12000);
+
+// tap the panel header to fold the list down to just the active quest line (default folded on touch)
+listEl.addEventListener('pointerdown',e=>{
+  if(e.target.tagName!=='B')return;
+  e.stopPropagation(); listEl.classList.toggle('collapsed'); renderList();
+});
+if(matchMedia('(pointer:coarse)').matches)listEl.classList.add('collapsed');
+
+// on-screen controls: buttons write straight into `keys`, so movement/boat logic stays untouched
+const touchBtns=[...document.querySelectorAll('#touch button')];
+function clearTouch(){for(const b of document.querySelectorAll('#touch .on'))b.classList.remove('on');} // DOM-queried: blur can fire before touchBtns is initialised
+for(const b of touchBtns){
+  const k=b.dataset.k, hold=!b.dataset.toggle;
+  const set=v=>{keys[k]=v; b.classList.toggle('on',v);};
+  b.addEventListener('pointerdown',e=>{
+    e.preventDefault(); e.stopPropagation(); // don't let it start a camera drag
+    initAudio(); if(!started){startGame();return;}
+    if(b.dataset.e)toggleBoat(); else if(hold)set(true); else set(!keys[k]);
+  });
+  const up=e=>{e.stopPropagation(); if(hold&&k)set(false);};
+  for(const ev of ['pointerup','pointercancel','pointerleave'])b.addEventListener(ev,up);
+}
 
 const mm=document.getElementById('minimap').getContext('2d');
 function drawMinimap(){
@@ -1913,7 +1961,8 @@ function drawMinimap(){
 }
 // click the minimap to teleport
 document.getElementById('minimap').addEventListener('click',e=>{
-  const wx=(e.offsetX-62)/0.6, wz=(e.offsetY-150)/0.6;
+  const r0=e.currentTarget.getBoundingClientRect(), s=160/r0.width; // canvas is CSS-scaled on mobile
+  const wx=(e.offsetX*s-62)/0.6, wz=(e.offsetY*s-150)/0.6;
   if(introT<INTRO_LEN)introT=INTRO_LEN;
   if(sailing){
     activeBoat.position.copy(activeBoat.userData.home);
