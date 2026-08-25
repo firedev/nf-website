@@ -162,15 +162,6 @@ body {
   background: rgb(255 255 255 / 0.12);
 }
 
-/* Header sits on the hero photo: the toggle borrows the light nav colour */
-.homepage > header .theme-toggle-btn {
-  border-color: rgb(255 255 255 / 0.25);
-}
-
-.homepage > header .theme-toggle-btn:hover {
-  background: rgb(255 255 255 / 0.12);
-}
-
 footer {
   background: #020617;
   color: #f8fafc;
