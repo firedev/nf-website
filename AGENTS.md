@@ -33,6 +33,8 @@ yarn deploy    # Build production site and deploy to GitHub Pages
 rake deploy    # Alternative: build only, no push
 ```
 
+`yarn deploy` вызывает `bin/bridgetown` без `mise exec`. Если в шелле системный Ruby / нет бандла — падает `Bundler::GemNotFound`. Обход (2026-08-27): `mise exec -- env BRIDGETOWN_ENV=production bin/bridgetown frontend:build && mise exec -- env BRIDGETOWN_ENV=production bin/bridgetown build`, потом `cp .nojekyll CNAME output/` и commit+push внутри `output/` на `master`.
+
 `yarn deploy` requires `output/` to be an initialized git repo (`ls output/.git`). **`bin/bridgetown clean` сносит `output/` целиком вместе с `.git`** — после него деплой падает, пока чекаут не восстановлен (проверено 2026-08-21). If `.git` is missing, restore it by cloning the live repo first (do NOT force-push):
 
 ```bash
