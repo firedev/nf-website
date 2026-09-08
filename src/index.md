@@ -87,7 +87,7 @@ title: nofins | Freediving trains life
     <img src="/images/nick.jpg" alt="Freediving instructor on the boat before a depth session" width="900" height="900" loading="lazy" class="home-about-photo md:order-2">
     <div class="md:order-1">
       <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">One diver. One buoy.</h2>
-      <p class="mb-6 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Just you on the line.</p>
+      <p class="mb-6 text-lg leading-relaxed text-slate-100">Just you on the line.</p>
       <ul class="home-creds">
         <li>Molchanovs Wave 2 Instructor</li>
         <li>Depth &amp; Pool</li>
@@ -127,7 +127,7 @@ title: nofins | Freediving trains life
       <h2 class="home-join-title mb-5 mt-0">Let&rsquo;s freedive.</h2>
       <p class="mb-8 max-w-xl text-lg leading-relaxed text-slate-200">Let me know what you&rsquo;d like to work on.</p>
       <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn">Get in touch</a>
-      <p class="mb-0 mt-8 max-w-xl text-sm leading-relaxed text-slate-300">Never hold your breath in water alone. Train with a qualified buddy watching, breathe normally before each dive, and surface with air to spare.</p>
+      <p class="mb-0 mt-8 max-w-xl text-base leading-relaxed text-slate-100">Never hold your breath in water alone. Train with a qualified buddy watching, breathe normally before each dive, and surface with air to spare.</p>
     </div>
   </div>
 </section>
