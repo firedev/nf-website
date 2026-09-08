@@ -13,7 +13,7 @@ title: nofins | Freediving trains life
   <div class="relative z-1 mx-auto w-full max-w-7xl px-6 pb-16 pt-32 sm:px-10 lg:px-12">
     <div class="max-w-3xl">
       <h1 class="home-title mb-6 mt-0 max-w-[13ch] text-[2.8rem] font-black leading-[0.96] sm:text-6xl lg:text-8xl">Freediving trains life.</h1>
-      <p class="mb-8 max-w-2xl text-lg leading-relaxed text-slate-100 sm:text-xl">Slow down. Go deeper.</p>
+      <p class="mb-8 max-w-2xl text-lg leading-relaxed text-slate-100 sm:text-xl">Slow down. Stay calm. Go deeper.</p>
       <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn home-cta">Let&rsquo;s freedive</a>
     </div>
   </div>
