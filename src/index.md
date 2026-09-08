@@ -55,7 +55,7 @@ title: nofins | Freediving trains life
       <article class="grid min-w-0 gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-x-10">
         <p class="home-trip-date mb-0"><time datetime="2027-02">February–March</time></p>
         <div class="min-w-0">
-          <p class="home-trip-copy mb-3">My retreat on the Surin Islands. Marine reserve, islands, clear water, quiet. We&rsquo;re still picking dates, and people are already gathering. We leave from Phuket.</p>
+          <p class="home-trip-copy mb-3">My retreat on the Surin Islands. Marine reserve, islands, clear water, quiet. We&rsquo;re still picking dates, and people are gathering. We leave from Phuket.</p>
           <a href="https://nonduality.today" target="_blank" rel="noopener" class="link-arrow text-sky-300 hover:text-sky-200">nonduality.today<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
@@ -76,8 +76,8 @@ title: nofins | Freediving trains life
         </div>
       </article>
 
-      <p class="home-prose mb-8 mt-8">Write me, sign up, and let&rsquo;s go.</p>
-      <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn">Get in touch</a>
+      <p class="home-prose mb-8 mt-8">Write me if you want to come.</p>
+      <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn">Write me</a>
     </div>
   </div>
 </section>
@@ -126,7 +126,7 @@ title: nofins | Freediving trains life
     <div class="max-w-2xl">
       <h2 class="home-join-title mb-5 mt-0">Let&rsquo;s freedive.</h2>
       <p class="mb-8 max-w-xl text-lg leading-relaxed text-slate-200">Let me know what you&rsquo;d like to work on.</p>
-      <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn">Get in touch</a>
+      <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn">Write me</a>
       <p class="mb-0 mt-8 max-w-xl text-base leading-relaxed text-slate-100">Never hold your breath in water alone. Train with a qualified buddy watching, breathe normally before each dive, and surface with air to spare.</p>
     </div>
   </div>
