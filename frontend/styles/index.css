@@ -179,6 +179,188 @@ footer {
 
 .home-title {
   text-wrap: balance;
+  letter-spacing: -0.04em;
+}
+
+.home-why-inner {
+  padding-top: 3.25rem;
+  padding-bottom: 3.25rem;
+}
+
+.home-lead {
+  font-size: clamp(1.35rem, 2.1vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  font-optical-sizing: auto;
+  color: rgb(248 250 252);
+  text-wrap: pretty;
+}
+
+.home-prose {
+  font-size: 1.25rem;
+  font-weight: 430;
+  line-height: 1.7;
+  letter-spacing: 0.012em;
+  font-optical-sizing: auto;
+  color: rgb(226 232 240);
+  text-wrap: pretty;
+}
+
+.home-about-photo {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  object-fit: cover;
+  object-position: 50% 10%;
+  border-radius: 0.75rem;
+}
+
+.home-creds {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1.05rem;
+  font-weight: 650;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  color: rgb(125 211 252);
+}
+
+.home-creds li {
+  display: inline;
+}
+
+.home-creds li:not(:last-child)::after {
+  content: "·";
+  margin: 0 0.7rem;
+  color: rgb(56 189 248);
+}
+
+.home-phuket-heading {
+  margin-bottom: 1.75rem;
+}
+
+.home-phuket-photos {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.home-phuket-photos img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+.home-phuket-photo-lead {
+  aspect-ratio: 16 / 11;
+}
+
+.home-phuket-photos img:not(.home-phuket-photo-lead) {
+  aspect-ratio: 16 / 10;
+}
+
+.home-phuket-copy {
+  margin-top: 4rem;
+  padding-top: 0;
+  max-width: 38rem;
+}
+
+.home-phuket-copy .home-lead {
+  margin-bottom: 2rem;
+}
+
+.home-phuket-copy .home-prose {
+  margin-bottom: 1.35rem;
+}
+
+.home-phuket-copy .home-prose:last-of-type {
+  margin-bottom: 0;
+}
+
+.home-phuket-end {
+  display: block;
+  margin-top: 4.5rem;
+  margin-bottom: 0;
+  font-size: clamp(2rem, 4.2vw, 2.85rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  font-optical-sizing: auto;
+  color: rgb(255 255 255);
+  text-wrap: balance;
+}
+
+.home-phuket-videos {
+  margin-top: 2.75rem;
+}
+
+.home-join-title {
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.home-trip-year {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  color: rgb(248 250 252);
+}
+
+.home-trip-date {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: rgb(186 230 253);
+}
+
+.home-trip-copy {
+  font-size: 1.2rem;
+  font-weight: 430;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  color: rgb(226 232 240);
+}
+
+@media (min-width: 640px) {
+  .home-why-inner {
+    padding-top: 4.25rem;
+    padding-bottom: 4.25rem;
+  }
+
+  .home-phuket-copy {
+    margin-top: 5.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-phuket-heading {
+    margin-bottom: 2.25rem;
+  }
+
+  .home-phuket-photos {
+    grid-template-columns: 1.45fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.85rem;
+    min-height: min(38rem, 72vh);
+  }
+
+  .home-phuket-photo-lead {
+    grid-row: 1 / span 2;
+    aspect-ratio: auto;
+  }
+
+  .home-phuket-photos img:not(.home-phuket-photo-lead) {
+    aspect-ratio: auto;
+    min-height: 0;
+  }
 }
 
 @media (max-width: 767px) {
@@ -196,8 +378,8 @@ footer {
     object-position: 62% center;
   }
 
-  .home-join picture img {
-    object-position: 65% center;
+  .homepage .home-join img {
+    object-position: 70% center;
   }
 }
 

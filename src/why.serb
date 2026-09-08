@@ -18,8 +18,8 @@ title: Why freediving
     </div>
 
     <div class="mb-14">
-      <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">Everything turns up at once.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">Hold your breath, drop below the surface, and every thought you own arrives together. You start filtering. The noise drops.</p>
+      <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">It all comes at once.</p>
+      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">You hold your breath and go under. You start filtering the chatter, and it goes quiet.</p>
     </div>
 
     <div class="mb-14">
@@ -28,7 +28,7 @@ title: Why freediving
     </div>
   </section>
 
-  <div class="mt-20 grid gap-12 border-t border-current/10 pt-14 sm:grid-cols-2 sm:gap-14">
+  <div class="mt-20 grid gap-12 pt-4 sm:grid-cols-2 sm:gap-14">
     <section>
       <h2 class="mb-4 mt-0 text-3xl font-black tracking-tight sm:text-4xl">Deeper means calmer.</h2>
       <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Equalize early, turn when you planned to, and come up with air to spare.</p>
