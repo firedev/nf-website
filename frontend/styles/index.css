@@ -459,6 +459,10 @@ body:not(.homepage) > header .nav-link:hover {
   color: rgb(226 232 240);
 }
 
+.home-trips-cta {
+  margin-top: 2rem;
+}
+
 @media (min-width: 640px) {
   .home-why-inner {
     padding-top: 4.25rem;

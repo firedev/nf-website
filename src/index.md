@@ -76,8 +76,7 @@ title: nofins | Freediving trains life
         </div>
       </article>
 
-      <p class="home-prose mb-8 mt-8">Write me if you want to come.</p>
-      <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn">Write me</a>
+      <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn home-trips-cta">Write me if you want to come.</a>
     </div>
   </div>
 </section>
