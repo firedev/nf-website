@@ -92,7 +92,6 @@ title: nofins | Freediving trains life
         <li>Molchanovs Wave 2 Instructor</li>
         <li>Depth &amp; Pool</li>
         <li>STA 6:15</li>
-        <li>English · Russian</li>
       </ul>
       <a href="/about/" class="link-arrow mt-8 text-sky-700 hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">More about Nick<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
     </div>
