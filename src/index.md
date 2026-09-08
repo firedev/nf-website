@@ -64,7 +64,7 @@ title: nofins | Freediving trains life
 <section id="where" class="bg-slate-100 text-slate-950 dark:bg-slate-950 dark:text-slate-100">
   <div class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12">
     <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">Phuket is home.</h2>
-    <p class="mb-12 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">Pool and depth sessions run in Phuket, with boat training around the Racha Islands. Trips to deep pools and freediving camps go up once the dates are set.</p>
+    <p class="mb-12 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">Pool and depth sessions run in Phuket, with boat training around the Racha Islands.</p>
 
     <div class="grid gap-8 md:grid-cols-3">
       <img src="/images/home/phuket-1.webp" alt="Clear water and green islands near Phuket" width="900" height="650" loading="lazy" class="aspect-[18/13] w-full rounded-xl object-cover">
@@ -72,6 +72,61 @@ title: nofins | Freediving trains life
       <img src="/images/home/phuket-3.webp" alt="Small boat crossing calm tropical water" width="900" height="650" loading="lazy" class="aspect-[18/13] w-full rounded-xl object-cover">
     </div>
     <a href="/videos/" class="btn mt-10">Watch videos</a>
+  </div>
+</section>
+
+<section id="trips" class="bg-sky-950 text-slate-100">
+  <div class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12">
+    <h2 class="mb-12 mt-0 max-w-2xl text-4xl font-black tracking-tight sm:text-5xl">The next trips.</h2>
+
+    <div class="max-w-3xl">
+      <h3 class="mb-0 mt-0 text-2xl font-black">2026</h3>
+
+      <article class="grid min-w-0 gap-2 border-t border-sky-800 py-8 sm:grid-cols-[13rem_1fr] sm:gap-x-10">
+        <p class="mb-0 text-lg font-black"><time datetime="2026-11-07/2026-11-14">November 7–14</time></p>
+        <div class="min-w-0">
+          <p class="mb-3 text-lg leading-relaxed text-slate-300">Deep Week Malaysia, Semporna.</p>
+          <a href="https://freedivingfamily.com/deep-week-malaysia" target="_blank" rel="noopener" class="link-arrow text-sky-300 hover:text-sky-200">freedivingfamily.com<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <article class="grid min-w-0 gap-2 border-t border-sky-800 py-8 sm:grid-cols-[13rem_1fr] sm:gap-x-10">
+        <p class="mb-0 text-lg font-black"><time datetime="2026-12-03/2026-12-07">December 3–7</time></p>
+        <div class="min-w-0">
+          <p class="mb-3 text-lg leading-relaxed text-slate-300">Wonderfruit, Pattaya.</p>
+          <a href="https://wonderfruit.co" target="_blank" rel="noopener" class="link-arrow text-sky-300 hover:text-sky-200">wonderfruit.co<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <h3 class="mb-0 mt-16 text-2xl font-black">2027</h3>
+
+      <article class="grid min-w-0 gap-2 border-t border-sky-800 py-8 sm:grid-cols-[13rem_1fr] sm:gap-x-10">
+        <p class="mb-0 text-lg font-black"><time datetime="2027-02">February–March</time></p>
+        <div class="min-w-0">
+          <p class="mb-3 text-lg leading-relaxed text-slate-300">My retreat on the Surin Islands. Marine reserve, islands, clear water, almost no one. Dates still being set, people are already gathering. We leave from Phuket.</p>
+          <a href="https://nonduality.today" target="_blank" rel="noopener" class="link-arrow text-sky-300 hover:text-sky-200">nonduality.today<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <article class="grid min-w-0 gap-2 border-t border-sky-800 py-8 sm:grid-cols-[13rem_1fr] sm:gap-x-10">
+        <p class="mb-0 text-lg font-black"><time datetime="2027-04-03/2027-04-10">April 3–10</time></p>
+        <div class="min-w-0">
+          <p class="mb-3 text-lg leading-relaxed text-slate-300">Deep Week Bali.</p>
+          <a href="https://freedivingfamily.com/deep-week-bali" target="_blank" rel="noopener" class="link-arrow text-sky-300 hover:text-sky-200">freedivingfamily.com<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <article class="grid min-w-0 gap-2 border-t border-b border-sky-800 py-8 sm:grid-cols-[13rem_1fr] sm:gap-x-10">
+        <p class="mb-0 text-lg font-black"><time datetime="2027-04-12/2027-04-15">April 12–15</time></p>
+        <div class="min-w-0">
+          <p class="mb-3 text-lg leading-relaxed text-slate-300">While we&rsquo;re in Indonesia, we&rsquo;re putting together a trip to Komodo Island. We&rsquo;ll see the Komodo dragons. We&rsquo;ll pick people up from Deep Week. Doing it with Yan from Bali Freedivers.</p>
+          <a href="https://www.balifreedivers.com/en/" target="_blank" rel="noopener" class="link-arrow text-sky-300 hover:text-sky-200">balifreedivers.com<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <p class="mb-8 mt-4 text-lg leading-relaxed text-slate-200">Write me, sign up, and let&rsquo;s go.</p>
+      <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn">Get in touch</a>
+    </div>
   </div>
 </section>
 
