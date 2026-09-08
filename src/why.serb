@@ -3,41 +3,41 @@ layout: default
 title: Why freediving
 ---
 
-<div class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+<div class="page mx-auto max-w-6xl px-6 py-16 sm:py-24">
   <header class="mb-16 grid items-center gap-10 lg:grid-cols-[1fr_390px] lg:gap-14">
-    <h1 class="mb-0 mt-0 text-balance text-4xl font-black tracking-tight sm:text-6xl">Freediving gives your life back.</h1>
-    <div class="w-full max-w-[390px]">
+    <h1 class="page-title mb-0 mt-0">Freediving gives your life back.</h1>
+    <div class="w-full max-w-[390px] min-h-[28rem]">
       <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DbiFJKNTMVc/" data-instgrm-version="14"></blockquote>
     </div>
   </header>
 
   <section class="max-w-4xl">
     <div class="mb-14">
-      <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">The whole underwater world is in the first ten metres.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">Below that there is nothing left to look at, so you look inward. We go out to sea and drift over open water. The states you reach down there go very deep.</p>
+      <p class="page-display mb-3 mt-0 text-3xl sm:text-5xl">The whole underwater world is in the first ten metres.</p>
+      <p class="page-prose mb-0">Below that there is nothing left to look at, so you look inward. We go out to sea and drift over open water. The states you reach down there go very deep.</p>
     </div>
 
     <div class="mb-14">
-      <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">It all comes at once.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">You hold your breath and go under. You start filtering the chatter, and it goes quiet.</p>
+      <p class="page-display mb-3 mt-0 text-3xl sm:text-5xl">It all comes at once.</p>
+      <p class="page-prose mb-0">You hold your breath and go under. You start filtering the chatter, and it goes quiet.</p>
     </div>
 
     <div class="mb-14">
-      <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">Then there is room inside you.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">Your head fights it first. On the way down you hear it &mdash; get out, we are drowning. Calm it and it goes quiet. It is still quiet when you surface, and it stays quiet at the desk, in the hard conversation, at&nbsp;3am.</p>
+      <p class="page-display mb-3 mt-0 text-3xl sm:text-5xl">Then there is room inside you.</p>
+      <p class="page-prose mb-0">Your head fights it first. On the way down you hear it &mdash; get out, we are drowning. Calm it and it goes quiet. It is still quiet when you surface, and it stays quiet at the desk, in the hard conversation, at&nbsp;3am.</p>
     </div>
   </section>
 
-  <div class="mt-20 grid gap-12 pt-4 sm:grid-cols-2 sm:gap-14">
+  <div class="mt-20 grid gap-12 sm:grid-cols-2 sm:gap-16">
     <section>
-      <h2 class="mb-4 mt-0 text-3xl font-black tracking-tight sm:text-4xl">Deeper means calmer.</h2>
-      <p class="text-lg leading-relaxed text-slate-600 dark:text-slate-300">Equalize early, turn when you planned to, and come up with air to spare.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Molchanovs Wave 1 and Wave 2 certification available. Always train with a qualified buddy watching, and stay well inside your limits.</p>
+      <h2 class="page-display mb-4 mt-0 text-3xl sm:text-4xl">Deeper means calmer.</h2>
+      <p class="page-prose">Equalize early, turn when you planned to, and come up with air to spare.</p>
+      <p class="page-prose mb-0">Molchanovs Wave 1 and Wave 2 certification available. Always train with a qualified buddy watching, and stay well inside your limits.</p>
     </section>
 
     <section>
-      <h2 class="mb-4 mt-0 text-3xl font-black tracking-tight sm:text-4xl">Water teaches calm for life.</h2>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Children learn to float, swim, glide and dive with an instructor beside them, one skill at a time. <a href="/junior/" class="font-bold decoration-sky-200 decoration-8">More for young divers</a></p>
+      <h2 class="page-display mb-4 mt-0 text-3xl sm:text-4xl">Water teaches calm for life.</h2>
+      <p class="page-prose mb-0">Children learn to float, swim, glide and dive with an instructor beside them, one skill at a time. <a href="/junior/" class="font-bold decoration-sky-200 decoration-8">More for young divers</a></p>
     </section>
   </div>
 
