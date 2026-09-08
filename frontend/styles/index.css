@@ -111,6 +111,11 @@
 
 /* Calm dark base: slate-night background, light text. Everything else is
    per-element dark: utilities in the templates — no parallel dark stylesheet. */
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 body {
   @apply text-slate-950 text-xl/8 bg-slate-50 dark:bg-slate-950 dark:text-slate-100;
 }
@@ -199,12 +204,12 @@ footer {
 
 .home-prose {
   font-size: 1.25rem;
-  font-weight: 430;
-  line-height: 1.7;
-  letter-spacing: 0.012em;
+  font-weight: 500;
+  line-height: 1.65;
+  letter-spacing: 0;
   font-optical-sizing: auto;
-  color: rgb(226 232 240);
-  text-wrap: pretty;
+  color: rgb(248 250 252);
+  text-wrap: wrap;
 }
 
 .home-about-photo {
@@ -257,10 +262,22 @@ body:not(.homepage) > header .nav-link:hover {
 }
 
 @media (max-width: 767px) {
+  header > div {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   .site-nav {
-    flex: 1 1 100%;
+    width: 100%;
     min-width: 0;
     justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 0;
+  }
+
+  .site-nav .nav-link {
+    white-space: nowrap;
   }
 }
 
@@ -278,14 +295,16 @@ body:not(.homepage) > header .nav-link:hover {
   text-wrap: balance;
 }
 
-.page-prose {
+.page-prose,
+.friend p {
   font-size: 1.25rem;
-  font-weight: 430;
-  line-height: 1.7;
-  letter-spacing: 0.012em;
-  color: rgb(226 232 240);
-  text-wrap: pretty;
+  font-weight: 500;
+  line-height: 1.65;
+  letter-spacing: 0;
+  color: rgb(248 250 252);
+  text-wrap: wrap;
   overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .page-display {
