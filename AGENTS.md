@@ -6,11 +6,17 @@ Bridgetown static site for nofins freediving (Phuket, Thailand) — read this be
 
 На мобиле пять пунктов влезают в одну строку только на `text-sm` (десктоп — `sm:text-lg`).
 
-**`/about/` — «Relax harder.»** (2026-08-21). Заголовок и `title` страницы — слова Ника; под ним его же строка про то, как он тренирует: «We train calm and relaxation in your own headspace. Only that — on the surface and at depth, in every style, until that depth feels like home.» Это его формулировки, при правке — резать и переставлять, не переписывать (`me/writing-rules.md`).
+**`/about/` — «Relax harder.»** (2026-08-21). Заголовок и `title` страницы — слова Ника; под ним его же строка про то, как он тренирует: «We train calm and relaxation in your own headspace. Only that — on the surface and at depth, in every style, until that depth feels like home.» Это его формулировки, при правке — резать и переставлять, не переписывать (`me/writing-rules.md`). В блоке фактов у имени — ссылка на визитку `nikolayx.com` (2026-09-08).
 
 **Главная не дублирует внутренние страницы** (2026-08-03). Она коротко представляет направление и ведёт дальше; `/why/` владеет кратким объяснением практики для взрослых и детей. `/senior/` остаётся совместимым редиректом на `/why/`.
 
-**`#trips` на главной — «The next trips.»** (2026-09-08). Календарь вылазок Ника, его текст: Deep Week Malaysia 7–14.11.2026, Wonderfruit 3–7.12.2026, Сурин февраль–март 2027 → nonduality.today, Deep Week Bali 3–10.04.2027, Комодо 12–15.04.2027 с Яном. Свадьбу 31.10 на сайт не класть. Контакт секции — Instagram `@nofinsfreediving`, без формы и без бэкенда (GitHub Pages). В навбар пункт не добавлять. Даты менять только из его списка, ссылки — живые страницы событий.
+**`/why/` — не паковать русский в одну английскую строку** (2026-09-08). Ник: «английский текст нечитаем, я слишком плотно пишу на русском». Канон питча — встреча с Никитой 21.08: «как только ты начинаешь погружаться, задерживать дыхание, в голову лезет все подряд… начинаешь фильтровать базар… он затихает, и внутри у тебя освобождается место для тебя самого.» На сайте это три шага, не один абзац-калька. Не возвращать «every thought you own arrives together» / «You start filtering. The noise drops.»
+
+**`#where` после фото — текст Ника про выходные на Пхукете** (2026-09-08): короткие абзацы, финал «We set the day as we go.» как display. Факты: выходные, спокойные дайвы, 50 м, своя лодка и катамаран, Wave 3. Не возвращать простыню «It all opens up» / «Independent training, Wave 3 certificate». Racha остаётся на `/about/`.
+
+**`#why` на главной — «Freediving is life.»** (2026-09-08). Текст Ника: снимаешь персонажа, неделька в океане в компании. Deeper/Kids с главной сняты — они живут на `/why/`. Не возвращать «Freediving gives your life back» на hero-блок главной (это h1 страницы `/why/`).
+
+**`#trips` на главной — «The next trips.»** (2026-09-08). Стоит сразу после `#why`. Календарь вылазок Ника, его текст: Deep Week Malaysia 7–14.11.2026, Wonderfruit 3–7.12.2026, Сурин февраль–март 2027 → nonduality.today, Deep Week Bali 3–10.04.2027, Комодо 12–15.04.2027 с Яном. Свадьбу 31.10 на сайт не класть. Контакт секции — Instagram `@nofinsfreediving`, без формы и без бэкенда (GitHub Pages). В навбар пункт не добавлять. Даты менять только из его списка, ссылки — живые страницы событий.
 
 **`/junior/` — отдельная страница с 2026-08-25** (Ник: «просто что это даёт детям»), больше не редирект. Только про пользу для ребёнка. Четыре блока с kids.molchanova.school: осанка/лёгкие; фокус; плавать и нырять безопасно; любовь к воде. Плюс dive reflex → спокойствие в жизни; 1:1; видимый прогресс; родители в курсе. Канон сырья — [[Freediving/junior/AGENTS]] ([kids.molchanova.school](https://kids.molchanova.school/); чужие цифры/Москва/методику Молчановой и Junior-сертификат на сайт не тащить до кроссовера). Без ECA/Headstart-питча. Ссылка на неё — из блока про детей на `/why/` («More for young divers»); в navbar не добавлять.
 
@@ -120,7 +126,7 @@ rake frontend:build           # Build frontend assets for production
 - **Никаких кикеров/надзаголовков** над h2/h1 (`text-sm uppercase tracking-[0.18em]`). Ник снял такой кикер с главного экрана (355d74d), 2026-08-21 сняты остальные восемь. Заголовок несёт себя сам; смысл кикера — в заголовок или в текст
 - **Футер — тёмная плашка на всех страницах** (`footer { background: #020617 }`), не только на главной. Внутренние страницы короткие, `min-h-screen` на `<main>` оставляет серую пустоту — тёмная плашка даёт странице явный конец
 - **Не резать абзацы по `max-w-[Nch]`.** Ник (21.08.2026): «wraps the line on the last word» — кап по мере оставлял последнее слово одиноким на строке. Вместо этого `text-wrap: pretty` на `p` в базовом слое `index.css` — браузер сам не даёт абзацу закончиться сиротой, на любой ширине. Ширину держит контейнер (`max-w-2xl`, колонка грида), а не класс на самом абзаце
-- Секция-заглушка (заголовок без текста и без ссылки) — дефект, а не «воздух»: блок `#why` на главной висел тупиком, теперь ведёт на `/why/`
+- Секция-заглушка (заголовок без текста и без ссылки) — дефект, а не «воздух»: блок `#why` на главной ведёт на `/why/`
 - **Портретный рил и ландшафтные ютубы не гридятся в одну сетку.** На `/videos/` рил стоит правой колонкой на две строки (`lg:row-span-2`), слева — шапка и 2×2 ютубов. Высоты колонок сходятся; любая попытка положить их в общий грид даёт дыру в 400px
 - **`@resource.data.homepage` не существует** — проверять `@resource.data.layout == 'homepage'`. На этом условии висит скрытие лого на мобильной главной; пока условие было мёртвым, шапка на мобиле занимала 179px из 844
 - `/phuket/` — самостоятельный HTML со своей палитрой (золото/навy). В нём есть `#backhome` — ссылка назад на сайт в стиле игры, а не тейлвиндовая кнопка. Игрок не должен оказываться в тупике
@@ -149,12 +155,14 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 4. Проверять скриншотом — тема одна, тёмная
 5. Verify responsive design with Tailwind breakpoints
 
+**Gotcha — headless screenshot of the homepage.** (2026-09-08) Chrome `--screenshot` of `100dvh` hero often writes the PNG and then hangs — kill the process once the file is non-empty. Do not hammer `:4000` (Puma’s 5 threads wedge on hung connections); serve `output/` on another port. A tall window or `#where` hash still captures only the hero, because `100dvh` fills the viewport. Section shots need a ~900px iframe, `scrollIntoView` after load, then wait.
+
 **Gotcha — `bin/bridgetown build` alone leaves CSS STALE.** Tailwind/PostCSS runs in the esbuild step (`frontend:build`), NOT in `bin/bridgetown build`. So a **newly-added utility class** (e.g. `bg-sky-500` not used elsewhere) won't be in the CSS bundle after a bare `build` — it silently has no styling, and screenshots off `output/` mislead. To verify a new class locally: `bin/bridgetown frontend:build && bin/bridgetown build`, then `grep <class> output/_bridgetown/static/index.*.css`. `yarn start` and `yarn deploy` both run `frontend:build` first, so the real deploy is fine — this only bites local verification.
 
 ### Голос и правки копирайта (2026-08-26)
 Ник прошёлся по всем страницам: «the english doesn't make sense». Что чинилось и что теперь нельзя ломать заново:
 
-- **Не заявлять, что тренировка — это no-fins.** Ник: «don't claim we train no fins, it's just the brand». `nofins` — имя, а не дисциплина. Тренируется расслабление в любом стиле (bi-fins, monofin, no fins, руки по тросу). Блок «No fins. / Just breath, body, and attention.» с `/about/` снят, секция `#nofins` на главной переписана на «в любом стиле»
+- **Не заявлять, что тренировка — это no-fins.** Ник: «don't claim we train no fins, it's just the brand». `nofins` — имя, а не дисциплина. Блок «No fins. / Just breath, body, and attention.» с `/about/` снят. Секция `#nofins` на главной («Move with your whole body» / bi-fins, monofin, lanyard) снята 08.09.2026 как slop — не возвращать.
 - **«Your character» — калька с русского «характер».** По-английски это персонаж книги, а не голос в голове. На `/why/` и `/about/` теперь «your head» / «switch off your head». Любой новый перевод внутренней речи Ника проверять этим тестом
 - Заголовок не пересказывается абзацем дословно (было «One diver. One buoy.» + «One diver, one buoy and full instructor attention.»)
 - Термин вводится до употребления: «The reflex» → «The dive reflex» на `/junior/`

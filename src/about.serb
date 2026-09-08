@@ -43,7 +43,7 @@ title: Relax harder
     <dl class="grid gap-8 text-base sm:grid-cols-2">
       <div>
         <dt class="font-black">Instructor</dt>
-        <dd class="mt-1 text-slate-600 dark:text-slate-300">Nick Ostrovsky</dd>
+        <dd class="mt-1 text-slate-600 dark:text-slate-300">Nick Ostrovsky · <a href="https://nikolayx.com" target="_blank" rel="noopener" class="font-bold decoration-sky-200 decoration-8">nikolayx.com</a></dd>
       </div>
       <div>
         <dt class="font-black">Training</dt>
