@@ -113,7 +113,6 @@ title: nofins | Freediving trains life
       <p class="home-prose">Calm dives. Rest as long as we want, dive at our own pace.</p>
       <p class="home-prose">The water around Phuket is shallow. Some days we go to 50&nbsp;m and more — Wave 3 or equivalent.</p>
       <p class="home-prose">We have a boat and a catamaran.</p>
-      <p class="home-phuket-end">We set the day as we go.</p>
     </div>
     <a href="/videos/" class="btn home-phuket-videos">Watch videos</a>
   </div>
