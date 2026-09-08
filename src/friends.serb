@@ -6,10 +6,17 @@ title: Friends I love to train with
 <div class="page mx-auto max-w-5xl px-6 py-16 sm:py-24">
   <header class="mb-16 max-w-3xl">
     <h1 class="page-title mb-5 mt-0">Friends I love to train with.</h1>
-    <p class="page-prose mb-0">Instructors I share water with — off Phuket, over in Amed, and in the pool in Moscow. Go and find them.</p>
+    <p class="page-prose mb-5">Instructors I share water with — off Phuket, over in Amed, and in the pool in Moscow.</p>
+    <p class="mb-0 text-lg font-bold">
+      <a href="#phuket" class="text-sky-300 no-underline hover:text-sky-200">Phuket</a>
+      <span class="mx-2 text-slate-500">|</span>
+      <a href="#bali" class="text-sky-300 no-underline hover:text-sky-200">Bali</a>
+      <span class="mx-2 text-slate-500">|</span>
+      <a href="#moscow" class="text-sky-300 no-underline hover:text-sky-200">Moscow</a>
+    </p>
   </header>
 
-  <h2 class="page-display mb-10 mt-0 text-3xl sm:text-4xl">Phuket</h2>
+  <h2 id="phuket" class="page-display mb-10 mt-0 text-3xl sm:text-4xl">Phuket</h2>
 
   <div class="grid gap-20">
     <article class="friend grid gap-8 md:grid-cols-[220px_1fr] md:gap-10">
@@ -71,7 +78,7 @@ title: Friends I love to train with
     </article>
   </div>
 
-  <h2 class="page-display mb-10 mt-20 text-3xl sm:text-4xl">Bali</h2>
+  <h2 id="bali" class="page-display mb-10 mt-20 text-3xl sm:text-4xl">Bali</h2>
 
   <div class="grid gap-20">
     <article class="friend grid gap-8 md:grid-cols-[220px_1fr] md:gap-10">
@@ -89,7 +96,7 @@ title: Friends I love to train with
     </article>
   </div>
 
-  <h2 class="page-display mb-10 mt-20 text-3xl sm:text-4xl">Moscow</h2>
+  <h2 id="moscow" class="page-display mb-10 mt-20 text-3xl sm:text-4xl">Moscow</h2>
 
   <div class="grid gap-20">
     <article class="friend grid gap-8 md:grid-cols-[220px_1fr] md:gap-10">
