@@ -76,7 +76,7 @@ title: nofins | Freediving trains life
         </div>
       </article>
 
-      <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn home-trips-cta">Write me if you want to come.</a>
+      <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn home-trips-cta">Let&rsquo;s go.</a>
     </div>
   </div>
 </section>
@@ -125,7 +125,7 @@ title: nofins | Freediving trains life
     <div class="max-w-2xl">
       <h2 class="home-join-title mb-5 mt-0">Let&rsquo;s freedive.</h2>
       <p class="mb-8 max-w-xl text-lg leading-relaxed text-slate-200">Let me know what you&rsquo;d like to work on.</p>
-      <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn">Write me</a>
+      <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn">Let&rsquo;s go.</a>
       <p class="mb-0 mt-8 max-w-xl text-base leading-relaxed text-slate-100">Never hold your breath in water alone. Train with a qualified buddy watching, breathe normally before each dive, and surface with air to spare.</p>
     </div>
   </div>
