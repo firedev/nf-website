@@ -3,59 +3,59 @@ layout: default
 title: Relax harder
 ---
 
-<div class="mx-auto max-w-5xl px-6 py-16 sm:py-24">
+<div class="page mx-auto max-w-5xl px-6 py-16 sm:py-24">
   <section class="grid items-center gap-10 md:grid-cols-[1.2fr_0.8fr] md:gap-14">
-    <img src="/images/nick.jpg" alt="Nick Ostrovsky, freediving instructor, on the boat before a depth session" width="900" height="900" class="aspect-square w-full rounded-2xl object-cover md:order-2">
-    <div class="md:order-1">
-      <h1 class="mb-6 mt-0 text-balance text-5xl font-black leading-[0.95] tracking-[-0.05em] sm:text-7xl">Relax harder.</h1>
-      <p class="mb-0 text-xl leading-snug font-bold text-slate-600 dark:text-slate-300 sm:text-2xl">We train calm and relaxation in your own headspace. Only that.</p>
+    <div>
+      <h1 class="page-title mb-6 mt-0">Relax harder.</h1>
+      <p class="mb-0 text-xl font-bold leading-snug text-slate-100 sm:text-2xl">We train calm and relaxation in your own headspace. Only that.</p>
     </div>
+    <img src="/images/nick.jpg" alt="Nick Ostrovsky, freediving instructor, on the boat before a depth session" width="900" height="900" class="home-about-photo">
   </section>
 
   <section class="mt-20 max-w-4xl sm:mt-28">
     <div class="mb-14">
-      <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">On the surface, at depth, in every style.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">Until that depth feels like home.</p>
+      <p class="page-display mb-3 mt-0 text-3xl sm:text-5xl">On the surface, at depth, in every style.</p>
+      <p class="page-prose mb-0">Until that depth feels like home.</p>
     </div>
 
     <div class="mb-14">
-      <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">Let everything go.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">The better you switch off your head, the better you dive. That is the whole secret.</p>
+      <p class="page-display mb-3 mt-0 text-3xl sm:text-5xl">Let everything go.</p>
+      <p class="page-prose mb-0">The better you switch off your head, the better you dive. That is the whole secret.</p>
     </div>
 
     <div>
-      <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">One diver. One buoy.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">Full attention, in the pool or on the line. Either way, <a href="/why/" class="font-bold decoration-sky-200 decoration-8">the dive does the same thing to you</a>.</p>
+      <p class="page-display mb-3 mt-0 text-3xl sm:text-5xl">One diver. One buoy.</p>
+      <p class="page-prose mb-0">Full attention, in the pool or on the line. Either way, <a href="/why/" class="font-bold decoration-sky-200 decoration-8">the dive does the same thing to you</a>.</p>
     </div>
   </section>
 
   <section class="mt-20 grid items-start gap-10 sm:mt-28 lg:grid-cols-[390px_1fr] lg:gap-14">
-    <div class="w-full max-w-[390px]">
+    <div class="w-full max-w-[390px] min-h-[28rem]">
       <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DcFTJ_nv7jm/" data-instgrm-version="14"></blockquote>
     </div>
     <div class="lg:pt-6">
-      <p class="mb-3 text-3xl font-black leading-tight tracking-[-0.04em] sm:text-5xl">Then you fall.</p>
-      <p class="mb-0 text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl">Past ten metres you stop swimming and start to fall. Go still and you fall faster, and that is the best part of it.</p>
+      <p class="page-display mb-3 mt-0 text-3xl sm:text-5xl">Then you fall.</p>
+      <p class="page-prose mb-0">Past ten metres you stop swimming and start to fall. Go still and you fall faster, and that is the best part of it.</p>
     </div>
   </section>
 
-  <section class="my-16 rounded-2xl border border-current/10 p-8 sm:p-10">
-    <dl class="grid gap-8 text-base sm:grid-cols-2">
+  <section class="page-facts">
+    <dl>
       <div>
-        <dt class="font-black">Instructor</dt>
-        <dd class="mt-1 text-slate-600 dark:text-slate-300">Nick Ostrovsky · <a href="https://nikolayx.com" target="_blank" rel="noopener" class="font-bold decoration-sky-200 decoration-8">nikolayx.com</a></dd>
+        <dt>Instructor</dt>
+        <dd>Nick Ostrovsky · <a href="https://nikolayx.com" target="_blank" rel="noopener" class="font-bold decoration-sky-200 decoration-8">nikolayx.com</a></dd>
       </div>
       <div>
-        <dt class="font-black">Training</dt>
-        <dd class="mt-1 text-slate-600 dark:text-slate-300">Molchanovs Wave 2 Instructor · Depth &amp; Pool</dd>
+        <dt>Training</dt>
+        <dd>Molchanovs Wave 2 Instructor · Depth &amp; Pool</dd>
       </div>
       <div>
-        <dt class="font-black">Static</dt>
-        <dd class="mt-1 text-slate-600 dark:text-slate-300">6 minutes 15 seconds</dd>
+        <dt>Static</dt>
+        <dd>6 minutes 15 seconds</dd>
       </div>
       <div>
-        <dt class="font-black">Home water</dt>
-        <dd class="mt-1 text-slate-600 dark:text-slate-300">Phuket, Thailand · Racha Islands · Andaman Sea</dd>
+        <dt>Home water</dt>
+        <dd>Phuket, Thailand · Racha Islands · Andaman Sea</dd>
       </div>
     </dl>
   </section>

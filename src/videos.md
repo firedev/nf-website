@@ -3,17 +3,17 @@ layout: default
 title: Videos
 ---
 
-<div class="mx-auto max-w-6xl px-6 py-16 sm:py-24">
+<div class="page mx-auto max-w-6xl px-6 py-16 sm:py-24">
   <div class="grid gap-x-12 gap-y-10 lg:grid-cols-[1fr_390px]">
     <header class="lg:col-start-1 lg:row-start-1">
-    <h1 class="mb-5 mt-0 text-balance text-4xl font-black tracking-tight sm:text-6xl">Watch freediving.</h1>
-    <p class="mb-8 text-lg leading-relaxed text-slate-600 dark:text-slate-300">Training, depth and conversations from the water. Longer talks live on the think&rarr;forward channel.</p>
+    <h1 class="page-title mb-5 mt-0">Watch freediving.</h1>
+    <p class="page-prose mb-8">Training, depth and conversations from the water. Longer talks live on the think&rarr;forward channel.</p>
     <a href="https://www.youtube.com/@thinkforward101" target="_blank" rel="noopener" class="btn">Think Forward YouTube</a>
     </header>
 
     <div class="w-full max-w-[390px] lg:col-start-2 lg:row-span-2 lg:row-start-1">
       <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DPwQd2dEzGN/" data-instgrm-version="14"></blockquote>
-      <p class="mb-0 mt-4 text-base text-slate-600 dark:text-slate-300">
+      <p class="page-prose mb-0 mt-4 text-base">
         <a href="https://www.instagram.com/_nikolayx_/" target="_blank" rel="noopener" class="font-bold decoration-sky-200 decoration-8">@_nikolayx_</a>
       </p>
     </div>

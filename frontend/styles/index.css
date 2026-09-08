@@ -237,6 +237,117 @@ footer {
   color: rgb(56 189 248);
 }
 
+body:not(.homepage) > header {
+  background: rgb(2 6 23 / 0.72);
+  box-shadow: none;
+  color: #f8fafc;
+}
+
+body:not(.homepage) > header .logo-text,
+body:not(.homepage) > header .site-nav {
+  color: #f8fafc;
+}
+
+body:not(.homepage) > header img.zen-circle {
+  filter: invert(1);
+}
+
+body:not(.homepage) > header .nav-link:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+
+@media (max-width: 767px) {
+  .site-nav {
+    flex: 1 1 100%;
+    min-width: 0;
+    justify-content: center;
+  }
+}
+
+.page {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.page-title {
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  color: rgb(248 250 252);
+  text-wrap: balance;
+}
+
+.page-prose {
+  font-size: 1.25rem;
+  font-weight: 430;
+  line-height: 1.7;
+  letter-spacing: 0.012em;
+  color: rgb(226 232 240);
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+.page-display {
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: rgb(248 250 252);
+  text-wrap: balance;
+}
+
+.page-facts {
+  margin: 4rem 0;
+}
+
+.page-facts dl {
+  display: grid;
+  gap: 2rem;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .page-facts dl {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.page-facts dt {
+  font-weight: 800;
+  color: rgb(186 230 253);
+}
+
+.page-facts dd {
+  margin-top: 0.35rem;
+  color: rgb(226 232 240);
+}
+
+.friend {
+  padding-top: 0;
+}
+
+.friend h3 {
+  color: rgb(248 250 252);
+  letter-spacing: -0.04em;
+}
+
+.friend p {
+  color: rgb(226 232 240);
+}
+
+.friend .home-creds {
+  margin-bottom: 1.25rem;
+}
+
+.friend-photo {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  max-width: 220px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 0.75rem;
+}
+
 .home-phuket-heading {
   margin-bottom: 1.75rem;
 }
