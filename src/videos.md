@@ -7,7 +7,7 @@ title: Videos
   <div class="grid gap-x-12 gap-y-10 lg:grid-cols-[1fr_390px]">
     <header class="lg:col-start-1 lg:row-start-1">
     <h1 class="page-title mb-5 mt-0">Watch freediving.</h1>
-    <p class="page-prose mb-8">Training, depth and conversations from the water. Longer talks live on the think&rarr;forward channel.</p>
+    <p class="page-prose mb-8">Depth sessions and conversations from the water. The longer talks live on the think&rarr;forward channel.</p>
     <a href="https://www.youtube.com/@thinkforward101" target="_blank" rel="noopener" class="btn">Think Forward YouTube</a>
     </header>
 

@@ -20,12 +20,12 @@ title: Relax harder
 
     <div class="mb-14">
       <p class="page-display mb-3 mt-0 text-3xl sm:text-5xl">Let everything go.</p>
-      <p class="page-prose mb-0">The better you switch off your head, the better you dive. That is the whole secret.</p>
+      <p class="page-prose mb-0">The better you switch off your head, the better you dive.</p>
     </div>
 
     <div>
-      <p class="page-display mb-3 mt-0 text-3xl sm:text-5xl">One diver. One buoy.</p>
-      <p class="page-prose mb-0">Full attention, in the pool or on the line. Either way, <a href="/why/" class="font-bold decoration-sky-200 decoration-8">the dive does the same thing to you</a>.</p>
+      <p class="page-display mb-3 mt-0 text-3xl sm:text-5xl">Full attention.</p>
+      <p class="page-prose mb-0">In the pool or on the line, <a href="/why/" class="font-bold decoration-sky-200 decoration-8">the dive does the same thing to you</a>.</p>
     </div>
   </section>
 
@@ -35,7 +35,7 @@ title: Relax harder
     </div>
     <div class="lg:pt-6">
       <p class="page-display mb-3 mt-0 text-3xl sm:text-5xl">Then you fall.</p>
-      <p class="page-prose mb-0">Past ten metres you stop swimming and start to fall. Go still and you fall faster, and that is the best part of it.</p>
+      <p class="page-prose mb-0">Past ten metres you stop swimming. Go still and you fall faster.</p>
     </div>
   </section>
 

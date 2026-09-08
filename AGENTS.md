@@ -172,3 +172,28 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 - Термин вводится до употребления: «The reflex» → «The dive reflex» на `/junior/`
 - Безличный корпоративный залог режется: «trips are announced with confirmed dates», «practice uses an active, qualified buddy», «No-fins develops efficient movement through coordination and feel» — всё переписано живым английским
 - Про Еву (реел на `/about/` подписан «EVA 13Y FREEFALL 20M`): блок «My daughter is thirteen» и строку «Five children, all of them freedivers» Ник велел снять, оставить только про падение. Не возвращать без его слова
+
+### Язык сайта — правила Ника (2026-09-08)
+
+Проход по всем страницам на «corny and unnatural». Три правила от Ника в тот день и список вычищенного.
+
+**Без стяжений.** Ник: «write "are" not "'re", the only ok is "Let's go"». На сайте пишем `you are`, `we are`, `she is`, `it is`, `you will`. Единственное исключение — CTA-канон «Let's freedive» / «Let's go.». Правило касается и `&rsquo;`-сущностей в HTML. Проверка: `rg "&rsquo;(s|re|ll|ve|t)" src --glob '!phuket/**'` — в выдаче должны остаться только кнопки.
+
+**Короткие рубленые фразы — его манера, не слоп.** Ник: «я люблю короткие рубленые фразы, они же поясняют сразу что надо». «Slow down. Stay calm. Go deeper.», «Calm dives.», «Pool first.», «A longer float. A cleaner duck dive.» — оставлять. Общий банлист режет тройки и рубленые пары ассистента; здесь clipped-ритм разрешён, вычищать его нельзя. Резать повтор смысла, не длину фразы.
+
+**Дважды одна строка на сайте — дефект.** Один заголовок живёт на одной странице:
+- «Freediving is life.» — h2 `#why` на главной. h1 `/why/` — «Freediving gives your life back.» (дубль вернулся и снят 08.09)
+- «One diver. One buoy.» — h2 `#about` на главной. Тот же блок на `/about/` озаглавлен «Full attention.»
+
+**Один приём — один раз на весь сайт.** Конструкция «the same X that helps at school / in a hard conversation / at 3am» стояла в трёх местах (`why.serb`, `junior.serb` ×2). Остался только хвост на `/why/` («…and it is there at 3am»). Появилась в четвёртом месте — значит шаблон, а не мысль.
+
+**Снято как слоп, не возвращать:**
+- «You take off the character» на главной — та же калька «персонаж», что чинили 26.08. Теперь «You drop the act and you are you.»
+- «You start filtering the chatter, and it goes quiet» на `/why/` — возврат запрещённой строки «You start filtering. The noise drops.». Плюс заголовок «It all comes at once.» обещал одно, а абзац говорил обратное. Теперь «Everything shows up at once.» / «…every thought you have comes with you. You start throwing them out one by one.»
+- Аплодисменты себе после своей же мысли: «That is the whole secret.», «and that is the best part of it», «Each win is concrete, and it stacks.»
+- Отрицательные параллелизмы на `/junior/`: «not a group average», «No pushing for depth, no racing the clock», «not just that they showed up», зачин «Not only on the surface.» Утверждать то, что есть
+- Обороты журнального профиля на `/friends/`: «you'll find him deep in his favourite discipline», «brings a calm presence to every line», «brings that athlete's precision», «she's known for the patience», «Personal bests tell the story», «it reshaped everything since», «a deep read on the local reef». Факты на месте — снята оправа
+- «Why freediving?» подзаголовком на главной — описывал функцию блока и дублировал пункт меню
+- Абзац, пересказывающий свой заголовок: «Just you on the line.» под «One diver. One buoy.»; «The rest of the time I'm in Phuket.» под «Phuket is home.» (отсылка «the rest of the time» уводила на две секции вверх)
+- Двойной CTA в `#join`: заголовок «Let's freedive.» плюс кнопка «Let's go.». Заголовок теперь вопрос «What do you want to work on?», кнопка канонная
+- `/404/` перечисляет все пять пунктов меню, Friends в том числе
