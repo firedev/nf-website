@@ -24,7 +24,7 @@ Bridgetown static site for nofins freediving (Phuket, Thailand) — read this be
 
 ## Development Commands
 
-All commands run from `/Users/nick/obsidian/obsidian-life/Sites/nofins/`. Ruby — через mise, системный ruby 2.6 Bridgetown не потянет.
+All commands run from `/Users/nick/Life/Sites/nofins/`. Ruby — через mise, системный ruby 2.6 Bridgetown не потянет.
 
 ### Initial Setup
 ```bash
