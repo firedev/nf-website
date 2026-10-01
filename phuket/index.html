@@ -18,11 +18,6 @@
   #start h1{margin:0;font-size:clamp(48px,9vw,120px);color:#fff;text-shadow:0 4px 0 #1a5f86,0 8px 22px rgba(0,0,0,.35);letter-spacing:2px}
   #start .sub{margin-top:6px;font-size:clamp(16px,2.4vw,26px);color:#eafaff;text-shadow:0 2px 6px rgba(0,0,0,.4);font-style:italic}
   #start .go{margin-top:38px;font-size:clamp(18px,2.6vw,28px);color:#0d3b56;background:#ffe27a;border:3px solid #fff;border-radius:40px;padding:12px 40px;box-shadow:0 6px 18px rgba(0,0,0,.3);animation:gopulse 1.6s ease-in-out infinite}
-  #backhome{position:absolute;z-index:12;top:calc(14px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);color:#0d3b56;text-decoration:none;font-size:16px;letter-spacing:.06em;pointer-events:auto}
-  #backhome:hover{color:#083044}
-  #backhome-play{position:fixed;z-index:12;top:calc(12px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);color:#eafaff;text-decoration:none;font-size:14px;letter-spacing:.06em;pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.55);opacity:0}
-  #ui.ready #backhome-play{opacity:1;pointer-events:auto}
-  #backhome-play:hover{color:#ffe27a}
   @keyframes gopulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
   #flash{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,225,120,.95),rgba(255,190,60,0) 70%);opacity:0;pointer-events:none;transition:opacity .4s}
   #toast{position:absolute;bottom:90px;width:100%;text-align:center;font-size:34px;text-shadow:0 2px 6px rgba(0,0,0,.5);letter-spacing:1px}
@@ -70,13 +65,11 @@
 </head>
 <body>
 <div id="start">
-  <a id="backhome" href="/">nofins.com</a>
   <h1>Finding Nama</h1>
   <div class="sub">Solve the mystery of Phuket</div>
   <div class="go" id="startbtn">Loading…</div>
 </div>
 <div id="ui">
-  <a id="backhome-play" href="/">nofins.com</a>
   <div id="list"></div>
   <canvas id="minimap" width="160" height="330"></canvas>
   <div id="toast"></div>
@@ -992,10 +985,11 @@ function buildCar(){
   ]);
   part(shell,BODY,[0,0,0],{outline:1.035,parent:v});
   part(new THREE.BoxGeometry(1.95,0.18,3.66),0x1f4c63,[0,0.44,0],{parent:v}); // sill shadow line
-  part(new THREE.BoxGeometry(1.5,0.5,0.08),GLASS,[0,1.38,0.58],{rot:[0.28,0,0],parent:v}); // windscreen
-  part(new THREE.BoxGeometry(1.5,0.42,0.08),GLASS,[0,1.38,-1.08],{rot:[-0.2,0,0],parent:v}); // rear glass
-  for(const s of [-1,1]) // side windows
-    part(new THREE.BoxGeometry(0.08,0.4,1.5),GLASS,[s*0.8,1.4,-0.25],{parent:v});
+  // glass sits ON the shell's slopes: windscreen leans back (top toward -z), rear glass leans forward
+  part(new THREE.BoxGeometry(1.4,0.72,0.05),GLASS,[0,1.37,0.5],{rot:[-0.39,0,0],parent:v}); // windscreen
+  part(new THREE.BoxGeometry(1.3,0.6,0.05),GLASS,[0,1.37,-1.29],{rot:[0.8,0,0],parent:v}); // rear glass
+  for(const s of [-1,1]) // side windows, tilted with the cabin's tumblehome
+    part(new THREE.BoxGeometry(0.05,0.4,1.3),GLASS,[s*0.79,1.36,-0.35],{rot:[0,0,s*0.18],parent:v});
   for(const s of [-1,1]){ // headlights, tail lights, mirrors
     part(new THREE.BoxGeometry(0.4,0.18,0.1),0xfff2a8,[s*0.62,0.85,1.82],{parent:v});
     part(new THREE.BoxGeometry(0.36,0.16,0.1),0xd42a2a,[s*0.64,0.9,-1.82],{parent:v});
@@ -1706,110 +1700,124 @@ gullFlock(-12.8+0.25*14,190.5+0.97*14,4);
 gullFlock(24,161,4);
 
 // ============================= PLAYER ==============================
-// Hand-built low-poly Wind-Waker kid: rounded head, FULLY visible face,
-// tidy hair that caps the crown + back only (never over the eyes/forehead),
-// tunic body, arms, legs, boots. Contract node names preserved:
+// Chibi Wind-Waker kid: big round ball head (~45% of the height), round-eyed flat toon face,
+// swept fringe + sideburn locks, pointed ears; short blue tunic, stubby arms that reach the
+// hem, cream leggings + brown boots. Contract node names preserved:
 // body, head, hat(=hair), armL, armR, legL, legR, blob, mask, sleeveMat.
+// BODY_Y/HEAD_Y are the rest heights the animate loop bobs around — keep them in sync.
 const player=new THREE.Group();
-const SKIN=0xf3c59a, SKIN2=0xecb488, TUNIC=0x2e9e57, HAIR=0xd6a23a;
+const SKIN=0xf3c59a, TUNIC=0x3a7bd5, HAIR=0xe0ae3e, LEGS=0xefe6cc;
+const BODY_Y=0.98, HEAD_Y=1.84;
+// The sun sits behind the camera-facing side, so front faces get only the darkest toon step.
+// A little emissive on skin + hair keeps the face and fringe readable from the front.
+const glowToon=(c,e)=>{const m=toon(c);m.emissive.setHex(e);return m;};
+const skinMat=glowToon(SKIN,0x7a6048), hairMat=glowToon(HAIR,0x5a4515);
 
-// --- BODY: hand-sculpted flared tunic, angular shoulders, fitted waist ---
-const tunicGeo=loftGeo([[-0.56,0,0.62,0.42],[-0.42,0,0.6,0.4],[-0.08,0,0.45,0.34],
-  [0.3,0,0.42,0.32],[0.5,0,0.54,0.36]],8);
+// --- BODY: slim long tunic, sloped shoulders; origin = mid-torso (y .68 hem .. 1.3 neck) ---
+const tunicGeo=loftGeo([[-0.32,0,0.4,0.3],[-0.2,0,0.37,0.28],[-0.03,0,0.33,0.25],
+  [0.15,0,0.35,0.26],[0.26,0,0.32,0.24],[0.32,0,0.16,0.14]],8);
 tunicGeo.rotateX(-Math.PI/2);
 const body=addOutline(new THREE.Mesh(tunicGeo,toon(TUNIC)),1.045);
-body.scale.set(1.06,0.86,0.88); body.position.y=1.14;
-// Cream V-neck and hem make the outfit read as clothes, not a green solid.
-const collar=new THREE.Mesh(slabGeo([[-0.23,0.48],[0,0.22],[0.23,0.48],[0.14,0.54],[0,0.36],[-0.14,0.54]],0.018),toon(0xf4e4b8));
-collar.position.z=0.34; body.add(collar);
-const belt=new THREE.Mesh(new THREE.CylinderGeometry(0.5,0.56,0.15,12),toon(0x5a3a1e));
-belt.position.y=-0.3; body.add(belt);
-const buckle=new THREE.Mesh(new THREE.BoxGeometry(0.15,0.13,0.08),new THREE.MeshBasicMaterial({color:0xffe27a}));
-buckle.position.set(0,-0.3,0.5); body.add(buckle);
+body.position.y=BODY_Y;
+const collar=new THREE.Mesh(slabGeo([[-0.18,0.26],[0,0.06],[0.18,0.26],[0.11,0.29],[0,0.16],[-0.11,0.29]],0.014),toon(0xf4e4b8));
+collar.position.z=0.235; body.add(collar);
+const neck=new THREE.Mesh(new THREE.CylinderGeometry(0.13,0.15,0.24,8),skinMat); neck.position.y=0.34; body.add(neck);
+const belt=new THREE.Mesh(new THREE.CylinderGeometry(0.37,0.39,0.12,12),toon(0x5a3a1e));
+belt.scale.set(1.03,1,0.8); belt.position.y=-0.12; body.add(belt);
+const buckle=new THREE.Mesh(new THREE.BoxGeometry(0.13,0.11,0.06),new THREE.MeshBasicMaterial({color:0xffe27a}));
+buckle.position.set(0,-0.12,0.3); body.add(buckle);
 
-// --- HEAD: broad brow, flat graphic face, small chin; face points +Z ---
-const headGeo=loftGeo([[-0.52,0.04,0.34,0.45],[-0.28,0.06,0.56,0.6],
-  [0.14,0.02,0.59,0.59],[0.4,-0.03,0.54,0.53],[0.51,-0.08,0.47,0.45]],12);
-const head=addOutline(new THREE.Mesh(headGeo,toon(SKIN)),1.045);
-head.position.y=2.12; head.scale.set(1.08,1.1,1.07);
-// Wind-Waker-style graphic eyes sit on the face plane instead of bulging out.
-const eyeW=new THREE.CircleGeometry(0.1,10), eyeWMat=new THREE.MeshBasicMaterial({color:0xffffff});
-const irisGeo=new THREE.CircleGeometry(0.06,9), irisMat=new THREE.MeshBasicMaterial({color:0x27445d});
-const glintGeo=new THREE.CircleGeometry(0.02,7), glintMat=new THREE.MeshBasicMaterial({color:0xffffff});
-const browGeo=new THREE.BoxGeometry(0.16,0.03,0.05), browMat=toon(0x5a3d1e);
+// --- HEAD: ball skull (equal radii) with a small flat face plane at z=FZ (faces +Z) ---
+// slabGeo only shows its front face when the outline runs CCW; facing() fixes mirrored (s=-1) copies
+const facing=pts=>{let a=0;pts.forEach(([x,y],i)=>{const [u,v]=pts[(i+1)%pts.length];a+=x*v-u*y;});return a<0?pts.slice().reverse():pts;};
+const FZ=0.58;
+const headGeo=loftGeo([[-0.6,0,0.16,0.16],[-0.48,0,0.42,0.42],[-0.25,0,0.58,0.58],[0,0,0.64,0.64],
+  [0.25,0,0.6,0.6],[0.45,0,0.5,0.5],[FZ,0,0.38,0.38]],14);
+const head=addOutline(new THREE.Mesh(headGeo,skinMat),1.04);
+head.position.y=HEAD_Y; head.scale.setScalar(1.05);
+const ink=new THREE.MeshBasicMaterial({color:0x2a1d14}),
+      eyeW=new THREE.CircleGeometry(0.14,14), eyeWMat=new THREE.MeshBasicMaterial({color:0xffffff}),
+      irisGeo=new THREE.CircleGeometry(0.105,12), irisMat=new THREE.MeshBasicMaterial({color:0x3f7ea0}),
+      pupGeo=new THREE.CircleGeometry(0.05,9),
+      glintGeo=new THREE.CircleGeometry(0.03,8), white=new THREE.MeshBasicMaterial({color:0xffffff}),
+      lidGeo=new THREE.TorusGeometry(0.15,0.015,5,12,Math.PI);
 for(const s of [-1,1]){
-  const w=new THREE.Mesh(eyeW,eyeWMat); w.position.set(s*0.19,0.025,0.515); w.scale.set(0.86,1.5,1); head.add(w);
-  const ir=new THREE.Mesh(irisGeo,irisMat); ir.position.set(s*0.19,0.005,0.519); ir.scale.set(0.72,1.25,1); head.add(ir);
-  const g=new THREE.Mesh(glintGeo,glintMat); g.position.set(s*0.17,0.045,0.522); head.add(g);
-  const ch=new THREE.Mesh(new THREE.CircleGeometry(0.06,8),new THREE.MeshBasicMaterial({color:0xf0a088,transparent:true,opacity:0.38}));
-  ch.position.set(s*0.34,-0.17,0.514); ch.scale.set(1,0.5,1); head.add(ch);
-  const br=new THREE.Mesh(browGeo,browMat); br.position.set(s*0.19,0.19,0.5); br.scale.x=0.85;br.rotation.z=s*-0.1;head.add(br);
+  const at=(m,x,y,z)=>{m.position.set(s*x,y,FZ+z);head.add(m);return m;};
+  at(new THREE.Mesh(eyeW,eyeWMat),0.22,0,0.004).scale.set(1,1.14,1);
+  at(new THREE.Mesh(irisGeo,irisMat),0.22,-0.01,0.008).scale.set(1,1.14,1);
+  at(new THREE.Mesh(pupGeo,ink),0.22,-0.01,0.012).scale.set(1,1.2,1);
+  at(new THREE.Mesh(glintGeo,white),0.185,0.05,0.016);
+  const lid=at(new THREE.Mesh(lidGeo,ink),0.22,0.03,0.02); lid.rotation.z=-s*0.1; lid.scale.set(1,1.1,1);
+  const br=at(new THREE.Mesh(new THREE.BoxGeometry(0.2,0.035,0.04),toon(0x6a4a20)),0.22,0.29,-0.02); br.rotation.z=-s*0.12;
+  const ch=at(new THREE.Mesh(new THREE.CircleGeometry(0.06,8),new THREE.MeshBasicMaterial({color:0xf0a088,transparent:true,opacity:0.4})),0.36,-0.2,0.002); ch.scale.set(1,0.5,1);
+  // pointed ear, tip up and out; sideburn hangs in front of it (added to the hair below)
+  part(slabGeo(facing([[0,-0.1],[s*0.3,0.16],[0,0.14]]),0.035),skinMat,[s*0.62,0.0,0.0],{outline:1.05,parent:head});
 }
-const nose=new THREE.Mesh(new THREE.CircleGeometry(0.018,6),toon(SKIN2));
-nose.position.set(0,-0.08,0.526);head.add(nose);
-const smile=new THREE.Mesh(new THREE.TorusGeometry(0.11,0.02,6,12,Math.PI),new THREE.MeshBasicMaterial({color:0x9c5a4a}));
-smile.scale.set(1.05,0.75,1);smile.rotation.z=Math.PI;smile.position.set(0,-0.29,0.522);head.add(smile);
-// Pointed ears widen the silhouette and keep the fantasy-adventurer read.
-for(const s of [-1,1])
-  part(slabGeo([[0,-0.11],[s*0.2,0.02],[0,0.13]],0.04),SKIN,[s*0.48,-0.03,-0.02],{outline:1.04,parent:head});
+part(new THREE.ConeGeometry(0.05,0.11,4),skinMat,[0,-0.09,FZ+0.015],{rot:[Math.PI/2,Math.PI/4,0],parent:head}); // nose
+const smile=new THREE.Mesh(new THREE.TorusGeometry(0.08,0.018,6,12,Math.PI),new THREE.MeshBasicMaterial({color:0x9c5a4a}));
+smile.rotation.z=Math.PI; smile.position.set(0,-0.27,FZ+0.004); head.add(smile);
 
 // --- MASK: freediving mask, hidden until wetsuit on; over the eyes on +Z front ---
-const mask=new THREE.Group(); mask.position.set(0,0.0,0); mask.visible=false; head.add(mask);
-const frame=addOutline(new THREE.Mesh(new THREE.TorusGeometry(0.3,0.07,8,18),toon(0x2b3a45)),1.05); // silicone skirt
-frame.scale.set(1.25,0.85,1); frame.position.z=0.52; mask.add(frame);
+const mask=new THREE.Group(); mask.visible=false; head.add(mask);
+const frame=addOutline(new THREE.Mesh(new THREE.TorusGeometry(0.3,0.05,8,18),toon(0x2b3a45)),1.05); // silicone skirt
+frame.scale.set(1.5,0.66,1); frame.position.set(0,0.0,FZ); mask.add(frame);
 const lens=new THREE.Mesh(new THREE.SphereGeometry(0.28,14,10,0,Math.PI*2,0,Math.PI*0.5),new THREE.MeshBasicMaterial({color:0x9fdcf0,transparent:true,opacity:0.72}));
-lens.rotation.x=Math.PI/2; lens.scale.set(1.16,1,0.5); lens.position.z=0.54; mask.add(lens); // domed glass bulging forward
+lens.rotation.x=Math.PI/2; lens.scale.set(1.5,0.6,0.66); lens.position.z=FZ+0.02; mask.add(lens); // domed glass bulging forward
 const mglint=new THREE.Mesh(new THREE.CircleGeometry(0.08,10),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0.6}));
-mglint.scale.set(1.6,0.8,1); mglint.position.set(-0.13,0.05,0.6); mask.add(mglint); // reflection streak
-const strap=new THREE.Mesh(new THREE.TorusGeometry(0.6,0.045,6,18),toon(0x2b3a45)); // band around the head
-strap.rotation.y=Math.PI/2; strap.scale.set(1,0.9,1); strap.position.y=0.0; mask.add(strap);
+mglint.scale.set(1.6,0.8,1); mglint.position.set(-0.15,0.05,FZ+0.08); mask.add(mglint); // reflection streak
+const strap=new THREE.Mesh(new THREE.TorusGeometry(0.62,0.045,6,18),toon(0x2b3a45)); // band around the head
+strap.rotation.x=Math.PI/2; strap.scale.set(1.08,0.98,1); strap.position.y=0.0; mask.add(strap);
 
-// --- HAIR ("hat" per contract): sculpted back cap + graphic pointed locks ---
+// --- HAIR ("hat" per contract): crown/back cap + tilted swept fringe + hanging locks ---
 const hat=new THREE.Group(); hat.position.copy(head.position); hat.scale.copy(head.scale);
-const hairCap=loftGeo([[-0.62,0.2,0.2,0.22],[-0.44,0.2,0.46,0.4],
-  [-0.12,0.25,0.62,0.48],[0.16,0.3,0.58,0.42],[0.3,0.34,0.44,0.3]],8);
-hat.add(addOutline(new THREE.Mesh(hairCap,toon(HAIR)),1.035));
-// Five flat, asymmetric locks create the readable Wind-Waker hairline.
-const locks=[
-  {x:-0.38,p:[[-0.16,0.34],[0.03,0.63],[0.18,0.4],[0.08,0.12],[-0.08,0.2]]},
-  {x:-0.18,p:[[-0.2,0.42],[-0.02,0.68],[0.18,0.5],[0.08,0.18],[-0.08,0.28]]},
-  {x:0.04,p:[[-0.2,0.5],[-0.02,0.7],[0.18,0.52],[0.02,0.2],[-0.12,0.3]]},
-  {x:0.27,p:[[-0.2,0.45],[-0.03,0.66],[0.18,0.42],[0.02,0.16],[-0.1,0.26]]}
-];
-for(const l of locks)part(slabGeo(l.p,0.025),HAIR,[l.x,0,0.515],{parent:hat});
+// Hair = a ball shell (r .72, centre up/back of the skull) that pokes out of the head ball on top
+// and at the back; the two spheres intersect on a plane, which is the natural curved hairline.
+// Bang locks are tilted onto the skull surface at that hairline (no flat slab floating in front).
+const hairCap=loftGeo([[-0.9,0.2,0.2,0.2],[-0.72,0.2,0.5,0.5],[-0.45,0.2,0.675,0.675],
+  [-0.2,0.2,0.72,0.72],[0.05,0.2,0.675,0.675],[0.3,0.2,0.52,0.52],[0.45,0.2,0.31,0.31]],12);
+hat.add(addOutline(new THREE.Mesh(hairCap,hairMat),1.03));
+const Z=new THREE.Vector3(0,0,1);
+for(const [x,L] of [[-0.44,0.26],[-0.22,0.17],[0,0.13],[0.22,0.17],[0.44,0.26]]){
+  // hairline point: on the head ball and on the shell/head intersection plane z=y+0.072
+  const r2=0.4096-x*x, y=(-0.072+Math.sqrt(0.005184+2*(r2-0.005184/2)))/2, z=y+0.072;
+  const p=new THREE.Vector3(x,y,z), lock=part(slabGeo([[-0.12,0.12],[0.01*Math.sign(x),-L],[0.12,0.12]],0.03),hairMat,
+    p.clone().multiplyScalar(1.03).toArray(),{outline:1.06,parent:hat});
+  lock.quaternion.setFromUnitVectors(Z,p.clone().normalize());
+}
+// Sideburns lie on the side of the ball (normal = ±x), hugging the front of the ear.
 for(const s of [-1,1])
-  part(slabGeo([[0,0.2],[s*0.16,0.06],[s*0.1,-0.35],[-s*0.08,-0.18]],0.035),HAIR,
-    [s*0.5,0,0.18],{parent:hat});
-part(slabGeo([[-0.13,0],[0.02,0.3],[0.16,0.04],[0.08,-0.18]],0.04),HAIR,
-  [0,0.58,-0.22],{rot:[-0.6,0,0],parent:hat});
-for(const [x,r] of [[-0.32,-0.3],[0,0],[0.32,0.3]])
-  part(slabGeo([[-0.13,0.14],[0.1,0.1],[0.04,-0.34],[-0.1,-0.2]],0.04),HAIR,
-    [x,-0.05,-0.5],{rot:[0,r,0],parent:hat});
+  part(slabGeo(facing([[0.02,0.12],[0.12,0.02],[0.06,-0.36],[-0.06,-0.12]]),0.03),hairMat,[s*0.66,0.0,0.2],
+    {rot:[0,s*Math.PI/2,0],outline:1.06,parent:hat});
+for(const [x,r] of [[-0.34,-0.3],[0,0],[0.34,0.3]])
+  part(slabGeo([[-0.15,0.14],[0.12,0.1],[0.04,-0.4],[-0.1,-0.24]],0.04),hairMat,[x,-0.05,-0.56],{rot:[0,r,0],parent:hat});
 
-// --- ARMS: tapered custom forearms, pivot at shoulder; sleeve + mitten hand ---
-const limbGeo=loftGeo([[-0.58,0,0.1,0.1],[-0.28,0,0.14,0.13],[-0.04,0,0.15,0.14],[0,0,0.12,0.11]],6);
-limbGeo.rotateX(-Math.PI/2);
-const armL=new THREE.Mesh(limbGeo,toon(SKIN)), armR=armL.clone(); // bare forearms (recolored to suit)
-armL.position.set(0.5,1.34,0); armR.position.set(-0.5,1.34,0);
-const sleeveGeo=loftGeo([[-0.28,0,0.2,0.18],[-0.04,0,0.27,0.24],[0,0,0.18,0.16]],6);
-sleeveGeo.rotateX(-Math.PI/2);
+// --- ARMS: long slim sleeves reaching the hem, mitten hand + thumb; pivot at shoulder ---
+const armGeo=loftGeo([[-0.5,0,0.1,0.1],[-0.32,0,0.115,0.115],[-0.06,0,0.15,0.15],[0,0,0.16,0.16]],6);
+armGeo.rotateX(-Math.PI/2);
 const sleeveMat=toon(TUNIC);
+const armL=new THREE.Mesh(armGeo,sleeveMat), armR=armL.clone();
+armL.position.set(0.46,1.2,0); armR.position.set(-0.46,1.2,0);
+const handGeo=loftGeo([[-0.16,0,0.07,0.055],[-0.05,0,0.12,0.08],[0.1,0,0.09,0.07]],6);
 for(const a of [armL,armR]){
-  const sl=new THREE.Mesh(sleeveGeo,sleeveMat);sl.position.y=-0.02;a.add(sl);
-  const hd=new THREE.Mesh(loftGeo([[-0.15,0,0.1,0.1],[0,0,0.17,0.15],[0.14,0,0.12,0.11]],6),toon(SKIN));
-  hd.rotation.x=-Math.PI/2;hd.position.y=-0.54;a.add(hd);a.userData.hand=hd;}
+  const ix=a===armL?-0.1:0.1;
+  const hd=new THREE.Mesh(handGeo,skinMat); hd.rotation.x=-Math.PI/2; hd.position.y=-0.58; a.add(hd); a.userData.hand=hd;
+  part(new THREE.BoxGeometry(0.05,0.13,0.05),skinMat,[ix,-0.02,0.05],{rot:[0.25,0,-ix*2.5],parent:hd}); // thumb (hd's local y = arm depth axis, so this sits beside the palm)
+}
 
-// --- LEGS: tapered shins and forward-toed custom boots ---
-const legGeo=loftGeo([[-0.44,0,0.12,0.12],[-0.18,0,0.16,0.14],[0,0,0.14,0.12]],6);
+// --- LEGS: cream leggings, brown boots with a cuff; pivot at hip ---
+const legGeo=loftGeo([[-0.42,0,0.11,0.11],[-0.22,0,0.14,0.13],[-0.06,0,0.16,0.15],[0,0,0.15,0.14]],6);
 legGeo.rotateX(-Math.PI/2);
-const legL=new THREE.Mesh(legGeo,toon(0x8a5a33)), legR=legL.clone();
-legL.position.set(0.21,0.62,0); legR.position.set(-0.21,0.62,0);
-const bootGeo=loftGeo([[-0.16,-0.01,0.14,0.11],[0.06,-0.02,0.2,0.14],[0.32,-0.04,0.17,0.1],[0.42,-0.05,0.06,0.05]],6),
-      bootMat=toon(0x6b4423);
-for(const l of [legL,legR]){const bt=new THREE.Mesh(bootGeo,bootMat);bt.position.set(0,-0.4,0.05);l.add(bt);l.userData.foot=bt;}
+const legL=new THREE.Mesh(legGeo,toon(LEGS)), legR=legL.clone();
+legL.position.set(0.2,0.64,0); legR.position.set(-0.2,0.64,0);
+const bootGeo=loftGeo([[-0.2,0,0.13,0.14],[0.02,0,0.17,0.16],[0.3,-0.04,0.16,0.11],[0.44,-0.06,0.07,0.05]],6),
+      bootMat=toon(0x6b4423), cuffGeo=new THREE.CylinderGeometry(0.15,0.16,0.07,8), cuffMat=toon(0x9a6a38);
+for(const l of [legL,legR]){
+  const bt=new THREE.Mesh(bootGeo,bootMat);bt.position.set(0,-0.48,0.03);l.add(bt);l.userData.foot=bt;
+  const cf=new THREE.Mesh(cuffGeo,cuffMat);cf.position.y=-0.36;l.add(cf);
+}
 
 // --- SHADOW blob: flat dark circle at the feet ---
-const blob=new THREE.Mesh(new THREE.CircleGeometry(0.7,16).rotateX(-Math.PI/2),
+const blob=new THREE.Mesh(new THREE.CircleGeometry(0.65,16).rotateX(-Math.PI/2),
   new THREE.MeshBasicMaterial({color:0x11331e,transparent:true,opacity:0.3}));
 blob.position.y=0.06;
 player.add(body,head,hat,armL,armR,legL,legR,blob);
@@ -1820,10 +1828,9 @@ scene.add(player);
 let wetsuit=false;
 function toggleWetsuit(){
   wetsuit=!wetsuit; wetsuitTried=true;
-  body.material.color.set(wetsuit?0x14181c:0x2e9e57);
-  sleeveMat.color.set(wetsuit?0x14181c:0x2e9e57);
-  armL.material.color.set(wetsuit?0x14181c:0xf5c89a); // forearms: black suit or bare skin
-  legL.material.color.set(wetsuit?0x14181c:0x8a5a33);
+  body.material.color.set(wetsuit?0x14181c:TUNIC);
+  sleeveMat.color.set(wetsuit?0x14181c:TUNIC);
+  legL.material.color.set(wetsuit?0x14181c:LEGS);
   mask.visible=wetsuit;
 }
 
@@ -2011,7 +2018,7 @@ function enlighten(){
   toast('☀ Enlightenment attained');
   if(!halo){
     halo=new THREE.Mesh(new THREE.TorusGeometry(0.45,0.06,8,24),new THREE.MeshBasicMaterial({color:0xffd75e}));
-    halo.rotation.x=Math.PI/2; halo.position.y=2.95; halo.scale.setScalar(1.3); player.add(halo); // clears the chibi head
+    halo.rotation.x=Math.PI/2; halo.position.y=HEAD_Y+1.05; halo.scale.setScalar(1.3); player.add(halo); // clears the chibi head
   }
 }
 let sailing=false, boatSpeed=0, vy=0, airborne=false;
@@ -2170,7 +2177,7 @@ function animate(){
     const amp=swimming?0.5:0.85;
     armL.rotation.x=sw*amp;  armR.rotation.x=-sw*amp;
     legL.rotation.x=-sw*amp; legR.rotation.x=sw*amp;
-    armL.rotation.z=0.06+gait*0.05; armR.rotation.z=-0.06-gait*0.05; // slight outward flare, clears the skirt
+    armL.rotation.z=0.1+gait*0.05; armR.rotation.z=-0.1-gait*0.05; // slight outward flare, clears the skirt
     // Knee bends while the leg swings FORWARD (foot lifting to clear the ground) and
     // straightens to plant and push back. legL.rotation.x=-sw*amp, so the leg is forward
     // when sw>0 — bend on max(0,sw), not max(0,-sw). Getting this backwards makes the
@@ -2183,8 +2190,8 @@ function animate(){
     // torso: bob twice per stride, lean into the run, counter-twist against the legs
     squash=Math.max(0,squash-dt*4);
     const bob=gait*Math.abs(sw2)*0.07+(1-gait)*Math.sin(t*2)*0.03; // idle breathing when still
-    body.position.y=1.12+bob-squash*0.22;                       // must match the constructor's body.position.y
-    body.scale.y=0.86*(1-squash*0.25); body.scale.x=1.06*(1+squash*0.16); // squash preserves volume; base 0.86 = constructor scale
+    body.position.y=BODY_Y+bob-squash*0.22;
+    body.scale.y=1-squash*0.25; body.scale.x=1+squash*0.16; // squash preserves volume
     body.rotation.y=-sw*0.16;                                   // hips/shoulders counter-rotate
     body.rotation.x=gait*(shift?0.16:0.07)+squash*0.1;          // lean forward, fold on impact
 
@@ -2197,7 +2204,7 @@ function animate(){
     headYaw+=dy*Math.min(1,dt*18);
     const MAXLAG=0.14;                                          // ~8deg, the most that still reads as "head leads"
     const headSpin=Math.max(-MAXLAG,Math.min(MAXLAG,(headYaw-player.rotation.y)*0.35));
-    const headY=2.14+bob*0.5-squash*0.3, headTilt=-gait*0.07+squash*0.18+sw2*0.02*gait;
+    const headY=HEAD_Y+bob*0.5-squash*0.3, headTilt=-gait*0.07+squash*0.18+sw2*0.02*gait;
     head.rotation.set(headTilt,headSpin,sw*0.05);
     head.position.y=headY;
     hat.rotation.copy(head.rotation); hat.position.y=headY;     // hair is a SIBLING of head — drive it too
@@ -2283,7 +2290,7 @@ function animate(){
   const focus=sailing?activeBoat.position:player.position;
   const cx=focus.x+Math.sin(camYaw)*Math.cos(camPitch)*camDist,
         cz=focus.z+Math.cos(camYaw)*Math.cos(camPitch)*camDist;
-  let cy=focus.y+Math.sin(camPitch)*camDist+2;
+  let cy=focus.y+Math.sin(camPitch)*camDist+1.5;
   for(let s=0.3;s<=1.001;s+=0.35) // keep the sight line above ridges
     cy=Math.max(cy,heightAt(focus.x+(cx-focus.x)*s,focus.z+(cz-focus.z)*s)+2);
   cy=Math.max(cy,1.2);
@@ -2293,12 +2300,12 @@ function animate(){
     scene.fog.far=650+(1-e)*600; // don't fog out the island during the aerial view
     camera.position.lerpVectors(AERIAL,new THREE.Vector3(cx,cy,cz),e);
     camera.position.y=Math.max(camera.position.y,heightAt(camera.position.x,camera.position.z)+2);
-    const look=new THREE.Vector3().lerpVectors(ISLAND_CENTER,new THREE.Vector3(focus.x,focus.y+2.5,focus.z),e);
+    const look=new THREE.Vector3().lerpVectors(ISLAND_CENTER,new THREE.Vector3(focus.x,focus.y+1.9,focus.z),e);
     camera.lookAt(look);
   } else {
     if(!uiEl.classList.contains('ready'))uiEl.classList.add('ready'); // reveal HUD once the fly-in lands
     camera.position.lerp(new THREE.Vector3(cx,cy,cz),Math.min(1,dt*6));
-    camera.lookAt(focus.x,focus.y+2.5,focus.z);
+    camera.lookAt(focus.x,focus.y+1.9,focus.z);
   }
 
   checkDiscoveries();
@@ -2315,4 +2322,4 @@ window.__dbg={player,boat,namo,get sailing(){return sailing},
 </script>
 </body>
 </html>
-<!--build:0ee59bc-->
+<!--build:7a47c624fc7e-->
