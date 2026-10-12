@@ -107,6 +107,24 @@
   .link-arrow:hover svg {
     transform: translateX(0.25rem);
   }
+
+  /* Click-to-load video: a local poster until the visitor asks for the player */
+  .embed-poster {
+    @apply relative block w-full overflow-hidden rounded-xl bg-slate-900 no-underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-500;
+  }
+
+  .embed-poster img {
+    @apply block h-full w-full object-cover;
+  }
+
+  .embed-play {
+    @apply absolute inset-0 m-auto grid size-18 place-items-center rounded-full bg-slate-950/60 text-slate-50 transition;
+  }
+
+  .embed-poster:hover .embed-play,
+  .embed-poster:focus-visible .embed-play {
+    @apply bg-sky-500 text-slate-950;
+  }
 }
 
 /* Calm dark base: slate-night background, light text. Everything else is
@@ -138,12 +156,6 @@ html {
 
 .theme-dark img.zen-circle {
   filter: invert(1);
-}
-
-.bg-logo {
-  background-image: url("../../src/images/zen-circle-grunge-brush-stroke-2.png");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 .homepage .homepage-no-shadow { box-shadow: none }

@@ -15,7 +15,10 @@ title: Why freediving
       <p class="page-prose mb-0">At first your mind fights back. On the way down it shouts: get out, we are drowning. Calm it down and it goes quiet. That quiet comes up with you, and it is still there at&nbsp;3&nbsp;a.m.</p>
     </div>
     <div class="w-full max-w-[390px] min-h-[28rem]">
-      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DbiFJKNTMVc/" data-instgrm-version="14"></blockquote>
+      <div class="embed" data-embed="instagram">
+        <a class="embed-poster aspect-[9/16]" href="https://www.instagram.com/p/DbiFJKNTMVc/" target="_blank" rel="noopener" aria-label="Play the reel on why freediving"><img src="/images/video/reel-why.webp" alt="" width="780" height="1387"><span class="embed-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"/></svg></span></a>
+        <template><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DbiFJKNTMVc/" data-instgrm-version="14"></blockquote></template>
+      </div>
     </div>
   </section>
 
@@ -34,5 +37,3 @@ title: Why freediving
 
   <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn mt-16">Let&rsquo;s freedive</a>
 </div>
-
-<script async src="//www.instagram.com/embed.js"></script>

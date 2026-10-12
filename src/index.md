@@ -85,7 +85,7 @@ title: nofins | Freediving trains life
 
 <section id="about" class="bg-white text-slate-950 dark:bg-slate-900 dark:text-slate-100">
   <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 sm:px-10 sm:py-28 md:grid-cols-[1.2fr_0.8fr] md:gap-16 lg:px-12">
-    <img src="/images/nick.jpg" alt="Freediving instructor on the boat before a depth session" width="900" height="900" loading="lazy" class="home-about-photo md:order-2">
+    <img src="/images/nick.webp" alt="Freediving instructor on the boat before a depth session" width="1000" height="1500" loading="lazy" class="home-about-photo md:order-2">
     <div class="md:order-1">
       <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">One diver. One buoy.</h2>
       <p class="mb-6 text-lg leading-relaxed text-slate-100">I dive with you every session, in the pool and on the line.</p>
@@ -110,7 +110,7 @@ title: nofins | Freediving trains life
     </div>
 
     <div class="home-phuket-copy">
-      <p class="home-lead">We dive every weekend.</p>
+      <p class="home-lead">I dive and instruct on the weekends.</p>
       <p class="home-prose">Calm dives. Rest as long as you like and dive at your own pace.</p>
       <p class="home-prose">The water around Phuket is shallow. Some days we go out to 50&nbsp;m and beyond, for divers with Wave 3 or equivalent.</p>
       <p class="home-prose">We have a boat and a catamaran.</p>
