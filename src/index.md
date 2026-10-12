@@ -89,7 +89,7 @@ title: nofins | Freediving trains life
     <div class="md:order-1">
       <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">One diver. One buoy.</h2>
       <p class="mb-6 text-lg leading-relaxed text-slate-100">I dive with you every session, in the pool and on the line.</p>
-      <p class="mb-6 text-lg leading-relaxed text-slate-100">Why nofins? Where we are going, we do not need fins.</p>
+      <p class="mb-6 text-lg leading-relaxed text-slate-100">Why nofins? Where we are going, into ourselves, we do not need fins.</p>
       <ul class="home-creds">
         <li>Molchanovs Wave 2 Instructor</li>
         <li>Depth &amp; Pool</li>
