@@ -17,7 +17,7 @@ title: Relax harder
   </section>
 
   <section class="mt-20 grid items-start gap-10 sm:mt-28 lg:grid-cols-[390px_1fr] lg:gap-14">
-    <div class="w-full max-w-[390px] min-h-[28rem]">
+    <div class="w-full max-w-[390px]">
       <div class="embed" data-embed="instagram">
         <a class="embed-poster aspect-[9/16]" href="https://www.instagram.com/reel/DcFTJ_nv7jm/" target="_blank" rel="noopener" aria-label="Play the reel: Eva, 13, freefall to 20 metres"><img src="/images/video/reel-about.webp" alt="" width="780" height="1387" loading="lazy"><span class="embed-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"/></svg></span></a>
         <template><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DcFTJ_nv7jm/" data-instgrm-version="14"></blockquote></template>

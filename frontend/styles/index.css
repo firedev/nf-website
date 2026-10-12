@@ -57,6 +57,11 @@
     outline: none;
   }
 
+  /* nav pills sit shoulder to shoulder on mobile: keep the ring on the pill edge */
+  .nav-link:focus-visible {
+    outline-offset: 0;
+  }
+
   [aria-current="page"] {
     @apply decoration-4 decoration-sky-200 underline font-bold;
   }
