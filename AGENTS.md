@@ -6,6 +6,8 @@ Bridgetown static site for nofins freediving (Phuket, Thailand) — read this be
 
 **Тон — с любовью, без давления** (2026-09-08). Канон: «Friends I love to train with.» / «Instructors I love to share water with.» Не «Go and find them», не «sign up, and let’s go», не urgency («already gathering»). Приглашение, не воронка. Safety-императивы («never hold your breath alone») оставлять.
 
+**Не хвастаться** (Коля, 12.10.2026: «не надо хвастаться»). Никаких «все мои ученики бьют свои рекорды» и прочих результатов учеников как рекламы. Строка «Everyone who trains with me breaks their own records…» с `/about/` снята — не возвращать. Факты о друзьях на `/friends/` (их PB) — не хвастовство, это их данные.
+
 На мобиле пять пунктов влезают в одну строку только на `text-sm` (десктоп — `sm:text-lg`).
 
 **`/about/` — «Relax harder.»** (2026-08-21). Заголовок и `title` страницы — слова Ника; под ним — его мысль про то, как он тренирует, в английском пересказе 12.10.2026: «We train one thing: staying calm and relaxed inside your own head.» / «On the surface, at depth, in every discipline.» / «Until depth feels like home.» Прежняя калька «We train calm and relaxation in your own headspace. Only that» снята по просьбе Коли («перепиши весь текст» после «это не английский»). В блоке фактов у имени — ссылка на визитку `nikolayx.com` (2026-09-08).
