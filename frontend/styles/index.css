@@ -47,6 +47,16 @@
     @apply text-sky-900;
   }
 
+  /* One focus ring for every link and control, in the site's sky instead of the browser default */
+  :focus-visible {
+    outline: 2px solid rgb(56 189 248);
+    outline-offset: 3px;
+  }
+
+  main:focus {
+    outline: none;
+  }
+
   [aria-current="page"] {
     @apply decoration-4 decoration-sky-200 underline font-bold;
   }
