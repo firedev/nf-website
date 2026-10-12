@@ -89,6 +89,7 @@ title: nofins | Freediving trains life
     <div class="md:order-1">
       <h2 class="mb-5 mt-0 text-4xl font-black tracking-tight sm:text-5xl">One diver. One buoy.</h2>
       <p class="mb-6 text-lg leading-relaxed text-slate-100">I dive with you every session, in the pool and on the line.</p>
+      <p class="mb-6 text-lg leading-relaxed text-slate-100">Why nofins? Where we are going, we do not need fins.</p>
       <ul class="home-creds">
         <li>Molchanovs Wave 2 Instructor</li>
         <li>Depth &amp; Pool</li>
@@ -112,6 +113,7 @@ title: nofins | Freediving trains life
     <div class="home-phuket-copy">
       <p class="home-lead">I dive and instruct on the weekends.</p>
       <p class="home-prose">Calm dives. Rest as long as you like and dive at your own pace.</p>
+      <p class="home-prose">You are alone in your own head, and someone always has an eye on you.</p>
       <p class="home-prose">The water around Phuket is always quiet. Some days we go out to 50&nbsp;m and beyond.</p>
       <p class="home-prose">We have a boat and a catamaran.</p>
       <p class="home-phuket-end">We do what we want.</p>

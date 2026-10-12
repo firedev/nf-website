@@ -9,6 +9,21 @@ title: Freediving for kids
     <p class="mb-0 text-xl font-bold leading-snug text-slate-100 sm:text-2xl">Children learn to float, swim, glide and dive with an instructor beside them, one skill at a time.</p>
   </header>
 
+  <section class="mb-20 grid items-start gap-10 sm:mb-28 lg:grid-cols-[390px_1fr] lg:gap-14">
+    <div class="w-full max-w-[390px]">
+      <div class="embed" data-embed="instagram">
+        <a class="embed-poster aspect-[9/16]" href="https://www.instagram.com/reel/DcFTJ_nv7jm/" target="_blank" rel="noopener" aria-label="Play the reel: Eva, 13, freefall to 20 metres"><img src="/images/video/reel-about.webp" alt="" width="780" height="1387" loading="lazy"><span class="embed-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"/></svg></span></a>
+        <template><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DcFTJ_nv7jm/" data-instgrm-version="14"></blockquote></template>
+      </div>
+    </div>
+    <div class="lg:pt-6">
+      <h2 class="page-display mb-3 mt-0 text-2xl sm:text-3xl">Twenty metres in one session.</h2>
+      <p class="page-prose mb-8">For two years Eva turned at twelve metres, sure she could not go deeper. One session on the line with me, and she fell straight to twenty.</p>
+      <p class="page-prose mb-2 text-xl font-bold text-slate-100">&ldquo;First I was scared that I was falling. Then I suddenly relaxed, and music started playing in my head.&rdquo;</p>
+      <p class="page-prose mb-0 text-slate-400">Eva, 13</p>
+    </div>
+  </section>
+
   <section class="grid gap-x-14 gap-y-12 md:grid-cols-2">
     <div>
       <h2 class="page-display mb-3 mt-0 text-2xl sm:text-3xl">The dive reflex starts in the pool.</h2>
