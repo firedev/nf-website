@@ -175,7 +175,7 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 
 ### Полный проход на английский носителя (12.10.2026)
 
-Коля: «блин ну это не английский! Какая-то калька с русского», потом «перепиши ВЕСЬ текст на сайте». Переписаны все страницы: главная, `/why/`, `/about/`, `/friends/`, `/junior/`, `/videos/`, `/404/` и `description`. Правило — `me/writing-rules.md` § «Каждый язык — как носитель»: каждую фразу писать словами, которые выбрал бы начитанный носитель. Нетронутыми оставлены строки Коли, которые по-английски звучат естественно: «Freediving trains life.», «Slow down. Stay calm. Go deeper.», «Freediving is life.», «Relax harder.», «We do what we want.», «Calm starts young.», «Pool first.», кнопки. Британская орфография (metres, organises, practises, travelled); «Equalise» тоже через s.
+Коля: «блин ну это не английский! Какая-то калька с русского», потом «перепиши ВЕСЬ текст на сайте». Переписаны все страницы: главная, `/why/`, `/about/`, `/friends/`, `/junior/`, `/videos/`, `/404/` и `description`. Правило — `me/writing-rules.md` § «Каждый язык — как носитель»: каждую фразу писать словами, которые выбрал бы начитанный носитель. Нетронутыми оставлены строки Коли, которые по-английски звучат естественно: «Freediving trains life.» (слоган и картинка превью; вариант «Freediving is training for life.» Коля отклонил — «оставь», 12.10.2026), «Slow down. Stay calm. Go deeper.», «Freediving is life.», «Relax harder.», «We do what we want.», «Calm starts young.», «Pool first.», кнопки. Британская орфография (metres, organises, practises, travelled); «Equalise» тоже через s.
 
 ### Язык сайта — правила Ника (2026-09-08)
 
