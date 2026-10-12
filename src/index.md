@@ -22,7 +22,7 @@ title: nofins | Freediving trains life
 <section id="why" class="home-why bg-[#041a2e] text-slate-100">
   <div class="home-why-inner mx-auto max-w-7xl px-6 sm:px-10 lg:px-12">
     <h2 class="mb-6 mt-0 max-w-2xl text-balance text-4xl font-black tracking-tight sm:text-5xl">Freediving is life.</h2>
-    <p class="home-lead mb-8 mt-0 max-w-2xl">You drop the act and you are you.</p>
+    <p class="home-lead mb-8 mt-0 max-w-2xl">You drop the act and get to be yourself.</p>
     <p class="home-lead mb-8 mt-0 max-w-2xl">Freediving is a mental lab. Hold your breath underwater and you reach corners of your mind you never knew were there. Your sense of time shifts. Nobody is chasing records here. We experiment. What works, I share on <a href="https://tellothers.com/try-freediving" target="_blank" rel="noopener" class="font-bold text-sky-300 decoration-sky-300/40 hover:text-sky-200">tellothers.com</a>.</p>
     <p class="home-lead mb-8 mt-0 max-w-2xl">It works the same for adults and kids.</p>
     <a href="/why/" class="link-arrow text-sky-300 hover:text-sky-200">Find out<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
@@ -57,7 +57,7 @@ title: nofins | Freediving trains life
       <article class="grid min-w-0 gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-x-10">
         <p class="home-trip-date mb-0"><time datetime="2027-02">February–March</time></p>
         <div class="min-w-0">
-          <p class="home-trip-copy mb-3">My retreat on the Surin Islands. Marine reserve, clear water, quiet. Exact dates TBD &mdash; we leave from Phuket.</p>
+          <p class="home-trip-copy mb-3">My retreat in the Surin Islands. Marine park, clear water, quiet. Dates to be announced. We leave from Phuket.</p>
           <a href="https://nonduality.today" target="_blank" rel="noopener" class="link-arrow text-sky-300 hover:text-sky-200">nonduality.today<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
@@ -73,7 +73,7 @@ title: nofins | Freediving trains life
       <article class="grid min-w-0 gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-x-10">
         <p class="home-trip-date mb-0"><time datetime="2027-04-12/2027-04-15">April 12–15</time></p>
         <div class="min-w-0">
-          <p class="home-trip-copy mb-3">While we are in Indonesia we are going to Komodo. See the dragons, come along from Deep Week if you want. With Yan from Bali Freedivers.</p>
+          <p class="home-trip-copy mb-3">While we are in Indonesia, we are heading to Komodo with Yan from Bali Freedivers to see the dragons. Come along straight from Deep Week.</p>
           <a href="https://www.balifreedivers.com/en/" target="_blank" rel="noopener" class="link-arrow text-sky-300 hover:text-sky-200">balifreedivers.com<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
@@ -111,8 +111,8 @@ title: nofins | Freediving trains life
 
     <div class="home-phuket-copy">
       <p class="home-lead">We dive every weekend.</p>
-      <p class="home-prose">Calm dives. Rest as long as we want, dive at our own pace.</p>
-      <p class="home-prose">The water around Phuket is shallow. Some days we go to 50&nbsp;m and more — Wave 3 or equivalent.</p>
+      <p class="home-prose">Calm dives. We rest as long as we like and dive at our own pace.</p>
+      <p class="home-prose">The water around Phuket is shallow. Some days we go out to 50&nbsp;m and beyond, for divers with Wave 3 or equivalent.</p>
       <p class="home-prose">We have a boat and a catamaran.</p>
       <p class="home-phuket-end">We do what we want.</p>
     </div>

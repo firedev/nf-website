@@ -8,7 +8,7 @@ Bridgetown static site for nofins freediving (Phuket, Thailand) — read this be
 
 На мобиле пять пунктов влезают в одну строку только на `text-sm` (десктоп — `sm:text-lg`).
 
-**`/about/` — «Relax harder.»** (2026-08-21). Заголовок и `title` страницы — слова Ника; под ним его же строка про то, как он тренирует: «We train calm and relaxation in your own headspace. Only that — on the surface and at depth, in every style, until that depth feels like home.» Это его формулировки, при правке — резать и переставлять, не переписывать (`me/writing-rules.md`). В блоке фактов у имени — ссылка на визитку `nikolayx.com` (2026-09-08).
+**`/about/` — «Relax harder.»** (2026-08-21). Заголовок и `title` страницы — слова Ника; под ним — его мысль про то, как он тренирует, в английском пересказе 12.10.2026: «We train one thing: staying calm and relaxed inside your own head.» / «On the surface, at depth, in every discipline.» / «Until depth feels like home.» Прежняя калька «We train calm and relaxation in your own headspace. Only that» снята по просьбе Коли («перепиши весь текст» после «это не английский»). В блоке фактов у имени — ссылка на визитку `nikolayx.com` (2026-09-08).
 
 **Главная не дублирует внутренние страницы** (2026-08-03). Она коротко представляет направление и ведёт дальше; `/why/` владеет кратким объяснением практики для взрослых и детей. `/senior/` остаётся совместимым редиректом на `/why/`.
 
@@ -167,11 +167,15 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 Ник прошёлся по всем страницам: «the english doesn't make sense». Что чинилось и что теперь нельзя ломать заново:
 
 - **Не заявлять, что тренировка — это no-fins.** Ник: «don't claim we train no fins, it's just the brand». `nofins` — имя, а не дисциплина. Блок «No fins. / Just breath, body, and attention.» с `/about/` снят. Секция `#nofins` на главной («Move with your whole body» / bi-fins, monofin, lanyard) снята 08.09.2026 как slop — не возвращать.
-- **«Your character» — калька с русского «характер».** По-английски это персонаж книги, а не голос в голове. На `/why/` и `/about/` теперь «your head» / «switch off your head». Любой новый перевод внутренней речи Ника проверять этим тестом
+- **«Your character» — калька с русского «характер».** По-английски это персонаж книги, а не голос в голове. На `/why/` и `/about/` теперь «your mind» / «The quieter your mind, the better you dive.» Любой новый перевод внутренней речи Ника проверять этим тестом
 - Заголовок не пересказывается абзацем дословно (было «One diver. One buoy.» + «One diver, one buoy and full instructor attention.»)
 - Термин вводится до употребления: «The reflex» → «The dive reflex» на `/junior/`
 - Безличный корпоративный залог режется: «trips are announced with confirmed dates», «practice uses an active, qualified buddy», «No-fins develops efficient movement through coordination and feel» — всё переписано живым английским
 - Про Еву (реел на `/about/` подписан «EVA 13Y FREEFALL 20M`): блок «My daughter is thirteen» и строку «Five children, all of them freedivers» Ник велел снять, оставить только про падение. Не возвращать без его слова
+
+### Полный проход на английский носителя (12.10.2026)
+
+Коля: «блин ну это не английский! Какая-то калька с русского», потом «перепиши ВЕСЬ текст на сайте». Переписаны все страницы: главная, `/why/`, `/about/`, `/friends/`, `/junior/`, `/videos/`, `/404/` и `description`. Правило — `me/writing-rules.md` § «Каждый язык — как носитель»: каждую фразу писать словами, которые выбрал бы начитанный носитель. Нетронутыми оставлены строки Коли, которые по-английски звучат естественно: «Freediving trains life.», «Slow down. Stay calm. Go deeper.», «Freediving is life.», «Relax harder.», «We do what we want.», «Calm starts young.», «Pool first.», кнопки. Британская орфография (metres, organises, practises, travelled); «Equalise» тоже через s.
 
 ### Язык сайта — правила Ника (2026-09-08)
 
@@ -182,13 +186,13 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 **Короткие рубленые фразы — его манера, не слоп.** Ник: «я люблю короткие рубленые фразы, они же поясняют сразу что надо». «Slow down. Stay calm. Go deeper.», «Calm dives.», «Pool first.», «A longer float. A cleaner duck dive.» — оставлять. Общий банлист режет тройки и рубленые пары ассистента; здесь clipped-ритм разрешён, вычищать его нельзя. Резать повтор смысла, не длину фразы.
 
 **Дважды одна строка на сайте — дефект.** Один заголовок живёт на одной странице:
-- «Freediving is life.» — h2 `#why` на главной. h1 `/why/` — «Freediving gives your life back.» (дубль вернулся и снят 08.09)
-- «One diver. One buoy.» — h2 `#about` на главной. Тот же блок на `/about/` озаглавлен «Full attention.»
+- «Freediving is life.» — h2 `#why` на главной. h1 `/why/` — «Freediving gives you your life back.» (идиома с двумя дополнениями; без «you» — калька) (дубль вернулся и снят 08.09)
+- «One diver. One buoy.» — h2 `#about` на главной. На `/about/` блок про бассейн и море озаглавлен «Pool or open sea.» (12.10.2026; прежний «Full attention.» с абзацем «the dive does the same thing to you» читался как бессмыслица)
 
 **Один приём — один раз на весь сайт.** Конструкция «the same X that helps at school / in a hard conversation / at 3am» стояла в трёх местах (`why.serb`, `junior.serb` ×2). Остался только хвост на `/why/` («…and it is there at 3am»). Появилась в четвёртом месте — значит шаблон, а не мысль.
 
 **Снято как слоп, не возвращать:**
-- «You take off the character» на главной — та же калька «персонаж», что чинили 26.08. Теперь «You drop the act and you are you.»
+- «You take off the character» на главной — та же калька «персонаж», что чинили 26.08. Теперь «You drop the act and get to be yourself.»
 - «You start filtering the chatter, and it goes quiet» на `/why/` — возврат запрещённой строки «You start filtering. The noise drops.». Плюс заголовок «It all comes at once.» обещал одно, а абзац говорил обратное. Теперь «Everything shows up at once.» / «…every thought you have comes with you. You start throwing them out one by one.»
 - Аплодисменты себе после своей же мысли: «That is the whole secret.», «and that is the best part of it», «Each win is concrete, and it stacks.»
 - Отрицательные параллелизмы на `/junior/`: «not a group average», «No pushing for depth, no racing the clock», «not just that they showed up», зачин «Not only on the surface.» Утверждать то, что есть
