@@ -285,6 +285,10 @@ function polyGeo(vertices,faces){
   const p=[];
   for(const face of faces)for(let i=1;i<face.length-1;i++)
     for(const n of [face[0],face[i],face[i+1]])p.push(...vertices[n]);
+  // hand-typed face order is easy to get backwards: negative signed volume = inside-out, so flip every triangle
+  let vol=0;
+  for(let i=0;i<p.length;i+=9)vol+=p[i]*(p[i+4]*p[i+8]-p[i+5]*p[i+7])-p[i+1]*(p[i+3]*p[i+8]-p[i+5]*p[i+6])+p[i+2]*(p[i+3]*p[i+7]-p[i+4]*p[i+6]);
+  if(vol<0)for(let i=0;i<p.length;i+=9)for(let k=0;k<3;k++)[p[i+3+k],p[i+6+k]]=[p[i+6+k],p[i+3+k]];
   const g=new THREE.BufferGeometry();
   g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));
   g.computeVertexNormals(); return g;
@@ -2322,4 +2326,4 @@ window.__dbg={player,boat,namo,get sailing(){return sailing},
 </script>
 </body>
 </html>
-<!--build:7a47c624fc7e-->
+<!--build:08bac1b44f49-->
