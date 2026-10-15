@@ -202,7 +202,7 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 **Короткие рубленые фразы — его манера, не слоп.** Ник: «я люблю короткие рубленые фразы, они же поясняют сразу что надо». «Slow down. Stay calm. Go deeper.», «Calm dives.», «Pool first.», «A longer float. A cleaner duck dive.» — оставлять. Общий банлист режет тройки и рубленые пары ассистента; здесь clipped-ритм разрешён, вычищать его нельзя. Резать повтор смысла, не длину фразы.
 
 **Дважды одна строка на сайте — дефект.** Один заголовок живёт на одной странице:
-- «Freediving is life.» — h2 `#why` на главной. h1 `/why/` — «Freediving gives you your life back.» (идиома с двумя дополнениями; без «you» — калька) (дубль вернулся и снят 08.09)
+- «Freediving is life.» — h2 `#why` на главной. h1 `/why/` — «Freediving gives your life back.» (Коля, 15.10.2026: «и так понятно что gives you» — второе «you» не возвращать) (дубль вернулся и снят 08.09)
 - «One diver. One buoy.» — h2 `#about` на главной. На `/about/` блок про бассейн и море озаглавлен «Pool or open sea.» (12.10.2026; прежний «Full attention.» с абзацем «the dive does the same thing to you» читался как бессмыслица)
 
 **Один приём — один раз на весь сайт.** Конструкция «the same X that helps at school / in a hard conversation / at 3am» стояла в трёх местах (`why.serb`, `junior.serb` ×2). Остался только хвост на `/why/` («…and it is there at 3am»). Появилась в четвёртом месте — значит шаблон, а не мысль.
