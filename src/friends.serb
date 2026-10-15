@@ -142,14 +142,15 @@ title: Friends I love to train with
       </div>
     </article>
     <article class="friend grid gap-8 md:grid-cols-[220px_1fr] md:gap-10">
-      <img src="/images/elie.jpg" alt="Elie underwater, lit from above" width="599" height="600" loading="lazy" class="friend-photo">
+      <img src="/images/elie.jpg" alt="Elie Galabert underwater, lit from above" width="599" height="600" loading="lazy" class="friend-photo">
       <div class="min-w-0">
-        <h3 class="mb-1 mt-0 text-2xl font-black tracking-tight">Elie</h3>
-        <p class="mb-4 text-base font-bold [overflow-wrap:anywhere]"><a href="https://instagram.com/apneelie.bre" target="_blank" rel="noopener" class="text-sky-700 no-underline hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">@apneelie.bre</a></p>
+        <h3 class="mb-1 mt-0 text-2xl font-black tracking-tight">Elie Galabert</h3>
+        <p class="mb-4 text-base font-bold [overflow-wrap:anywhere]"><a href="https://instagram.com/apneelie.bre" target="_blank" rel="noopener" class="text-sky-700 no-underline hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">@apneelie.bre</a><span class="mx-2 text-slate-400">·</span><a href="https://www.aidainternational.org/InstructorProfile/35e1af0c-f69a-48e0-b769-3a61d8c8ee1d" target="_blank" rel="noopener" class="text-slate-600 no-underline hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">AIDA profile</a></p>
         <ul class="home-creds">
-          <li>AIDA Master Freediving Instructor</li>
+          <li>AIDA Master Instructor</li>
         </ul>
-        <p class="page-prose mb-0">Elie comes from Réunion and now coaches in Dahab: depth, open water and safety, through courses and one-to-one training.</p>
+        <p class="page-prose">Elie comes from Réunion and now coaches in Dahab: depth, open water and safety, through courses and one-to-one training.</p>
+        <p class="page-prose mb-0">Elie teaches every AIDA course from AIDA 1 to AIDA 4, in the pool and at depth, plus AIDA Monofin.</p>
       </div>
     </article>
   </div>
