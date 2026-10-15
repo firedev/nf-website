@@ -113,7 +113,7 @@ rake frontend:build           # Build frontend assets for production
 ## Development Guidelines
 
 ### `/friends/` (2026-08-21)
-`src/friends.serb` — «Friends I love to train with», инструкторы, с которыми Ник ныряет. Порядок: **Пхукет** (Ben первым — прямое указание Ника, дальше Court, Victoria, Tony), **Бали** (Yan Tychkovskyi), **Дахаб** (Roman — Коля 15.10.2026: «roman in dahab»), **Москва** (Artur). Под h1 строка «These are the instructors I recommend. Wherever you are, train with them.» (Коля 15.10.2026: «make it clear that these are the people I recommend»). Заводилась как скрытая, в тот же день Ник попросил вынести в меню — сейчас она в навбаре и футере, `noindex` снят.
+`src/friends.serb` — «Friends I love to train with», инструкторы, с которыми Ник ныряет. Порядок: **Пхукет** (Ben первым — прямое указание Ника, дальше Court, Victoria, Tony), **Бали** (Yan Tychkovskyi), **Бангкок** (Ploy Scott, `@ploy_prn`, Bangkok Freedivers — Коля 15.10.2026; данные и фото `images/ploy.jpg` с bangkokfreedivers.com/about и /team), **Дахаб** (Roman — Коля 15.10.2026: «roman in dahab»), **Москва** (Artur). Под h1 строка «These are the instructors I recommend. Wherever you are, train with them.» (Коля 15.10.2026: «make it clear that these are the people I recommend»). Заводилась как скрытая, в тот же день Ник попросил вынести в меню — сейчас она в навбаре и футере, `noindex` снят.
 
 - Механизм `noindex: true` во фронтматтере остался в `_partials/_head.serb` — пригодится, если снова понадобится непубличная страница
 - Фото Yan — `src/images/yan.jpg` (селфи с рыбой, Ник прислал 2026-08-22). Фамилия **Tychkovskyi** — тоже от Ника в тот день. Личный инстаграм по-прежнему не дан — не додумывать

@@ -71,6 +71,25 @@ title: Friends I love to train with
     </article>
   </div>
 
+  <h2 id="bangkok" class="page-display mb-10 mt-20 text-3xl sm:text-4xl">Bangkok</h2>
+
+  <div class="grid gap-20">
+    <article class="friend grid gap-8 md:grid-cols-[220px_1fr] md:gap-10">
+      <img src="/images/ploy.jpg" alt="Ploy Scott" width="315" height="301" loading="lazy" class="friend-photo">
+      <div class="min-w-0">
+        <h3 class="mb-1 mt-0 text-2xl font-black tracking-tight">Ploy Scott</h3>
+        <p class="mb-4 text-base font-bold [overflow-wrap:anywhere]"><a href="https://instagram.com/ploy_prn" target="_blank" rel="noopener" class="text-sky-700 no-underline hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">@ploy_prn</a><span class="mx-2 text-slate-400">·</span><a href="https://www.bangkokfreedivers.com" target="_blank" rel="noopener" class="text-slate-600 no-underline hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">Bangkok Freedivers</a></p>
+        <ul class="home-creds">
+          <li>PADI &amp; Molchanovs Instructor Trainer</li>
+          <li>Thai national record holder</li>
+        </ul>
+        <p class="page-prose">Ploy founded Bangkok Freedivers in 2017. Her team now has more than ten instructors, and they teach in Thai and English.</p>
+        <p class="page-prose">She has set the Thai national freediving record twice and has taught hundreds of courses in Bangkok and abroad.</p>
+        <p class="page-prose mb-0">Her school also runs kids and junior courses for ages 4 to 15.</p>
+      </div>
+    </article>
+  </div>
+
   <h2 id="bali" class="page-display mb-10 mt-20 text-3xl sm:text-4xl">Bali</h2>
 
   <div class="grid gap-20">
