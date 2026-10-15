@@ -74,10 +74,34 @@ title: Friends I love to train with
   <h2 id="bangkok" class="page-display mb-10 mt-20 text-3xl sm:text-4xl">Bangkok</h2>
 
   <div class="grid gap-20">
-    <article class="friend">
+    <article class="friend grid gap-8 md:grid-cols-[220px_1fr] md:gap-10">
+      <img src="/images/ploy.jpg" alt="Ploy Pairin freediving between rocks" width="599" height="600" loading="lazy" class="friend-photo">
       <div class="min-w-0">
         <h3 class="mb-1 mt-0 text-2xl font-black tracking-tight">Ploy Pairin</h3>
-        <p class="mb-0 text-base font-bold [overflow-wrap:anywhere]"><a href="https://instagram.com/ploy_prn" target="_blank" rel="noopener" class="text-sky-700 no-underline hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">@ploy_prn</a></p>
+        <p class="mb-4 text-base font-bold [overflow-wrap:anywhere]"><a href="https://instagram.com/ploy_prn" target="_blank" rel="noopener" class="text-sky-700 no-underline hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">@ploy_prn</a><span class="mx-2 text-slate-400">·</span><a href="https://move.molchanovs.com/user_profile/1676820202691x450440059103916350" target="_blank" rel="noopener" class="text-slate-600 no-underline hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">Molchanovs profile</a></p>
+        <ul class="home-creds">
+          <li>Molchanovs Wave 2 Instructor</li>
+          <li>SSI Advanced Instructor</li>
+        </ul>
+        <p class="page-prose mb-0">Ploy trained as a mechanical engineer, swims in open water and surfs.</p>
+      </div>
+    </article>
+  </div>
+
+  <h2 id="pattaya" class="page-display mb-10 mt-20 text-3xl sm:text-4xl">Pattaya</h2>
+
+  <div class="grid gap-20">
+    <article class="friend grid gap-8 md:grid-cols-[220px_1fr] md:gap-10">
+      <img src="/images/eline.jpg" alt="Eline Postma in the sea in a full-face mask" width="600" height="600" loading="lazy" class="friend-photo">
+      <div class="min-w-0">
+        <h3 class="mb-1 mt-0 text-2xl font-black tracking-tight">Eline Postma</h3>
+        <p class="mb-4 text-base font-bold [overflow-wrap:anywhere]"><a href="https://instagram.com/elinebythesea" target="_blank" rel="noopener" class="text-sky-700 no-underline hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">@elinebythesea</a><span class="mx-2 text-slate-400">·</span><a href="https://move.molchanovs.com/user_profile/1669346382221x384706460591672800" target="_blank" rel="noopener" class="text-slate-600 no-underline hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">Reef People Freediving</a></p>
+        <ul class="home-creds">
+          <li>Molchanovs Wave 3 Instructor</li>
+          <li>Lap 2 Instructor</li>
+        </ul>
+        <p class="page-prose">Eline taught herself to freedive at eight and grew up sailing and scuba diving. She holds an MSc in marine biology and has worked in marine conservation in the Netherlands, the Maldives and Thailand.</p>
+        <p class="page-prose mb-0">She heads Reef People Freediving in Pattaya and teaches in English, Dutch and Thai.</p>
       </div>
     </article>
   </div>
@@ -115,6 +139,17 @@ title: Friends I love to train with
         <p class="page-prose">Roman grew up in the water and swam competitively for his city team before freediving took over.</p>
         <p class="page-prose">He still competes and keeps refining his own diving while he coaches. He is certified to teach adults (Wave 3) and kids (L1 &amp; L2) in the Molchanovs system, and he is an experienced safety diver.</p>
         <p class="page-prose mb-0">He organises the amateur <em>I Love Freediving</em> competitions and is sports manager at the Natalia Molchanova Freediving School.</p>
+      </div>
+    </article>
+    <article class="friend grid gap-8 md:grid-cols-[220px_1fr] md:gap-10">
+      <img src="/images/elie.jpg" alt="Elie underwater, lit from above" width="599" height="600" loading="lazy" class="friend-photo">
+      <div class="min-w-0">
+        <h3 class="mb-1 mt-0 text-2xl font-black tracking-tight">Elie</h3>
+        <p class="mb-4 text-base font-bold [overflow-wrap:anywhere]"><a href="https://instagram.com/apneelie.bre" target="_blank" rel="noopener" class="text-sky-700 no-underline hover:text-sky-600 dark:text-sky-300 dark:hover:text-sky-200">@apneelie.bre</a></p>
+        <ul class="home-creds">
+          <li>AIDA Master Freediving Instructor</li>
+        </ul>
+        <p class="page-prose mb-0">Elie comes from Réunion and now coaches in Dahab: depth, open water and safety, through courses and one-to-one training.</p>
       </div>
     </article>
   </div>
