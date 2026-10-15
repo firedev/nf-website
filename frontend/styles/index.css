@@ -764,3 +764,24 @@ prose img { width: 100%; height: auto; @apply rounded-xl; }
   }
   .essay-toc a:hover { color: rgb(125 211 252); }
 }
+
+/* A trip that is off: badge on top, the rest struck through and dimmed */
+.home-trip-badge {
+  width: fit-content;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: rgb(244 63 94 / 0.15);
+  color: rgb(253 164 175);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.home-trip-cancelled .home-trip-date,
+.home-trip-cancelled .home-trip-copy,
+.home-trip-cancelled .link-arrow {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  opacity: 0.55;
+}

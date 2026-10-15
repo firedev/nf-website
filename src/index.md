@@ -83,7 +83,8 @@ title: nofins | Freediving trains life
     <div class="max-w-3xl">
       <h3 class="home-trip-year mb-4 mt-0">2026</h3>
 
-      <article class="grid min-w-0 gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-x-10">
+      <article class="home-trip-cancelled grid min-w-0 gap-2 py-6 sm:grid-cols-[13rem_1fr] sm:gap-x-10">
+        <p class="home-trip-badge mb-1 sm:col-span-2">Cancelled</p>
         <p class="home-trip-date mb-0"><time datetime="2026-11-07/2026-11-14">November 7–14</time></p>
         <div class="min-w-0">
           <p class="home-trip-copy mb-3">Deep Week Malaysia, Semporna.</p>
