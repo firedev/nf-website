@@ -1,6 +1,6 @@
 <footer class="overflow-hidden">
-  <div class="mx-auto flex max-w-screen-2xl flex-col items-center justify-center px-6 py-14">
-    <nav class="flex flex-wrap justify-center gap-x-7 text-base font-bold">
+  <div class="mx-auto flex max-w-screen-2xl flex-col items-start px-8 py-14 lg:px-14">
+    <nav class="flex flex-wrap gap-x-7 text-base font-bold">
       <a class="py-2.5 no-underline transition hover:text-sky-300" href="/why/">Why freediving</a>
       <a class="py-2.5 no-underline transition hover:text-sky-300" href="/about/">About</a>
       <a class="py-2.5 no-underline transition hover:text-sky-300" href="/friends/">Friends</a>
@@ -8,7 +8,7 @@
       <a class="py-2.5 no-underline transition hover:text-sky-300" href="/phuket/">Phuket</a>
       <a class="py-2.5 no-underline transition hover:text-sky-300" href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener">Instagram</a>
     </nav>
-    <nav class="mt-10 flex flex-wrap justify-center gap-x-6 text-base text-slate-400">
+    <nav class="mt-10 flex flex-wrap gap-x-6 text-base text-slate-400">
       <a href="https://nikolayx.com" target="_blank" rel="noopener" class="py-2.5 no-underline transition hover:text-slate-200">nikolayx.com</a>
       <a href="https://tellothers.com" target="_blank" rel="noopener" class="py-2.5 no-underline transition hover:text-slate-200">tellothers.com</a>
       <a href="https://thinkforward.academy" target="_blank" rel="noopener" class="py-2.5 no-underline transition hover:text-slate-200">thinkforward.academy</a>

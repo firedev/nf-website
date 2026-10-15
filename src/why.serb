@@ -5,7 +5,7 @@ title: Why freediving
 
 <div class="page mx-auto max-w-6xl px-6 py-16 sm:py-24">
   <section class="grid items-start gap-12 lg:grid-cols-[1fr_390px] lg:gap-14">
-    <div>
+    <div class="max-w-[42rem]">
       <h1 class="page-title mb-12 mt-0">Freediving gives your life back.</h1>
       <h2 class="page-display mb-3 mt-0 text-2xl sm:text-3xl">The whole underwater world is in the first ten metres.</h2>
       <p class="page-prose mb-10">Out over open water, below that, there is nothing left to look at. So you look inward.</p>
@@ -22,7 +22,7 @@ title: Why freediving
     </div>
   </section>
 
-  <div class="mt-20 grid gap-12 sm:grid-cols-2 sm:gap-16">
+  <div class="mt-20 grid max-w-[42rem] gap-12">
     <section>
       <h2 class="page-display mb-4 mt-0 text-3xl sm:text-4xl">Deeper means calmer.</h2>
       <p class="page-prose">Equalise early, turn at the depth you planned, and come up with air to spare.</p>

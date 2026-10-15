@@ -788,9 +788,14 @@ prose img { width: 100%; height: auto; @apply rounded-xl; }
 }
 
 /* /why/: the dive line hangs in the gap between the essay and its contents.
-   A tag marks each chapter; near the bottom come the striped candy cane and the
-   lanyard stopper, and the rope carries on past the essay to the end of the page. */
+   A black square marks each chapter. Below the last chapter (so no mark lands on
+   it) come the dashed candy cane and the stopper; the rope carries on through the
+   footer to the bottom of the page (--tail is set in index.js). */
 .dive-line { display: none; }
+
+/* the rope's upper run passes behind the page text; the header stays on top */
+.page:has(.dive-line) { isolation: isolate; }
+body > header { z-index: 2; }
 
 @media (min-width: 1024px) {
   .essay-wrap { grid-template-columns: minmax(0, 42rem) 5px 14rem; }
@@ -799,11 +804,18 @@ prose img { width: 100%; height: auto; @apply rounded-xl; }
     display: block;
     position: relative;
     pointer-events: none;
-    background: repeating-linear-gradient(
-      160deg,
-      rgb(226 232 240 / 0.55) 0 3px,
-      rgb(148 163 184 / 0.35) 3px 6px
-    );
+    background: #fff;
+  }
+
+  .dive-line::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: var(--head, 0);
+    background: inherit;
   }
 
   .dive-line::after {
@@ -812,42 +824,38 @@ prose img { width: 100%; height: auto; @apply rounded-xl; }
     top: 100%;
     left: 0;
     right: 0;
-    height: 16rem;
+    height: var(--tail, 16rem);
     background: inherit;
   }
 }
 
 .dive-line-mark {
   position: absolute;
-  left: 50%;
-  width: 0.7rem;
-  height: 0.7rem;
-  transform: translate(-50%, -50%);
+  left: 0;
+  width: 100%;
+  height: 0.8rem;
+  transform: translateY(-50%);
   background: #000;
 }
 
 .dive-line-cane {
+  z-index: 1;
   position: absolute;
-  bottom: 3rem;
-  left: -1px;
-  width: calc(100% + 2px);
+  bottom: -10.4rem;
+  left: 0;
+  width: 100%;
   height: 9rem;
-  border-radius: 2px;
-  background: repeating-linear-gradient(
-    150deg,
-    rgb(239 68 68) 0 10px,
-    rgb(248 250 252) 10px 20px
-  );
+  background: repeating-linear-gradient(180deg, #000 0 14px, #fff 14px 26px);
 }
 
 .dive-line-stopper {
+  z-index: 1;
   position: absolute;
-  bottom: 1.4rem;
+  bottom: -12rem;
   left: 50%;
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.3rem;
+  height: 1.3rem;
   border-radius: 999px;
   transform: translateX(-50%);
-  background: radial-gradient(circle at 35% 30%, rgb(253 224 71), rgb(234 179 8) 60%, rgb(161 98 7));
-  box-shadow: 0 4px 12px rgb(2 6 23 / 0.6);
+  background: #d9f53b;
 }

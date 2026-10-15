@@ -27,6 +27,12 @@ if (tocLinks.length) {
   const marks = sections.map(() => line.appendChild(document.createElement("span")))
   marks.forEach((m) => (m.className = "dive-line-mark"))
   const place = () => {
+    // the rope runs on past the essay to the bottom of the footer…
+    const end = document.querySelector("footer").getBoundingClientRect().bottom
+    line.style.setProperty("--tail", `${Math.max(0, end - line.getBoundingClientRect().bottom)}px`)
+    // …and up from the essay to the top of the page, stopping under the menu
+    const surface = document.getElementById("main").getBoundingClientRect().top
+    line.style.setProperty("--head", `${line.getBoundingClientRect().top - surface}px`)
     const top = line.getBoundingClientRect().top
     sections.forEach((s, i) => {
       const h = s.querySelector("h2").getBoundingClientRect()
