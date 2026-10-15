@@ -171,5 +171,16 @@ title: Friends I love to train with
         <p class="page-prose mb-0">Personal bests: 248 m bi-fins, 227 m monofin, 161 m breaststroke and a 7:24 static. He teaches Wave 1 and Wave 2 in the pool and is a certified freediving rescue and first-aid specialist.</p>
       </div>
     </article>
+    <article class="friend grid gap-8 md:grid-cols-[220px_1fr] md:gap-10">
+      <img src="/images/olga.jpg" alt="Olga Lukova in the pool" width="600" height="600" loading="lazy" class="friend-photo">
+      <div class="min-w-0">
+        <h3 class="mb-1 mt-0 text-2xl font-black tracking-tight">Olga Lukova</h3>
+        <p class="mb-4 text-base font-bold [overflow-wrap:anywhere]"><a href="https://move.molchanovs.com/user_profile/1738246954421x324046973713847400" target="_blank" rel="noopener" class="text-slate-600 no-underline hover:text-slate-950 dark:text-slate-400 dark:hover:text-slate-100">Molchanovs profile</a></p>
+        <ul class="home-creds">
+          <li>Molchanovs Wave 3 Instructor Trainer</li>
+        </ul>
+        <p class="page-prose mb-0">Olga trains freediving instructors in Moscow.</p>
+      </div>
+    </article>
   </div>
 </div>
