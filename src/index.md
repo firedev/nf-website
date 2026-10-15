@@ -22,32 +22,27 @@ title: nofins | Freediving trains life
 <section id="head" class="bg-slate-950 text-slate-100">
   <div class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12">
     <h2 class="mb-6 mt-0 max-w-3xl text-balance text-4xl font-black tracking-tight sm:text-5xl">It is all in your head.</h2>
-    <p class="home-lead mb-14 mt-0 max-w-2xl">Every deeper dive and every longer hold touches what you took for your limits.</p>
+    <p class="home-lead mb-14 mt-0 max-w-2xl">Every deeper dive and every longer hold pushes on what you thought were your limits.</p>
     <div class="home-cards">
       <article class="home-card">
-        <h3 class="home-card-title">Your air runs out too soon.</h3>
-        <p class="home-card-copy">Breathing can be learned. A long hold starts with not reacting to the first alarm.</p>
-        <a href="/why/#breath" class="link-arrow mt-auto text-sky-300 hover:text-sky-200">The urge to breathe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
-      </article>
-      <article class="home-card">
-        <h3 class="home-card-title">You keep hitting the same wall.</h3>
-        <p class="home-card-copy">Willpower carries you through seventy-five metres. The last twenty-five ask you to relax.</p>
-        <a href="/why/#wall" class="link-arrow mt-auto text-sky-300 hover:text-sky-200">The wall<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
-      </article>
-      <article class="home-card">
-        <h3 class="home-card-title">Your mind will not settle.</h3>
-        <p class="home-card-copy">Go deeper or hold longer and it gets nervous at first. That is where the work starts.</p>
+        <h3 class="home-card-title">Your head never switches off.</h3>
+        <p class="home-card-copy">One breath under water, and your thoughts start to thin out.</p>
         <a href="/why/#thoughts" class="link-arrow mt-auto text-sky-300 hover:text-sky-200">Thoughts that are not yours<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
       </article>
       <article class="home-card">
-        <h3 class="home-card-title">You come to the water upset.</h3>
-        <p class="home-card-copy">The water puts things in perspective.</p>
-        <a href="/why/#angry" class="link-arrow mt-auto text-sky-300 hover:text-sky-200">You cannot dive angry<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        <h3 class="home-card-title">You are a little wary of water.</h3>
+        <p class="home-card-copy">My favourite part of teaching is watching someone like that settle into the water.</p>
+        <a href="/about/" class="link-arrow mt-auto text-sky-300 hover:text-sky-200">How I teach<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
       </article>
       <article class="home-card">
-        <h3 class="home-card-title">You want it to last on land.</h3>
-        <p class="home-card-copy">What you train on the line works the same way in life.</p>
-        <a href="/why/#land" class="link-arrow mt-auto text-sky-300 hover:text-sky-200">On land<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        <h3 class="home-card-title">Your air runs out too soon.</h3>
+        <p class="home-card-copy">The urge to breathe comes early. You can learn to let it pass.</p>
+        <a href="/why/#breath" class="link-arrow mt-auto text-sky-300 hover:text-sky-200">The urge to breathe<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+      </article>
+      <article class="home-card">
+        <h3 class="home-card-title">You keep turning at the same depth.</h3>
+        <p class="home-card-copy">The wall is in your head, and it moves once you relax.</p>
+        <a href="/why/#wall" class="link-arrow mt-auto text-sky-300 hover:text-sky-200">The wall<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
       </article>
     </div>
   </div>
@@ -59,35 +54,25 @@ title: nofins | Freediving trains life
     <p class="home-lead mb-8 mt-0 max-w-2xl">Drop the act and be yourself.</p>
     <p class="home-lead mb-8 mt-0 max-w-2xl">Freediving is a mental lab. Hold your breath underwater and you reach corners of your mind you never knew were there. Your sense of time shifts. Nobody is chasing records here. We experiment. What works, I share on <a href="https://tellothers.com/try-freediving" target="_blank" rel="noopener" class="font-bold text-sky-300 decoration-sky-300/40 hover:text-sky-200">tellothers.com</a>.</p>
     <p class="home-lead mb-8 mt-0 max-w-2xl">It works the same for adults and kids.</p>
-    <a href="/why/" class="link-arrow text-sky-300 hover:text-sky-200">Find out<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+    <a href="/why/" class="link-arrow text-sky-300 hover:text-sky-200">Why freediving<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
   </div>
 </section>
 
 <section id="start" class="bg-slate-900 text-slate-100">
   <div class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12">
     <h2 class="mb-12 mt-0 max-w-2xl text-4xl font-black tracking-tight sm:text-5xl">Try freediving.</h2>
-    <ol class="home-steps">
-      <li>
+    <div class="home-offers">
+      <div>
         <h3 class="home-card-title">Adults.</h3>
-        <p class="home-card-copy">From your first breath-hold to the line. I teach Molchanovs Wave 1 and Wave 2.</p>
-        <a href="/about/" class="link-arrow text-sky-300 hover:text-sky-200">About Nick<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
-      </li>
-      <li>
+        <p class="home-card-copy">From your first breath-hold in the pool to your first dive on the line.</p>
+        <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="link-arrow text-sky-300 hover:text-sky-200">Let&rsquo;s freedive<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <div>
         <h3 class="home-card-title">Kids.</h3>
         <p class="home-card-copy">One-to-one, at their own pace, with parents kept in the loop.</p>
         <a href="/junior/" class="link-arrow text-sky-300 hover:text-sky-200">Freediving for kids<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
-      </li>
-      <li>
-        <h3 class="home-card-title">Trips.</h3>
-        <p class="home-card-copy">Deep Week, Wonderfruit, the Surin Islands and Komodo.</p>
-        <a href="#trips" class="link-arrow text-sky-300 hover:text-sky-200">The next trips<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
-      </li>
-      <li>
-        <h3 class="home-card-title">Friends.</h3>
-        <p class="home-card-copy">Instructors I love to share water with, in Phuket, Bali and Moscow.</p>
-        <a href="/friends/" class="link-arrow text-sky-300 hover:text-sky-200">Meet them<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
-      </li>
-    </ol>
+      </div>
+    </div>
   </div>
 </section>
 

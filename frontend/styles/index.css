@@ -667,9 +667,6 @@ prose img { width: 100%; height: auto; @apply rounded-xl; }
   .home-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (min-width: 1100px) {
-  .home-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
 
 .home-card {
   display: flex;
@@ -698,50 +695,72 @@ prose img { width: 100%; height: auto; @apply rounded-xl; }
   color: rgb(203 213 225);
 }
 
-/* Numbered ways in: the number is a list marker in its own column */
-.home-steps {
+/* Home: two ways in, side by side */
+.home-offers {
   display: grid;
-  gap: 2.5rem;
-  max-width: 48rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: step;
+  gap: 3rem;
+  max-width: 56rem;
 }
 
-.home-steps li {
+@media (min-width: 768px) {
+  .home-offers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.home-offers > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* /why/: the long read, with a sticky contents list in the right margin */
+.essay-wrap {
   display: grid;
-  grid-template-columns: 3.5rem minmax(0, 1fr);
-  column-gap: 1rem;
-  row-gap: 0.5rem;
-  counter-increment: step;
+  gap: 3rem;
+  margin-top: 7rem;
 }
 
-.home-steps li::before {
-  content: counter(step, decimal-leading-zero);
-  grid-row: span 3;
-  font-size: 1.25rem;
-  font-weight: 900;
-  line-height: 1.6;
-  color: rgb(125 211 252);
-  font-variant-numeric: tabular-nums;
+@media (min-width: 1024px) {
+  .essay-wrap { grid-template-columns: minmax(0, 42rem) 14rem; justify-content: space-between; }
 }
 
-.home-steps li > * { grid-column: 2; }
-
-/* /why/: the long read, one column */
-.essay {
-  max-width: 42rem;
-  margin-top: 6rem;
-}
-
-.essay section { scroll-margin-top: 6rem; }
+.essay section { scroll-margin-top: 2rem; }
 .essay section + section { margin-top: 4.5rem; }
 
 .essay h2 {
   margin: 0 0 1.5rem;
-  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-size: clamp(1.9rem, 3.4vw, 2.25rem);
+  letter-spacing: -0.02em;
 }
 
-.essay p { margin: 0 0 1.4rem; }
+.essay p {
+  margin: 0 0 1.4rem;
+  font-weight: 400;
+  color: rgb(226 232 240);
+}
+
 .essay p:last-child { margin-bottom: 0; }
+
+.essay-toc { display: none; }
+
+@media (min-width: 1024px) {
+  .essay-toc { display: block; }
+  .essay-toc ol {
+    position: sticky;
+    top: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .essay-toc a {
+    display: block;
+    padding: 0.45rem 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: rgb(148 163 184);
+    text-decoration: none;
+    transition: color 150ms;
+  }
+  .essay-toc a:hover { color: rgb(125 211 252); }
+}
