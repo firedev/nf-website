@@ -75,6 +75,7 @@ title: Why freediving
       <p class="page-prose">Life works the same way. It was all in my head. It was only discomfort.</p>
     </section>
   </article>
+    <div class="dive-line" aria-hidden="true"><span class="dive-line-cane"></span><span class="dive-line-stopper"></span></div>
     <nav class="essay-toc" aria-label="Sections">
       <ol>
         <li><a href="#twelve">First contact.</a></li>

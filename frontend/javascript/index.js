@@ -17,19 +17,32 @@ document.addEventListener("click", (event) => {
   document.head.append(script)
 })
 
-// /why/ contents: mark the section being read. A section counts once its top
-// passes a line 30% down the viewport.
+// /why/ contents and dive line: one tag on the line per chapter, level with its
+// heading; the chapter being read (its top past 30% of the viewport) is marked
+// in both places.
 const tocLinks = document.querySelectorAll(".essay-toc a")
 if (tocLinks.length) {
   const sections = [...document.querySelectorAll(".essay section")]
+  const line = document.querySelector(".dive-line")
+  const marks = sections.map(() => line.appendChild(document.createElement("span")))
+  marks.forEach((m) => (m.className = "dive-line-mark"))
+  const place = () => {
+    const top = line.getBoundingClientRect().top
+    sections.forEach((s, i) => {
+      const h = s.querySelector("h2").getBoundingClientRect()
+      marks[i].style.top = `${h.top - top + h.height / 2}px`
+    })
+  }
   const mark = () => {
-    const line = innerHeight * 0.3
-    const current = sections.filter((s) => s.getBoundingClientRect().top <= line).pop()
-    tocLinks.forEach((a) => {
-      if (current && a.hash === `#${current.id}`) a.setAttribute("aria-current", "true")
-      else a.removeAttribute("aria-current")
+    const current = sections.filter((s) => s.getBoundingClientRect().top <= innerHeight * 0.3).pop()
+    sections.forEach((s, i) => {
+      const on = s === current
+      for (const el of [tocLinks[i], marks[i]]) on ? el.setAttribute("aria-current", "true") : el.removeAttribute("aria-current")
     })
   }
   addEventListener("scroll", mark, { passive: true })
+  addEventListener("resize", place)
+  addEventListener("load", place)
+  place()
   mark()
 }

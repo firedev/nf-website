@@ -154,7 +154,6 @@ body {
 }
 
 /* Zen-circle logo: black brush stroke inverts to white on dark */
-/* Dark: depth gradient — surface water up top, near-black at depth (fixed so long pages don't band) */
 html {
   background: #020617;
 }
@@ -164,9 +163,11 @@ html {
   color: #020617;
 }
 
+/* One continuous dive from the surface (top of the page) to the footer: the
+   gradient scrolls with the page, so the water darkens as you go down. */
 .theme-dark body {
-  background: linear-gradient(180deg, #082f49 0%, #0c1a33 45%, #020617 100%);
-  background-attachment: fixed;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0c4a6e 0%, #082f49 18%, #0c1a33 55%, #020617 92%);
 }
 
 .theme-dark img.zen-circle {
@@ -204,7 +205,6 @@ html {
 }
 
 footer {
-  background: #020617;
   color: #f8fafc;
 }
 
@@ -279,7 +279,7 @@ footer {
 }
 
 body:not(.homepage) > header {
-  background: rgb(2 6 23 / 0.72);
+  background: transparent;
   box-shadow: none;
   color: #f8fafc;
 }
@@ -785,4 +785,76 @@ prose img { width: 100%; height: auto; @apply rounded-xl; }
   text-decoration: line-through;
   text-decoration-thickness: 2px;
   opacity: 0.55;
+}
+
+/* /why/: the dive line hangs in the gap between the essay and its contents.
+   A tag marks each chapter; near the bottom come the striped candy cane and the
+   lanyard stopper, and the rope carries on past the essay to the end of the page. */
+.dive-line { display: none; }
+
+@media (min-width: 1024px) {
+  .essay-wrap { grid-template-columns: minmax(0, 42rem) 5px 14rem; }
+
+  .dive-line {
+    display: block;
+    position: relative;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      160deg,
+      rgb(226 232 240 / 0.55) 0 3px,
+      rgb(148 163 184 / 0.35) 3px 6px
+    );
+  }
+
+  .dive-line::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 16rem;
+    background: inherit;
+  }
+}
+
+.dive-line-mark {
+  position: absolute;
+  left: 50%;
+  width: 1.4rem;
+  height: 0.55rem;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  background: rgb(248 250 252 / 0.85);
+  transition: background-color 200ms, width 200ms;
+}
+
+.dive-line-mark[aria-current="true"] {
+  width: 2rem;
+  background: rgb(125 211 252);
+}
+
+.dive-line-cane {
+  position: absolute;
+  bottom: 3rem;
+  left: -1px;
+  width: calc(100% + 2px);
+  height: 9rem;
+  border-radius: 2px;
+  background: repeating-linear-gradient(
+    150deg,
+    rgb(239 68 68) 0 10px,
+    rgb(248 250 252) 10px 20px
+  );
+}
+
+.dive-line-stopper {
+  position: absolute;
+  bottom: 1.4rem;
+  left: 50%;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 35% 30%, rgb(253 224 71), rgb(234 179 8) 60%, rgb(161 98 7));
+  box-shadow: 0 4px 12px rgb(2 6 23 / 0.6);
 }
