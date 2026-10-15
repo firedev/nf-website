@@ -27,7 +27,7 @@ title: nofins | Freediving trains life
       <article class="home-card">
         <h3 class="home-card-title">Your head never switches off.</h3>
         <p class="home-card-copy">One breath under water, and your thoughts start to thin out.</p>
-        <a href="/why/#thoughts" class="link-arrow mt-auto text-sky-300 hover:text-sky-200">Thoughts that are not yours<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
+        <a href="/why/#thoughts" class="link-arrow mt-auto text-sky-300 hover:text-sky-200">The voice in your head<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
       </article>
       <article class="home-card">
         <h3 class="home-card-title">You are a little wary of water.</h3>
