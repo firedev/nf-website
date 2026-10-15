@@ -5,7 +5,8 @@ title: Friends I love to train with
 
 <div class="page mx-auto max-w-5xl px-6 py-16 sm:py-24">
   <header class="mb-16 max-w-3xl">
-    <h1 class="page-title mb-0 mt-0">Friends I love to train with.</h1>
+    <h1 class="page-title mb-8 mt-0">Friends I love to train with.</h1>
+    <p class="mb-0 text-xl font-bold leading-snug text-slate-100 sm:text-2xl">These are the instructors I recommend. Wherever you are, train with them.</p>
   </header>
 
   <h2 id="phuket" class="page-display mb-10 mt-0 text-3xl sm:text-4xl">Phuket</h2>
@@ -88,7 +89,7 @@ title: Friends I love to train with
     </article>
   </div>
 
-  <h2 id="moscow" class="page-display mb-10 mt-20 text-3xl sm:text-4xl">Moscow</h2>
+  <h2 id="dahab" class="page-display mb-10 mt-20 text-3xl sm:text-4xl">Dahab</h2>
 
   <div class="grid gap-20">
     <article class="friend grid gap-8 md:grid-cols-[220px_1fr] md:gap-10">
@@ -105,7 +106,11 @@ title: Friends I love to train with
         <p class="page-prose mb-0">He organises the amateur <em>I Love Freediving</em> competitions and is sports manager at the Natalia Molchanova Freediving School.</p>
       </div>
     </article>
+  </div>
 
+  <h2 id="moscow" class="page-display mb-10 mt-20 text-3xl sm:text-4xl">Moscow</h2>
+
+  <div class="grid gap-20">
     <article class="friend grid gap-8 md:grid-cols-[220px_1fr] md:gap-10">
       <img src="/images/artur.jpg" alt="Artur Tikhonov" width="912" height="1332" loading="lazy" class="friend-photo">
       <div class="min-w-0">
