@@ -19,7 +19,7 @@ document.addEventListener("click", (event) => {
 
 // /why/ contents and dive line: one tag on the line per chapter, level with its
 // heading; the chapter being read (its top past 30% of the viewport) is marked
-// in both places.
+// in the contents.
 const tocLinks = document.querySelectorAll(".essay-toc a")
 if (tocLinks.length) {
   const sections = [...document.querySelectorAll(".essay section")]
@@ -37,7 +37,7 @@ if (tocLinks.length) {
     const current = sections.filter((s) => s.getBoundingClientRect().top <= innerHeight * 0.3).pop()
     sections.forEach((s, i) => {
       const on = s === current
-      for (const el of [tocLinks[i], marks[i]]) on ? el.setAttribute("aria-current", "true") : el.removeAttribute("aria-current")
+      on ? tocLinks[i].setAttribute("aria-current", "true") : tocLinks[i].removeAttribute("aria-current")
     })
   }
   addEventListener("scroll", mark, { passive: true })

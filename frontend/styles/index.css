@@ -820,17 +820,10 @@ prose img { width: 100%; height: auto; @apply rounded-xl; }
 .dive-line-mark {
   position: absolute;
   left: 50%;
-  width: 1.4rem;
-  height: 0.55rem;
-  border-radius: 2px;
-  transform: translateX(-50%);
-  background: rgb(248 250 252 / 0.85);
-  transition: background-color 200ms, width 200ms;
-}
-
-.dive-line-mark[aria-current="true"] {
-  width: 2rem;
-  background: rgb(125 211 252);
+  width: 0.7rem;
+  height: 0.7rem;
+  transform: translate(-50%, -50%);
+  background: #000;
 }
 
 .dive-line-cane {
