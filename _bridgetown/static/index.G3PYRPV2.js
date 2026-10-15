@@ -1,2 +1,0 @@
-(()=>{document.addEventListener("click",t=>{let i=t.target.closest(".embed-poster");if(!i||t.metaKey||t.ctrlKey||t.shiftKey)return;t.preventDefault();let g=i.parentElement;if(g.replaceChildren(g.querySelector("template").content),g.dataset.embed!=="instagram")return g.querySelector("iframe")?.focus();if(window.instgrm)return window.instgrm.Embeds.process();let Q=document.createElement("script");Q.src="https://www.instagram.com/embed.js",document.head.append(Q)});})();
-//# sourceMappingURL=/_bridgetown/static/index.G3PYRPV2.js.map

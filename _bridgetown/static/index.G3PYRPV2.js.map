@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../frontend/javascript/index.js"],
-  "sourcesContent": ["import \"$styles/index.css\"\n\n// Import all JavaScript & CSS files from src/_components\nimport components from \"$components/**/*.{js,jsx,js.rb,css}\"\n\n// Click-to-load embeds: swap the poster for the real player only when asked\ndocument.addEventListener(\"click\", (event) => {\n  const poster = event.target.closest(\".embed-poster\")\n  if (!poster || event.metaKey || event.ctrlKey || event.shiftKey) return\n  event.preventDefault()\n  const embed = poster.parentElement\n  embed.replaceChildren(embed.querySelector(\"template\").content)\n  if (embed.dataset.embed !== \"instagram\") return embed.querySelector(\"iframe\")?.focus()\n  if (window.instgrm) return window.instgrm.Embeds.process()\n  const script = document.createElement(\"script\")\n  script.src = \"https://www.instagram.com/embed.js\"\n  document.head.append(script)\n})\n"],
-  "mappings": "MAMA,SAAS,iBAAiB,QAAUA,GAAU,CAC5C,IAAMC,EAASD,EAAM,OAAO,QAAQ,eAAe,EACnD,GAAI,CAACC,GAAUD,EAAM,SAAWA,EAAM,SAAWA,EAAM,SAAU,OACjEA,EAAM,eAAe,EACrB,IAAME,EAAQD,EAAO,cAErB,GADAC,EAAM,gBAAgBA,EAAM,cAAc,UAAU,EAAE,OAAO,EACzDA,EAAM,QAAQ,QAAU,YAAa,OAAOA,EAAM,cAAc,QAAQ,GAAG,MAAM,EACrF,GAAI,OAAO,QAAS,OAAO,OAAO,QAAQ,OAAO,QAAQ,EACzD,IAAMC,EAAS,SAAS,cAAc,QAAQ,EAC9CA,EAAO,IAAM,qCACb,SAAS,KAAK,OAAOA,CAAM,CAC7B,CAAC",
-  "names": ["event", "poster", "embed", "script"]
-}
