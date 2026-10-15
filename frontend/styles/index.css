@@ -816,6 +816,8 @@ body > header { z-index: 2; }
     z-index: -1;
     height: var(--head, 0);
     background: inherit;
+    /* the rope comes up out of nowhere: it fades in from the surface */
+    mask-image: linear-gradient(to bottom, transparent, #000 14rem);
   }
 
   .dive-line::after {
