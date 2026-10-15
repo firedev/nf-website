@@ -8,7 +8,7 @@ title: Why freediving
     <div class="max-w-[42rem]">
       <h1 class="page-title mb-12 mt-0">Freediving gives your life back.</h1>
       <h2 class="page-display mb-3 mt-0 text-2xl sm:text-3xl">The whole underwater world is in the first ten metres.</h2>
-      <p class="page-prose mb-10">Out over open water, below that, there is nothing left to look at. So you look inward.</p>
+      <p class="page-prose mb-10">Below that, out in open water, there is nothing left to look at. So you look inward.</p>
       <h2 class="page-display mb-3 mt-0 text-2xl sm:text-3xl">Everything shows up at once.</h2>
       <p class="page-prose mb-10">You hold your breath and go under, and every thought you have comes down with you. You start letting them go, one at a time.</p>
       <h2 class="page-display mb-3 mt-0 text-2xl sm:text-3xl">Then there is room for you.</h2>
@@ -21,19 +21,6 @@ title: Why freediving
       </div>
     </div>
   </section>
-
-  <div class="mt-20 grid max-w-[42rem] gap-12">
-    <section>
-      <h2 class="page-display mb-4 mt-0 text-3xl sm:text-4xl">Deeper means calmer.</h2>
-      <p class="page-prose">Equalise early, turn at the depth you planned, and come up with air to spare.</p>
-      <p class="page-prose mb-0">I certify Molchanovs Wave 1 and Wave 2. Always train with a qualified buddy watching and stay well within your limits.</p>
-    </section>
-
-    <section>
-      <h2 class="page-display mb-4 mt-0 text-3xl sm:text-4xl">One-to-one for kids.</h2>
-      <p class="page-prose mb-0">An instructor stays beside your child the whole time, and each skill is solid before the next one starts. <a href="/junior/" class="font-bold decoration-sky-200 decoration-8">Freediving for kids</a></p>
-    </section>
-  </div>
 
   <div class="essay-wrap">
   <article class="essay">
@@ -50,19 +37,19 @@ title: Why freediving
     </section>
     <section id="letting-go">
       <h2 class="page-display">Letting go.</h2>
-      <p class="page-prose">You cannot dive angry, hurt or irritated. Freediving is letting go of everything. Every dive should feel easy, and so should life.</p>
+      <p class="page-prose">You cannot dive angry, hurt or irritated: each of them eats your air. Freediving is letting go of everything. Every dive should feel easy, and so should life.</p>
       <p class="page-prose">I left every grudge I carried on the seabed off Racha Yai. Free as in freedom.</p>
     </section>
     <section id="wall">
       <h2 class="page-display">The wall.</h2>
-      <p class="page-prose">The instructor test is a hundred metres underwater on one breath. Seventy-five you can force. The last twenty-five open up only when you let go of the fear.</p>
+      <p class="page-prose">The instructor test includes a hundred metres underwater on one breath, in the pool. Seventy-five you can force. The last twenty-five open up only when you let go of the fear.</p>
       <p class="page-prose">On the edge of the pool I was bracing for certain death. My friend Misha said: &ldquo;Seventy-five to a hundred is the hardest stretch. After that it gets easier.&rdquo; I pushed off thinking: this is the worst part, and nothing is going to happen. I came up at a hundred, and the wall was gone.</p>
       <p class="page-prose">Certain death was only sensations in the body. The wall is a process. You learn to pass through fear.</p>
     </section>
     <section id="thoughts">
       <h2 class="page-display">Thoughts that are not yours.</h2>
       <p class="page-prose">Out in the blue, with tens of metres of water above you, your body and mind get scared and broadcast that fear. You hear it as thoughts in your head, in a voice that sounds exactly like yours.</p>
-      <p class="page-prose">Settle your nervous system. Nothing is happening. All is well.</p>
+      <p class="page-prose">The work is to settle your nervous system and tell it the truth: nothing is happening, all is well.</p>
     </section>
     <section id="water">
       <h2 class="page-display">Only the water.</h2>
@@ -72,7 +59,7 @@ title: Why freediving
     <section id="land">
       <h2 class="page-display">On land.</h2>
       <p class="page-prose">Now I mostly dive with students, and every dive is a lesson. Depth no longer worries me, so I scan my body for whatever is still tense.</p>
-      <p class="page-prose">Life works the same way. It was all in my head. It was only discomfort.</p>
+      <p class="page-prose">Life works the same way: find what is still tense and let it go. It was all in my head. It was only discomfort.</p>
     </section>
   </article>
     <div class="dive-line" aria-hidden="true"><span class="dive-line-cane"></span><span class="dive-line-stopper"></span></div>
@@ -88,5 +75,18 @@ title: Why freediving
       </ol>
     </nav>
   </div>
-  <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn mt-20">Let&rsquo;s freedive</a>
+  <div class="mt-28 grid max-w-[42rem] gap-12">
+    <section>
+      <h2 class="page-display mb-4 mt-0 text-3xl sm:text-4xl">Deeper means calmer.</h2>
+      <p class="page-prose">Equalise early, turn at the depth you planned, and come up with air to spare.</p>
+      <p class="page-prose mb-0">I certify Molchanovs Wave 1 and Wave 2. Always train with a qualified buddy watching and stay well within your limits.</p>
+    </section>
+
+    <section>
+      <h2 class="page-display mb-4 mt-0 text-3xl sm:text-4xl">One-to-one for kids.</h2>
+      <p class="page-prose mb-0">An instructor stays beside your child the whole time, and each skill is solid before the next one starts. <a href="/junior/" class="font-bold decoration-sky-200 decoration-8">Freediving for kids</a></p>
+    </section>
+  </div>
+
+  <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn mt-16">Let&rsquo;s freedive</a>
 </div>
