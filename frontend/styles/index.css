@@ -763,6 +763,7 @@ prose img { width: 100%; height: auto; @apply rounded-xl; }
     transition: color 150ms;
   }
   .essay-toc a:hover { color: rgb(125 211 252); }
+  .essay-toc a[aria-current="true"] { color: rgb(248 250 252); }
 }
 
 /* A trip that is off: badge on top, the rest struck through and dimmed */

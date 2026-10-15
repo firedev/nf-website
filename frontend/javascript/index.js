@@ -16,3 +16,20 @@ document.addEventListener("click", (event) => {
   script.src = "https://www.instagram.com/embed.js"
   document.head.append(script)
 })
+
+// /why/ contents: mark the section being read. A section counts once its top
+// passes a line 30% down the viewport.
+const tocLinks = document.querySelectorAll(".essay-toc a")
+if (tocLinks.length) {
+  const sections = [...document.querySelectorAll(".essay section")]
+  const mark = () => {
+    const line = innerHeight * 0.3
+    const current = sections.filter((s) => s.getBoundingClientRect().top <= line).pop()
+    tocLinks.forEach((a) => {
+      if (current && a.hash === `#${current.id}`) a.setAttribute("aria-current", "true")
+      else a.removeAttribute("aria-current")
+    })
+  }
+  addEventListener("scroll", mark, { passive: true })
+  mark()
+}
