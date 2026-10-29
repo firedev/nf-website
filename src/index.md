@@ -5,10 +5,10 @@ title: nofins | Freediving trains life
 
 <section class="home-hero relative isolate flex min-h-[100dvh] items-center overflow-hidden text-white">
   <picture class="absolute inset-0 block h-full w-full">
-    <source media="(max-width: 767px)" srcset="/images/home/hero-wreck-mobile.webp">
-    <img src="/images/home/hero-wreck.webp" alt="A broken yacht wreck on the sand under blue water, light falling from the surface" width="1280" height="800" loading="eager" fetchpriority="high" class="h-full w-full object-cover object-center">
+    <source media="(max-width: 767px)" srcset="/images/home/hero-wreck-mobile.webp?v=3">
+    <img src="/images/home/hero-wreck.webp?v=3" alt="A broken yacht wreck on the sand under blue water, light falling from the surface" width="1280" height="800" loading="eager" fetchpriority="high" class="h-full w-full object-cover" style="object-position:60% 10%;transform:scale(1.15);transform-origin:60% 10%">
   </picture>
-  <canvas class="home-hero-orbit absolute inset-0 h-full w-full" data-path="/images/home/orbit/f" data-frames="23" data-center="6" aria-hidden="true"></canvas>
+  <canvas class="home-hero-orbit absolute inset-0 h-full w-full" data-path="/images/home/orbit/f" data-frames="23" data-center="6" data-version="3" aria-hidden="true"></canvas>
   <div class="home-hero-shade absolute inset-0"></div>
   <p class="home-hero-place">Koh Racha Yai,<br>Phuket, Thailand</p>
   <p class="home-hero-credit absolute bottom-2 right-3 z-1 m-0 text-[0.65rem] text-slate-400/70">Wreck: <a href="https://sketchfab.com/3d-models/yacht-ii-dadc775d1d044aee9f6744fa7b47648e" target="_blank" rel="noopener">Yacht II</a> by <a href="https://sketchfab.com/agt14032013" target="_blank" rel="noopener">gogiart</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></p>
@@ -18,7 +18,6 @@ title: nofins | Freediving trains life
       <h1 class="home-title mb-6 mt-0 max-w-[13ch] text-[2.8rem] font-black leading-[0.96] sm:text-6xl lg:text-8xl">Freediving trains life.</h1>
       <p class="mb-8 max-w-2xl text-lg leading-relaxed text-slate-100 sm:text-xl">Slow down. Stay calm. Go deeper.</p>
       <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn home-cta">Let&rsquo;s freedive</a>
-      <button type="button" class="home-hero-look" hidden>Look around with your head</button>
     </div>
   </div>
 </section>
@@ -52,8 +51,8 @@ title: nofins | Freediving trains life
   </div>
 </section>
 
-<section id="why" class="home-why bg-[#041a2e] text-slate-100">
-  <div class="home-why-inner mx-auto grid max-w-7xl items-center gap-12 px-6 sm:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:px-12">
+<section id="why" class="home-why relative bg-[#041a2e] text-slate-100">
+  <div class="home-why-inner mx-auto max-w-7xl px-6 sm:px-10 lg:px-12">
     <div>
     <h2 class="mb-6 mt-0 max-w-2xl text-balance text-4xl font-black tracking-tight sm:text-5xl">Freediving is life.</h2>
     <p class="home-lead mb-8 mt-0 max-w-2xl">Drop the act and be yourself.</p>
@@ -61,8 +60,8 @@ title: nofins | Freediving trains life
     <p class="home-lead mb-8 mt-0 max-w-2xl">It works the same for adults and kids.</p>
     <a href="/why/" class="link-arrow text-sky-300 hover:text-sky-200">Why freediving<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
     </div>
-    <img src="/images/home/why-line.webp" alt="Nick Ostrovsky on the line underwater, one arm up, looking towards the surface" width="800" height="1000" loading="lazy" class="home-why-photo w-full rounded-3xl object-cover">
   </div>
+  <img src="/images/home/why-line.webp?v=3" alt="Nick Ostrovsky on the line underwater, one arm up, looking towards the surface" width="720" height="1280" loading="lazy" class="home-why-photo">
 </section>
 
 <section id="start" class="bg-slate-900 text-slate-100">

@@ -216,26 +216,19 @@ footer {
 
 .home-hero-orbit { opacity: 0; transition: opacity 600ms ease; }
 .home-hero-orbit.is-live { opacity: 1; }
-.home-hero-look {
-  display: block;
-  margin-top: 1.25rem;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: rgb(226 232 240 / 0.85);
-  font-size: 0.95rem;
-  text-decoration: underline;
-  text-underline-offset: 0.25em;
-  cursor: pointer;
-}
-.home-hero-look[hidden] { display: none; }
-.home-hero-look:disabled { cursor: default; text-decoration: none; }
 .home-hero-credit a { color: inherit; }
 
+.home-why-photo { display: block; width: 100%; height: auto; }
 @media (min-width: 1024px) {
-  .home-why-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 26rem); }
+  .home-why-inner > div { max-width: 52%; }
+  .home-why-photo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    height: 100%;
+  }
 }
-.home-why-photo { aspect-ratio: 4 / 5; }
 
 .home-hero-place {
   position: absolute;
