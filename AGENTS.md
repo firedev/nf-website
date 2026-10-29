@@ -215,7 +215,7 @@ Components are Ruby objects in `src/_components/`. When creating new components:
 **Один приём — один раз на весь сайт.** Конструкция «the same X that helps at school / in a hard conversation / at 3am» стояла в трёх местах (`why.serb`, `junior.serb` ×2). Остался только хвост на `/why/` («…and it is there at 3am»). Появилась в четвёртом месте — значит шаблон, а не мысль.
 
 **Снято как слоп, не возвращать:**
-- «You take off the character» на главной — та же калька «персонаж», что чинили 26.08. Теперь «Drop the act and be yourself.» (Коля, 12.10.2026)
+- «You take off the character» на главной — та же калька «персонаж», что чинили 26.08. Теперь «Become yourself.» (Коля, 29.10.2026: «not drop the act and be yourself, just Become yourself»); та же строка в meta description
 - «You start filtering the chatter, and it goes quiet» на `/why/` — возврат запрещённой строки «You start filtering. The noise drops.». Плюс заголовок «It all comes at once.» обещал одно, а абзац говорил обратное. Теперь «Everything shows up at once.» / «…every thought you have comes with you. You start throwing them out one by one.»
 - Аплодисменты себе после своей же мысли: «That is the whole secret.», «and that is the best part of it», «Each win is concrete, and it stacks.»
 - Отрицательные параллелизмы на `/junior/`: «not a group average», «No pushing for depth, no racing the clock», «not just that they showed up», зачин «Not only on the surface.» Утверждать то, что есть

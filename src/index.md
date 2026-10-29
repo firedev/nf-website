@@ -59,7 +59,7 @@ title: nofins | Freediving trains life
   <div class="home-why-inner mx-auto max-w-7xl px-6 sm:px-10 lg:px-12">
     <div>
     <h2 class="mb-6 mt-0 max-w-2xl text-balance text-4xl font-black tracking-tight sm:text-5xl">Freediving is life.</h2>
-    <p class="home-lead mb-8 mt-0 max-w-2xl">Drop the act and be yourself.</p>
+    <p class="home-lead mb-8 mt-0 max-w-2xl">Become yourself.</p>
     <p class="home-lead mb-8 mt-0 max-w-2xl">Freediving is a mental lab. Hold your breath underwater and you reach corners of your mind you never knew were there. Your sense of time shifts. Nobody is chasing records here. We experiment. What works, I share on <a href="https://tellothers.com/try-freediving" target="_blank" rel="noopener" class="font-bold text-sky-300 decoration-sky-300/40 hover:text-sky-200">tellothers.com</a>.</p>
     <p class="home-lead mb-8 mt-0 max-w-2xl">It works the same for adults and kids.</p>
     <a href="/why/" class="link-arrow text-sky-300 hover:text-sky-200">Why freediving<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="h-[0.9em] w-[0.9em]" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
