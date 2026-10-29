@@ -1,5 +1,5 @@
 <footer class="overflow-hidden">
-  <div class="mx-auto flex max-w-screen-2xl flex-col items-start px-8 py-14 lg:px-14">
+  <div class="mx-auto flex max-w-7xl flex-col items-start px-6 py-14 sm:px-10 lg:px-12">
     <nav class="flex flex-wrap gap-x-7 text-base font-bold">
       <a class="py-2.5 no-underline transition hover:text-sky-300" href="/why/">Why freediving</a>
       <a class="py-2.5 no-underline transition hover:text-sky-300" href="/about/">About</a>

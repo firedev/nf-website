@@ -216,27 +216,29 @@ footer {
 
 .home-hero-orbit { opacity: 0; transition: opacity 600ms ease; }
 .home-hero-orbit.is-live { opacity: 1; }
+.home-hero-corner { text-align: right; }
+.home-hero-credit { margin-top: 0.75rem; padding-bottom: 0.5rem; }
 .home-hero-credit a { color: inherit; }
 
 .home-why-photo { display: block; width: 100%; height: auto; }
+@media (min-width: 1024px) {
+  .home-phuket { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .home-phuket .home-phuket-photos { margin-top: 0; }
+}
 @media (min-width: 1024px) {
   .home-why-inner > div { max-width: 52%; }
   .home-why-photo {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 75%;
+    transform: translateX(-50%);
     width: auto;
     height: 100%;
   }
 }
 
 .home-hero-place {
-  position: absolute;
-  right: 1.5rem;
-  bottom: 2.5rem;
-  z-index: 1;
   margin: 0;
-  text-align: right;
   font-weight: 900;
   font-size: clamp(1.5rem, 3.6vw, 3.25rem);
   line-height: 0.95;
@@ -437,60 +439,22 @@ body:not(.homepage) > header .nav-link:hover {
   margin-bottom: 1.75rem;
 }
 
+.home-phuket-copy .home-lead {
+  margin-bottom: 1.5rem;
+}
+
 .home-phuket-photos {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.85rem;
+  margin-top: 3rem;
 }
 
 .home-phuket-photos img {
   display: block;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 16 / 11;
   object-fit: cover;
   border-radius: 0.75rem;
-}
-
-.home-phuket-photo-lead {
-  aspect-ratio: 16 / 11;
-}
-
-.home-phuket-photos img:not(.home-phuket-photo-lead) {
-  aspect-ratio: 16 / 10;
-}
-
-.home-phuket-copy {
-  margin-top: 4rem;
-  padding-top: 0;
-  max-width: 38rem;
-}
-
-.home-phuket-copy .home-lead {
-  margin-bottom: 2rem;
-}
-
-.home-phuket-copy .home-prose {
-  margin-bottom: 1.35rem;
-}
-
-.home-phuket-copy .home-prose:last-of-type {
-  margin-bottom: 0;
-}
-
-.home-phuket-end {
-  display: block;
-  margin-top: 4.5rem;
-  margin-bottom: 0;
-  font-size: clamp(2rem, 4.2vw, 2.85rem);
-  font-weight: 900;
-  line-height: 1.08;
-  letter-spacing: -0.04em;
-  font-optical-sizing: auto;
-  color: rgb(255 255 255);
-  text-wrap: balance;
-}
-
-.home-phuket-videos {
-  margin-top: 2.75rem;
 }
 
 .home-join-title {
@@ -534,32 +498,11 @@ body:not(.homepage) > header .nav-link:hover {
     padding-top: 4.25rem;
     padding-bottom: 4.25rem;
   }
-
-  .home-phuket-copy {
-    margin-top: 5.5rem;
-  }
 }
 
 @media (min-width: 768px) {
   .home-phuket-heading {
     margin-bottom: 2.25rem;
-  }
-
-  .home-phuket-photos {
-    grid-template-columns: 1.45fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0.85rem;
-    min-height: min(38rem, 72vh);
-  }
-
-  .home-phuket-photo-lead {
-    grid-row: 1 / span 2;
-    aspect-ratio: auto;
-  }
-
-  .home-phuket-photos img:not(.home-phuket-photo-lead) {
-    aspect-ratio: auto;
-    min-height: 0;
   }
 }
 

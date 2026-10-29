@@ -10,8 +10,12 @@ title: nofins | Freediving trains life
   </picture>
   <canvas class="home-hero-orbit absolute inset-0 h-full w-full" data-path="/images/home/orbit/f" data-frames="45" data-center="12" data-version="4" aria-hidden="true"></canvas>
   <div class="home-hero-shade absolute inset-0"></div>
-  <p class="home-hero-place">Koh Racha Yai,<br>Phuket, Thailand</p>
-  <p class="home-hero-credit absolute bottom-2 right-3 z-1 m-0 text-[0.65rem] text-slate-400/70">Wreck: <a href="https://sketchfab.com/3d-models/yacht-ii-dadc775d1d044aee9f6744fa7b47648e" target="_blank" rel="noopener">Yacht II</a> by <a href="https://sketchfab.com/agt14032013" target="_blank" rel="noopener">gogiart</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></p>
+  <div class="home-hero-corner absolute inset-x-0 bottom-0 z-1">
+    <div class="mx-auto max-w-7xl px-6 sm:px-10 lg:px-12">
+      <p class="home-hero-place">Koh Racha Yai<br>Phuket, Thailand</p>
+      <p class="home-hero-credit m-0 text-[0.65rem] text-slate-400/70">Wreck: <a href="https://sketchfab.com/3d-models/yacht-ii-dadc775d1d044aee9f6744fa7b47648e" target="_blank" rel="noopener">Yacht II</a> by <a href="https://sketchfab.com/agt14032013" target="_blank" rel="noopener">gogiart</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></p>
+    </div>
+  </div>
 
   <div class="relative z-1 mx-auto w-full max-w-7xl px-6 pb-16 pt-32 sm:px-10 lg:px-12">
     <div class="max-w-3xl">
@@ -155,24 +159,17 @@ title: nofins | Freediving trains life
 </section>
 
 <section id="where" class="bg-slate-100 text-slate-950 dark:bg-slate-950 dark:text-slate-100">
-  <div class="mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12">
-    <h2 class="home-phuket-heading mt-0 text-4xl font-black tracking-tight sm:text-5xl">Phuket is home.</h2>
-
-    <div class="home-phuket-photos">
-      <img src="/images/home/phuket-1.webp" alt="Clear water and green islands near Phuket" width="900" height="650" loading="lazy" class="home-phuket-photo-lead">
-      <img src="/images/home/phuket-2.webp" alt="Limestone islands rising from the Andaman Sea" width="900" height="650" loading="lazy">
-      <img src="/images/home/phuket-3.webp" alt="Small boat crossing calm tropical water" width="900" height="650" loading="lazy">
-    </div>
-
+  <div class="home-phuket mx-auto max-w-7xl px-6 py-20 sm:px-10 sm:py-28 lg:px-12">
     <div class="home-phuket-copy">
+      <h2 class="home-phuket-heading mt-0 text-4xl font-black tracking-tight sm:text-5xl">Phuket is home.</h2>
       <p class="home-lead">I dive and instruct on the weekends.</p>
       <p class="home-prose">Calm dives. Rest as long as you like and dive at your own pace.</p>
-      <p class="home-prose">You are alone in your own head, and someone always has an eye on you.</p>
-      <p class="home-prose">The water around Phuket is always quiet. Some days we go out to 50&nbsp;m and beyond.</p>
-      <p class="home-prose">We have a boat and a catamaran.</p>
-      <p class="home-phuket-end">We do what we want.</p>
     </div>
-    <a href="/videos/" class="btn home-phuket-videos">Watch videos</a>
+
+    <div class="home-phuket-photos">
+      <img src="/images/home/phuket-1.webp" alt="Clear water and green islands near Phuket" width="900" height="650" loading="lazy">
+      <img src="/images/home/phuket-2.webp" alt="Limestone islands rising from the Andaman Sea" width="900" height="650" loading="lazy">
+    </div>
   </div>
 </section>
 
