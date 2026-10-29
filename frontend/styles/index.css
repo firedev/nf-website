@@ -568,12 +568,6 @@ body:not(.homepage) > header .nav-link:hover {
     position: absolute;
   }
 
-  .home-hero-shade {
-    background:
-      linear-gradient(180deg, rgb(2 6 23 / 0.28) 0%, rgb(2 6 23 / 0.86) 68%, rgb(2 6 23 / 0.96) 100%),
-      linear-gradient(90deg, rgb(2 6 23 / 0.52), transparent);
-  }
-
   .home-hero picture img {
     object-position: 62% center;
   }
