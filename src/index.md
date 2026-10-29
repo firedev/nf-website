@@ -6,9 +6,9 @@ title: nofins | Freediving trains life
 <section class="home-hero relative isolate flex min-h-[100dvh] items-center overflow-hidden text-white">
   <picture class="absolute inset-0 block h-full w-full">
     <source media="(max-width: 767px)" srcset="/images/home/hero-wreck-mobile.webp?v=3">
-    <img src="/images/home/hero-wreck.webp?v=3" alt="A broken yacht wreck on the sand under blue water, light falling from the surface" width="1280" height="800" loading="eager" fetchpriority="high" class="h-full w-full object-cover" style="object-position:60% 10%;transform:scale(1.15);transform-origin:60% 10%">
+    <img src="/images/home/hero-wreck.webp?v=4" alt="A broken yacht wreck on the sand under blue water, light falling from the surface" width="1280" height="800" loading="eager" fetchpriority="high" class="h-full w-full object-cover" style="object-position:60% 10%;transform:scale(1.15);transform-origin:60% 10%">
   </picture>
-  <canvas class="home-hero-orbit absolute inset-0 h-full w-full" data-path="/images/home/orbit/f" data-frames="23" data-center="6" data-version="3" aria-hidden="true"></canvas>
+  <canvas class="home-hero-orbit absolute inset-0 h-full w-full" data-path="/images/home/orbit/f" data-frames="45" data-center="12" data-version="4" aria-hidden="true"></canvas>
   <div class="home-hero-shade absolute inset-0"></div>
   <p class="home-hero-place">Koh Racha Yai,<br>Phuket, Thailand</p>
   <p class="home-hero-credit absolute bottom-2 right-3 z-1 m-0 text-[0.65rem] text-slate-400/70">Wreck: <a href="https://sketchfab.com/3d-models/yacht-ii-dadc775d1d044aee9f6744fa7b47648e" target="_blank" rel="noopener">Yacht II</a> by <a href="https://sketchfab.com/agt14032013" target="_blank" rel="noopener">gogiart</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></p>

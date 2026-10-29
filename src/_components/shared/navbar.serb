@@ -1,7 +1,7 @@
 <header class="homepage-no-shadow transition-shadows py-5 px-4 sm:py-7 shadow-2xl shadow-stone-600/10 relative z1 dark:bg-transparent dark:shadow-none">
   <div class="flex flex-wrap lg:items-center row w-full justify-between max-w-screen-2xl mx-auto gap-2">
 
-    <a href="/" class="flex items-center mx-3 mb-2 no-underline {{ @resource.data.layout == 'homepage' && 'hidden lg:flex' }}">
+    <a href="/" class="flex items-center mx-3 mb-2 no-underline">
       <span class="logo-text text-4xl tracking-tighter text-slate-950 dark:text-slate-100"><span class="font-bold inline-flex items-center">n<img src="/images/zen-circle.webp" alt="o" class="zen-circle inline-block" style="width:1.15em;height:1.15em;margin:0 -0.08em">fins</span>.com</span>
     </a>
 
