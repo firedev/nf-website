@@ -5,10 +5,12 @@ title: nofins | Freediving trains life
 
 <section class="home-hero relative isolate flex min-h-[100dvh] items-center overflow-hidden text-white">
   <picture class="absolute inset-0 block h-full w-full">
-    <source media="(max-width: 767px)" srcset="/images/home/hero-mobile.webp">
-    <img src="/images/home/hero.webp" alt="Freediver holding the line underwater" width="1920" height="1200" loading="eager" fetchpriority="high" class="h-full w-full object-cover object-center">
+    <source media="(max-width: 767px)" srcset="/images/home/hero-wreck-mobile.webp">
+    <img src="/images/home/hero-wreck.webp" alt="A broken yacht wreck on the sand under blue water, light falling from the surface" width="1920" height="1200" loading="eager" fetchpriority="high" class="h-full w-full object-cover object-center">
   </picture>
+  <canvas class="home-hero-depth absolute inset-0 h-full w-full" data-image="/images/home/hero-wreck.webp" data-depth="/images/home/hero-wreck-depth.webp" aria-hidden="true"></canvas>
   <div class="home-hero-shade absolute inset-0"></div>
+  <p class="home-hero-credit absolute bottom-2 right-3 z-1 m-0 text-[0.65rem] text-slate-400/70">Wreck: <a href="https://sketchfab.com/3d-models/yacht-ii-dadc775d1d044aee9f6744fa7b47648e" target="_blank" rel="noopener">Yacht II</a> by <a href="https://sketchfab.com/agt14032013" target="_blank" rel="noopener">gogiart</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></p>
 
   <div class="relative z-1 mx-auto w-full max-w-7xl px-6 pb-16 pt-32 sm:px-10 lg:px-12">
     <div class="max-w-3xl">

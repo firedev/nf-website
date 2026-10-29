@@ -2,6 +2,7 @@ import "$styles/index.css"
 
 // Import all JavaScript & CSS files from src/_components
 import components from "$components/**/*.{js,jsx,js.rb,css}"
+import "./hero-depth.js"
 
 // Click-to-load embeds: swap the poster for the real player only when asked
 document.addEventListener("click", (event) => {

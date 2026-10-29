@@ -210,9 +210,13 @@ footer {
 
 .home-hero-shade {
   background:
-    linear-gradient(90deg, rgb(2 6 23 / 0.92) 0%, rgb(2 20 38 / 0.72) 42%, rgb(2 20 38 / 0.08) 76%),
-    linear-gradient(0deg, rgb(2 6 23 / 0.56), transparent 46%);
+    linear-gradient(90deg, rgb(2 6 23 / 0.62) 0%, rgb(2 20 38 / 0.32) 40%, transparent 70%),
+    linear-gradient(0deg, rgb(2 6 23 / 0.5), transparent 40%);
 }
+
+.home-hero-depth { opacity: 0; transition: opacity 600ms ease; }
+.home-hero-depth.is-live { opacity: 1; }
+.home-hero-credit a { color: inherit; }
 
 .home-join-shade {
   background: linear-gradient(90deg, rgb(2 6 23 / 0.96) 0%, rgb(2 20 38 / 0.78) 48%, rgb(2 20 38 / 0.18) 78%);
