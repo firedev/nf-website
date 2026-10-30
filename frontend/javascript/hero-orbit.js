@@ -1,6 +1,7 @@
 // Home hero: renders of the wreck from an arc around it. The cursor picks the
 // angle and scrolling through the hero turns it further; the two nearest renders
-// are cross-faded. Without JS the plain <img> stays.
+// are cross-faded. Reduced motion keeps only user-driven turning. Without JS the
+// plain <img> stays.
 const canvas = document.querySelector(".home-hero-orbit")
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
@@ -16,7 +17,7 @@ function startOrbit() {
     img.src = `${canvas.dataset.path}${String(i + first).padStart(2, "0")}.webp?v=${canvas.dataset.version || 1}`
     return img
   })
-  let mouse = 0, pos = 0, t0 = performance.now()
+  let mouse = 0, touched = false, pos = 0, t0 = performance.now()
 
   const resize = () => {
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -28,6 +29,11 @@ function startOrbit() {
 
   window.addEventListener("pointermove", (e) => {
     if (e.pointerType === "mouse") mouse = (e.clientX / window.innerWidth) * 2 - 1
+  }, { passive: true })
+  // touch: the finger's X turns the wreck the way the cursor does, also mid-scroll
+  window.addEventListener("touchmove", (e) => {
+    mouse = (e.touches[0].clientX / window.innerWidth) * 2 - 1
+    touched = true
   }, { passive: true })
 
   const draw = (img, alpha) => {
@@ -43,10 +49,12 @@ function startOrbit() {
   }
 
   const frame = (t) => {
-    // mouse on desktop, a slow sway on touch screens; scrolling past the hero adds a turn
-    const hover = matchMedia("(hover: hover)").matches
+    // mouse or finger steers; an untouched touch screen sways (not with reduced motion);
+    // scrolling past the hero adds a turn
+    const steer = touched || matchMedia("(hover: hover)").matches
+    const sway = reduce ? 0 : Math.sin((t - t0) / 3000) * 0.3
     const scroll = Math.min(1, window.scrollY / canvas.clientHeight)
-    let target = (hover ? mouse : Math.sin((t - t0) / 3000) * 0.3) + scroll * 1.6
+    let target = (steer ? mouse : sway) + scroll * 1.6
     target = Math.max(-1, Math.min(1, target))
     pos += (target - pos) * 0.08
     const f = pos < 0 ? mid + pos * mid : mid + pos * (n - 1 - mid)
@@ -60,4 +68,4 @@ function startOrbit() {
   requestAnimationFrame(frame)
 }
 
-if (canvas && !reduce) startOrbit()
+if (canvas) startOrbit()
