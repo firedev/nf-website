@@ -19,13 +19,14 @@ function startOrbit() {
   })
   let mouse = 0, touched = false, pos = 0, t0 = performance.now()
 
+  // Match the drawing buffer to the box on every frame: Safari runs this script
+  // before CSS lands (box still 300×150) and resizes the hero with the toolbar
+  // without a reliable resize event, so a one-off size stretched the render.
   const resize = () => {
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
-    canvas.width = canvas.clientWidth * dpr
-    canvas.height = canvas.clientHeight * dpr
+    const w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr)
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h }
   }
-  resize()
-  window.addEventListener("resize", resize)
 
   window.addEventListener("pointermove", (e) => {
     if (e.pointerType === "mouse") mouse = (e.clientX / window.innerWidth) * 2 - 1
@@ -57,6 +58,7 @@ function startOrbit() {
     let target = (steer ? mouse : sway) + scroll * 1.6
     target = Math.max(-1, Math.min(1, target))
     pos += (target - pos) * 0.08
+    resize()
     const f = pos < 0 ? mid + pos * mid : mid + pos * (n - 1 - mid)
     const a = Math.max(0, Math.min(n - 1, Math.floor(f))), b = Math.min(n - 1, a + 1)
     if (draw(frames[a], 1)) {
