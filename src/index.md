@@ -3,7 +3,7 @@ layout: homepage
 title: nofins | Freediving trains life
 ---
 
-<section class="home-hero relative isolate flex min-h-[100dvh] items-center overflow-hidden text-white">
+<section class="home-hero relative isolate flex min-h-[100svh] items-center overflow-hidden text-white">
   <picture class="absolute inset-0 block h-full w-full">
     <source media="(max-width: 767px)" srcset="/images/home/hero-wreck-mobile.webp?v=3">
     <img src="/images/home/hero-wreck.webp?v=4" alt="A broken yacht wreck on the sand under blue water, light falling from the surface" width="1280" height="800" loading="eager" fetchpriority="high" class="h-full w-full object-cover" style="object-position:60% 10%;transform:scale(1.15);transform-origin:60% 10%">
@@ -176,7 +176,7 @@ title: nofins | Freediving trains life
 <section id="join" class="home-join relative isolate overflow-hidden text-white">
   <img src="/images/home/hero-bottom.webp" alt="" width="1920" height="1200" loading="lazy" class="absolute inset-0 h-full w-full object-cover object-center">
   <div class="home-join-shade absolute inset-0"></div>
-  <div class="relative z-1 mx-auto flex min-h-[70dvh] max-w-7xl items-center px-6 py-20 sm:px-10 lg:px-12">
+  <div class="relative z-1 mx-auto flex min-h-[70svh] max-w-7xl items-center px-6 py-20 sm:px-10 lg:px-12">
     <div class="max-w-2xl">
       <h2 class="home-join-title mb-5 mt-0">What do you want to work on?</h2>
       <a href="https://instagram.com/nofinsfreediving" target="_blank" rel="noopener" class="btn">Let&rsquo;s go.</a>
